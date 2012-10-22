@@ -130,7 +130,7 @@
     (first (filter is-correct-author? authors))))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
   :-)
