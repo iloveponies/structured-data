@@ -1,16 +1,20 @@
 (ns structured-data)
 
 (defn do-a-thing [x]
-  :-)
+  (let [xx (+ x x)]
+    (Math/pow xx xx)))
 
 (defn spiff [v]
-  :-)
+  (let [x (get v 0)
+        y (get v 2)]
+    (+ x y)))
 
 (defn cutify [v]
-  :-)
+  (conj v "<3"))
 
 (defn spiff-destructuring [v]
-  :-)
+  (let [[x y z] v]
+    (+ x z)))
 
 (defn point [x y]
   [x y])
@@ -18,17 +22,21 @@
 (defn rectangle [bottom-left top-right]
   [bottom-left top-right])
 
-(defn width [rectangle]
-  :-)
+; Kokeilin näissä erilaisia tapoja
+
+(defn width [[[x1 y1] [x2 y2]]]
+  (- x2 x1))
 
 (defn height [rectangle]
-  :-)
+  (let [y1 (second (first rectangle))
+        y2 (second (second rectangle))]
+          (- y2 y1)))
 
 (defn square? [rectangle]
-  :-)
+    (= (width rectangle) (height rectangle)))
 
 (defn area [rectangle]
-  :-)
+  (* (width rectangle) (height rectangle)))
 
 (defn contains-point? [rectangle point]
   :-)
