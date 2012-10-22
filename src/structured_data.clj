@@ -111,7 +111,15 @@
        (authors->string (:authors book))))
 
 (defn books->string [books]
-  :-)
+  (let [how-many (count books)
+        how-many->string (if (empty? books)
+                           "No books"
+                           (str how-many
+                                " "
+                                (if (> how-many 1) "books" "book") ". "))]
+    (str how-many->string
+         (apply str (interpose ". " (map book->string books)))
+         ".")))
 
 (defn books-by-author [author books]
   :-)
