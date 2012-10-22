@@ -1,16 +1,21 @@
 (ns structured-data)
 
 (defn do-a-thing [x]
-  :-)
+  (let [xx (+ x x)]
+  (Math/pow xx xx)))
 
 (defn spiff [v]
-  :-)
+
+  (if (< (count v) 3)
+    nil
+    (+ (get v 0) (get v 2))))
 
 (defn cutify [v]
-  :-)
+  (conj v "<3"))
 
 (defn spiff-destructuring [v]
-  :-)
+  (let [[x y z] v]
+  (+ x z)))
 
 (defn point [x y]
   [x y])
@@ -19,13 +24,18 @@
   [bottom-left top-right])
 
 (defn width [rectangle]
-  :-)
+   (let ([x y] rectangle)
+       (- (get (get [y] 0) 0) (get (get [x] 0) 0))))
 
 (defn height [rectangle]
-  :-)
+  (let ([x y] rectangle)
+       (- (get (get [y] 1) 0) (get (get [x] 1) 0))))
 
 (defn square? [rectangle]
-  :-)
+   (if (== 0 (mod (height rectangle) (width rectangle)))
+     true
+     false)
+ )
 
 (defn area [rectangle]
   :-)
@@ -110,5 +120,3 @@
 
 (defn books-by-living-authors [books]
   :-)
-
-; %________%
