@@ -33,8 +33,9 @@
 (defn area [rectangle]
   (* (width rectangle) (height rectangle)))
 
-(defn contains-point? [rectangle point]
-  :-)
+(defn contains-point? [[[x1 y1] [x2 y2]] [x3 y3]]
+  (and (<= x1 x3 x2)
+       (<= y1 y3 y2)))
 
 (defn contains-rectangle? [outer inner]
   :-)
