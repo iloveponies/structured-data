@@ -42,16 +42,16 @@
        (contains-point? outer point2)))
 
 (defn title-length [book]
-  (count (get book :title)))
+  (count (:title book)))
 
 (defn author-count [book]
-  (count (get book :authors)))
+  (count (:authors book)))
 
 (defn multiple-authors? [book]
   (> (author-count book) 1))
 
 (defn add-author [book new-author]
-  (let [authors (conj (get book :authors) new-author)]
+  (let [authors (conj (:authors book) new-author)]
     (assoc book :authors authors)))
 
 (defn alive? [author]
@@ -84,7 +84,7 @@
         (count (set a-seq))))
 
 (defn old-book->new-book [book]
-  (assoc book :authors (set (get book :authors))))
+  (assoc book :authors (set (:authors book))))
 
 (defn has-author? [book author]
   (contains? (get book :authors) author))
@@ -96,9 +96,9 @@
   (set (map :name (authors books))))
 
 (defn author->string [author]
-  (let [author-name (get author :name)
+  (let [author-name (:name author)
         living (if (contains? author :birth-year)
-                 (str " (" (get author :birth-year) " - " (get author :death-year) ")")
+                 (str " (" (:birth-year author) " - " (:death-year author) ")")
                  nil)]
     (str author-name living)))
 
