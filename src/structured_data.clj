@@ -10,7 +10,7 @@
     (+ x1 x3)))
 
 (defn cutify [v]
-  :-)
+  (conj v "<3"))
 
 (defn spiff-destructuring [v]
   :-)
