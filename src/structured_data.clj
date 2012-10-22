@@ -21,8 +21,8 @@
 (defn rectangle [bottom-left top-right]
   [bottom-left top-right])
 
-(defn width [rectangle]
-  :-)
+(defn width [[[x1] [x2]]]
+  (- x2 x1))
 
 (defn height [rectangle]
   :-)
