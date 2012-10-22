@@ -24,8 +24,8 @@
 (defn width [[[x1] [x2]]]
   (- x2 x1))
 
-(defn height [rectangle]
-  :-)
+(defn height [[[_ y1] [_ y2]]]
+  (- y2 y1))
 
 (defn square? [rectangle]
   :-)
