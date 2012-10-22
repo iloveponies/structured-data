@@ -5,7 +5,9 @@
     (Math/pow x2 x2)))
 
 (defn spiff [v]
-  :-)
+  (let [x1 (get v 0),
+        x3 (get v 2)]
+    (+ x1 x3)))
 
 (defn cutify [v]
   :-)
