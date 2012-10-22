@@ -84,7 +84,7 @@
         (count (set a-seq))))
 
 (defn old-book->new-book [book]
-  :-)
+  (assoc book :authors (set (get book :authors))))
 
 (defn has-author? [book author]
   :-)
