@@ -126,7 +126,8 @@
     (filter has-correct-author? books)))
 
 (defn author-by-name [name authors]
-  :-)
+  (let [is-correct-author? (fn [author] (= name (:name author)))]
+    (first (filter is-correct-author? authors))))
 
 (defn living-authors [authors]
   :-)
