@@ -68,15 +68,21 @@
                        (rectangle [1 1] [2 2])) => false)
 
 (def china {:name "China Miéville", :birth-year 1972})
+
 (def octavia {:name "Octavia E. Butler"
               :birth-year 1947
               :death-year 2006})
+
 (def friedman {:name "Daniel Friedman" :birth-year 1944})
+
 (def felleisen {:name "Matthias Felleisen"})
 
 (def cities {:title "The City and the City" :authors [china]})
+
 (def wild-seed {:title "Wild Seed", :authors [octavia]})
+
 (def embassytown {:title "Embassytown", :authors [china]})
+
 (def little-schemer {:title "The Little Schemer"
                      :authors [friedman, felleisen]})
 
@@ -162,7 +168,6 @@
     => {:title "The Little Schemer" :authors #{friedman, felleisen}}
   (old-book->new-book {:title "Wild Seed", :authors [octavia]})
     => {:title "Wild Seed", :authors #{octavia}})
-
 
 (let [china {:name "China Miéville", :birth-year 1972}
       octavia {:name "Octavia E. Butler"
@@ -265,5 +270,3 @@
     (books-by-living-authors books) => (just #{little-schemer cities embassytown})
     (books-by-living-authors (concat books [deus-irae, silmarillion]))
       => (just #{little-schemer cities embassytown silmarillion})))
-
-; %____%
