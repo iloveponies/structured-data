@@ -1,16 +1,24 @@
 (ns structured-data)
 
-(defn do-a-thing [x]  ;; Tuplataan syöte
+(defn do-a-thing 
+	"Tuplataan syöte"
+	[x]  
 	(let [tupla (+ x x)]
 		(Math/pow tupla tupla)) )
 
-(defn spiff [v]  ;; Haetaan 1. ja 3. elementti vektorista
+(defn spiff 
+	"Haetaan 1. ja 3. elementti vektorista"
+	[v]  
 	(+ (get v 0) (get v 2)) )
 
-(defn cutify [v]  ;; Lisätään lempeä vektoriin
+(defn cutify 
+	"Lisätään lempeä vektoriin"
+	[v]  
 	(conj v "<3") )
 
-(defn spiff-destructuring [v] ;; Poistetaan viimeinen elementti vektorista
+(defn spiff-destructuring 
+	"Poistetaan viimeinen elementti vektorista"
+	[v] 
  	(let [[x y z] v]
 		(+ x z)) )
 
@@ -20,89 +28,135 @@
 (defn rectangle [bottom-left top-right]
   [bottom-left top-right])
 
-(defn width [rectangle] ;; Lasketaan suorakaiteen leveys
+(defn width 
+	"Lasketaan suorakaiteen leveys"
+	[rectangle] 
  	 (let [[[x1 y1] [x2 y2]] rectangle]
 		(- x2 x1)) )
 
-(defn height [rectangle] ;; Lasketaan suorakaiteen korkeus
+(defn height 
+	"Lasketaan suorakaiteen korkeus"
+	[rectangle] 
 	(let [[[x1 y1] [x2 y2]] rectangle]
                 (- y2 y1)) )
 
-(defn square? [rectangle] ;; Tutkitaan onko suorakaide neliö
+(defn square? 
+	"Tutkitaan onko suorakaide neliö"
+	[rectangle] 
 	 (let [[[x1 y1] [x2 y2]] rectangle]
 		(if (== (- y2 y1) (- x2 x1)) true false)) )
 
-(defn area [rectangle] ;; Lasketaan suorakaiteen pinta-ala
-   (let [[[x1 y1] [x2 y2]] rectangle]     
+(defn area 
+	"Lasketaan suorakaiteen pinta-ala"
+	[rectangle] 
+	(let [[[x1 y1] [x2 y2]] rectangle]     
                  (* (- y2 y1) (- x2 x1))) )
 
-(defn contains-point? [rectangle point] ;; Sisältyykö annettu piste suorakaiteeseen
+(defn contains-point? 
+	"Sisältyykö annettu piste suorakaiteeseen"
+	[rectangle point] 
 	(let [[[x1 y1] [x2 y2]] rectangle
 		[px py] point]
 		(if (and (<= x1 px x2) (<= y1 py y2)) true false)) )
 
-(defn contains-rectangle? [outer inner] ;; Sisältyykö inner outeriin
+(defn contains-rectangle? 
+	"Sisältyykö inner outeriin"
+	[outer inner] 
 	(let [[[x1 y1] [x2 y2]] inner]
 		(if (and (contains-point? outer [x1 y1]) (contains-point? outer [x2 y2])) true false)) )
 
-(defn title-length [book] ;; Kirjan nimen pituus merkkeinä
+(defn title-length 
+	"Kirjan nimen pituus merkkeinä"
+	[book] 
 	(count (:title book)) )
 
-(defn author-count [book] ;; Tekijöiden lukumäärä
+(defn author-count 
+	"Tekijöiden lukumäärä"
+	[book] 
   	(count (:authors book)) )
 
-(defn multiple-authors? [book] ;; Onko tekijöitä useampia
+(defn multiple-authors? 
+	"Onko tekijöitä useampia"
+	[book] 
   	(if (< 1 (count (:authors book))) true false) )
 
-(defn add-author [book new-author] ;; Uudet tekijän lisääminen
+(defn add-author 
+	"Uudet tekijän lisääminen"
+	[book new-author] 
 	(let [authors (:authors book)
 		new (conj authors new-author)]
 		(assoc book :authors new)) )
 
-(defn alive? [author] ;; Onko tekijä elossa
+(defn alive? 
+	"Onko tekijä elossa"
+	[author] 
 	(not (contains? author :death-year)) )
 
-(defn element-lengths [collection] ;; Kokoelman koko
+(defn element-lengths 
+	"Kokoelman koko"
+	[collection] 
   	(map count collection) )
 
-(defn second-elements [collection] ;; Poimitaan kokoelman kokoelmista toiseksi indeksoituvat elementit ja kootaan uusi kokoelma niistä
+(defn second-elements 
+	"Poimitaan kokoelman kokoelmista toiseksi indeksoituvat elementit ja kootaan uusi kokoelma niistä"
+	[collection] 
 	(let [toinen (fn [x] (get x 1))]
 		(map toinen collection)) )
 
-(defn titles [books]  ;; Kootan kirjojen otsikot
+(defn titles 
+	"Kootan kirjojen otsikot"
+	[books]  
 	(map :title books) )
 
-(defn monotonic? [a-seq] ;; Onko sarja monotoninen
+(defn monotonic? 
+	"Onko sarja monotoninen"
+	[a-seq] 
 	(or (apply >= a-seq) (apply <= a-seq)) )
 
-(defn stars [n] ;; Tehdään tähtiä
+(defn stars 
+	"Tehdään tähtiä"
+	[n] 
 	(apply str (repeat n "*")) )
 
-(defn toggle [a-set elem] ;; päälle/pois
+(defn toggle 
+	"päälle/pois"
+	[a-set elem] 
 	(if (contains? a-set elem)
 		(disj a-set elem)
 		(conj a-set elem)) )
 
-(defn contains-duplicates? [a-seq] ;; Onko sarjassa duplikaatteja
+(defn contains-duplicates? 
+	"Onko sarjassa duplikaatteja"
+	[a-seq] 
 	(let [set (set a-seq)]
 		(not= (count set) (count a-seq))) )
 
-(defn old-book->new-book [book] ;; Vaihdetaan kirjan muotoilua
+(defn old-book->new-book 
+	"Vaihdetaan kirjan muotoilua"
+	[book] 
 	 (let [set (set (:authors book))]
 		(assoc book :authors set)) )
 
-(defn has-author? [book author] ;; Onko kirjalla annettu tekijä
+(defn has-author? 
+	"Onko kirjalla annettu tekijä"
+	[book author] 
 	(contains? (:authors book) author) )
 
-(defn authors [books] ;; Listataan kaikki tekijät
+(defn authors 
+	"Listataan kaikki tekijät"
+	[books] 
 	(apply clojure.set/union (map :authors books)) )
 
-(defn all-author-names [books] ;; Listataan tekijöiden nimet - tää ei vielä ihan uponnut
+(defn all-author-names 
+	"Listataan tekijöiden nimet - tää ei vielä ihan uponnut"
+	[books] 
 	(let [author-names
 		(fn [book] (map :name (:authors book)))]
 	(set (apply concat (map author-names books)))) )
 
-(defn author->string [author] ;; Tekijä lukukelpoiseen muotoon
+(defn author->string 
+	"Tekijä lukukelpoiseen muotoon"
+	[author] 
 	(let [name (:name author)
 		birth (:birth-year author)
 		death (:death-year author)]
@@ -110,33 +164,49 @@
 			(not birth) (str name)
 			:else  (str name " (" birth " - " death ")"))) )
 
-(defn authors->string [authors] ;; Useampi tekijä lukukelpoiseen muotoon
+(defn authors->string 
+	"Useampi tekijä lukukelpoiseen muotoon"
+	[authors] 
 	(apply str (interpose ", " (map author->string authors))) )
 
-(defn book->string [book] ;; Kirja lukukelpoiseen muotoon
+(defn book->string 
+	"Kirja lukukelpoiseen muotoon"
+	[book] 
 	(str (:title book) ", written by " (authors->string (:authors book))) )
 
-(defn books->string [books] ;; Useampi kirja lukukelpoiseen muotoon
+(defn books->string 
+	"Useampi kirja lukukelpoiseen muotoon"
+	[books] 
 	(let [kirjalista (apply str (interpose ". " (map book->string books)))]
 		(cond
 			(<= (count books) 0) (str "No books.")
 			(== (count books)  1) (str "1 book. " kirjalista ".")
 			:else (str (count books) " books. " kirjalista "."))) )
 
-(defn books-by-author [author books] ;; Kirjat annetulta tekijältä
+(defn books-by-author 
+	"Kirjat annetulta tekijältä"
+	[author books] 
 	(filter (fn [x] (has-author? x author )) books) )
 
-(defn author-by-name [name authors] ;; Etsii nimeä tekijöistä
+(defn author-by-name 
+	"Etsii nimeä tekijöistä"
+	[name authors] 
 	(let [found? (fn [x] (= (:name x) name))]
 	  (first(filter found? authors))))
 
-(defn living-authors [authors] ;; Etsii elossa olevat tekijät joukosta
+(defn living-authors 
+	"Etsii elossa olevat tekijät joukosta"
+	[authors] 
 	(filter alive? authors) )
 
-(defn has-a-living-author? [book] ;; Tutkii onko joku kirjan tekijöistä elossa
+(defn has-a-living-author? 
+	"Tutkii onko joku kirjan tekijöistä elossa"
+	[book] 
 	(< 0 (count (living-authors (:authors book)))) )
 
-(defn books-by-living-authors [books] ;; Kirjat joilla on elossa olevia tekijöitä
+(defn books-by-living-authors 
+	"Kirjat joilla on elossa olevia tekijöitä"
+	[books] 
 	(filter (fn [book] (has-a-living-author? book)) books) )
 
 ; %________%
