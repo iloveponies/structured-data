@@ -132,40 +132,73 @@
   (contains? (:authors book) author)
 )
 
-(defn all-author-names [books]
-  (let [auth (apply (clojure.set/union) (map :authors books))
-        names (map :name auth)]
-    (set names)
-    )
+(defn authors [books]
+   (apply clojure.set/union (map :authors books))
 )
 
-(defn authors [books]
-   (apply clojure.set/union (map (:authors) books))
+(defn all-author-names [books]
+  (let [auth (authors books)
+        names (map :name auth)]
+    (set names)
+  )
 )
 
 (defn author->string [author]
-  :-)
+  (let [n (:name author)
+       by (if (contains? author :birth-year) 
+               (str " (" (:birth-year author) " - ")
+               (str "")
+          )
+       dy (if (contains? author :death-year) 
+               (str (:death-year author))
+               (str "")
+          )
+       lastSign (if (contains? author :birth-year) 
+                    (str ")")
+                    (str "")
+                )    
+       ]
+    (str n by dy lastSign)
+  )
+  )
 
 (defn authors->string [authors]
-  :-)
+  str (apply str (interpose ", " (map author->string authors)))
+)
 
 (defn book->string [book]
-  :-)
+  (let [ti (:title book) 
+        authors (authors->string (:authors book))
+       ]
+     (str ti ", written by " authors)
+  )
+)
 
 (defn books->string [books]
-  :-)
+  (let [numBooks (count books)
+        strnum (str numBooks (if (== numBooks 1) " book. " " books. "))
+        bookInfo (str (apply str (interpose ". " (map book->string books))))
+        ]
+    (if (empty? books) "No books." (str strnum bookInfo "."))
+   ))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [b] (has-author? b author)) books)
+  )
 
-(defn author-by-name [name authors]
-  :-)
+(defn author-by-name [n authors]
+   (let [li (filter (fn [aut] (.equals (:name aut) n)) authors)]
+     (first li)
+   )
+  )
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (:authors book))))
+)
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books)
+  )
