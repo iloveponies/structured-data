@@ -67,22 +67,28 @@
   (contains-rectangle? (rectangle [0 0] [1 1])
                        (rectangle [1 1] [2 2])) => false)
 
-(def china {:name "China Miéville", :birth-year 1972})
+(def china {:name "China Mieville", :birth-year 1972})
+
 (def octavia {:name "Octavia E. Butler"
               :birth-year 1947
               :death-year 2006})
+
 (def friedman {:name "Daniel Friedman" :birth-year 1944})
+
 (def felleisen {:name "Matthias Felleisen"})
 
 (def cities {:title "The City and the City" :authors [china]})
+
 (def wild-seed {:title "Wild Seed", :authors [octavia]})
+
 (def embassytown {:title "Embassytown", :authors [china]})
+
 (def little-schemer {:title "The Little Schemer"
                      :authors [friedman, felleisen]})
 
 (def books [cities, wild-seed, embassytown, little-schemer])
 
-(let [china {:name "China Miéville", :birth-year 1972}
+(let [china {:name "China Mieville", :birth-year 1972}
       octavia {:name "Octavia E. Butler"
                :birth-year 1947
                :death-year 2006}
@@ -99,7 +105,7 @@
     (title-length cities)         => 21
     (title-length wild-seed)      => 9
     (title-length little-schemer) => 18)
-  
+
   (facts "author-count"
     (author-count cities)         => 1
     (author-count wild-seed)      => 1
@@ -166,7 +172,6 @@
     => {:title "The Little Schemer" :authors #{friedman, felleisen}}
   (old-book->new-book {:title "Wild Seed", :authors [octavia]})
     => {:title "Wild Seed", :authors #{octavia}})
-
 
 (let [china {:name "China Miéville", :birth-year 1972}
       octavia {:name "Octavia E. Butler"
