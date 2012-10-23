@@ -139,14 +139,18 @@
   
   (facts "titles"
     (titles [cities]) => ["The City and the City"]
-    (titles books)    => ["The City and the City" "Wild Seed" "Embassytown"]))
+    (titles books)    => (just ["The City and the City"
+                                "Wild Seed"
+                                "Embassytown"
+                                "The Little Schemer"]
+                               :in-any-order)))
 
 (facts "monotonic?"
-  (monotonic? [1 2 3])     => true
-  (monotonic? [0 1 10 11]) => true
-  (monotonic? [3 2 0 -3])  => true
-  (monotonic? [3 2 2])     => true
-  (monotonic? [1 2 1 0])   => false)
+       (monotonic? [1 2 3])     => true
+       (monotonic? [0 1 10 11]) => true
+       (monotonic? [3 2 0 -3])  => true
+       (monotonic? [3 2 2])     => true
+       (monotonic? [1 2 1 0])   => false)
 
 (facts "stars"
   (stars 1) => "*"
@@ -181,7 +185,7 @@
       dick {:name "Philip K. Dick", :birth-year 1928, :death-year 1982}
       zelazny {:name "Roger Zelazny", :birth-year 1937, :death-year 1995}
 
-      authors #{china, felleisen, octavia, friedman}
+      authors-set #{china, felleisen, octavia, friedman}
 
       cities {:title "The City and the City" :authors #{china}}
       wild-seed {:title "Wild Seed", :authors #{octavia}}
@@ -213,7 +217,6 @@
     (all-author-names books)
       => #{"Matthias Felleisen" "China Miéville"
            "Octavia E. Butler" "Daniel Friedman"})
-
   (facts "author->string"
     (author->string felleisen) => "Matthias Felleisen"
     (author->string friedman)  => "Daniel Friedman (1944 - )"
@@ -232,7 +235,8 @@
                           (contains ", ")))
 
   (facts "book->string"
-    (book->string wild-seed) => "Wild Seed, written by Octavia E. Butler"
+         (book->string wild-seed)
+         => "Wild Seed, written by Octavia E. Butler (1947 - 2006)"
     (book->string little-schemer)
       => (every-checker (has-prefix "The Little Schemer, written by ")
                         (has-suffix #"Daniel Friedman \(1944 - \), Matthias Felleisen|Matthias Felleisen, Daniel Friedman \(1944 - \)")))
@@ -249,13 +253,13 @@
     (books-by-author octavia books) => (just [wild-seed]))
 
   (facts "author-by-name"
-    (author-by-name "Octavia E. Butler" authors)                => octavia
+    (author-by-name "Octavia E. Butler" authors-set)            => octavia
     (author-by-name "Octavia E. Butler" #{felleisen, friedman}) => nil
-    (author-by-name "China Miéville" authors)                   => china
-    (author-by-name "Goerge R. R. Martin" authors)              => nil)
+    (author-by-name "China Miéville" authors-set)               => china
+    (author-by-name "Goerge R. R. Martin" authors-set)          => nil)
 
   (facts "living-authors"
-    (living-authors authors)             => (just #{china, felleisen, friedman})
+    (living-authors authors-set)         => (just #{china, felleisen, friedman})
     (living-authors #{octavia})          => (just #{})
     (living-authors #{china, felleisen}) => (just #{china, felleisen}))
 
