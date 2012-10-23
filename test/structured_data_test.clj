@@ -67,7 +67,7 @@
   (contains-rectangle? (rectangle [0 0] [1 1])
                        (rectangle [1 1] [2 2])) => false)
 
-(def china {:name "China Mieville", :birth-year 1972})
+(def china {:name "China Mi�ville", :birth-year 1972})
 
 (def octavia {:name "Octavia E. Butler"
               :birth-year 1947
@@ -173,7 +173,7 @@
   (old-book->new-book {:title "Wild Seed", :authors [octavia]})
     => {:title "Wild Seed", :authors #{octavia}})
 
-(let [china {:name "China Miéville", :birth-year 1972}
+(let [china {:name "China Mieville", :birth-year 1972}
       octavia {:name "Octavia E. Butler"
                :birth-year 1947
                :death-year 2006}
@@ -213,9 +213,9 @@
   (facts "all-author-names"
     (all-author-names []) => #{}
     (all-author-names [cities, wild-seed])
-      => #{"China Miéville" "Octavia E. Butler"}
+      => #{"China Mieville" "Octavia E. Butler"}
     (all-author-names books)
-      => #{"Matthias Felleisen" "China Miéville"
+      => #{"Matthias Felleisen" "China Mieville"
            "Octavia E. Butler" "Daniel Friedman"})
   (facts "author->string"
     (author->string felleisen) => "Matthias Felleisen"
@@ -244,9 +244,9 @@
   (facts "books->string"
     (books->string []) => "No books."
     (books->string [cities])
-      => "1 book. The City and the City, written by China Miéville (1972 - )."
+      => "1 book. The City and the City, written by China Mieville (1972 - )."
     (books->string [little-schemer, cities, wild-seed])
-      => #"3 books. The Little Schemer, written by (Daniel Friedman \(1944 - \), Matthias Felleisen|Matthias Felleisen, Daniel Friedman \(1944 - \)). The City and the City, written by China Miéville \(1972 - \). Wild Seed, written by Octavia E. Butler \(1947 - 2006\).")
+      => #"3 books. The Little Schemer, written by (Daniel Friedman \(1944 - \), Matthias Felleisen|Matthias Felleisen, Daniel Friedman \(1944 - \)). The City and the City, written by China Mieville \(1972 - \). Wild Seed, written by Octavia E. Butler \(1947 - 2006\).")
 
   (facts "books-by-author"
     (books-by-author china books)   => (just [cities embassytown])
@@ -255,7 +255,7 @@
   (facts "author-by-name"
     (author-by-name "Octavia E. Butler" authors-set)            => octavia
     (author-by-name "Octavia E. Butler" #{felleisen, friedman}) => nil
-    (author-by-name "China Miéville" authors-set)               => china
+    (author-by-name "China Mieville" authors-set)               => china
     (author-by-name "Goerge R. R. Martin" authors-set)          => nil)
 
   (facts "living-authors"
