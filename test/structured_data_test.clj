@@ -132,11 +132,11 @@
   (facts "element-lengths"
     (element-lengths ["foo" "bar" "" "quux"])  => [3 3 0 4]
     (element-lengths ["x" [:a :b :c] {:y 42}]) => [1 3 1])
-  
+
   (facts "second-elements"
     (second-elements [[1 2] [2 3] [3 4]])               => [2 3 4]
     (second-elements [[1 2 3 4] [1] ["a" "s" "d" "f"]]) => [2 nil "s"])
-  
+
   (facts "titles"
     (titles [cities]) => ["The City and the City"]
     (titles books)    => (just ["The City and the City"
