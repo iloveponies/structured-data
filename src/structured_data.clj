@@ -95,16 +95,31 @@
   (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (let [partname (:name author)
+        partbirth (:birth-year author)
+        partdeath (:death-year author)]
+    (cond
+      (= (:birth-year author) nil) (str partname)
+      (= (:death-year author) nil) (str partname " (" partbirth " - )")
+      :else (str partname " (" partbirth " - " partdeath ")"))))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
-  :-)
+  (str
+    (cond
+      (> (count books) 1) (str (count books) " books. ")
+      (= (count books) 1) (str (count books) " book. ")
+      (= (count books) 0) "No books."
+    )
+    (apply str (interpose ". " (map book->string books)))
+    (if (> (count books) 0) ".")
+  )
+)
 
 (defn books-by-author [author books]
   :-)
