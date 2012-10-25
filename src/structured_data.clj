@@ -44,19 +44,19 @@
     (and (contains-point? outer start) (contains-point? outer end))))
 
 (defn title-length [book]
-  :-)
+  (count (:title book)))
 
 (defn author-count [book]
-  :-)
+  (count (:authors book)))
 
 (defn multiple-authors? [book]
-  :-)
+  (> (count (:authors book)) 1))
 
 (defn add-author [book new-author]
-  :-)
+  (assoc book :authors (conj (:authors book) new-author)))
 
 (defn alive? [author]
-  :-)
+  (= (:death-year author) nil))
 
 (defn element-lengths [collection]
   :-)
