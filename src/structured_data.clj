@@ -8,7 +8,7 @@
   (+ (get v 0) (get v 2)))
 
 (defn cutify [v]
-  (conj v "<3"))
+  (let [love "<3"] (conj v love)))
 
 (defn spiff-destructuring [v]
   (let [a (get v 0)
@@ -34,8 +34,9 @@
 (defn square? [rectangle]
   (if (== (width rectangle) (height rectangle)) true false))
 
-(defn area [rectangle]
-  (* (width rectangle) (height rectangle)))
+(defn contains-point? [[[left bottom] [right top]] [x y]]
+  (and (<= left x right)
+       (<= bottom y top)))
 
 (defn contains-point? [rectangle point]
   (let [x1 (get (get rectangle 0) 0)
@@ -51,17 +52,17 @@
         b (get inner 1)] 
     (and (contains-point? outer a) (contains-point? outer b))))
 
-(defn title-lenght [book]
- (count (str(:title book))))
+(defn title-length [book]
+  (count (:title book)))
 
 (defn author-count [book]
   (count(:authors book)))
 
-(defn multiple-authors [book]
-  (if(== 1 (count(:authors book))) false true)) 
+(defn multiple-authors? [book]
+  (> (author-count book) 1))
 
 (defn add-author [book new-author]
-  (conj(:authors book) new-author))
+  (assoc book :authors (conj (:authors book) new-author)))
 
 (defn alive? [author]
   (if (contains? author :death-year) false true))
