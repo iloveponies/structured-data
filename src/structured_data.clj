@@ -126,7 +126,7 @@
         book-descriptions-coll (map book->string books)
         coll-with-points (interpose ". " book-descriptions-coll)
         stringed-coll (apply str coll-with-points)
-        stringed-coll-added (if (> (count books) 0) (str " " stringed-coll ".") (stringed-coll))]
+        stringed-coll-added (if (> (count books) 0) (str " " stringed-coll ".") stringed-coll)]
     (str how-many stringed-coll-added)))
 
 (defn books-by-author [author books]
