@@ -102,12 +102,14 @@
   (cond
    (contains? author :death-year) (str (author :name) " (" (author :birth-year) " - " (author :death-year) ")")
    (contains? author :birth-year) (str (author :name) " (" (author :birth-year) " - )")
-   :else (:name author))) 
+   (contains? author :name) (:name author)
+   :else (str ", ")))
 
 (defn authors->string [authors]
+  (let [aut (interpose ", " authors)] 
   (if (< 0 (count authors)) 
-    (apply str (apply author->string (interpose ", " authors)))
-    (str "")))
+    (apply str (map author->string aut)) 
+           (str ""))))
 
 (defn book->string [book]
   (str (book :title) ", written by " 
@@ -120,7 +122,7 @@
                                          (first books)) ".")
    :else (str (count books) " books. " 
               (apply str (interpose ". " 
-                                    (apply book->string books))) ".")))
+                                    (map book->string books))) ".")))
 
 (defn books-by-author [author books]
   (filter (fn [b] (has-author? b author)) books))
