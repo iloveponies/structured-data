@@ -52,7 +52,7 @@
   (count (:authors book)))
 
 (defn multiple-authors? [book]
-  (not (== (author-count book) 1)))
+  (not= (author-count book) 1))
 
 (defn add-author [book new-author]
   (assoc book :authors (conj (:authors book) new-author)))
@@ -83,8 +83,7 @@
   (not (== (count (set a-seq)) (count a-seq))))
 
 (defn old-book->new-book [book]
-  {:title (:title book)
-   :authors (set (:authors book))})
+  (assoc book :authors (set (:authors book))))
 
 (defn has-author? [book author]
   (contains? (:authors book) author))
@@ -120,15 +119,14 @@
     (filter f books)))
 
 (defn author-by-name [name authors]
-  (let [f (fn [author] (= name (:name author)))
-        matches (filter f authors)]
-    (if (> (count matches) 0) (first matches) nil)))
+  (let [find-author (fn [author] (= name (:name author)))]
+    (first (filter find-author authors))))
 
 (defn living-authors [authors]
   (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  (> (count (living-authors (:authors book))) 0))
+  (not (empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
   (filter has-a-living-author? books))
