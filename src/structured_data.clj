@@ -53,7 +53,7 @@
   (count (:authors book)))
 
 (defn multiple-authors? [book]
-  (>= ((author-count book) 2)))
+  (> (author-count book) 1))
 
 (defn add-author [book new-author]
   (let [authors (get book :authors)
@@ -87,40 +87,53 @@
   (not (== (count (set a-seq)) (count a-seq))))
 
 (defn old-book->new-book [book]
-  :-)
+  (assoc book :authors (set (:authors book))))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author))
 
 (defn authors [books]
-  :-)
+  (apply clojure.set/union (map :authors books)))
 
 (defn all-author-names [books]
-  :-)
+  (set (clojure.set/union (map :name (authors books)))))
 
 (defn author->string [author]
-  :-)
+  (cond
+   (contains? author :death-year) (str (author :name) " (" (author :birth-year) " - " (author :death-year) ")")
+   (contains? author :birth-year) (str (author :name) " (" (author :birth-year) " - )")
+   :else (:name author))) 
 
 (defn authors->string [authors]
-  :-)
+  (if (< 0 (count authors)) 
+    (apply str (apply author->string (interpose ", " authors)))
+    (str "")))
 
 (defn book->string [book]
-  :-)
+  (str (book :title) ", written by " 
+       (authors->string (book :authors))))
 
 (defn books->string [books]
-  :-)
+  (cond
+   (== 0 (count books)) (str "No books.")
+   (== 1 (count books)) (str "1 book. " (book->string 
+                                         (first books)) ".")
+   :else (str (count books) " books. " 
+              (apply str (interpose ". " 
+                                    (apply book->string books))) ".")))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [b] (has-author? b author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (let [filt (filter (fn [a] (= (:name a) name)) authors)]
+  (if (< 0 (count filt)) (first filt) (or))))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter (fn [b] (has-a-living-author? b)) books))
