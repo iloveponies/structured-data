@@ -125,7 +125,7 @@
     (if (empty? books)
       (str "No books.")
       (cond
-        (> nbooks 1) (str nbooks " books. " (apply str (map book->string books)) "." )
+        (> nbooks 1) (str nbooks " books. " (apply str (interpose ". " (map book->string books))) "." )
         (= nbooks 1) (str nbooks " book. " (apply str (map book->string books)) ".")))))
 
 (defn books-by-author [author books]
