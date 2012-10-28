@@ -130,18 +130,20 @@
     (str how-many stringed-coll-added)))
 
 (defn books-by-author [author books]
-  :-)
+  (let [has-this-author? (fn [some-book] (has-author? some-book author))]
+        (filter has-this-author? books)))
 
 (defn author-by-name [name authors]
-  :-)
+  (let [is-this-person-called-name? (fn [this-person] (if (= (:name this-person) name) true false))]
+        (first (filter is-this-person-called-name? authors))))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (filter alive? (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
