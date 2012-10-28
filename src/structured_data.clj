@@ -32,14 +32,14 @@
 
 (defn height [rectangle]
 	(let [[[x1 y1] [x2 y2]] rectangle]
-		(- x2 x1) (- y2 y1)
+	  (- y2 y1)
       )
   )
 
 (defn square? [rectangle]
 	(let [[[x1 y1] [x2 y2]] rectangle]
-		(if(= (- x1 x2) (- y1 y2) ) true false
-      ))
+	  (= (height rectangle) (width rectangle))
+      )
   )
 
 (defn area [rectangle]
@@ -49,10 +49,14 @@
   )
 
 (defn contains-point? [rectangle point]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle
+        [xp yp] point]
+    (and (<= x1 xp x2) (<= y1 yp y2))))
 
 (defn contains-rectangle? [outer inner]
-  :-)
+  (let [[p1 p2] inner]
+    (and (contains-point? outer p1) 
+         (contains-point? outer p2))))
 
 (defn title-length [book]
 	(count(:title book))
@@ -77,8 +81,7 @@
   )
 
 (defn element-lengths [collection]
-  (let [laske (fn [x] (count x))]
-    (map laske collection)))
+  (map count collection))
 
 (defn second-elements [collection]
   (let [laske (fn [x] (get x 1))]
@@ -89,7 +92,7 @@
   )
 
 (defn monotonic? [a-seq]
-  :-)
+  (or (apply <= a-seq) (apply >= a-seq)))
 
 (defn stars [n]
 	(apply str (repeat n "*"))
@@ -144,25 +147,30 @@
   )
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
   :-)
 
 (defn books-by-author [author books]
-  :-)
+  (filter #(has-author? % author) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter #(= (:name %) name) authors))
+  )
 
 (defn living-authors [authors]
-  :-)
+ (filter alive? authors)
+  )
 
 (defn has-a-living-author? [book]
-  :-)
+ (not (empty? (living-authors (:authors book)))
+      )
+)
 
 (defn books-by-living-authors [books]
-  :-)
+	(filter has-a-living-author? books)
+  )
