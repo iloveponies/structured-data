@@ -81,37 +81,67 @@
     (map laske collection)))
 
 (defn second-elements [collection]
-  :-)
+  (let [laske (fn [x] (get x 1))]
+    (map laske collection)))
 
 (defn titles [books]
-  :-)
+	(map :title books)
+  )
 
 (defn monotonic? [a-seq]
   :-)
 
 (defn stars [n]
-  :-)
+	(apply str (repeat n "*"))
+  )
 
 (defn toggle [a-set elem]
-  :-)
+	(if (contains? a-set elem)
+       (disj a-set elem)
+       (conj a-set elem))
+  )
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (if 
+    (= (count a-seq) (count (set a-seq))) 
+     false 
+     true )
+  )
 
 (defn old-book->new-book [book]
-  :-)
+  (let [authors (get book :authors)]
+    (assoc book :authors (set authors))
+  )
+)
 
 (defn has-author? [book author]
-  :-)
+      (let [authors (get book :authors)]
+			(contains? authors author)
+        )
+  	)
 
 (defn authors [books]
-  :-)
+	(let [authors (map :authors books)]
+    (apply clojure.set/union authors )
+		)
+  )
 
 (defn all-author-names [books]
-  :-)
+	(let [authors (authors books)] 
+      (set (map :name authors))
+      )
+  )
 
 (defn author->string [author]
-  :-)
+  (let [name (get author :name) 
+        birth (get author :birth-year) 
+        death (get author :death-year)]
+    	(if (or birth death)
+			(str name " (" birth " - " death")")
+          	(str name )
+          )
+    )
+  )
 
 (defn authors->string [authors]
   :-)
