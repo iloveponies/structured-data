@@ -57,10 +57,12 @@
   (map count collection))
 
 (defn second-elements [collection]
-  :-)
+  (let [second-element (fn [x] (second x))]
+  (map second-element collection)))
 
 (defn titles [books]
-  :-)
+  (let [title (fn [book] (get book :title))]
+    (map title books)))
 
 (defn monotonic? [a-seq]
   :-)
