@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Leiningen: org.apache.maven.wagon:wagon-http:2.2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.m2/repository/org/apache/maven/wagon/wagon-http/2.2/wagon-http-2.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

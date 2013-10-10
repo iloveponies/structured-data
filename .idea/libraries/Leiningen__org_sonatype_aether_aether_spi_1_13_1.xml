@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Leiningen: org.sonatype.aether:aether-spi:1.13.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.m2/repository/org/sonatype/aether/aether-spi/1.13.1/aether-spi-1.13.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
