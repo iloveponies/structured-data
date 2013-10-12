@@ -2,7 +2,7 @@
 
 (defn do-a-thing [x]
   (let [xx (+ x x)]
-  (Math/pow xx xx)))
+    (Math/pow xx xx)))
 
 (defn spiff [v]
   (+ (get v 0) (get v 2)))
@@ -11,7 +11,7 @@
   (conj v "<3"))
 
 (defn spiff-destructuring [[x0 x1 x2]]
-    (+ x0 x2))
+  (+ x0 x2))
 
 (defn point [x y]
   [x y])
@@ -48,7 +48,7 @@
 
 (defn add-author [book new-author]
   (let [new-authors (conj (get book :authors) new-author)]
-  (assoc book :authors new-authors)))
+    (assoc book :authors new-authors)))
 
 (defn alive? [author]
   (= nil (get author :death-year)))
@@ -58,7 +58,7 @@
 
 (defn second-elements [collection]
   (let [second-element (fn [x] (second x))]
-  (map second-element collection)))
+    (map second-element collection)))
 
 (defn titles [books]
   (let [title (fn [book] (get book :title))]
@@ -71,22 +71,27 @@
   (apply str(repeat n "*")))
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem)
+      (disj a-set elem)
+      (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (not(== (count a-seq) (count (set a-seq)))))
 
 (defn old-book->new-book [book]
-  :-)
+  (def new-authors (set (get book :authors)))
+  (assoc book :authors new-authors))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (get book :authors) author))
 
 (defn authors [books]
-  :-)
+  (let [get-authors (fn [book] (get book :authors))]
+  (apply clojure.set/union (map get-authors books) )))
 
 (defn all-author-names [books]
-  :-)
+  (let [author-name (fn [author] (get author :name))]
+    (set (concat (map author-name (authors books))))))
 
 (defn author->string [author]
   :-)
