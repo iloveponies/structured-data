@@ -120,16 +120,41 @@
   (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (let [namae (:name author)
+        birth-year (:birth-year author)
+        death-year (:death-year author)
+        sb (new StringBuilder)]
+    (.append sb (str namae))
+    (if birth-year 
+      (.append sb (str " (" birth-year " - ")))
+    (if death-year
+      (.append sb (str death-year)))
+    (if birth-year
+      (.append sb (str ")")))
+    (.toString sb)))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (let [title (:title book)
+        authors (authors->string (:authors book))]
+    (str title ", written by " authors)))
+
+(defn count-pluralize [col word]
+  (let [len (count col)]
+    (cond
+      (== 1 (count col)) (str len " " word)
+      :else (str len " " word "s"))))
 
 (defn books->string [books]
-  :-)
+  (let [countbooks (count-pluralize books "book")
+        bstring (map book->string books)]
+    (cond
+      (> 1 (count books)) (str "No books.")
+      :else (str countbooks ". "
+                 (apply str (interpose ", " (map book->string books)))
+                 "." ))))
 
 (defn books-by-author [author books]
   :-)
