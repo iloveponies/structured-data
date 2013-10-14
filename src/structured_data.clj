@@ -157,18 +157,20 @@
                  "." ))))
 
 (defn books-by-author [author books]
-  :-)
+  (let [check-author (fn [book] (has-author? book author))]
+    (filter check-author books)))
 
-(defn author-by-name [name authors]
-  :-)
+(defn author-by-name [namae authors]
+  (let [check-name (fn [author] (= (:name author) namae))]
+    (first (filter check-name authors))))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
