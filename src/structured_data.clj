@@ -129,7 +129,8 @@
            ""))))
 
 (defn books-by-author [author books]
-  :-)
+  (let [book-has-given-author? (fn [book] (has-author? book author))]
+  (filter book-has-given-author? books)))
 
 (defn author-by-name [name authors]
   :-)
