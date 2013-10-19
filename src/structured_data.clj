@@ -114,10 +114,19 @@
   (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
-  :-)
+  (let [number-of-books (count books)
+        pluralize-number-of-books (cond
+                                   (== 0 number-of-books) "No books."
+                                   (== 1 number-of-books) "1 book."
+                                   :else (str number-of-books " books."))
+        list-of-books (str " " (apply str (interpose ". " (map book->string books))) ".")]
+    (str pluralize-number-of-books
+         (if (> number-of-books 0)
+           list-of-books
+           ""))))
 
 (defn books-by-author [author books]
   :-)
