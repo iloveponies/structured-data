@@ -65,10 +65,11 @@
   (not (contains? author :death-year)))
 
 (defn element-lengths [collection]
-  :-)
+  (map count collection))
 
 (defn second-elements [collection]
-  :-)
+  (let [get-second-element (fn [v] (get v 1))]
+    (map get-second-element collection)))
 
 (defn titles [books]
   :-)
