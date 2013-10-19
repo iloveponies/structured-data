@@ -94,13 +94,14 @@
     (assoc book :authors author-set)))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author))
 
 (defn authors [books]
-  :-)
+  (apply clojure.set/union (map :authors books)))
 
 (defn all-author-names [books]
-  :-)
+  (let [all-authors (authors books)]
+    (set (map :name all-authors))))
 
 (defn author->string [author]
   :-)
