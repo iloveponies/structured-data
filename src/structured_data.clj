@@ -137,8 +137,7 @@
   (first (filter author-has-given-name? authors))))
 
 (defn living-authors [authors]
-  (let [is-not-dead? (fn [author] (not (:death-year author)))]
-  (filter is-not-dead? authors)))
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
   :-)
