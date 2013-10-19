@@ -89,7 +89,9 @@
   (> (count a-seq) (count (set a-seq))))
 
 (defn old-book->new-book [book]
-  :-)
+  (let [author-vector (:authors book)
+        author-set (set author-vector)]
+    (assoc book :authors author-set)))
 
 (defn has-author? [book author]
   :-)
