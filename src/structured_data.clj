@@ -42,7 +42,10 @@
      (<= ry1 y ry2))))
 
 (defn contains-rectangle? [outer inner]
-  :-)
+  (let [[bottom-left-inner top-right-inner] inner]
+    (and
+     (contains-point? outer bottom-left-inner)
+     (contains-point? outer top-right-inner))))
 
 (defn title-length [book]
   :-)
