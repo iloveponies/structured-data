@@ -35,7 +35,11 @@
   (* (width rectangle) (height rectangle)))
 
 (defn contains-point? [rectangle point]
-  :-)
+  (let [[[rx1 ry1][rx2 ry2]] rectangle
+        [x y] point]
+    (and
+     (<= rx1 x rx2)
+     (<= ry1 y ry2))))
 
 (defn contains-rectangle? [outer inner]
   :-)
