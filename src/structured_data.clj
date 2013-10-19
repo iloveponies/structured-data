@@ -133,10 +133,12 @@
   (filter book-has-given-author? books)))
 
 (defn author-by-name [name authors]
-  :-)
+  (let [author-has-given-name? (fn [author] (= name (:name author)))]
+  (first (filter author-has-given-name? authors))))
 
 (defn living-authors [authors]
-  :-)
+  (let [is-not-dead? (fn [author] (not (:death-year author)))]
+  (filter is-not-dead? authors)))
 
 (defn has-a-living-author? [book]
   :-)
