@@ -5,10 +5,10 @@
     (Math/pow x-plus-x x-plus-x)))
 
 (defn spiff [v]
-  :-)
+  (+ (get v 0) (get v 2)))
 
 (defn cutify [v]
-  :-)
+  (conj v "<3"))
 
 (defn spiff-destructuring [v]
   :-)
