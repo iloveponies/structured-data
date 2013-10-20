@@ -134,17 +134,17 @@
     (first (filter predicate authors))))
 
 (defn living-authors [authors]
-  (let [predicate (fn [author] (alive? author))]
-    (filter predicate authors)))
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
   (not (empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
-  (let [predicate (fn [book] (has-a-living-author? book))]
-    (filter predicate books)))
+  (filter has-a-living-author? books))
 
 ; %________%
+
+
 
 
 
