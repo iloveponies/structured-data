@@ -62,70 +62,97 @@
   )
 
 (defn add-author [book new-author]
-  :-)
+  (let [original_authors (:authors book)
+        new_authors (conj original_authors new-author)]
+    (assoc book :authors new_authors)))
 
 (defn alive? [author]
-  :-)
+  (if (contains? author :death-year)
+    false
+    true))
 
 (defn element-lengths [collection]
-  :-)
+  (map count collection))
 
 (defn second-elements [collection]
-  :-)
+  (let [second_elements (fn [x] (get x 1))]
+    (map second_elements collection)))
 
 (defn titles [books]
-  :-)
+  (map :title books))
 
 (defn monotonic? [a-seq]
-  :-)
+  (or (apply <= a-seq) (apply >= a-seq)))
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n \*)))
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (let [copy (set a-seq)]
+    (< (count copy) (count a-seq))))
 
 (defn old-book->new-book [book]
-  :-)
+  (let [old_authors (:authors book)
+        new_authors (set old_authors)]
+  (assoc book :authors new_authors)))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author))
 
 (defn authors [books]
-  :-)
+  (apply clojure.set/union (map :authors books)))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (let [author_name (:name author)
+        author_years (str " (" (:birth-year author) " - " (:death-year author) ")")]
+    (if (contains? author :birth-year)
+      (str author_name author_years)
+      author_name)))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
-  :-)
+  (let [book_count (count books)
+        book_details (fn [book] (book->string book))]
+    (cond
+     (= book_count 0) "No books."
+     (= book_count 1) (str "1 book. " (apply book_details books) ".")
+     :else (str book_count " books. " (apply str (interpose ". " (map book_details books))) ".")
+     )))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [books] (has-author? books author)) books)
+  )
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [author] (= (:name author) name)) authors)
+  ))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (:authors book))))
+  )
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
+
+
+
+
 
