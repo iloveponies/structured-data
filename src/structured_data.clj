@@ -5,14 +5,9 @@
     (Math/pow x x)))
 
 (defn spiff [v]
-;;  (let [x (get v 0)
-;;       y (get v 3)]
-;;    (+ x y )))
   (cond
     (and (vector? v) (> (count v) 2)) (+ (get v 0) (get v 2))
     :else nil))
-
-
 
 (defn cutify [v]
   (conj v "<3"))
@@ -47,7 +42,6 @@
   (let [[[x1 y1] [x2 y2]] rectangle]
     (let [[z1 z2] point]
       (and (<= x1 z1 x2) (<= y1 z2 y2)))))
-
 
 (defn contains-rectangle? [outer inner]
   (let [[[x1 y1] [x2 y2]] outer]
@@ -105,7 +99,6 @@
 (defn authors [books]
   (apply clojure.set/union
          (map :authors books)))
-
 
 (defn author-names [book]
   (map :name (:authors book)))
