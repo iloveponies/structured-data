@@ -122,42 +122,82 @@
     (assoc book :authors
       (set authors))))
 
-
 (defn has-author? [book author]
   (contains? (book :authors) author))
 
+
 (defn authors [books]
-  :-)
+  (apply clojure.set/union (set (map :authors books))))
+
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name
+       (authors books))))
+
+
 
 (defn author->string [author]
-  :-)
+  (let [name (:name author) birth (:birth-year author) death (:death-year author)]
+    (cond
+     death (str name " (" birth " - " death ")")
+     birth (str name " (" birth " - " ")")
+     :else (str name))))
 
-(defn authors->string [authors]
-  :-)
+
+
+(defn authors->string [authors] (apply str (interpose ", "(concat (map author->string authors)))))
+
 
 (defn book->string [book]
-  :-)
+  (str
+   (:title book) ", written by "
+   (authors->string
+    (:authors book))))
+
 
 (defn books->string [books]
-  :-)
+  (let [kirjat
+        (apply str
+               (interpose ", "
+                          (concat
+                           (map book->string books))))]
+    (cond
+     (== (count books) 0)
+     (str "No books.")
+     (== (count books) 1)
+     (str "1 book. " kirjat ".")
+     :else (str
+            (count books) " books. " kirjat "."))))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [book] (has-author? book author)) books ))
+
 
 (defn author-by-name [name authors]
-  :-)
+  (let[kirjailija (filter (fn [author]
+           (= (:name author) name))
+          authors)]
+    (if (not-empty kirjailija) (first kirjailija) nil)))
+
 
 (defn living-authors [authors]
-  :-)
+  (filter (fn [author]
+             (alive? author))
+           authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (if
+    (empty?
+     (living-authors
+      (:authors book)))
+    false true))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter (fn [book]
+            (has-a-living-author? book))
+          books))
 
 ; %________%
+
+
 
