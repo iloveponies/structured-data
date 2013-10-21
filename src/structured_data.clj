@@ -58,7 +58,7 @@
   (assoc book :authors (conj (get book :authors) new-author)))
 
 (defn alive? [author]
-  (contains? author :death-year))
+  (not (contains? author :death-year)))
 
 (defn element-lengths [collection]
   :-)
