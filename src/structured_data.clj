@@ -116,27 +116,36 @@
      :else name)))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (let [authors (authors->string (:authors book))
+        title (:title book)]
+    (str title", written by " authors)))
 
 (defn books->string [books]
-  :-)
+  (let [stringedBooks (apply str (interpose ". " (map book->string books)))
+        amount (count  books)
+        completeStringMany (str amount " books. " stringedBooks".")
+        completeStringOne (str amount " book. " stringedBooks".")]
+    (cond
+     (= 0 amount) "No books."
+     (= 1 amount) completeStringOne
+     (> amount 1) completeStringMany)))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [x] (has-author? x author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [x] (= (:name x) name)) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter (fn [x] (alive? x)) authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter (fn [x] (has-a-living-author? x)) books))
 
-; %________%
+; %________%  X________X
