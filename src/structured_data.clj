@@ -105,35 +105,54 @@
   (if(< (count (set a-seq))                           ;=> Return true if count set of a-seq smaller
         (count a-seq)) true false))                   ;=> than count of a-seq. Else return false
 
-(defn old-book->new-book [book]
-  ())
+(defn old-book->new-book [book]                       ;=> Don't wanna comment no mooore
+  (let [new (assoc book :authors
+              (set (get book :authors)))]
+    new))
 
 (defn has-author? [book author]
-  :-)
+  (if (contains? (get book :authors) author)
+    true false))
 
 (defn authors [books]
-  :-)
+    (set (apply concat (map :authors books))))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (let [name (:name author)
+        years (cond
+               (:death-year author)
+                (str " (" (:birth-year author)
+                     " - " (:death-year author) ")")
+               (:birth-year author)
+                (str " (" (:birth-year author)
+                     " - )"))]
+    (str name years)))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", "(map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by "
+       (authors->string (:authors book))))
 
 (defn books->string [books]
-  :-)
+  (let [book-count (count books)
+        get-info (str (apply str (interpose ". " (map book->string books))) ".")]
+  (cond
+   (= 0 book-count) (str "No books.")
+   (= 1 book-count) (str "1 book. " get-info)
+   (< 1 book-count) (str book-count " books. " get-info)
+  )))
+
 
 (defn books-by-author [author books]
-  :-)
+ (filter #(has-author? % author) books))
 
-(defn author-by-name [name authors]
-  :-)
+(defn author-by-name [authors name]
+  )
 
 (defn living-authors [authors]
   :-)
