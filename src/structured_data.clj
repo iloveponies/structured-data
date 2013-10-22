@@ -119,12 +119,6 @@
   (assoc book :authors (set (get book :authors)))
 )
 
-(defn has-author? [book author]
-  (if (contains? (get book :authors) author)
-    true
-    false )
-)
-
 (defn authors [books]
   (apply clojure.set/union (map :authors books)) 
 )
@@ -156,22 +150,37 @@
         (> bookcount 1 ) (str bookcount " books. " (apply str (map book->string books)) ".")
         :else (str "No books.") ))
 )
+(defn has-author? [book author]
+  (if (contains? (get book :authors) author)
+    true
+    false )
+)
+
 
 (defn books-by-author [author books]
-  (filter  )
+  (let [filted (filter (fn [bookk] (has-author? bookk author)) books)]
+    filted)
 )
 
 
 (defn author-by-name [name authors]
-  :-)
+  (let [filted (filter (fn [x] (= name (:name (first x)))) authors)]
+    (first filted))
+)
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors)
+)
 
 (defn has-a-living-author? [book]
-  :-)
+  (let [livelist (filter alive? (:authors book)) ]
+    (if (empty? livelist)
+      false 
+      true))
+)
 
 (defn books-by-living-authors [books]
-  :-)
+  () 
+)
 
 ; %________%
