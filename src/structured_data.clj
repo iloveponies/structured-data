@@ -152,15 +152,16 @@
  (filter #(has-author? % author) books))
 
 (defn author-by-name [authors name]
-  )
+(first (filter #(= (get % :name) authors) name)))
 
 (defn living-authors [authors]
-  :-)
+  (filter #(alive? %) authors))
 
 (defn has-a-living-author? [book]
-  :-)
+ (if (empty? (living-authors (get book :authors)))
+   false true))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter #(has-a-living-author? %) books))
 
 ; wot is it
