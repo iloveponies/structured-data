@@ -30,7 +30,7 @@
     (if (> l 2)
       (let [[a x b] v
             ab (+ a b)]
-        (str ab))
+        ab)
       "?"))
   )
 
@@ -80,7 +80,7 @@
   (count (:authors book)))
 
 (defn multiple-authors? [book]
-  (if (< (author-count book) 1)
+  (if (> (author-count book) 1)
     true
     false)
   )
@@ -94,40 +94,64 @@
   (not(contains? author :death-year)))
 
 (defn element-lengths [collection]
-  :-)
+  (map count collection))
 
 (defn second-elements [collection]
-  :-)
+  (let [seconder (fn [x] (get x 1))]
+    (map seconder collection)))
 
 (defn titles [books]
-  :-)
+  (map :title books))
 
 (defn monotonic? [a-seq]
-  :-)
+  (or (apply <= a-seq) (apply >= a-seq))
+  )
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*")))
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (if
+    (<
+     (count
+      (set a-seq))
+     (count a-seq)
+     )
+    true
+    false
+    )
+  )
 
 (defn old-book->new-book [book]
-  :-)
+  (assoc book :authors (set (:authors book)))
+  )
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author))
 
 (defn authors [books]
-  :-)
-
+  (set (apply concat (map :authors books)))
+  )
 (defn all-author-names [books]
-  :-)
+  (set(map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (let [nimi (:name author)
+        syntynyt (:birth-year author)
+        kuollut (let [pvm (:death-year author)]
+                 (if (= pvm nil)
+                   ""
+                   pvm))
+        elanyt (if (= syntynyt nil)
+                 ""
+                 (str " (" syntynyt " - " kuollut ")"))]
+    (str nimi elanyt)
+    ))
 
 (defn authors->string [authors]
   :-)
@@ -154,4 +178,6 @@
   :-)
 
 ; %________%
+
+
 
