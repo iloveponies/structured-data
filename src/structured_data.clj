@@ -1,16 +1,38 @@
 (ns structured-data)
 
-(defn do-a-thing [x]
-  :-)
+(defn
+  do-a-thing
+  [x]
+  (let [a (+ x x)]
+  (Math/pow a a)))
 
-(defn spiff [v]
-  :-)
+(defn
+  spiff
+  [v]
+  (let [l (count v)
+        a (get v 0)
+        b (get v 2)]
+    (if (> l 2)
+      (+ a b)
+      "?")
+  ))
 
-(defn cutify [v]
-  :-)
+(defn
+  cutify
+  [v]
+  (conj v "<3")
+  )
 
-(defn spiff-destructuring [v]
-  :-)
+(defn
+  spiff-destructuring
+  [v]
+  (let [l (count v)]
+    (if (> l 2)
+      (let [[a x b] v
+            ab (+ a b)]
+        (str ab))
+      "?"))
+  )
 
 (defn point [x y]
   [x y])
@@ -19,37 +41,57 @@
   [bottom-left top-right])
 
 (defn width [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (Math/abs (- x1 x2))))
 
 (defn height [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (Math/abs (- y1 y2))))
 
 (defn square? [rectangle]
-  :-)
+  (let [a (width rectangle)
+        b (height rectangle)]
+    (if (= a b)
+      true
+      false)))
 
-(defn area [rectangle]
-  :-)
+(defn
+  area
+  [rectangle]
+  (let [a (width rectangle)
+       b (height rectangle)]
+  (* a b))
+  )
 
 (defn contains-point? [rectangle point]
-  :-)
+  (let [[a b] point
+        [[x1 y1] [x2 y2]] rectangle]
+    (and (<= x1 a x2) (<= y1 b y2))))
 
 (defn contains-rectangle? [outer inner]
-  :-)
+  (let [[a b] inner]
+    (and (contains-point? outer a) (contains-point? outer b)))
+  )
 
 (defn title-length [book]
-  :-)
+  (count (:title book)))
 
 (defn author-count [book]
-  :-)
+  (count (:authors book)))
 
 (defn multiple-authors? [book]
-  :-)
+  (if (< (author-count book) 1)
+    true
+    false)
+  )
 
 (defn add-author [book new-author]
-  :-)
+  (let [authors (:authors book)
+        new-authors (conj authors new-author)]
+    (assoc book :authors new-authors)))
 
 (defn alive? [author]
-  :-)
+  (not(contains? author :death-year)))
 
 (defn element-lengths [collection]
   :-)
@@ -112,3 +154,4 @@
   :-)
 
 ; %________%
+
