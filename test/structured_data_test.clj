@@ -143,7 +143,7 @@
     (title-length cities)         => 21
     (title-length wild-seed)      => 9
     (title-length little-schemer) => 18)
-  
+
   (facts "author-count" {:exercise 11
                          :points 1}
     (author-count cities)         => 1
@@ -155,7 +155,7 @@
          (multiple-authors? cities)         => false
          (multiple-authors? wild-seed)      => false
          (multiple-authors? little-schemer) => true)
-  
+
   (facts "add-author" {:exercise 13
                        :points 1}
     (add-author little-schemer {:name "Gerald J. Sussman"})
@@ -165,22 +165,22 @@
                     {:name "Gerald J. Sussman"}]}
     (add-author {:authors [{:name "Juhana"}]} {:name "Jani"})
       => {:authors [{:name "Juhana"} {:name "Jani"}]})
-  
+
   (facts "alive?" {:exercise 14
                    :points 1}
     (alive? china)   => true
     (alive? octavia) => false)
-  
+
   (facts "element-lengths" {:exercise 15
                             :points 1}
     (element-lengths ["foo" "bar" "" "quux"])  => [3 3 0 4]
     (element-lengths ["x" [:a :b :c] {:y 42}]) => [1 3 1])
-  
+
   (facts "second-elements" {:exercise 16
                             :points 1}
     (second-elements [[1 2] [2 3] [3 4]])               => [2 3 4]
     (second-elements [[1 2 3 4] [1] ["a" "s" "d" "f"]]) => [2 nil "s"])
-  
+
   (facts "titles" {:exercise 17
                    :points 1}
     (titles [cities]) => ["The City and the City"]
@@ -342,9 +342,12 @@
     (has-a-living-author? little-schemer) => true
     (has-a-living-author? cities)         => true
     (has-a-living-author? deus-irae)      => false)
-  
+
   (facts "books-by-living-authors" {:exercise 34
                                     :points 1}
     (books-by-living-authors books) => (just #{little-schemer cities embassytown})
     (books-by-living-authors (concat books [deus-irae, silmarillion]))
     => (just #{little-schemer cities embassytown silmarillion})))
+
+
+
