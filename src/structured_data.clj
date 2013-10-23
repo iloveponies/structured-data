@@ -88,16 +88,21 @@
   (apply concat (repeat n "*")))
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (if (== (count a-seq) (count (set a-seq)))
+    true
+    false))
 
 (defn old-book->new-book [book]
-  :-)
+  (let [presentation (set (:authors book))]
+  (assoc book :authors presentation)))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author))
 
 (defn authors [books]
   :-)
