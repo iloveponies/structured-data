@@ -1,12 +1,5 @@
 (ns structured-data)
 
-;; (let [name1 value1
-;;       name2 value2
-;;       ...]
-;;   (expression1)
-;;   (expression2)
-;;   ...)
-
 (defn do-a-thing [x]
   (let [summa (+ x x)]
     (Math/pow summa summa)))
@@ -59,10 +52,6 @@
 (defn author-count [book]
   (count (:authors book)))
 
-;; (if (my-father? darth-vader)  ; Conditional
-;;     (lose-hand me)              ; If true
-;;     (gain-hat me))              ; If false
-
 (defn multiple-authors? [book]
   (< 1 (count (:authors book))))
 
@@ -91,17 +80,10 @@
 (defn stars [n]
   (apply str (repeat n \*)))
 
-;; (cond
-;;     condition1 true1
-;;     condition2 true2
-;;     condition3 true3
-;;     ...)
-
 (defn toggle [a-set elem]
   (cond
     (contains? a-set elem) (disj a-set elem)
     :else (conj a-set elem)))
-
 
 (defn contains-duplicates? [a-seq]
   (< (count (set a-seq)) (count a-seq)))
@@ -173,4 +155,3 @@
 (defn books-by-living-authors [books]
   (filter has-a-living-author? books))
 
-; %________%
