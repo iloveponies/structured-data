@@ -95,9 +95,7 @@
   (set (map :name (authors books))))
 
 (defn author->string [author]
-  (let [name (:name author)
-        ]
-     (str name)))
+  )
 
 (defn authors->string [authors]
   :-)
@@ -115,12 +113,20 @@
   (first(filter (fn [x](= (:name x) name)) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (let [authors (:authors book)
+        living (living-authors authors)
+        count-living (count living)]
+    (if (> count-living 0)
+      true
+      false)))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
+
+
+
