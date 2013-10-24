@@ -74,11 +74,7 @@
     ))
 
 (defn alive? [author]
-  (if
-    (= nil (get author :death-year))
-    true
-    false
-    ))
+    (= nil (get author :death-year)))
 
 (defn element-lengths [collection]
   (map count collection))
@@ -157,15 +153,21 @@
   (filter (fn [x] (contains? (:authors x) author)) books))
 
 (defn author-by-name [name authors]
-  )
+   (let [author (filter (fn [x] (= (:name x) name)) authors)]
+     (if
+       (== (count author) 1)
+       (first author)
+       nil)))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors)
+  )
 
 (defn has-a-living-author? [book]
-  :-)
+    (> (count (living-authors (:authors book))) 0)
+  )
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ;
