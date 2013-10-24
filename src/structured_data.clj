@@ -116,7 +116,7 @@
 
 (defn authors->string [authors]
   (let [authorstrings (map author->string authors)]
-  (apply str (interpose ", " authorstrings))))
+    (apply str (interpose ", " authorstrings))))
 
 (defn book->string [book]
   (let [title (get book :title)
