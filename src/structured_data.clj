@@ -117,28 +117,47 @@
   (contains? (:authors book) author))
 
 (defn authors [books]
-  :-)
+  (apply clojure.set/union (map :authors books)))
+
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+    (let [neim (:name author)
+        birth (:birth-year author)
+        death (:death-year author)]
+    (if
+      (= nil birth)
+      neim
+      (if
+        (= nil death)
+        (str neim " (" birth " - )")
+        (str neim " (" birth " - " death ")")))))
+
 
 (defn authors->string [authors]
-  :-)
+  (apply str ( interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by " (authors->string (:authors book))))
+
+(defn mongobongo [books]
+  (apply str (interpose ". " (map book->string books))))
 
 (defn books->string [books]
-  :-)
+  (let [kount (count books)]
+    (cond
+      (> kount 1) (str kount " books. " (mongobongo books) ".")
+      (== kount 1)(str kount " book. " (mongobongo books) ".")
+      (== kount 0) "No books.")))
+
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [x] (contains? (:authors x) author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  )
 
 (defn living-authors [authors]
   :-)
