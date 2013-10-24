@@ -29,7 +29,7 @@
     (if (> y1 y2) (- y1 y2) (- y2 y1))))
 
 (defn square? [rectangle]
-  (if (== (height rectangle) (width rectangle)) true false))
+  (== (height rectangle) (width rectangle)))
 
 (defn area [rectangle]
   (* (width rectangle) (height rectangle)))
@@ -37,7 +37,7 @@
 (defn contains-point? [rectangle point]
   (let [[[x1 y1] [x2 y2]] rectangle
         [xp yp] point]
-    (if (and (<= y1 yp y2) (<= x1 xp x2)) true false)))
+    (and (<= y1 yp y2) (<= x1 xp x2))))
 
 (defn contains-rectangle? [outer inner]
   (let [[bl tr] inner]
@@ -52,7 +52,7 @@
   (count (:authors book)))
 
 (defn multiple-authors? [book]
-  (if (> (author-count book) 1) true false))
+  (> (author-count book) 1))
 
 (defn add-author [book new-author]
   (assoc book :authors (conj (:authors book) new-author)))
