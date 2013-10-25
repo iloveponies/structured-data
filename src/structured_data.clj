@@ -119,22 +119,22 @@
   (let [boo (apply str (interpose ". " (map book->string books)))]
   (cond
    (= 0 num) "No books."
-   (= 1 num) (apply str ["1 book. " boo])
-   :else (apply str [num " books. " boo])))))
+   (= 1 num) (apply str ["1 book. " boo "."])
+   :else (apply str [num " books. " boo "."])))))
 
 (defn books-by-author [author books]
-  :-)
+    (filter (fn [x] (has-author? x author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [x] (= (:name x) name)) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter (fn [x] (alive? x)) authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
