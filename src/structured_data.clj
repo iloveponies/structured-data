@@ -115,7 +115,7 @@
     true false))
 
 (defn authors [books]
-    (set (apply concat (map :authors books))))
+    (set (apply clojure.set/union (map :authors books))))
 
 (defn all-author-names [books]
   (set (map :name (authors books))))
