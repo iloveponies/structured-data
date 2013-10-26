@@ -76,7 +76,7 @@
     true)
 )
 (defn add-author [book new-author]
-  (assoc book :authors  
+  (assoc book :authors
     (conj (:authors book) new-author))
 )
 
@@ -99,7 +99,7 @@
   (map :title books))
 
 (defn monotonic? [a-seq]
-  (if (apply <= a-seq) true 
+  (if (apply <= a-seq) true
     (if (apply >= a-seq) true
       false))
 )
@@ -122,44 +122,71 @@
 
 
 (defn old-book->new-book [book]
-  :-)
+   (assoc book :authors (set (:authors book))))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author)
+  )
 
 (defn authors [books]
-  :-)
+
+  (apply clojure.set/union (map :authors books)))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (let [namestr (:name author)
+         yspan (cond
+                   (contains? author :death-year) (str " (" (:birth-year author) " - " (:death-year author) ")")
+                   (contains? author :birth-year) (str " (" (:birth-year author) " - )")
+                   :else (str "")
+                          )
+         ]
+
+     (str namestr yspan)
+     )
+  )
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by " (authors->string (:authors book)))
+  )
 
 (defn books->string [books]
-  :-)
+  (cond
+   (empty? books) (str "No books.")
+   :else
+
+     (str (apply str (count books) " book" (when (> (count books) 1) "s") ". " (interpose ". " (map book->string books))) ".")
+  )  )
+
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [book] (has-author? book author)) books)
+
+  )
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [x] (= name (:name x))) authors))
+  )
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors)
+  )
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (filter alive? (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books)
+  )
 
 ; %________%
 
 
+
+
+
