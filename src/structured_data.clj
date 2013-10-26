@@ -33,9 +33,7 @@
 
 (defn square? [rectangle]
   (let [[[x1 y1] [x2 y2]] rectangle]
-    (if (= (- x1 x2) (- y1 y2))
-    true
-    false
+    (= (- x1 x2) (- y1 y2)
   )))
 
 (defn area [rectangle]
