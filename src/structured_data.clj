@@ -83,7 +83,8 @@
       (apply >= a-seq)))
 
 (defn stars [n]
-  :-)
+  (let [rivi (repeat n "*")]
+    (apply str rivi)))
 
 (defn toggle [a-set elem]
  (if (contains? a-set elem)
@@ -108,16 +109,28 @@
   :-)
 
 (defn author->string [author]
-  :-)
+  (let [name (:name author)]
+    (if (:birth-year author)
+    (let [birth-year (:birth-year author)]
+      (let [death-year (:death-year author)]
+        (str name " (" birth-year " - " death-year ")")))
+    (str name))))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (let [title (:title book)]
+    (str title ", written by "(authors->string (:authors book)))))
 
 (defn books->string [books]
-  :-)
+  (let [numbooks (count books)]
+    (let [authors (apply str (interpose ". " (map book->string books)))]
+    (if (= numbooks 0)
+      "No books."
+      (if (> numbooks 1)
+        (str numbooks " books. " authors ".")
+        (str numbooks " book. " authors "."))))))
 
 (defn books-by-author [author books]
   :-)
@@ -129,9 +142,11 @@
   :-)
 
 (defn has-a-living-author? [book]
-  :-)
+    (if (empty? (filter alive? (:authors book)))
+      false
+      true))
 
 (defn books-by-living-authors [books]
-  :-)
+  (map :title (filter has-a-living-author? books)))
 
 ; %________%
