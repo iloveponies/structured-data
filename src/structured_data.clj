@@ -116,13 +116,12 @@
 )
 
 (defn contains-duplicates? [a-seq]
-  (let[a count(a-set)
-       b count(set a-set)]
-    (if(> a b)
-      true
+  (let[a (count a-seq)
+       b (count(set a-seq))]
+    (if(== a b)
       false
-    )
-  )
+      true
+    ))
 )
 
 (defn old-book->new-book [book]
