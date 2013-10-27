@@ -55,7 +55,10 @@
 )
 
 (defn contains-rectangle? [outer inner]
-
+  (let [[[x1 y1] [x2 y2]] inner
+        a (point x1 y1)
+        b (point x2 y2)]
+    (and (contains-point? outer a) (contains-point? outer b)))
 )
 
 (defn title-length [book]
@@ -142,7 +145,8 @@
 )
 
 (defn author->string [author]
-  :-)
+
+)
 
 (defn authors->string [authors]
   :-)
