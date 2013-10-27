@@ -145,7 +145,22 @@
 )
 
 (defn author->string [author]
-
+  (let [n (:name author)
+        death (if (contains? author :death-year)
+               (str (:death-year author))
+               ""
+           )
+        birth (if (contains? author :birth-year)
+             (str (:birth-year author))
+             ""
+           )]
+          (if (> (count death) 0)
+            (str n " (" birth " - " death ")")
+            (if (> (count birth) 0)
+              (str n " (" birth " - )")
+              (str n))
+          )
+  )
 )
 
 (defn authors->string [authors]
