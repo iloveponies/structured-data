@@ -125,16 +125,21 @@
 )
 
 (defn old-book->new-book [book]
-  :-)
+  (assoc book :authors (set (:authors book)))
+)
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author)
+)
+
 
 (defn authors [books]
-  :-)
+  (apply clojure.set/union (map :authors books))
+)
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books)))
+)
 
 (defn author->string [author]
   :-)
@@ -164,6 +169,8 @@
   :-)
 
 ; %________%
+
+
 
 
 
