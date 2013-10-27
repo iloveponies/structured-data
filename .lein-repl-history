@@ -1,0 +1,4 @@
+(use structured-data)
+(use 'structured-data)
+spiff []
+spiff [1 2 3]
