@@ -71,7 +71,10 @@
 )
 
 (defn add-author [book new-author]
-  :-)
+  (assoc book :authors
+    (conj (:authors book) new-author)
+    )
+)
 
 (defn alive? [author]
   :-)
