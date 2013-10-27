@@ -16,8 +16,8 @@
 
 
 (defn spiff-destructuring [v]
-  (let [[a b] (get v 0) (get v 2)])
-  (+ a b)
+  (let [[a b c] v]
+    (+ a c))
 )
 
 (defn point [x y]
@@ -27,16 +27,23 @@
   [bottom-left top-right])
 
 (defn width [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (- x2 x1))
+)
 
 (defn height [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (- y2 y1))
+)
+
 
 (defn square? [rectangle]
-  :-)
+    (== (width rectangle) (height rectangle))
+)
 
 (defn area [rectangle]
-  :-)
+  (* (width rectangle) (height rectangle))
+)
 
 (defn contains-point? [rectangle point]
   :-)
