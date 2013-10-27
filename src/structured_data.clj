@@ -60,7 +60,7 @@
     true))
 
 (defn add-author [book new-author]
-  :-)
+  (assoc book :authors (conj (:authors book) new-author)))
 
 (defn alive? [author]
   (if (:death-year author)
@@ -97,16 +97,16 @@
     true))
 
 (defn old-book->new-book [book]
-  :-)
+   (assoc book :authors (set (:authors book))))
 
 (defn has-author? [book author]
   (contains? (:authors book) author))
 
-(defn authors [books]
-  :-)
+ (defn authors [books]
+  (apply clojure.set/union(map :authors books)))
 
-(defn all-author-names [books]
-  :-)
+ (defn all-author-names [books]
+   (set (map :name (authors books))))
 
 (defn author->string [author]
   (let [name (:name author)]
@@ -133,13 +133,13 @@
         (str numbooks " book. " authors "."))))))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [x](has-author? x author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+   (first (filter (fn [x](= name (:name x))) authors)))
 
 (defn living-authors [authors]
-  :-)
+   (filter (fn [x](alive? x)) authors))
 
 (defn has-a-living-author? [book]
     (if (empty? (filter alive? (:authors book)))
@@ -147,6 +147,6 @@
       true))
 
 (defn books-by-living-authors [books]
-  (map :title (filter has-a-living-author? books)))
+  (filter (fn [x](has-a-living-author? x)) books))
 
 ; %________%
