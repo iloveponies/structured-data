@@ -77,25 +77,43 @@
 )
 
 (defn alive? [author]
-  :-)
+  (not (contains? author :death-year))
+)
+
+
 
 (defn element-lengths [collection]
-  :-)
+  (map count collection)
+)
 
 (defn second-elements [collection]
-  :-)
+  (let [b (fn[x] (get x 1))]
+    (map b collection))
+)
 
 (defn titles [books]
-  :-)
+  (map :title books)
+)
 
 (defn monotonic? [a-seq]
-  :-)
+  (if (apply <= a-seq)
+    true
+    (if (apply >= a-seq)
+    true
+    false)
+  )
+)
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*"))
+)
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)
+  )
+)
 
 (defn contains-duplicates? [a-seq]
   :-)
