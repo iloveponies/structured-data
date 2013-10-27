@@ -8,6 +8,8 @@
 (defn spiff [v]
   (+ (get v 0) (get v 2)))
 
+(spiff [1 2])         ;=> nullpointer exception
+(spiff [])            ;=> nullpointer exception
 
 (defn cutify [v]
   (conj v "<3"))
@@ -117,8 +119,7 @@
 ;HOW?? :D
 
 (defn all-author-names [books]
-
-(set (map :name (authors books))))
+  (set (map :name (authors books))))
 
 (defn author->string [author]
   (let [nimi (author :name)
