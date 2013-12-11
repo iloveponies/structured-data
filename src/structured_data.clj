@@ -85,7 +85,7 @@
     (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  (let [uniques (set a-seq)]
+  (let [uniques (seq (set a-seq))]
     (not (= uniques a-seq))))
 
 (defn old-book->new-book [book]
@@ -107,30 +107,49 @@
   (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (let [name (:name author)
+        byear (:birth-year author)
+        dyear (:death-year author)
+        years (cond
+                (boolean dyear) (str " (" byear " - " dyear ")")
+                (boolean byear) (str " (" byear " - )")
+                :else "")]
+    (str name years)))
+
 
 (defn authors->string [authors]
-  :-)
+  (clojure.string/join ", " (map author->string authors)))
 
 (defn book->string [book]
-  :-)
+  (let [title (:title book)
+        author-names (authors->string (:authors book))]
+    (str title ", written by " author-names)))
 
 (defn books->string [books]
-  :-)
+  (let [book-count (count books)
+        book-count-label (cond
+                     (= 0 book-count) "No books"
+                     (= 1 book-count) "1 book. "
+                     :else (str book-count " books. "))
+        book-strings (clojure.string/join ". " (map book->string books))]
+    (str book-count-label book-strings ".")))
+
+
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [book] (has-author? book author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [author] (= name (:name author))) authors)))
+
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (> (count (living-authors (:authors book)))  0))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
