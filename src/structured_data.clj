@@ -87,6 +87,52 @@
   (let [authors (set (:authors book))]
     (assoc book :authors authors)))
 
+(defn has-author? [book author]
+  (contains? (:authors book) author))
+
+(defn authors [books]
+  (apply clojure.set/union (map :authors books)))
+
+(defn all-author-names [books]
+  (set (map :name (authors books))))
+
+(defn author->string [author]
+  (let [n (:name author) b (:birth-year author) d (:death-year author)]
+    (cond
+     (nil? b) (str n)
+     (nil? d) (str n " (" b " - )")
+     :else (str n " (" b " - " d ")"))))
+
+(defn authors->string [authors]
+  (apply str (interpose ", " (map author->string authors))))
+
+(defn book->string [book]
+    (str (:title book) ", written by " (authors->string (:authors book))))
+
+(defn books->string [books]
+  (let [c (count books)]
+    (cond
+     (== c 0) (str "No books.")
+     (== c 1) (str "1 book. " (book->string (first books)) ".")
+     :else (str c " books. " (apply str (interpose ". " (map book->string books))) ".")
+     )))
+
+(defn books-by-author [author books]
+  (filter (fn [b] (has-author? b author)) books))
+
+(defn author-by-name [name authors]
+  (first (filter (fn [author] (= (:name author) name)) authors)))
+
+(defn living-authors [authors]
+  (filter alive? authors))
+
+(defn has-a-living-author? [book]
+  (not (empty? (living-authors (:authors book)))))
+
+(defn books-by-living-authors [books]
+  (filter (fn [book] (has-a-living-author? book)) books))
+
+; %________%
 
 (comment
 (def china {:name "China Miéville", :birth-year 1972})
@@ -103,50 +149,17 @@
                      :authors #{friedman, felleisen}})
 
 (def books [cities, wild-seed, embassytown, little-schemer])
+(def jrrtolkien {:name "J. R. R. Tolkien" :birth-year 1892 :death-year 1973})
+(def christopher {:name "Christopher Tolkien" :birth-year 1924})
+(def kay {:name "Guy Gavriel Kay" :birth-year 1954})
+(def silmarillion {:title "Silmarillion"
+                   :authors #{jrrtolkien, christopher, kay}})
+(def dick {:name "Philip K. Dick", :birth-year 1928, :death-year 1982})
+(def zelazny {:name "Roger Zelazny", :birth-year 1937, :death-year 1995})
+(def deus-irae {:title "Deus Irae", :authors #{dick, zelazny}})
+(def authors #{china, felleisen, octavia, friedman})
+
+(books-by-living-authors books) ;=> (little-schemer cities embassytown)
+(books-by-living-authors (concat books [deus-irae, silmarillion])) ;=> (little-schemer cities embassytown silmarillion)
 )
-
-
-(defn has-author? [book author]
-  (contains? (:authors book) author))
-
-(defn authors [books]
-  (apply clojure.set/union (map :authors books)))
-
-(comment
-(authors [cities, wild-seed])              ;=> #{china, octavia}
-(authors [cities, wild-seed, embassytown]) ;=> #{china, octavia}
-(authors [little-schemer, cities])         ;=> #{china, friedman, felleisen}
- )
-
-(defn all-author-names [books]
-  :-)
-
-(defn author->string [author]
-  :-)
-
-(defn authors->string [authors]
-  :-)
-
-(defn book->string [book]
-  :-)
-
-(defn books->string [books]
-  :-)
-
-(defn books-by-author [author books]
-  :-)
-
-(defn author-by-name [name authors]
-  :-)
-
-(defn living-authors [authors]
-  :-)
-
-(defn has-a-living-author? [book]
-  :-)
-
-(defn books-by-living-authors [books]
-  :-)
-
-; %________%
 
