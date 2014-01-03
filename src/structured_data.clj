@@ -4,7 +4,6 @@
   (let [t (+ x x)]
   (Math/pow t t)))
 
-
 (defn spiff [v]
   (+ (get v 0) (get v 2)))
 
@@ -23,16 +22,15 @@
 
 (defn width [rectangle]
   (let [[[x1 y1] [x2 y2]] rectangle]
-    (- x1 x2)))
+    (Math/abs (- x1 x2))))
 
 (defn height [rectangle]
   (let [[[x1 y1 ] [x2 y2]] rectangle]
-    (- y1 y2)))
+    (Math/abs(- y1 y2))))
 
 (defn square? [rectangle]
   (let [[[x1 y1] [x2 y2]] rectangle]
-    (and (= x1 x2) (= y1 y2))))
-
+    (= (- x1 x2) (- y1 y2))))
 (defn area [rectangle]
   (* (width rectangle) (height rectangle)))
 
@@ -46,19 +44,20 @@
     (and (contains-point? outer x) (contains-point? outer y))))
 
 (defn title-length [book]
-  :-)
+  (count (:title book)))
 
 (defn author-count [book]
-  :-)
+  (count (:authors book)))
 
 (defn multiple-authors? [book]
-  :-)
+  (> (author-count book) 1))
 
 (defn add-author [book new-author]
-  :-)
+  (let [author-original (:authors book)]
+    (assoc book :authors (conj author-original new-author))))
 
 (defn alive? [author]
-  :-)
+  (not (contains? author :death-year)))
 
 (defn element-lengths [collection]
   :-)
