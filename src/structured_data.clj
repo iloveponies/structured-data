@@ -94,7 +94,6 @@
 (defn all-author-names [books]
   (set (map :name (authors books))))
 
-;; ---------------------------------------------------------------------
 (defn author->string [{:keys [name birth-year death-year]}]
   (let [tail (cond (nil? birth-year) ""
                    (nil? death-year) (str " (" birth-year " - )")
@@ -120,15 +119,16 @@
   (filter #(has-author? % author) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter #(= (% :name) name) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
+
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (book :authors)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
