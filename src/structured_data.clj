@@ -132,14 +132,10 @@
   (filter (fn [book] (has-author? book author)) books))
 
 (defn author-by-name [name authors]
-  (let [author (first authors)]
-    (cond
-      (nil? author)
+  (let [answer (filter #(= name (:name %)) authors)]
+    (if (empty? answer)
       nil
-      (= name (:name author))
-      author
-      :else
-      (author-by-name name (rest authors)))))
+      (first answer))))
 
 (defn living-authors [authors]
   (filter alive? authors))
