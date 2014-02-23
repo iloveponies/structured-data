@@ -109,15 +109,15 @@
   (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  (str (:title book) ", written by " (authors->string (:authors book))))
+  (apply str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
-  (defn format-book-count-string [books-count]
+  (let [format-book-count-string (fn [books-count]
     (cond 
       (= books-count 0) "No books. "
       (= books-count 1) "1 book. "
-      :else (str books-count " books. ")))
-  (str (format-book-count-string (count books)) (apply book->string books) "."))
+      :else (str books-count " books. ")))]
+  (apply str (format-book-count-string (count books)) (set (map book->string books)) ".")))
 
 (defn books-by-author [author books]
   :-)
