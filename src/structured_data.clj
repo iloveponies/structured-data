@@ -54,40 +54,46 @@
   (> (count (:authors book)) 1))
 
 (defn add-author [book new-author]
-  )
+  (assoc book :authors (conj (:authors book) new-author)
+    ))
 
 (defn alive? [author]
-  :-)
+  (not (contains? author :death-year)
+    ))
 
 (defn element-lengths [collection]
-  :-)
+  (map (fn [item] (count item)) collection))
 
 (defn second-elements [collection]
-  :-)
+  (let [get-second-element (fn [collection] (get collection 1))]
+  (seq (map get-second-element collection))))
 
 (defn titles [books]
-  :-)
+  (map :title books))
 
 (defn monotonic? [a-seq]
-  :-)
+    (or (apply <= a-seq)
+        (apply >= a-seq)))
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*")))
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (not (= (count a-seq) (count (set a-seq)))))
 
 (defn old-book->new-book [book]
-  :-)
+  (assoc book :authors (set (:authors book))))
 
 (defn has-author? [book author]
-  :-)
+  (= (count (:authors book)) (count (conj (:authors book) author))))
 
 (defn authors [books]
-  :-)
+  (apply clojure.set/union (apply :authors books)))
 
 (defn all-author-names [books]
   :-)
