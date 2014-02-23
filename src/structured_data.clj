@@ -93,22 +93,31 @@
   (= (count (:authors book)) (count (conj (:authors book) author))))
 
 (defn authors [books]
-  (apply clojure.set/union (apply :authors books)))
+  (apply clojure.set/union (map :authors books)))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (let [name (:name author)
+        years (str "(" (:birth-year author) " - " (:death-year author) ")" )]
+        (str name (if(:birth-year author) 
+                    (str " " years)
+                    ""))))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
-  :-)
+  (defn format-book-count-string [books-count]
+    (cond 
+      (= books-count 0) "No books. "
+      (= books-count 1) "1 book. "
+      :else (str books-count " books. ")))
+  (str (format-book-count-string (count books)) (apply book->string books) "."))
 
 (defn books-by-author [author books]
   :-)
