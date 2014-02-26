@@ -72,40 +72,64 @@
   (map :title books))
 
 (defn monotonic? [a-seq]
-  :-)
+  (or (apply >= a-seq) (apply <= a-seq)))
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*")))
 
-(defn toggle [a-set elem]
-  :-)
+(defn toggle [xs x]
+  (let [ys (set xs)]
+    (cond
+     (contains? ys x) (disj ys x)
+     :else (conj ys x))))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (not (= (count (set a-seq)) (count a-seq))))
+
 
 (defn old-book->new-book [book]
-  :-)
+  (assoc book :title (get book :title) :authors (set (get book :authors))))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (get book :authors) author)
+  )
+
+(defn getauthors [abook]
+  (get abook :authors))
 
 (defn authors [books]
-  :-)
+  (apply clojure.set/union (map getauthors books)))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
 
-(defn author->string [author]
-  :-)
+(defn author->string [a]
+    (let [dy (get a :death-year)
+        by (get a :birth-year)
+        nm (get a :name)]
+
+    (cond
+     dy (str nm " (" by " - " dy ")")
+     by (str nm " (" by " - )")
+     :else (str nm)
+     )))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (str (get book :title) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
-  :-)
+  (let [n (count books)]
+    (cond
+     (= 0 n) (str "No books.")
+     (= 1 n) (str "1 book. " (book->string (first books)) ".")
+     :else (str n " books. " (apply str
+                                    (interpose ". " (map book->string books))) ".")
+     )
+    )
+  )
 
 (defn books-by-author [author books]
   :-)
