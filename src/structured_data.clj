@@ -60,13 +60,16 @@
   (not (contains? author :death-year)))
 
 (defn element-lengths [collection]
-  :-)
+  (map count collection))
+
+(defn getsecond [s] (get s 1))
 
 (defn second-elements [collection]
-  :-)
+  (map getsecond collection))
+
 
 (defn titles [books]
-  :-)
+  (map :title books))
 
 (defn monotonic? [a-seq]
   :-)
