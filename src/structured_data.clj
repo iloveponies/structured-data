@@ -13,7 +13,10 @@
   (conj v "<3"))
 
 (defn spiff-destructuring [v]
-  :-)
+  (if (<= 3 (count v))
+    (let [[fst _ trd] v]
+      (+ fst trd))
+    '?))
 
 (defn point [x y]
   [x y])
