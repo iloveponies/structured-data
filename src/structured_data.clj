@@ -5,7 +5,9 @@
     (Math/pow dbl dbl)))
 
 (defn spiff [v]
-  :-)
+  (if (<= 3 (count v))
+    (+ (first v) (nth v 2))
+    '?))
 
 (defn cutify [v]
   :-)
