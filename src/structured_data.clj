@@ -1,7 +1,8 @@
 (ns structured-data)
 
 (defn do-a-thing [x]
-  :-)
+  (let [dbl (+ x x)]
+    (Math/pow dbl dbl)))
 
 (defn spiff [v]
   :-)
