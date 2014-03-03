@@ -42,7 +42,7 @@
 (defn contains-rectangle? [outer inner]
   (let [[p1 p2] inner]
     (and (contains-point? outer p1) (contains-point? outer p2))))
-  
+
 
 (defn title-length [book]
   (count (:title book)))
@@ -88,13 +88,13 @@
   (contains? (:authors book) author))
 
 (defn authors [books]
-  :-)
+  (apply clojure.set/union (map :authors books)))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+    :-)
 
 (defn authors->string [authors]
   :-)
