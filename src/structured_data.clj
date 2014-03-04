@@ -47,7 +47,8 @@
       (and (<= (min x1 x2) x (max x1 x2)) (<= (min y1 y2) y (max y1 y2)))))
 
 (defn contains-rectangle? [outer inner]
-  :-)
+  (let [[inner-bottom-left inner-top-right] inner]
+    (and (contains-point? outer inner-bottom-left) (contains-point? outer inner-top-right))))
 
 (defn title-length [book]
   :-)
