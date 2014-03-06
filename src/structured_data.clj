@@ -118,7 +118,15 @@
     (str book-title ", written by " authors)))
 
 (defn books->string [books]
-  :-)
+  (let [[cnt bookstrings] (reduce (fn [[cnt acc] book]
+                                    (vector (inc cnt)
+                                            (conj acc (book->string book)))) [0 []] books)
+        allbooks (clojure.string/join (interpose ", " bookstrings))]
+    (cond (= cnt 1) (str cnt " book. " allbooks ".")
+          (> cnt 1) (str cnt " books. " allbooks ".")
+          :else   "No books.")))
+
+
 
 (defn books-by-author [author books]
   :-)
