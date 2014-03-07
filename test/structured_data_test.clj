@@ -1,2 +1,2 @@
 (ns structured-data-test
-  (:use iloveponies.tests.structured-data))
+  (:use structured-data iloveponies.tests.structured-data))
