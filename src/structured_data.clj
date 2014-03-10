@@ -84,28 +84,55 @@
           (count (set a-seq)))))
 
 (defn old-book->new-book [book]
-  :-)
+  (assoc book :authors (set (:authors book))))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book)
+             author))
 
 (defn authors [books]
-  :-)
+  (->> books
+       (map :authors)
+       (apply clojure.set/union)))
 
 (defn all-author-names [books]
-  :-)
+  (->> books
+       authors
+       (map :name)
+       set))
 
 (defn author->string [author]
-  :-)
+  (str (:name author)
+       (if (:birth-year author)
+         (str " ("
+              (:birth-year author)
+              " - "
+              (:death-year author)
+              ")"))))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (apply str 
+         (:title book)
+         ", written by "
+         (authors->string (:authors book))))
+
+(defn number-of-books [books]
+  (case (count books)
+    0 "No books."
+    1 "1 book. "
+    (str (count books) " books. ")))
 
 (defn books->string [books]
-  :-)
+  (if (empty? books)
+    (number-of-books books)
+    (str
+     (apply str
+            (number-of-books books)
+            (interpose ", " (map book->string books)))
+     ".")))
 
 (defn books-by-author [author books]
   :-)
