@@ -101,7 +101,7 @@
 (defn author->string [author]
   (let [name (:name author)
         years (str "(" (:birth-year author) " - " (:death-year author) ")" )]
-        (str name (if(:birth-year author) 
+        (apply str name (if(:birth-year author) 
                     (str " " years)
                     ""))))
 
@@ -114,24 +114,24 @@
 (defn books->string [books]
   (let [format-book-count-string (fn [books-count]
     (cond 
-      (= books-count 0) "No books. "
+      (= books-count 0) "No books"
       (= books-count 1) "1 book. "
       :else (str books-count " books. ")))]
-  (apply str (format-book-count-string (count books)) (set (map book->string books)) ".")))
+  (apply str (format-book-count-string (count books)) (apply str (interpose ". " (map book->string books))) "." )))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [book] (has-author? book author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [author] (= (:name author) name)) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter (fn [author] (alive? author)) authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter (fn [book] (has-a-living-author? book)) books))
 
 ; %________%
