@@ -59,6 +59,7 @@
 (def embassytown {:title "Embassytown", :authors [china]})
 (def little-schemer {:title "The Little Schemer"
                      :authors [friedman, felleisen]})
+(def books  [cities, wild-seed, embassytown, little-schemer])
 
 (defn title-length [book]
   (count (:title book) ))
@@ -80,8 +81,6 @@
 (defn alive? [author]
   (not (contains? author :death-year)))
 
-(seq  {:a 42 :b "foo" :c  ["ur" "dad"]})
-                       ;=> ([:a 42] [:c ["ur" "dad"]] [:b "foo"])
 (defn element-lengths [collection]
   (map count collection))
 
@@ -91,16 +90,19 @@
     ))
 
 (defn titles [books]
-  :-)
+  (map :title books))
 
 (defn monotonic? [a-seq]
-  :-)
+  (or (apply >= a-seq) (apply <= a-seq)))
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*")))
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)
+    ))
 
 (defn contains-duplicates? [a-seq]
   :-)
