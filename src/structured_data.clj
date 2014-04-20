@@ -47,20 +47,6 @@
   (let [[p1 p2] inner]
     (and (contains-point? outer p1) (contains-point? outer p2))))
 
-(def china {:name "China Miéville", :birth-year 1972})
-(def octavia {:name "Octavia E. Butler"
-              :birth-year 1947
-              :death-year 2006})
-(def friedman {:name "Daniel Friedman" :birth-year 1944})
-(def felleisen {:name "Matthias Felleisen"})
-
-(def cities {:title "The City and the City" :authors [china]})
-(def wild-seed {:title "Wild Seed", :authors [octavia]})
-(def embassytown {:title "Embassytown", :authors [china]})
-(def little-schemer {:title "The Little Schemer"
-                     :authors [friedman, felleisen]})
-(def books  [cities, wild-seed, embassytown, little-schemer])
-
 (defn title-length [book]
   (count (:title book) ))
 
@@ -107,43 +93,69 @@
 (defn contains-duplicates? [a-seq]
   (not (= (count a-seq) (count (set a-seq)))))
 
+
 (defn old-book->new-book [book]
-  :-)
+  (let [new-authors (set (:authors book))]
+        (assoc book :authors new-authors)))
+
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author))
 
 (defn authors [books]
-  :-)
+  (apply clojure.set/union (map :authors books)))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
+
 
 (defn author->string [author]
-  :-)
+  (let [years (if (contains? author :birth-year)
+       (str " ("  (:birth-year author) " - " (:death-year author) ")" ))
+        ]
+    (str (:name author) years)
+    ))
+
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
+
 
 (defn book->string [book]
-  :-)
+  (apply str (interpose ", written by "  [(:title book) (authors->string (:authors book))])))
+
 
 (defn books->string [books]
-  :-)
+  (let [set-books (map book->string books)
+        number-books (count set-books)
+        rep-count (cond
+                    (== number-books 0) "No books"
+                    (== number-books 1) "1 book. "
+                    :else (str number-books " books. "))
+        separeted-books (interpose ". " (map book->string books))]
+    ( str rep-count (apply str separeted-books  ) "." )))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [x] (has-author? x author)) books))
+
+
+(def authors #{china, felleisen, octavia, friedman})
+
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [x] (= name (:name x))) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter (fn [x] (alive? x)) authors))
+
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (:authors book)))))
+
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter (fn [x] (has-a-living-author? x)) books))
+
+
 
 ; %________%
