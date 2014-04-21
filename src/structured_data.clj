@@ -139,9 +139,6 @@
   (filter (fn [x] (has-author? x author)) books))
 
 
-(def authors #{china, felleisen, octavia, friedman})
-
-
 (defn author-by-name [name authors]
   (first (filter (fn [x] (= name (:name x))) authors)))
 
