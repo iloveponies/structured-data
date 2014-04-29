@@ -66,57 +66,68 @@
     (map secndelem collection)))
 
 (defn titles [books]
-  :-)
+  (map :title books))
 
 (defn monotonic? [a-seq]
-  :-)
+  (or (apply <= a-seq) (apply >= a-seq)))
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n \*)))
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem) (disj a-set elem) (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (not (= (count (set a-seq)) (count a-seq))))
 
 (defn old-book->new-book [book]
-  :-)
+  (assoc book :authors (set (book :authors)))
+  )
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author))
 
 (defn authors [books]
-  :-)
+  (apply clojure.set/union (map :authors books)))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (let [name (:name author)
+        years (if (contains? author :birth-year) (str " (" (:birth-year author) " - " (:death-year author) ")"))
+       ]
+    (str name years)))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (if (> (count book) 0) (str (:title book) ", written by "(authors->string (:authors book)))))
 
 (defn books->string [books]
-  :-)
+  (let [
+        bookcount (cond
+                   (= (count books) 0) "No books"
+                   (= (count books) 1) "1 book. "
+                   :else (str (count books) " books. ")
+                   )
+        booklist (apply str (interpose ". " (map book->string books)))]
+    (str bookcount booklist ".")))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [x] (has-author? x author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [x] (= (:name x) name )) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter (fn [x] (alive? x)) authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (boolean (seq (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter (fn [x] (has-a-living-author? x)) books))
 
 ; %________%

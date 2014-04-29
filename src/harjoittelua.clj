@@ -41,16 +41,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
 (defn contains-point? [rectangle point]
   (let [[[x1 y1] [x2 y2]] rectangle
         [px py] point]
@@ -94,7 +84,7 @@
 (def embassytown {:title "Embassytown", :authors [china]})
 (def little-schemer {:title "The Little Schemer"
                      :authors [friedman, felleisen]})
-
+(def books [cities, wild-seed, embassytown, little-schemer])
 
 (defn title-length [book]
   (count (:title book)))
@@ -145,8 +135,98 @@
     (map secndelem collection)))
 
 (second-elements [[1 2] [2 3] [3 4]]) ;=> (2 3 4)
-(second-elements [[1 2 3 4] [1] ["a" "s" "d" "f"]])
-;=> (2 nil "s")
+(second-elements [[1 2 3 4] [1] ["a" "s" "d" "f"]]) ;=> (2 nil "s")
+
+
+(defn titles [books]
+  (map :title books))
+
+(titles [cities]) ;=> ("The City and the City" )
+(titles books)
+;=> ("The City and the City" "Wild Seed"
+;    "Embassytown" "The Little Schemer")
+
+
+
+(defn author-names [book]
+  (map :name (:authors book)))
+(defn all-author-names [books]
+  (set (apply concat (map author-names books))))
+(all-author-names books)
+;=> #{"China Miéville" "Octavia E. Butler"
+;     "Daniel Friedman" "Matthias Felleisen"}
+(defn all-author-names2 [books]
+  (set (concat (map author-names books))))
+(all-author-names2 books)
+
+[cities,wild-seed]
+(author-names little-schemer)
+(map author-names [cities, wild-seed])
+(concat (map author-names [cities,wild-seed]))
+(apply concat (map author-names [cities,wild-seed]))
+
+
+
+(defn stars [n]
+  (apply str (repeat n \*)))
+(stars 1) ;=> "*"
+(stars 7) ;=> "*******"
+(stars 3) ;=> "***"
+
+
+(defn monotonic? [a-seq]
+  (or (apply <= a-seq) (apply >= a-seq)))
+
+(monotonic? [1 2 3])     ;=> true
+(monotonic? [0 1 10 11]) ;=> true
+(monotonic? [3 2 0 -3])  ;=> true
+(monotonic? [3 2 2])     ;=> true    Not strictly monotonic
+(monotonic? [1 2 1 0])   ;=> false
+
+(defn toggle [a-set elem]
+  (if (contains? a-set elem) (disj a-set elem) (conj a-set elem)))
+
+(toggle #{:a :b :c} :d) ;=> #{:a :c :b :d}
+(toggle #{:a :b :c} :a) ;=> #{:c :b}
+
+(defn contains-duplicates? [a-seq]
+  (not (= (count (set a-seq)) (count a-seq))))
+(contains-duplicates? [1 1 2 3 -40]) ;=> true
+(contains-duplicates? [1 2 3 -40]) ;=> false
+(contains-duplicates? [1 2 3 "a" "a"]) ;=> true
+
+
+(defn old-book->new-book [book]
+  (assoc book :authors (set (book :authors)))
+  )
+(old-book->new-book {:title "The Little Schemer"
+                     :authors [friedman, felleisen]})
+;=> {:title "The Little Schemer" :authors #{friedman, felleisen}}
+    {:title "The Little Schemer" :authors #{friedman, felleisen}}
+(old-book->new-book {:title "Wild Seed", :authors [octavia]})
+;=> {:title "Wild Seed", :authors #{octavia}}
+    {:title "Wild Seed", :authors #{octavia}}
+(old-book->new-book
+  {:awards ["Hugo" "World Fantasy Award" "Arthur C. Clarke Award"
+            "British Science Fiction Award"]
+   :title "The City and the City"
+   :authors [{:birth-year 1972, :name "China Miéville"}]})
+;=> {:awards ["Hugo" "World Fantasy Award" "Arthur C. Clarke Award"
+;             "British Science Fiction Award"]
+;    :title "The City and the City"
+;    :authors #{{:birth-year 1972, :name "China Miéville"}}}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
