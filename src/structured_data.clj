@@ -13,8 +13,8 @@
   (conj v "<3"))
 
 (defn spiff-destructuring [v]
-  (let [[x y z] v]
-    (+ x z)))
+  (let [[x _ y] v]
+    (+ x y)))
 
 (defn point [x y]
   [x y])
@@ -23,7 +23,7 @@
   [bottom-left top-right])
 
 (defn width [rectangle]
-  (let [[[x1 y1] [x2 y2]] rectangle]
+  (let [[[x1 _] [x2 _]] rectangle]
     (- x2 x1)))
 
 (defn height [rectangle]
