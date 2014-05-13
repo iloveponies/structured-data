@@ -3,9 +3,10 @@
 ;; right.
 
 (defn do-a-thing [x]
-  :-)
+  (let [xx (+ x x)]
+    (Math/pow xx xx)))
 
-(do-a-thing "a")
+(do-a-thing 2)
 
 (defn hypotenuse [x y]
   (let [xx (* x x)
@@ -13,3 +14,110 @@
     (Math/sqrt (+ xx yy))))
 
 (hypotenuse 2 2)
+
+
+
+;; Vectors stuff
+
+(defn spiff [v]
+  (+ (get v 0) (get v 2)))
+
+(spiff [1 2 3])       ;=> 4
+(spiff [1 2 3 4 5 6]) ;=> 4
+
+(conj [1 2 3] 4)          ;=> [1 2 3 4]
+(assoc [1 2 3 4] 2 "foo") ;=> [1 2 "foo" 4]
+
+(defn cutify [v]
+  (conj v "<3"))
+
+(cutify []) ;=> ["<3"]
+(cutify [1 2 3]) ;=> [1 2 3 "<3"]
+(cutify ["a" "b"]) ;=> ["a" "b" "<3"]
+
+(defn spiff-destructuring [v]
+  (let [[x _ y] v]
+    (+ x y)))
+
+(spiff-destructuring [1 2 3])       ;=> 4
+(spiff-destructuring [1 2 3 4 5 6]) ;=> 4
+
+;; Rectangle
+
+(defn point [x y]
+  [x y])
+
+(defn rectangle [bottom-left top-right]
+  [bottom-left top-right])
+
+(defn width [rectangle]
+  (let [[[bottom _][top _]] rectangle]
+    (- top bottom)))
+
+(defn height [rectangle]
+  (let [[[_ bottom][_ top]] rectangle]
+    (- top bottom)))
+
+(height (rectangle [1 1] [5 1])) ;=> 0
+(height (rectangle [1 1] [5 5])) ;=> 4
+(height (rectangle [0 0] [2 3])) ;=> 3
+
+(width (rectangle [1 1] [5 1]))  ;=> 4
+(width (rectangle [1 1] [1 1]))  ;=> 0
+(width (rectangle [3 1] [10 4])) ;=> 7
+
+
+(defn square? [rectangle]
+  (let [[[x1 y1][x2 y2]] rectangle]
+    (= (- x2 x1) (- y2 y1))))
+
+(square? (rectangle [1 1] [2 2])) ;=> true
+(square? (rectangle [1 1] [2 3])) ;=> false
+(square? (rectangle [1 1] [1 1])) ;=> true
+(square? (rectangle [3 2] [1 0])) ;=> true
+(square? (rectangle [3 2] [1 1])) ;=> false
+
+(defn area [rectangle]
+  (let [[[x1 y1][x2 y2]] rectangle]
+    (* (- x2 x1) (- y2 y1))))
+
+(area (rectangle [1 1] [5 1]))  ;=> 0
+(area (rectangle [0 0] [1 1]))  ;=> 1
+(area (rectangle [0 0] [4 3]))  ;=> 12
+(area (rectangle [3 1] [10 4])) ;=> 21
+
+(defn contains-point? [rectangle point]
+  (let [[[x1 y1][x2 y2]] rectangle
+        [x y] point]
+    (and (<= x1 x x2) (<= y1 y y2))))
+
+(contains-point? (rectangle [0 0] [2 2])
+                 (point 1 1))            ;=> true
+(contains-point? (rectangle [0 0] [2 2])
+                 (point 2 1))            ;=> true
+(contains-point? (rectangle [0 0] [2 2])
+                 (point -3 1))           ;=> false
+(contains-point? (rectangle [0 0] [2 2])
+                 (point 1 3))            ;=> false
+(contains-point? (rectangle [1 1] [2 2])
+                 (point 1 1))            ;=> true
+(contains-point? (rectangle [1 1] [1 1])
+                 (point 1 1))
+
+(defn contains-rectangle? [outer inner]
+  (let [[bottom-left top-right] inner]
+    (and (contains-point? outer bottom-left)
+         (contains-point? outer top-right))))
+
+(contains-rectangle? (rectangle [0 0] [3 3])
+                     (rectangle [1 1] [2 2])) ;=> true
+(contains-rectangle? (rectangle [0 0] [2 2])
+                     (rectangle [1 1] [3 3])) ;=> false
+(contains-rectangle? (rectangle [0 0] [1 1])
+                     (rectangle [0 0] [1 1])) ;=> true
+(contains-rectangle? (rectangle [0 0] [1 1])
+                     (rectangle [1 1] [2 2]))
+
+;; Maps
+
+(+ 1 1)
