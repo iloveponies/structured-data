@@ -1,0 +1,15 @@
+;; Anything you type in here will be executed
+;; immediately with the results shown on the
+;; right.
+
+(defn do-a-thing [x]
+  :-)
+
+(do-a-thing "a")
+
+(defn hypotenuse [x y]
+  (let [xx (* x x)
+        yy (* y y)]
+    (Math/sqrt (+ xx yy))))
+
+(hypotenuse 2 2)
