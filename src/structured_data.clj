@@ -134,6 +134,14 @@
     true
     false))
 ;;
+;; for solution
+(defn contains-rectangle? [outer [[x1 y1] [x2 y2]]]
+  ;; Check all four points with for
+  (let [bool-4-points (for [x [x1 x2] y [y1 y2]]
+                        (contains-point? outer [x y]))]
+    ;; true if true X 4
+    (every? identity bool-4-points)))
+;;
 (contains-rectangle? (rectangle [0 0] [3 3])
                      (rectangle [1 1] [2 2])) ;=> true
 (contains-rectangle? (rectangle [0 0] [2 2])
