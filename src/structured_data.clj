@@ -195,7 +195,7 @@
 (defn add-author [book new-author]
   ;; Extract authors part
   (let [authors (:authors book)]
-    ;; Add a new authors to authors part, then add to map
+    ;; Add a new authors to authors part, then add to map (overwrite)
     (assoc book :authors (conj authors new-author))))
 (add-author little-schemer {:name "Gerald J. Sussman"})
 ;=> {:title "The Little Schemer"
@@ -206,9 +206,16 @@
 ;=> {:authors [{:name "Juhana"} {:name "Jani"}]}
 
 
-;; 
+;; Exercise 14
+;; Write the function (alive? author) which takes an author map and returns true if the author is alive, otherwise false.
+;; An author is alive if the author does not have a death year.
+;; (alive? china)   ;=> true
+;; (alive? octavia) ;=> false
+;;
+;; map -> bool
+;; Check for presence of :death-year element in the map
 (defn alive? [author]
-  :-)
+  (not (contains? author :death-year)))
 
 
 (defn element-lengths [collection]
