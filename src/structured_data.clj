@@ -104,18 +104,27 @@
              (or (<= y1 y y2) (>= y1 y y2)))
       true
       false)))
-;; (contains-point? (rectangle [0 0] [2 2])
-;;                  (point 1 1))            ;=> true
-;; (contains-point? (rectangle [0 0] [2 2])
-;;                  (point 2 1))            ;=> true
-;; (contains-point? (rectangle [0 0] [2 2])
-;;                  (point -3 1))           ;=> false
-;; (contains-point? (rectangle [0 0] [2 2])
-;;                  (point 1 3))            ;=> false
-;; (contains-point? (rectangle [1 1] [2 2])
-;;                  (point 1 1))            ;=> true
-;; (contains-point? (rectangle [1 1] [1 1])
-;;                  (point 1 1))            ;=> true
+;;
+;; no need for if when using predicates
+(defn contains-point? [rectangle point]
+  (let [[[x1 y1] [x2 y2]] rectangle
+        [x y] point]
+    ;; Generalized version that can handle x2 < x1, etc
+    (and (or (<= x1 x x2) (>= x1 x x2))
+         (or (<= y1 y y2) (>= y1 y y2)))))
+;;
+(contains-point? (rectangle [0 0] [2 2])
+                 (point 1 1))            ;=> true
+(contains-point? (rectangle [0 0] [2 2])
+                 (point 2 1))            ;=> true
+(contains-point? (rectangle [0 0] [2 2])
+                 (point -3 1))           ;=> false
+(contains-point? (rectangle [0 0] [2 2])
+                 (point 1 3))            ;=> false
+(contains-point? (rectangle [1 1] [2 2])
+                 (point 1 1))            ;=> true
+(contains-point? (rectangle [1 1] [1 1])
+                 (point 1 1))            ;=> true
 
 
 ;; Exercise 9
@@ -127,12 +136,10 @@
 ;; Get all four points from inner
 (defn contains-rectangle? [outer [[x1 y1] [x2 y2]]]
   ;; Check all four points with AND condition
-  (if (and (contains-point? outer [x1 y1])
-           (contains-point? outer [x1 y2])
-           (contains-point? outer [x2 y1])
-           (contains-point? outer [x2 y2]))
-    true
-    false))
+  (and (contains-point? outer [x1 y1])
+       (contains-point? outer [x1 y2])
+       (contains-point? outer [x2 y1])
+       (contains-point? outer [x2 y2])))
 ;;
 ;; for solution
 (defn contains-rectangle? [outer [[x1 y1] [x2 y2]]]
