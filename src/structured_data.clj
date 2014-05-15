@@ -62,27 +62,88 @@
       res
       (- res))))
 
-;; (height (rectangle [1 1] [5 1])) => 0
-;; (height (rectangle [1 1] [5 5])) => 4
-;; (height (rectangle [0 0] [2 3])) => 3
+;; (height (rectangle [1 1] [5 1])) ;=> 0
+;; (height (rectangle [1 1] [5 5])) ;=> 4
+;; (height (rectangle [0 0] [2 3])) ;=> 3
 
-;; (width (rectangle [1 1] [5 1]))  => 4
-;; (width (rectangle [1 1] [1 1]))  => 0
-;; (width (rectangle [3 1] [10 4])) => 7
+;; (width (rectangle [1 1] [5 1]))  ;=> 4
+;; (width (rectangle [1 1] [1 1]))  ;=> 0
+;; (width (rectangle [3 1] [10 4])) ;=> 7
 
 
-
+;; Exercise 6
+;; Write the function (square? rectangle) that returns true if rectangle is a square and otherwise false.
+;; (square? (rectangle [1 1] [2 2])) ;=> true
+;; (square? (rectangle [1 1] [2 3])) ;=> false
+;; (square? (rectangle [1 1] [1 1])) ;=> true
+;; (square? (rectangle [3 2] [1 0])) ;=> true
+;; (square? (rectangle [3 2] [1 1])) ;=> false
 (defn square? [rectangle]
-  :-)
+  (= (height rectangle) (width rectangle)))
 
+;; Exercise 7
+;; Write the function (area rectangle) that returns the area of the given rectangle.
 (defn area [rectangle]
-  :-)
+  (* (height rectangle) (width rectangle)))
+;; (area (rectangle [1 1] [5 1]))  ;=> 0
+;; (area (rectangle [0 0] [1 1]))  ;=> 1
+;; (area (rectangle [0 0] [4 3]))  ;=> 12
+;; (area (rectangle [3 1] [10 4])) ;=> 21
 
+
+;; Exercise 8
+;; Write the function (contains-point? rectangle point) that returns true if rectangle contains point and otherwise false.
+;; Remember that you can give <= multiple parameters. (<= x y z) returns true if x≤y≤z holds. Otherwise false.
+;; Hint: and is useful.
+;; use destructuring.
 (defn contains-point? [rectangle point]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle
+        [x y] point]
+    ;; Generalized version that can handle x2 < x1, etc
+    (if (and (or (<= x1 x x2) (>= x1 x x2))
+             (or (<= y1 y y2) (>= y1 y y2)))
+      true
+      false)))
+;; (contains-point? (rectangle [0 0] [2 2])
+;;                  (point 1 1))            ;=> true
+;; (contains-point? (rectangle [0 0] [2 2])
+;;                  (point 2 1))            ;=> true
+;; (contains-point? (rectangle [0 0] [2 2])
+;;                  (point -3 1))           ;=> false
+;; (contains-point? (rectangle [0 0] [2 2])
+;;                  (point 1 3))            ;=> false
+;; (contains-point? (rectangle [1 1] [2 2])
+;;                  (point 1 1))            ;=> true
+;; (contains-point? (rectangle [1 1] [1 1])
+;;                  (point 1 1))            ;=> true
 
-(defn contains-rectangle? [outer inner]
-  :-)
+
+;; Exercise 9
+;; Write the function (contains-rectangle? outer inner) that returns true if the rectangle inner is inside the rectangle outer and otherwise false.
+;; Hint: use contains-point?
+;;
+;; Two nested vectors -> Bool
+;; Check if all four points are within the first rectangle
+;; Get all four points from inner
+(defn contains-rectangle? [outer [[x1 y1] [x2 y2]]]
+  ;; Check all four points with AND condition
+  (if (and (contains-point? outer [x1 y1])
+           (contains-point? outer [x1 y2])
+           (contains-point? outer [x2 y1])
+           (contains-point? outer [x2 y2]))
+    true
+    false))
+;;
+(contains-rectangle? (rectangle [0 0] [3 3])
+                     (rectangle [1 1] [2 2])) ;=> true
+(contains-rectangle? (rectangle [0 0] [2 2])
+                     (rectangle [1 1] [3 3])) ;=> false
+(contains-rectangle? (rectangle [0 0] [1 1])
+                     (rectangle [0 0] [1 1])) ;=> true
+(contains-rectangle? (rectangle [0 0] [1 1])
+                     (rectangle [1 1] [2 2])) ;=> false
+
+
 
 (defn title-length [book]
   :-)
