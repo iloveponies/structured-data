@@ -159,21 +159,57 @@
                      (rectangle [1 1] [2 2])) ;=> false
 
 
-
+;; Exercise 10
+;; Write the function (title-length book) that counts the length of the book’s title.
+;; (title-length cities)         ;=> 21
+;; (title-length wild-seed)      ;=> 9
+;; (title-length little-schemer) ;=> 18
+;; Map -> Number
+;; Length of :title element of the map
 (defn title-length [book]
-  :-)
+  (count (:title book)))
 
+;; Exercise 11
+;; Write the function (author-count book) that returns the amount of authors that book has.
+;; (author-count cities)         ;=> 1
+;; (author-count wild-seed)      ;=> 1
+;; (author-count little-schemer) ;=> 2
 (defn author-count [book]
-  :-)
+  (count (:authors book)))
 
+;; Exercise 12
+;; Write the function (multiple-authors? book) that returns true if book has multiple authors, otherwise false.
+;; (multiple-authors? cities)         ;=> false
+;; (multiple-authors? wild-seed)      ;=> false
+;; (multiple-authors? little-schemer) ;=> true
 (defn multiple-authors? [book]
-  :-)
+  (>= (author-count book) 2))
 
+
+;; Exercise 13
+;; Use assoc and conj to write the function (add-author book new-author) that takes a book and an author as a parameter and adds author to books authors.
+;; Hint: use let to avoid pain
+;;
+;; map -> map
+;; Add author by extracting author part, add author, and conj
 (defn add-author [book new-author]
-  :-)
+  ;; Extract authors part
+  (let [authors (:authors book)]
+    ;; Add a new authors to authors part, then add to map
+    (assoc book :authors (conj authors new-author))))
+(add-author little-schemer {:name "Gerald J. Sussman"})
+;=> {:title "The Little Schemer"
+;    :authors [{:birth-year 1944, :name "Daniel Friedman"}
+;              {:name "Matthias Felleisen"}
+;              {:name "Gerald J. Sussman"}]}
+(add-author {:authors [{:name "Juhana"}]} {:name "Jani"})
+;=> {:authors [{:name "Juhana"} {:name "Jani"}]}
 
+
+;; 
 (defn alive? [author]
   :-)
+
 
 (defn element-lengths [collection]
   :-)
