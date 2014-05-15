@@ -218,14 +218,28 @@
   (not (contains? author :death-year)))
 
 
+;; Exercise 15
+;; Write the function (element-lengths collection) that returns the lengths of every item in collection.
+;; (element-lengths ["foo" "bar" "" "quux"])  ;=> (3 3 0 4)
+;; (element-lengths ["x" [:a :b :c] {:y 42}]) ;=> (1 3 1)
 (defn element-lengths [collection]
-  :-)
+  (map count collection))
 
+;; Exercise 16
+;; Use map to write the function (second-elements collection) that takes a vector of vectors and returns a sequence of the second elements.
+;; Remember that you can use get to index a vector.
+;; Use fn and let to create a helper function and use it with map.
+;; (second-elements [[1 2] [2 3] [3 4]]) ;=> (2 3 4)
+;; (second-elements [[1 2 3 4] [1] ["a" "s" "d" "f"]])
+;; ;=> (2 nil "s")
 (defn second-elements [collection]
-  :-)
+  (map second collection))
 
+;; Exercise 17
+;; Write the function (titles books) that takes a collection of books and returns their titles.
 (defn titles [books]
-  :-)
+  (map :title books))
+
 
 (defn monotonic? [a-seq]
   :-)
