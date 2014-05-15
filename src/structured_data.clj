@@ -37,6 +37,9 @@
 (defn spiff-destructuring [v]
   (let [[a _ c] v]
     (+ a c)))
+;; Simpler
+(defn spiff-destructuring [[a _ c]]
+  (+ a c))
 
 
 (defn point [x y]
@@ -45,11 +48,29 @@
 (defn rectangle [bottom-left top-right]
   [bottom-left top-right])
 
-(defn width [rectangle]
-  :-)
+;; Exercise 5
+;; Write the functions (height rectangle) and (width rectangle) that return the height and width of the given rectangle. Use destructuring.
+(defn width [[[x1 y1] [x2 y2]]]
+  (let [res (- x1 x2)]
+    (if (>= res 0 )
+      res
+      (- res))))
 
-(defn height [rectangle]
-  :-)
+(defn height [[[x1 y1] [x2 y2]]]
+  (let [res (- y1 y2)]
+    (if (>= res 0 )
+      res
+      (- res))))
+
+;; (height (rectangle [1 1] [5 1])) => 0
+;; (height (rectangle [1 1] [5 5])) => 4
+;; (height (rectangle [0 0] [2 3])) => 3
+
+;; (width (rectangle [1 1] [5 1]))  => 4
+;; (width (rectangle [1 1] [1 1]))  => 0
+;; (width (rectangle [3 1] [10 4])) => 7
+
+
 
 (defn square? [rectangle]
   :-)
