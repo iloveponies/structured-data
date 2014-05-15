@@ -45,19 +45,6 @@
     (and (contains-point? outer bottom-left)
          (contains-point? outer top-right))))
 
-(def china {:name "China Miéville", :birth-year 1972})
-(def octavia {:name "Octavia E. Butler"
-              :birth-year 1947
-              :death-year 2006})
-(def friedman {:name "Daniel Friedman" :birth-year 1944})
-(def felleisen {:name "Matthias Felleisen"})
-
-(def cities {:title "The City and the City" :authors [china]})
-(def wild-seed {:title "Wild Seed", :authors [octavia]})
-(def embassytown {:title "Embassytown", :authors [china]})
-(def little-schemer {:title "The Little Schemer"
-                     :authors [friedman, felleisen]})
-
 (defn title-length [book]
   (count (:title book)))
 
@@ -75,37 +62,43 @@
   (not (contains? author :death-year)))
 
 (defn element-lengths [collection]
-  :-)
+  (map count collection))
 
 (defn second-elements [collection]
-  :-)
+  (map second collection))
 
 (defn titles [books]
-  :-)
+  (map :title books))
 
 (defn monotonic? [a-seq]
-  :-)
+  (or (apply <= a-seq)
+      (apply >= a-seq)))
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*")))
 
 (defn toggle [a-set elem]
-  :-)
+  ((if (contains? a-set elem) disj conj)
+   a-set elem))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (not (= (count a-seq) (count (set a-seq)))))
 
 (defn old-book->new-book [book]
-  :-)
+  (let [authors-set (set (:authors book))]
+    (assoc book :authors authors-set)))
 
 (defn has-author? [book author]
-  :-)
+  (contains?
+   (:authors (old-book->new-book book))
+   author))
 
 (defn authors [books]
-  :-)
+  (apply clojure.set/union
+         (map (comp :authors old-book->new-book) books)))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
 
 (defn author->string [author]
   :-)
