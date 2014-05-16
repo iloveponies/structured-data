@@ -197,7 +197,7 @@
   (let [authors (:authors book)]
     ;; Add a new authors to authors part, then add to map (overwrite)
     (assoc book :authors (conj authors new-author))))
-(add-author little-schemer {:name "Gerald J. Sussman"})
+;; (add-author little-schemer {:name "Gerald J. Sussman"})
 ;=> {:title "The Little Schemer"
 ;    :authors [{:birth-year 1944, :name "Daniel Friedman"}
 ;              {:name "Matthias Felleisen"}
@@ -239,31 +239,151 @@
 ;; Write the function (titles books) that takes a collection of books and returns their titles.
 (defn titles [books]
   (map :title books))
+;; (def china {:name "China Miéville", :birth-year 1972})
+;; (def octavia {:name "Octavia E. Butler"
+;;               :birth-year 1947
+;;               :death-year 2006})
+;; (def friedman {:name "Daniel Friedman" :birth-year 1944})
+;; (def felleisen {:name "Matthias Felleisen"})
+
+;; (def cities {:title "The City and the City" :authors [china]})
+;; (def wild-seed {:title "Wild Seed", :authors [octavia]})
+;; (def embassytown {:title "Embassytown", :authors [china]})
+;; (def little-schemer {:title "The Little Schemer"
+;;                      :authors [friedman, felleisen]})
+
+;; (def books [cities, wild-seed, embassytown, little-schemer])
+;; ;; titles should work like this:
+;; (titles [cities]) ;=> ("The City and the City" )
+;; (titles books)
+;; ;=> ("The City and the City" "Wild Seed"
+;; ;    "Embassytown" "The Little Schemer")
 
 
+;; Exercise 19
+;; Write the function (monotonic? a-seq) that returns true if a-seq is monotonic and otherwise false.
+;; A sequence is monotonic if is either inceasing or decreasing. In a decreasing sequence every element is at most as large as the previous one and in an increasing sequence every member is at least as large as the previous one.
+;; Use apply.
+;; Hint: <= might be useful
+;; (monotonic? [1 2 3])     ;=> true
+;; (monotonic? [0 1 10 11]) ;=> true
+;; (monotonic? [3 2 0 -3])  ;=> true
+;; (monotonic? [3 2 2])     ;=> true    Not strictly monotonic
+;; (monotonic? [1 2 1 0])   ;=> false
 (defn monotonic? [a-seq]
-  :-)
+  (or (apply <= a-seq)
+      (apply >= a-seq)))
 
+;; Exercise 18
+;; Write the function (stars n) that returns a string with n aterisks \*.
+;; The function (repeat n x) returns a sequence with n xs:
+;; (repeat 5 "*") ;=> ("*" "*" "*" "*" "*")
+;; (repeat 3 "~o~") ;=> ("~o~" "~o~" "~o~")
+;; Remember that you can use str to concatenate strings.
+;; (stars 1) ;=> "*"
+;; (stars 7) ;=> "*******"
+;; (stars 3) ;=> "***"
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*")))
 
+
+;; Exercise 20
+;; Write the function (toggle a-set elem) that removes elem from a-set if a-set contains elem, and adds it to the set otherwise.
+;; (toggle #{:a :b :c} :d) ;=> #{:a :c :b :d}
+;; (toggle #{:a :b :c} :a) ;=> #{:c :b}
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)))
 
+
+;; Exercise 21
+;; Write the function (contains-duplicates? sequence) that takes a sequence as a parameter and returns true if sequence contains some element multiple times. Otherwise it returns false.
+;; (contains-duplicates? [1 1 2 3 -40]) ;=> true
+;; (contains-duplicates? [1 2 3 -40]) ;=> false
+;; (contains-duplicates? [1 2 3 "a" "a"]) ;=> true
 (defn contains-duplicates? [a-seq]
-  :-)
+  (not (= (count a-seq) (count (set a-seq)))))
 
+;; Exercise 22
+;; Write the function (old-book->new-book book) that takes a book with the previous representation (authors in a vector) and returns the same book in the new representation (authors in a set).
+;; Use assoc to change the representation. Do not construct a new map using the map literal syntax.
+;; (old-book->new-book {:title "The Little Schemer"
+;;                      :authors [friedman, felleisen]})
+;; ;=> {:title "The Little Schemer" :authors #{friedman, felleisen}}
+;; (old-book->new-book {:title "Wild Seed", :authors [octavia]})
+;; ;=> {:title "Wild Seed", :authors #{octavia}}
+;; The reason to use assoc is that it allows us to keep any additional key-value pairs intact. Earlier we had an example where we added a list of awards to a book. By using assoc, these additional key-value pairs do not disappear anywhere during the transformation.
+;; (old-book->new-book
+;;   {:awards ["Hugo" "World Fantasy Award" "Arthur C. Clarke Award"
+;;             "British Science Fiction Award"]
+;;    :title "The City and the City"
+;;    :authors [{:birth-year 1972, :name "China Miéville"}]})
+;; ;=> {:awards ["Hugo" "World Fantasy Award" "Arthur C. Clarke Award"
+;; ;             "British Science Fiction Award"]
+;; ;    :title "The City and the City"
+;; ;    :authors #{{:birth-year 1972, :name "China Miéville"}}}
+;;
+;; map -> map
+;; Change author part from a vector to a set
 (defn old-book->new-book [book]
-  :-)
+  (assoc book :authors (set (:authors book))))
 
+;; Exercise 23
+;; Write the function (has-author? book author) that returns true if author is in the authors of book and otherwise false.
+;; (has-author? cities china)             ;=> true
+;; (has-author? cities felleisen)         ;=> false
+;; (has-author? little-schemer felleisen) ;=> true
+;; (has-author? little-schemer friedman)  ;=> true
+;; (has-author? little-schemer octavia)   ;=> false
+;;
+;; map -> bool
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author))
 
+
+;; data
+(def china {:name "China Miéville", :birth-year 1972})
+(def octavia {:name "Octavia E. Butler"
+              :birth-year 1947
+              :death-year 2006})
+(def friedman {:name "Daniel Friedman" :birth-year 1944})
+(def felleisen {:name "Matthias Felleisen"})
+
+(def cities {:title "The City and the City" :authors #{china}})
+(def wild-seed {:title "Wild Seed", :authors #{octavia}})
+(def embassytown {:title "Embassytown", :authors #{china}})
+(def little-schemer {:title "The Little Schemer"
+                     :authors #{friedman, felleisen}})
+
+(def books [cities, wild-seed, embassytown, little-schemer])
+
+;; Exercise 24
+;; Write the function (authors books) that returns the authors of every book in books as a set.
+;; (authors [cities, wild-seed])              ;=> #{china, octavia}
+;; (authors [cities, wild-seed, embassytown]) ;=> #{china, octavia}
+;; (authors [little-schemer, cities])         ;=> #{china, friedman, felleisen}
+;;
+;; map -> set
+;; extract authors and return as a set of these using union
+;; Utilize has-author
 (defn authors [books]
-  :-)
+  (apply clojure.set/union (map (fn [book] (:authors book)) books)))
 
+
+
+;; Exercise 25
+;; Write the function (all-author-names books) that works like the previous one and uses authors.
+;; (all-author-names books)
+;; ;=> #{"Matthias Felleisen" "China Miéville"
+;; ;     "Octavia E. Butler" "Daniel Friedman"}
+;; (all-author-names [cities, wild-seed])
+;; ;=> #{"China Miéville" "Octavia E. Butler"}
+;; (all-author-names []) ;=> #{}
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
+
+
 
 (defn author->string [author]
   :-)
