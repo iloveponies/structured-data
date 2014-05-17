@@ -384,32 +384,139 @@
   (set (map :name (authors books))))
 
 
-
+;; Exercise 26
+;; Write the function (author->string author) that returns a string representation of author as follows:
+;; You can assume that every author with a :death-year also has a :birth-year.
+;; (author->string felleisen) ;=> "Matthias Felleisen"
+;; (author->string friedman)  ;=> "Daniel Friedman (1944 - )"
+;; (author->string octavia)   ;=> "Octavia E. Butler (1947 - 2006)"
+;; Hint: you probably want to split this string into two parts: name and years. Use let to form these and use str to create the final string.
+;; map -> string
+;; if present, format 
 (defn author->string [author]
-  :-)
+  (str (:name author)
+       ;; Return formatted years if :birth-year is contained.
+       (if (contains? author :birth-year)
+         (str " (" (:birth-year author) " - " (:death-year author) ")"))))
 
+
+;; Exercise 27
+;; Write the function (authors->string authors) which takes a sequence of authors as a parameter and returns a string representation of authors in the following manner:
+;; (authors->string (:authors little-schemer))
+;; ;=> "Daniel Friedman (1944 - ), Matthias Felleisen"
+;; (authors->string #{octavia})          ;=> "Octavia E. Butler (1947 - 2006)"
+;; (authors->string #{})                 ;=> ""
+;; (authors->string #{octavia, friedman})
+;; ;=> "Octavia E. Butler (1947 - 2006), Daniel Friedman (1944 - )"
+;; ;   order doesn't matter
+;; Since the authors are in a set, which doesn’t have a predefined order, the resulting string can have the authors in any order.
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
+
+;; Exercise 28
+;; Write the function (book->string book) takes a single book as a parameter and returns a string representation of book as follows:
+;; (book->string wild-seed) ;=> "Wild Seed, written by Octavia E. Butler"
+;; (book->string little-schemer)
+;; ;=> "The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen"
+;; ;                                   ^-- order doesn't matter
+;; Again, the order of authors in the string doesn’t matter.
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by " (authors->string (:authors book))))
 
+;; Exercise 29
+;; Write the function (books->string books) that takes a sequence of books as a parameter and returns a string representation of books like this:
+;; (books->string []) ;=> "No books."
+;; (books->string [cities])
+;; ;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+;; (books->string [little-schemer, cities, wild-seed])
+;; ;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+;;
+;; map -> string
+;; 3 patterns depending on the number of books. State the number of books. Then use book->string for each book, add 
 (defn books->string [books]
-  :-)
+  (let [n-books (count books)]
+    (cond
+     (= n-books 0) "No books."
+     (= n-books 1) (str "1 book." (apply book->string books) ".")
+     (> n-books 1) (str n-books " books. "
+                        ;; combine together
+                        (apply str
+                               ;; Add a single space in between
+                               (interpose " "
+                                          ;; Add . at the end of each string.
+                                          (map #(str % ".")
+                                               ;; Use book->string for each book
+                                               (map book->string books))))))))
 
+;; Exercise 30
+;; Write the function (books-by-author author books).
+;; Hint: has-author?
+;; (books-by-author china books)   ;=> (cities embassytown)
+;; (books-by-author octavia books) ;=> (wild-seed)
+;;
+;; map -> list
+;; Return books having author as one of the authors
 (defn books-by-author [author books]
-  :-)
+  (filter #(has-author? % author)  books))
 
+;; Exercise 31
+;; Write the function (author-by-name name authors) that takes a string name and a sequence of authors and returns an author with the given name if one is found. If one is not found, then nil should be returned.
+;; Hint: remember first
+;; (author-by-name "Octavia E. Butler" authors)                ;=> octavia
+;; (author-by-name "Octavia E. Butler" #{felleisen, friedman}) ;=> nil
+;; (author-by-name "China Miéville" authors)                   ;=> china
+;; (author-by-name "Goerge R. R. Martin" authors)              ;=> nil
+;;
+;; 
+(def authors #{china, felleisen, octavia, friedman})
 (defn author-by-name [name authors]
-  :-)
+  (filter #(= name (:name %)) authors))
 
+
+;; Exercise 32
+;; Write the function (living-authors authors) that takes a sequence of authors and returns those that are alive. Remember alive?.
+;; (living-authors authors)             ;=> (china, felleisen, friedman)
+;; (living-authors #{octavia})          ;=> ()
+;; (living-authors #{china, felleisen}) ;=> (china, felleisen)
+;; The order in the results doesn’t matter.
+;;
+;; map -> seq
+;; Keep if the author does not have :death-year
 (defn living-authors [authors]
-  :-)
+  (filter #(not (contains? % :death-year)) authors))
 
+
+
+(def jrrtolkien {:name "J. R. R. Tolkien" :birth-year 1892 :death-year 1973})
+(def christopher {:name "Christopher Tolkien" :birth-year 1924})
+(def kay {:name "Guy Gavriel Kay" :birth-year 1954})
+
+(def silmarillion {:title "Silmarillion"
+                   :authors #{jrrtolkien, christopher, kay}})
+
+(def dick {:name "Philip K. Dick", :birth-year 1928, :death-year 1982})
+(def zelazny {:name "Roger Zelazny", :birth-year 1937, :death-year 1995})
+
+(def deus-irae {:title "Deus Irae", :authors #{dick, zelazny}})
+
+;; Exercise 33
+;; Write the function (has-a-living-author? book) that returns true if book has a living author, and otherwise false.
+;; (has-a-living-author? wild-seed)      ;=> false
+;; (has-a-living-author? silmarillion)   ;=> true
+;; (has-a-living-author? little-schemer) ;=> true
+;; (has-a-living-author? cities)         ;=> true
+;; (has-a-living-author? deus-irae)      ;=> false
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (:authors book)))))
 
+
+;; Exercise 34
+;; Write the function (books-by-living-authors books) that takes a sequence of books as a parameter and returns those that have a living author.
+;; (books-by-living-authors books) ;=> (little-schemer cities embassytown)
+;; (books-by-living-authors (concat books [deus-irae, silmarillion]))
+;; ;=> (little-schemer cities embassytown silmarillion)
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author?  books))
 
 ; %________%
