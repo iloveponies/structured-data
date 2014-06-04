@@ -30,3 +30,4 @@ china
 (alive? octavia)
 (alive? cities)
 (contains? octavia :birth_year)
+(use 'structured-data)
