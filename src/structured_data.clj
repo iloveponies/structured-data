@@ -64,13 +64,16 @@ false)))
   false))
 
 (defn add-author [book new-author]
-  :-)
+  (assoc book :authors (assoc (:authors book) (count (:authors book)) new-author)))
 
 (defn alive? [author]
-  :-)
+  (if (contains? author :death-year)
+  false
+  true))
 
 (defn element-lengths [collection]
-  :-)
+  (map count collection)
+)
 
 (defn second-elements [collection]
   :-)
