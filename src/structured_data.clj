@@ -76,10 +76,11 @@ false)))
 )
 
 (defn second-elements [collection]
-  :-)
+  (let [drugi (fn [xs] (get xs 1))]
+  (map drugi collection)))
 
 (defn titles [books]
-  :-)
+  (map :title books))
 
 (defn monotonic? [a-seq]
   :-)
