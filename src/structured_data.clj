@@ -83,28 +83,38 @@ false)))
   (map :title books))
 
 (defn monotonic? [a-seq]
-  :-)
+  (if
+  (or (apply <= a-seq) (apply >= a-seq))
+  true
+  false))
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*")))
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem)
+  (disj a-set elem)
+  (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (let [sx (set a-seq)]
+  (if (> (count a-seq) (count sx))
+  true
+  false)))
 
 (defn old-book->new-book [book]
-  :-)
+  (assoc book :authors  (set (:authors book))))
 
 (defn has-author? [book author]
-  :-)
+  (if (contains? (:authors book) author)
+  true
+  false))
 
 (defn authors [books]
-  :-)
+  (apply clojure.set/union (map :authors books)))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
 
 (defn author->string [author]
   :-)
