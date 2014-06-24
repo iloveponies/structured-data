@@ -167,23 +167,23 @@
    (= (get (first authors) :name) name) (first authors)
    :else (author-by-name name (rest authors))))
 
+;(defn living-authors [authors]
+;  (cond
+;   (empty? authors) '()
+;   (alive? (first authors))
+;     (cons (first authors)
+;           (living-authors (rest authors)))
+;   :else (living-authors (rest authors))))
+
 (defn living-authors [authors]
-  (cond
-   (empty? authors) '()
-   (alive? (first authors))
-     (cons (first authors)
-           (living-authors (rest authors)))
-   :else (living-authors (rest authors))))
+  filter alive? authors)
+
 
 (defn has-a-living-author? [book]
-  (let [my-authors (all-author-names book)]
-    (cond
-  (empty? (map living-authors my-authors)) false
-     :else true)))
+  (pos? (count (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
-  (let [my-authors (all-author-names books)]
-      (map living-authors my-authors)))
+  (filter has-a-living-author? books))
 
 
 ; %________%
