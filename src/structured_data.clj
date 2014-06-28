@@ -42,8 +42,8 @@
 (defn contains-point? [rectangle point]
   (let [[[x1 y1] [x2 y2]] rectangle
         [xp yp] point]
-    (and (< x1 xp x2)
-         (< y1 yp y2))))
+    (and (<= x1 xp x2)
+         (<= y1 yp y2))))
 
 (defn contains-rectangle? [outer inner]
   (and (contains-point? outer (first inner))
@@ -56,7 +56,7 @@
   (count (get book :authors)))
 
 (defn multiple-authors? [book]
-  (> (count (author-count book)) 1))
+  (> (author-count book) 1))
 
 (defn add-author [book new-author]
   (let [n-book (assoc book :authors
@@ -95,10 +95,11 @@
   (assoc book :authors (set (:authors book))))
 
 (defn has-author? [book author]
-  (contains? (:author book) author))
+  (contains? (:authors book) author))
 
 (defn authors [books]
   (set (apply concat (map :authors books))) )
+
 
 (defn all-author-names [books]
   (set (map :name (authors books))))
@@ -115,24 +116,32 @@
   (clojure.string/join ", " (map author->string authors)))
 
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
-  :-)
+  (let [cnt (cond
+             (empty? books) "No books"
+             ( = 1 (count books)) "1 book"
+             :else (str (count books) " books"))
+        bstring (map book->string books)
+        bks (clojure.string/join ". " bstring )]
+    (if ( = (count bstring) 0)
+      (str cnt ".")
+      (str cnt ". " bks "."))))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [x] (contains? (:authors x) author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [x] (= (:name x) name)) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter (fn [x] (nil? (:death-year x))) authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (> (count (living-authors (:authors book))) 0))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
