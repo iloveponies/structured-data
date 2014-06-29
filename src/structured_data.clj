@@ -62,22 +62,28 @@
   (map (fn [pair] (get pair 1)) collection))
 
 (defn titles [books]
-  :-)
+  (map :title books))
 
 (defn monotonic? [a-seq]
-  :-)
+  (or (apply <= a-seq) (apply >= a-seq)))
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*")))
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (not (= (count a-seq)
+          (count (set a-seq)))))
 
 (defn old-book->new-book [book]
-  :-)
+  (let [current-authors (:authors book)]
+    (if (nil? current-authors)
+      book
+      (assoc book :authors (set current-authors))))) 
 
 (defn has-author? [book author]
   :-)
