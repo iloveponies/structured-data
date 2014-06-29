@@ -1,7 +1,7 @@
 (ns structured-data)
 
 (defn do-a-thing [x]
-  (let [two-x (+ x x x)]
+  (let [two-x (+ x x)]
     (Math/pow two-x two-x)))
 
 (defn spiff [v]
@@ -114,7 +114,7 @@
   (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  (str (:title book) ", writen by " (authors->string (:authors book))))
+  (str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
   (let [book-count (count books)
