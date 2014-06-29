@@ -34,7 +34,7 @@
   (= (height rectangle) (width rectangle)))
 
 (defn area [rectangle]
-  :-)
+  (* (height rectangle) (width rectangle)))
 
 (defn contains-point? [rectangle point]
   :-)
