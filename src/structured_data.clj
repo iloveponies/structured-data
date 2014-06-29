@@ -70,7 +70,7 @@
   (map (fn [x] (get x 1)) collection))
 
 (defn titles [books]
-  :-)
+  (map :title books))
 
 (defn monotonic? [a-seq]
   :-)
