@@ -117,13 +117,13 @@
   (str (:title book) ", writen by " (authors->string (:authors book))))
 
 (defn books->string [books]
+  (let [book-count (count books)
+        book-plurality (if (= book-count 1) " book. " " books. ")
+        book-count-string (str book-count book-plurality)
+        books-string (apply str (interpose ". " (map book->string books)))]
   (if (empty? books)
     "No books."
-    (let [book-count (count books)
-          book-plurality (if (= book-count 1) " book. " " books. ")
-          book-count-string (str book-count book-plurality)
-          books-string (apply str (interpose ". " (map book->string books)))]
-      (str book-count-string books-string "."))))
+    (str book-count-string books-string "."))))
 
 (defn books-by-author [author books]
   (filter (fn [b] (has-author? b author)) books))
