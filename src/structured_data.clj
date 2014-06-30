@@ -126,7 +126,7 @@
   (first (filter (fn [a] (= name (:name a))) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
   :-)
