@@ -35,8 +35,8 @@
 (defn contains-point? [[[x1 y1] [x2 y2]] [px py]]
   (and (<= x1 px x2) (<= y1 py y2)))
 
-(defn contains-rectangle? [outer inner]
-  :-)
+(defn contains-rectangle? [outer [bottom-left top-right]]
+  (and (contains-point? outer bottom-left) (contains-point? outer top-right)))
 
 (defn title-length [book]
   :-)
