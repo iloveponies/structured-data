@@ -59,7 +59,9 @@
   (map count collection))
 
 (defn second-elements [collection]
-  :-)
+  (let [second-element (fn [c] (get c 1))]
+    (map second-element collection)
+    ))
 
 (defn titles [books]
   :-)
