@@ -86,7 +86,7 @@
     (assoc book :authors (set authors))))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author))
 
 (defn authors [books]
   :-)
