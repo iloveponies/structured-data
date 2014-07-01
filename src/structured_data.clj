@@ -128,7 +128,7 @@
   (first (filter #(= (:name %) name) authors)))
 
 (defn living-authors [authors]
-  (filter #(not (:death-year %)) authors))
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
   (not (empty? (living-authors (:authors book)))))
