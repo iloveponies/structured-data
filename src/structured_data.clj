@@ -137,18 +137,21 @@ false)))
 
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [x] (has-author? x author)) books))
+
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [x] (= (:name x) name)) authors)))
 
 (defn living-authors [authors]
   (filter alive? authors)) 
 
 (defn has-a-living-author? [book]
-  :-)
+  (if (empty? (living-authors (:authors book)))
+  false
+  true))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
