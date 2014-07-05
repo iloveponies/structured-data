@@ -39,7 +39,11 @@
     (if (and (<= x1 px x2) (<= y1 py y2)) true false)))
 
 (defn contains-rectangle? [outer inner]
-  :-)
+  (let [[[x1 y1] [x2 y2]] inner]
+    (if 
+      (and (contains-point? outer [x1 y1]) (contains-point? outer [x2 y2]))
+      true
+      false)))
 
 (defn title-length [book]
   :-)
