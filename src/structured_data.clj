@@ -46,16 +46,21 @@
       false)))
 
 (defn title-length [book]
-  :-)
+  (count (:title book)))
 
 (defn author-count [book]
-  :-)
+  (count (:authors book)))
 
 (defn multiple-authors? [book]
-  :-)
+  (not (= (author-count book) 1)))
 
 (defn add-author [book new-author]
-  :-)
+  (let [authors (:authors book)]
+    (if 
+      (nil? authors)
+      (assoc book :authors [new-author])
+      (assoc book :authors (conj authors new-author))
+      )))
 
 (defn alive? [author]
   :-)
