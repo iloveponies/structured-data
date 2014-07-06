@@ -77,7 +77,7 @@
     ))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (< (count (set a-seq)) (count a-seq)))
 
 (defn old-book->new-book [book]
   :-)
