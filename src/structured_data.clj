@@ -33,8 +33,7 @@
   (* (height rectangle) (width rectangle)))
 
 (defn contains-point? [[[blx bly] [xtr ytr]] [px py]]
-  (and (<= blx px) (>= xtr px) (<= bly py) (>= ytr py))
-  )
+  (and (<= blx px) (>= xtr px) (<= bly py) (>= ytr py)))
 
 (defn contains-rectangle? [outer [ibl itr]]
   (and (contains-point? outer ibl) (contains-point? outer itr)))
@@ -52,7 +51,7 @@
   (assoc book :authors (conj (:authors book) new-author)))
 
 (defn alive? [author]
-  :-)
+  (not (contains? author :death-year)))
 
 (defn element-lengths [collection]
   :-)
