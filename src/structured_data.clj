@@ -147,13 +147,7 @@
     (filter (fn [x] (if (contains? (:authors x) author) true false)) books))
 
   (defn author-by-name [name authors]
-    (let [func (fn [x] (if (= name (:name x)) true false))
-          found (apply 
-                  clojure.set/union 
-                  (filter 
-                    func
-                    authors))]
-      (if (empty? found) nil found)))
+    (first (filter (fn [author] (= name (:name author))) authors)))
 
   (defn living-authors [authors]
     (filter alive? authors))
