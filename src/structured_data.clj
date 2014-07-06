@@ -92,8 +92,8 @@
 
 (defn contains-duplicates? [a-seq]
   (not (=
-         (count (set a-seq))
-         (count a-seq))))
+        (count (set a-seq))
+        (count a-seq))))
 
 (defn old-book->new-book [book]
   (assoc book :authors (set (:authors book))))
@@ -108,30 +108,43 @@
   (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (let [has-birth (contains? author :birth-year)
+        has-death (contains? author :death-year)]
+    (str (:name author)
+         (if
+           has-birth
+           (str " ("
+                (:birth-year author)
+                " - "
+                (if has-death
+                  (str (:death-year author) ")")
+                  ")"))
+           ""))))
 
-(defn authors->string [authors]
-  :-)
+  (defn authors->string [authors]
+    (apply str (interpose
+      ", "
+      (map author->string authors))))
 
-(defn book->string [book]
-  :-)
+  (defn book->string [book]
+    :-)
 
-(defn books->string [books]
-  :-)
+  (defn books->string [books]
+    :-)
 
-(defn books-by-author [author books]
-  :-)
+  (defn books-by-author [author books]
+    :-)
 
-(defn author-by-name [name authors]
-  :-)
+  (defn author-by-name [name authors]
+    :-)
 
-(defn living-authors [authors]
-  :-)
+  (defn living-authors [authors]
+    :-)
 
-(defn has-a-living-author? [book]
-  :-)
+  (defn has-a-living-author? [book]
+    :-)
 
-(defn books-by-living-authors [books]
-  :-)
+  (defn books-by-living-authors [books]
+    :-)
 
-; %________%
+  ; %________%
