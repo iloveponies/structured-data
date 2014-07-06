@@ -122,7 +122,7 @@
   (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (< 0 (count (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
   :-)
