@@ -97,36 +97,16 @@
 (defn old-book->new-book [book]
   (assoc book :authors (set (:authors book))))
 
-(def china {:name "China Miéville", :birth-year 1972})
-(def octavia {:name "Octavia E. Butler"
-              :birth-year 1947
-              :death-year 2006})
-(def friedman {:name "Daniel Friedman" :birth-year 1944})
-(def felleisen {:name "Matthias Felleisen"})
-
-(def cities {:title "The City and the City" :authors #{china}})
-(def wild-seed {:title "Wild Seed", :authors #{octavia}})
-(def embassytown {:title "Embassytown", :authors #{china}})
-(def little-schemer {:title "The Little Schemer"
-                     :authors #{friedman, felleisen}})
-
-(def books [cities, wild-seed, embassytown, little-schemer])
-
 (defn has-author? [book author]
   (not(nil? (get (:authors book) author))))
 
-
 (defn authors [books]
-  (clojure.set/union (:authors books)))
-
-(clojure.set/union (apply :authors [cities, wild-seed]))
-
-(authors [cities, wild-seed])              ;=> #{china, octavia}
-(authors [cities, wild-seed, embassytown]) ;=> #{china, octavia}
-(authors [little-schemer, cities])         ;=> #{china, friedman, felleisen}
+  (apply clojure.set/union (map #(:authors %) books)))
 
 (defn all-author-names [books]
-  :-)
+  (set (map #(:name %)(authors books))))
+
+;(set (map #(str (val %))(authors books)))
 
 (defn author->string [author]
   :-)
