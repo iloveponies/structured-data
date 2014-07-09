@@ -8,8 +8,12 @@
     (Math/pow xx xx)))
 
 
+;; that takes a vector and returns the sum of the first and third elements
+
 (defn spiff [v]
-  :-)
+  (+ (get v 0) (get v 2)))
+
+
 
 (defn cutify [v]
   :-)
