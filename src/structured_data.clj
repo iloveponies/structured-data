@@ -87,8 +87,12 @@
   (count (book :authors)))
 
 
+;; returns true if book has multiple authors, otherwise false
+
 (defn multiple-authors? [book]
-  :-)
+  (if (> (author-count book) 1)
+    true
+    false))
 
 
 (defn add-author [book new-author]
