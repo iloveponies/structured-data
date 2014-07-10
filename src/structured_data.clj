@@ -75,10 +75,11 @@
     (and (contains-point? outer p1) (contains-point? outer p2))))
 
 
-
+;; counts the length of the book’s title.
 
 (defn title-length [book]
-  :-)
+  (count (:title book)))
+
 
 (defn author-count [book]
   :-)
