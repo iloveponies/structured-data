@@ -95,8 +95,14 @@
     false))
 
 
+
 (defn add-author [book new-author]
-  :-)
+  (let [{authors :authors} book
+        new_authors (conj authors new-author)]
+    (assoc book :authors new_authors)
+    ))
+
+
 
 (defn alive? [author]
   :-)
