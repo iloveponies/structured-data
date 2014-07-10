@@ -68,8 +68,14 @@
 
 
 
+;;  returns true if the rectangle inner is inside the rectangle outer and otherwise false
+
 (defn contains-rectangle? [outer inner]
-  :-)
+  (let [[p1 p2] inner]
+    (and (contains-point? outer p1) (contains-point? outer p2))))
+
+
+
 
 (defn title-length [book]
   :-)
