@@ -81,11 +81,15 @@
   (count (:title book)))
 
 
+;;  returns the amount of authors that book has
+
 (defn author-count [book]
-  :-)
+  (count (book :authors)))
+
 
 (defn multiple-authors? [book]
   :-)
+
 
 (defn add-author [book new-author]
   :-)
