@@ -16,7 +16,8 @@
 
 
 (defn cutify [v]
-  :-)
+  (conj v "<3"))
+
 
 (defn spiff-destructuring [v]
   :-)
