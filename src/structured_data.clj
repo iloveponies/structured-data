@@ -44,9 +44,14 @@
     (- y2 y1)))
 
 
+;; returns true if rectangle is a square and otherwise false
 
 (defn square? [rectangle]
-  :-)
+  (if (= (height rectangle) (width rectangle))
+    true
+    false))
+
+
 
 (defn area [rectangle]
   :-)
