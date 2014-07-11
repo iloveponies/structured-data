@@ -135,8 +135,14 @@
 (defn monotonic? [a-seq]
   :-)
 
+
+;; returns a string with n asterisks \*
+
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*")))
+
+
+
 
 (defn toggle [a-set elem]
   :-)
