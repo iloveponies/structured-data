@@ -104,8 +104,14 @@
 
 
 
+;;  takes an author map and returns true if the author is alive, otherwise false.
+
 (defn alive? [author]
-  :-)
+  (if (contains? author :death-year)
+    false
+    true))
+
+
 
 (defn element-lengths [collection]
   :-)
