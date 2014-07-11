@@ -132,8 +132,15 @@
   (map :title books))
 
 
+
+;; returns true if a-seq is monotonic and otherwise false.
+
 (defn monotonic? [a-seq]
-  :-)
+  (let [[x y] a-seq]
+    (if (>= x y)
+      (apply >= a-seq)
+      (apply < a-seq))))
+
 
 
 ;; returns a string with n asterisks \*
