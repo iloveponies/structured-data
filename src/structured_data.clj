@@ -126,10 +126,11 @@
     (map sec-el collection)))
 
 
-
+;; takes a collection of books and returns their titles
 
 (defn titles [books]
-  :-)
+  (map :title books))
+
 
 (defn monotonic? [a-seq]
   :-)
