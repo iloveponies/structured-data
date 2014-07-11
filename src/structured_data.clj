@@ -119,9 +119,14 @@
   (map count collection))
 
 
+;;  takes a vector of vectors and returns a sequence of the second elements.
 
 (defn second-elements [collection]
-  :-)
+  (let [sec-el (fn [x] (get x 1))]
+    (map sec-el collection)))
+
+
+
 
 (defn titles [books]
   :-)
