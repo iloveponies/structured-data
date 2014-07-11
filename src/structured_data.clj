@@ -113,8 +113,12 @@
 
 
 
+;; returns the lengths of every item in collection
+
 (defn element-lengths [collection]
-  :-)
+  (map count collection))
+
+
 
 (defn second-elements [collection]
   :-)
