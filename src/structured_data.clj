@@ -10,8 +10,8 @@
 (defn cutify [v]
   (conj v "<3"))
 
-(defn spiff-destructuring [v]
-  :-)
+(defn spiff-destructuring [[x _ z]]
+  (+ x z))
 
 (defn point [x y]
   [x y])
