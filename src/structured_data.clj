@@ -79,19 +79,25 @@
     (map second-element collection)))
 
 (defn titles [books]
-  :-)
+  (map :title books))
 
 (defn monotonic? [a-seq]
-  :-)
+  (let [increasing (apply <= a-seq)
+        decreasing (apply >= a-seq)]
+    (or increasing decreasing)))
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n \*)))
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (let [a-set-count (count (set a-seq))
+        a-seq-count (count a-seq)]
+    (< a-set-count a-seq-count)))
 
 (defn old-book->new-book [book]
   :-)
