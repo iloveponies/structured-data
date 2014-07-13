@@ -100,16 +100,19 @@
     (< a-set-count a-seq-count)))
 
 (defn old-book->new-book [book]
-  :-)
+  (let [authors-set (set (:authors book))]
+    (assoc book :authors authors-set)))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors (old-book->new-book book)) author))
 
 (defn authors [books]
-  :-)
+  (let [authors-set (map :authors (map old-book->new-book books))]
+   (apply clojure.set/union authors-set)))
 
 (defn all-author-names [books]
-  :-)
+  (let [author-names (map :name (authors books))]
+    (set author-names)))
 
 (defn author->string [author]
   :-)
