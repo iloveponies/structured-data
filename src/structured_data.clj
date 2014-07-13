@@ -11,7 +11,8 @@
   (conj v "<3"))
 
 (defn spiff-destructuring [v]
-  :-)
+  (let [[a b c] v]
+    (+ a c)))
 
 (defn point [x y]
   [x y])
@@ -19,17 +20,19 @@
 (defn rectangle [bottom-left top-right]
   [bottom-left top-right])
 
-(defn width [rectangle]
-  :-)
+(defn width [[[x1 y1] [x2 y2]]]
+  (- x2 x1))
 
-(defn height [rectangle]
-  :-)
+(defn height [[[x1 y1] [x2 y2]]]
+  (- y2 y1))
 
 (defn square? [rectangle]
-  :-)
+  (if (= (width rectangle) (height rectangle))
+    true
+    false))
 
 (defn area [rectangle]
-  :-)
+  (* (width rectangle) (height rectangle)))
 
 (defn contains-point? [rectangle point]
   :-)
@@ -113,4 +116,4 @@
   :-)
 
 ; %________%
-(cutify [])
+(area (rectangle [3 1] [10 4]))
