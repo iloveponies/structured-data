@@ -87,36 +87,54 @@
   (let [t (set a-seq)]
     (not(== (count t) (count a-seq)))))
 
-
 (defn old-book->new-book [book]
-  :-)
+  (assoc book :authors (set (:authors book))))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author))
 
 (defn authors [books]
-  :-)
+  (set (apply concat (map :authors books))))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (let [name (:name author)
+        years (str "(" (:birth-year author) " - " (:death-year author) ")")]
+    (if (contains? author :birth-year)
+      (str name " " years)
+      (str name))))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
-  :-)
+  (let [num (count books)
+        num_str
+        (cond
+         (== num 0) "No books."
+         (== num 1) "1 book. "
+         (> num 1) (str num " books. ")
+         )]
+    (cond
+     (== num 0) (str num_str)
+     (>= num 1) (str num_str (apply str (interpose ". " (map book->string books))) "."))
+    ))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [x] (has-author? x author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (filter (fn [x] (first name x)) authors))
+
+(author-by-name "Octavia E. Butler" authors)                ;=> octavia
+(author-by-name "Octavia E. Butler" #{felleisen, friedman}) ;=> nil
+(author-by-name "China Miéville" authors)                   ;=> china
+(author-by-name "Goerge R. R. Martin" authors)              ;=> nil
 
 (defn living-authors [authors]
   :-)
