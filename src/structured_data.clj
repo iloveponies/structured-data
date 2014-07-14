@@ -191,8 +191,17 @@
   (map :name (authors books)))
 
 
+;;  returns a string representation of author
+
 (defn author->string [author]
-  :-)
+  (let [{:keys [name birth-year death-year]} author]
+    (if (or birth-year death-year)
+      (let [str-birth-year (if true? birth-year "")
+            str-death-year (if true? death-year "")]
+        (str name "(" str-birth-year " - " str-death-year ")"))
+      name)
+    ))
+
 
 (defn authors->string [authors]
   :-)
