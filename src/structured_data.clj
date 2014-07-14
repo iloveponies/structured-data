@@ -188,7 +188,8 @@
 
 
 (defn all-author-names [books]
-  :-)
+  (map :name (authors books)))
+
 
 (defn author->string [author]
   :-)
