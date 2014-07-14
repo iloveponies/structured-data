@@ -131,7 +131,8 @@
   (filter #(has-author? % author) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter #(= (:name %) name)
+                 authors)))
 
 (defn living-authors [authors]
   :-)
