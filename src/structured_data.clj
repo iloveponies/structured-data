@@ -172,9 +172,12 @@
     ))
 
 
+;; returns true if author is in the authors of book and otherwise false.
 
 (defn has-author? [book author]
-  :-)
+  (let [{authors :authors} book]
+    (contains? authors author)))
+
 
 (defn authors [books]
   :-)
