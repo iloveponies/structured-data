@@ -163,8 +163,15 @@
     (not (= (count a-set) (count a-seq)))))
 
 
+;; takes a book with the previous representation (authors in a vector) and
+;; returns the same book in the new representation (authors in a set).
+
 (defn old-book->new-book [book]
-  :-)
+  (let [{old-authors :authors} book]
+    (assoc book :authors (set old-authors))
+    ))
+
+
 
 (defn has-author? [book author]
   :-)
