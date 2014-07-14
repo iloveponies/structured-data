@@ -128,7 +128,7 @@
     (str book-count-string book-string)))
 
 (defn books-by-author [author books]
-  :-)
+  (filter #(has-author? % author) books))
 
 (defn author-by-name [name authors]
   :-)
