@@ -179,8 +179,13 @@
     (contains? authors author)))
 
 
+;; returns the authors of every book in books as a set.
+
 (defn authors [books]
-  :-)
+  (let [author-in-book (fn [book]
+                         (:authors book))]
+    (apply clojure.set/union (map author-in-book books))))
+
 
 (defn all-author-names [books]
   :-)
