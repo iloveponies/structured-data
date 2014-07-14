@@ -188,7 +188,7 @@
 
 
 (defn all-author-names [books]
-  (map :name (authors books)))
+  (set (map :name (authors books))))
 
 
 ;;  returns a string representation of author
@@ -198,13 +198,16 @@
     (if (or birth-year death-year)
       (let [str-birth-year (if true? birth-year "")
             str-death-year (if true? death-year "")]
-        (str name "(" str-birth-year " - " str-death-year ")"))
+        (str name " (" str-birth-year " - " str-death-year ")"))
       name)
     ))
 
 
+;; takes a sequence of authors as a parameter and returns a string representation of authors
+
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
+
 
 (defn book->string [book]
   :-)
