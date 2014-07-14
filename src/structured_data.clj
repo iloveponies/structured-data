@@ -132,7 +132,6 @@
   (map :title books))
 
 
-
 ;; returns true if a-seq is monotonic and otherwise false.
 
 (defn monotonic? [a-seq]
@@ -142,17 +141,19 @@
       (apply < a-seq))))
 
 
-
 ;; returns a string with n asterisks \*
 
 (defn stars [n]
   (apply str (repeat n "*")))
 
 
-
+;; removes elem from a-set if a-set contains elem, and adds it to the set otherwise.
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)))
+
 
 (defn contains-duplicates? [a-seq]
   :-)
