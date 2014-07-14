@@ -155,8 +155,13 @@
     (conj a-set elem)))
 
 
+;; takes a sequence as a parameter and returns true if sequence contains some element multiple times.
+;; Otherwise it returns false.
+
 (defn contains-duplicates? [a-seq]
-  :-)
+  (let [a-set (set a-seq)]
+    (not (= (count a-set) (count a-seq)))))
+
 
 (defn old-book->new-book [book]
   :-)
