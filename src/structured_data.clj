@@ -119,7 +119,13 @@
 
 
 (defn books->string [books]
-  :-)
+  (let [book-count-string (case (count books)
+                            0 "No books."
+                            1 "1 book. "
+                            (str (count books) " books. "))
+        book-strings (map #(str (book->string %) ".") books)
+        book-string (apply str (interpose " " book-strings))]
+    (str book-count-string book-string)))
 
 (defn books-by-author [author books]
   :-)
