@@ -42,19 +42,19 @@
 (defn contains-point? [rectangle point]
   (let [[[x1 y1][x2 y2]] rectangle [p1 p2] point] 
     (and 
-      (and (> p1 x1) (< p1 x2)) 
-      (and (> p2 y1) (< p2 y2)))
+      (and (>= p1 x1) (<= p1 x2)) 
+      (and (>= p2 y1) (<= p2 y2)))
     ))
 
 (defn contains-rectangle? [outer inner]
   (let [[[v1 w1][v2 w2]] outer [[x1 y1][x2 y2]] inner] 
     (and
       (and 
-        (and (> x1 v1) (> y1 w1)) 
-        (and (< x1 v2) (< y1 w2)))
+        (and (>= x1 v1) (>= y1 w1)) 
+        (and (<= x1 v2) (<= y1 w2)))
       (and 
-        (and (< x2 v2) (< y2 w2)) 
-        (and (> x2 v1) (> y2 w1))))
+        (and (<= x2 v2) (<= y2 w2)) 
+        (and (>= x2 v1) (>= y2 w1))))
     ))
 
 (defn title-length [book]
@@ -86,9 +86,10 @@
   (let [get-title (fn [book] (get book :title))]
     (map get-title books)))
 
-
 (defn monotonic? [a-seq]
-  (apply <= a-seq))
+  (or
+    (apply <= a-seq)
+    (apply >= a-seq)))
 
 (defn stars [n]
   (apply str (repeat n "*")))
@@ -121,13 +122,15 @@
 (defn all-author-names [books]
   (let [get-name (fn [auth] (:name auth))
         authors-list (authors books)]
-    (map get-name authors-list))) 
+    (set (map get-name authors-list))))
 
 (defn author->string [author]
   (let [author-name (:name author) 
         birth (:birth-year author)
         death (:death-year author)]
-    (str author-name " (" birth " - " death ")")))
+    (if (nil? birth) 
+      (str author-name) 
+      (str author-name " (" birth " - " death ")"))))
 
 
 (defn authors->string [authors]
@@ -141,9 +144,9 @@
 (defn books->string [books]
   (let [book-detail (map book->string books)
         book-count (count books)
-        book-count-str (if (= count 1) (str book-count " book")(str book-count " books"))]
+        book-count-str (if (= book-count 1) (str book-count " book")(str book-count " books"))]
     (if (> book-count 0) 
-      (str book-count-str ". " (apply str (interpose ", " book-detail)))
+      (str book-count-str ". " (apply str (interpose ", " book-detail)) ".")
       "No books." )))
 
 
@@ -153,13 +156,13 @@
 
 (defn author-by-name [name authors]
   (let [result (filter (fn[x] (= (:name x) name)) authors)]
-    (if (empty? result) nil result)))
+    (if (empty? result) nil (first result))))
 
 (defn living-authors [authors]
   (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  (alive? (living-authors (:authors book))))
+  (not (empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
   (filter has-a-living-author? books))
