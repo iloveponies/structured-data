@@ -209,11 +209,26 @@
   (apply str (interpose ", " (map author->string authors))))
 
 
+;; takes a single book as a parameter and returns a string representation of book
+
 (defn book->string [book]
-  :-)
+  (let [{:keys [title authors]} book]
+    (str title ", written by " (authors->string authors))))
+
+
+;; takes a sequence of books as a parameter and returns a string representation of books
 
 (defn books->string [books]
-  :-)
+  (if (empty? books)
+    "No books."
+     (let [books-str (set (map #(str % ".") (map book->string books)))]
+       (if (= 1 (count books-str))
+         (str "1 book.")
+         ())
+       )))
+
+
+;; (map #(str % ".") (map book->string books))
 
 (defn books-by-author [author books]
   :-)
