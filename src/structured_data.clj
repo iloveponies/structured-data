@@ -221,14 +221,11 @@
 (defn books->string [books]
   (if (empty? books)
     "No books."
-     (let [books-str (set (map #(str % ".") (map book->string books)))]
-       (if (= 1 (count books-str))
-         (str "1 book.")
-         ())
+     (let [books-str (map #(str % ".") (map book->string books))
+           books-str-size (count books-str)]
+       (apply str books-str-size " book" (if (> books-str-size 1) "s") ". " books-str)
        )))
 
-
-;; (map #(str % ".") (map book->string books))
 
 (defn books-by-author [author books]
   :-)
