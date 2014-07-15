@@ -234,10 +234,8 @@
     (filter filter-func books)))
 
 
-
 (defn author-by-name [name authors]
   (first (filter #(= (:name %) name) authors)))
-
 
 
 ;; takes a sequence of authors and returns those that are alive
@@ -247,9 +245,12 @@
   (filter #(alive? %) authors))
 
 
+;; returns true if book has a living author, and otherwise false
 
 (defn has-a-living-author? [book]
-  :-)
+  (let [{authors :authors} book]
+    (not (empty? (living-authors authors)))))
+
 
 (defn books-by-living-authors [books]
   :-)
