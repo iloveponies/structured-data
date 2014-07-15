@@ -227,8 +227,13 @@
        )))
 
 
+;; has-author? [book author]
+
 (defn books-by-author [author books]
-  :-)
+  (let [filter-func (fn [book] (has-author? book author))]
+    (filter filter-func books)))
+
+
 
 (defn author-by-name [name authors]
   :-)
