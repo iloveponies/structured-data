@@ -48,34 +48,41 @@
       false)))
 
 (defn title-length [book]
-  :-)
+  (count (:title book)))
 
 (defn author-count [book]
-  :-)
+  (count (:authors book)))
 
 (defn multiple-authors? [book]
-  :-)
+  (> (author-count book) 1))
 
 (defn add-author [book new-author]
-  :-)
+  (let [authors (:authors book)]
+    (assoc book :authors (conj authors new-author))))
 
 (defn alive? [author]
-  :-)
+  (not (contains? author :death-year)))
 
 (defn element-lengths [collection]
-  :-)
+  (map count collection))
 
 (defn second-elements [collection]
-  :-)
+  (let [second-elm (fn [collection] (get collection 1))]
+    (map second-elm collection)))
+
+(defn second-elements2 [collection]
+  (let [second-elm (fn [[a b]] b)]
+    (map second-elm collection)))
 
 (defn titles [books]
-  :-)
+  (map :title books))
 
 (defn monotonic? [a-seq]
-  :-)
+  (or (apply <= a-seq)
+      (apply >= a-seq)))
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n \*)))
 
 (defn toggle [a-set elem]
   :-)
@@ -123,5 +130,18 @@
   :-)
 
 ; %________%
-(contains-rectangle? (rectangle [0 0] [1 1])
-                     (rectangle [1 1] [2 2]))
+(def china {:name "China Miéville", :birth-year 1972})
+(def octavia {:name "Octavia E. Butler"
+              :birth-year 1947
+              :death-year 2006})
+(def friedman {:name "Daniel Friedman" :birth-year 1944})
+(def felleisen {:name "Matthias Felleisen"})
+
+(def cities {:title "The City and the City" :authors [china]})
+(def wild-seed {:title "Wild Seed", :authors [octavia]})
+(def embassytown {:title "Embassytown", :authors [china]})
+(def little-schemer {:title "The Little Schemer"
+                     :authors [friedman, felleisen]})
+(def books [cities, wild-seed, embassytown, little-schemer])
+
+(monotonic? [10 9 11])
