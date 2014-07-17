@@ -252,8 +252,14 @@
     (not (empty? (living-authors authors)))))
 
 
+;; takes a sequence of books as a parameter and returns those that have a living author
+
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
+
+
+
+
 
 ; %________%
 
