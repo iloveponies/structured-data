@@ -28,7 +28,7 @@
     (- y2 y1)))
 
 (defn square? [rectangle]
-  :-)
+  (= (height rectangle) (width rectangle)))
 
 (defn area [rectangle]
   :-)
