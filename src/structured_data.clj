@@ -129,20 +129,17 @@
   (filter (fn [x] (has-author? x author)) books))
 
 (defn author-by-name [name authors]
-  (filter (fn [x] (first name x)) authors))
-
-(author-by-name "Octavia E. Butler" authors)                ;=> octavia
-(author-by-name "Octavia E. Butler" #{felleisen, friedman}) ;=> nil
-(author-by-name "China Miéville" authors)                   ;=> china
-(author-by-name "Goerge R. R. Martin" authors)              ;=> nil
+  (let [f (fn [x] (= name (str (:name x))))]
+    (first(filter f authors))))
 
 (defn living-authors [authors]
-  :-)
+  (filter #(alive? %) authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter #(has-a-living-author? %) books))
+
 
 ; %________%
