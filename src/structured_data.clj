@@ -40,7 +40,9 @@
          (<= y1 py y2))))
 
 (defn contains-rectangle? [outer inner]
-  :-)
+  (let [[point1 point2] inner]
+       (and (contains-point? outer point1)
+            (contains-point? outer point2))))
 
 (defn title-length [book]
   :-)
