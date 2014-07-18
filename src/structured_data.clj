@@ -105,16 +105,29 @@
   (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (let [name (:name author)
+        year-str (if (or (:birth-year author)
+                         (:death-year author))
+                   (str " (" (:birth-year author) " - " (:death-year author ) \))
+                   "")]
+    (str name year-str)))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
-  :-)
+  (let [num-books (count books)
+        books-str (if (> num-books 0)
+                    (str (apply str (interpose ". " (map book->string books))) ".")
+                    "")
+        num-books-str (cond
+                       (= num-books 0) "No books."
+                       (= num-books 1) "1 book. "
+                       :else (str num-books " books. "))]
+    (str num-books-str books-str)))
 
 (defn books-by-author [author books]
   :-)
@@ -149,19 +162,19 @@
          (old-book->new-book {:title "The Little Schemer"
                               :authors [friedman, felleisen]}))
 
-comment
-(def china {:name "China Miéville", :birth-year 1972})
-(def octavia {:name "Octavia E. Butler"
-              :birth-year 1947
-              :death-year 2006})
-(def friedman {:name "Daniel Friedman" :birth-year 1944})
-(def felleisen {:name "Matthias Felleisen"})
+(comment 
+  (def china {:name "China Miéville", :birth-year 1972})
+  (def octavia {:name "Octavia E. Butler"
+                :birth-year 1947
+                :death-year 2006})
+  (def friedman {:name "Daniel Friedman" :birth-year 1944})
+  (def felleisen {:name "Matthias Felleisen"})
 
-(def cities {:title "The City and the City" :authors #{china}})
-(def wild-seed {:title "Wild Seed", :authors #{octavia}})
-(def embassytown {:title "Embassytown", :authors #{china}})
-(def little-schemer {:title "The Little Schemer"
-                     :authors #{friedman, felleisen}})
+  (def cities {:title "The City and the City" :authors #{china}})
+  (def wild-seed {:title "Wild Seed", :authors #{octavia}})
+  (def embassytown {:title "Embassytown", :authors #{china}})
+  (def little-schemer {:title "The Little Schemer"
+                       :authors #{friedman, felleisen}})
 
-(def books [cities, wild-seed, embassytown, little-schemer])
-(all-author-names books)
+  (def books [cities, wild-seed, embassytown, little-schemer])
+  (books->string [little-schemer, cities, wild-seed]))
