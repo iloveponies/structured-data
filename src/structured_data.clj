@@ -176,7 +176,9 @@
 ;   :else (living-authors (rest authors))))
 
 (defn living-authors [authors]
-  filter alive? authors)
+  (filter alive? authors))
+
+
 
 
 (defn has-a-living-author? [book]
