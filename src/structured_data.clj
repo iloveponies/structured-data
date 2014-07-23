@@ -68,7 +68,8 @@
          (get elm 1)) collection))
 
 (defn titles [books]
-  :-)
+  (map (fn [book]
+         (:title book)) books))
 
 (defn monotonic? [a-seq]
   :-)
