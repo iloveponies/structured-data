@@ -95,7 +95,7 @@
   (contains? (:authors book) author))
 
 (defn authors [books]
-  :-)
+  (apply clojure.set/union  (set (map :authors books))))
 
 (defn all-author-names [books]
   :-)
