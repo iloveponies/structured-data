@@ -84,7 +84,9 @@
     (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (let [test-set (set a-seq)]
+    (not (= (count a-seq)
+            (count test-set)))))
 
 (defn old-book->new-book [book]
   :-)
