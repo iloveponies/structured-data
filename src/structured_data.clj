@@ -110,7 +110,7 @@
 
 (defn authors->string [authors]
   (apply str (interpose ", " (map author->string
-                                  (:authors little-schemer)))))
+                                  authors))))
 
 (defn book->string [book]
   :-)
