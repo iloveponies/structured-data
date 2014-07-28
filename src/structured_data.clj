@@ -110,13 +110,19 @@
 
 (defn authors->string [authors]
   (apply str (interpose ", " (map author->string
-                                  (:authors little-schemer)))))
+                                  authors))))
 
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
-  :-)
+  (let [book-count (count books)
+        books-string (fn [books]
+                       (apply str (interpose ". " (map book->string books))))]
+    (if (= book-count 0)
+      "No books."
+
+      (str book-count  " book" (when (> book-count 1) "s") ". "  (books-string books) "."))))
 
 (defn books-by-author [author books]
   :-)
