@@ -125,7 +125,8 @@
       (str book-count  " book" (when (> book-count 1) "s") ". "  (books-string books) "."))))
 
 (defn books-by-author [author books]
-  :-)
+  (let [has-enclosed-author (fn [book] (has-author? book author))]
+    (filter has-enclosed-author books)))
 
 (defn author-by-name [name authors]
   :-)
