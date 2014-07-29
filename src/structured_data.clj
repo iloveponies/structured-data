@@ -129,7 +129,8 @@
     (filter has-enclosed-author books)))
 
 (defn author-by-name [name authors]
-  :-)
+  (let [has-enclosed-author (fn [author] (= (:name author) name))]
+    (first  (filter has-enclosed-author authors))))
 
 (defn living-authors [authors]
   :-)
