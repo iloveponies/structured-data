@@ -125,18 +125,20 @@
       (str book-count  " book" (when (> book-count 1) "s") ". "  (books-string books) "."))))
 
 (defn books-by-author [author books]
-  :-)
+  (let [has-enclosed-author (fn [book] (has-author? book author))]
+    (filter has-enclosed-author books)))
 
 (defn author-by-name [name authors]
-  :-)
+  (let [has-enclosed-author (fn [author] (= (:name author) name))]
+    (first  (filter has-enclosed-author authors))))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not  (empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
