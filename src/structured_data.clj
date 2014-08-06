@@ -34,11 +34,9 @@
   (* (width rectangle) (height rectangle)))
 
 (defn contains-point? [[[x1 y1] [x2 y2]] [xp yp]]
-
-  (and (< x1 xp x2) (< y1 yp y2)))
+  (and (<= x1 xp x2) (<= y1 yp y2)))
 
 (defn contains-rectangle? [rectangle [p1 p2]]
-
   (and (contains-point? rectangle p1) (contains-point? rectangle p2)))
 
 (defn title-length [book]
