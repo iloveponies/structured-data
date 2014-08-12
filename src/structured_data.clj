@@ -175,7 +175,7 @@
 (defn book->string [book]
   (let [title (:title book)
         ats (:authors book)]
- (str title ", written by " (authors->string ats)   )
+ (str title ", written by " (authors->string ats)  )
 
     )
  )
@@ -187,7 +187,7 @@
    (>  (count books) 1)
 
        (str (count books) " books. "
-            (apply str (interpose ". " (map book->string books)))
+            (apply str (interpose ". " (map book->string books))) "."
 
                    )
    )
