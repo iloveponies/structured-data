@@ -47,44 +47,54 @@
   (and (<= x1 x3 x2) (<= y1 y3 y2))))
 
 (defn contains-rectangle? [outer inner]
+  ;outer rectangle contains inner rectangle if it contains both bottom left and top right points of inner rectangle
   (let [[p1 p2] inner]
     (and (contains-point? outer p1) (contains-point? outer p2))))
 
 (defn title-length [book]
-  :-)
+  (count (:title book) ))
 
 (defn author-count [book]
-  :-)
+  (count (:authors book)))
 
 (defn multiple-authors? [book]
-  :-)
+  (> (count (:authors book)) 1))
 
 (defn add-author [book new-author]
-  :-)
+  (let [authors (:authors book)
+        new-authors (conj authors new-author)]
+    (assoc book :authors new-authors)))
 
 (defn alive? [author]
-  :-)
+  (not (contains? author :death-year)))
 
 (defn element-lengths [collection]
-  :-)
+  (map count collection))
 
 (defn second-elements [collection]
-  :-)
+  (let [get-second (fn [stuff] (get stuff 1))]
+    (map get-second collection)))
 
 (defn titles [books]
-  :-)
+  (map :title books))
 
 (defn monotonic? [a-seq]
-  :-)
+  (let [increasing (fn [seq] (apply <= seq))
+        decreasing (fn [seq] (apply >= seq))]
+    (or (increasing a-seq) (decreasing a-seq))))
 
 (defn stars [n]
-  :-)
+  (let [starseq (repeat n "*")]
+    (apply str starseq)))
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (let [a-set (set a-seq)]
+    (not (= (count a-seq) (count a-set)))))
 
 (defn old-book->new-book [book]
   :-)
