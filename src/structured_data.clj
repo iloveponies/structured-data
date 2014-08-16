@@ -114,7 +114,7 @@
           :else   (str n " books. " books \.))))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [b] (has-author? b author)) books))
 
 (defn author-by-name [name authors]
   :-)
