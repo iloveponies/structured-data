@@ -12,9 +12,8 @@
 (defn cutify [v]
   (conj v "<3"))
 
-(defn spiff-destructuring [v]
-  (let [[first _ third] v]
-    (+ first third)))
+(defn spiff-destructuring [[first _ third]]
+  (+ first third))
 
 (defn point [x y]
   [x y])
