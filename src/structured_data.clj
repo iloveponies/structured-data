@@ -20,23 +20,23 @@
 (defn rectangle [bottom-left top-right]
   [bottom-left top-right])
 
-(defn width [rectangle]
-  :-)
+(defn width [[[bx by] [tx ty]]]
+  (- tx bx))
 
-(defn height [rectangle]
-  :-)
+(defn height [[[bx by] [tx ty]]]
+  (- ty by))
 
 (defn square? [rectangle]
-  :-)
+  (= (width rectangle) (height rectangle)))
 
 (defn area [rectangle]
-  :-)
+  (* (width rectangle) (height rectangle)))
 
-(defn contains-point? [rectangle point]
-  :-)
+(defn contains-point? [[[bx by] [tx ty]] [x y]]
+  (and (<= bx x tx) (<= by y ty)))
 
-(defn contains-rectangle? [outer inner]
-  :-)
+(defn contains-rectangle? [[[bx1 by1] [tx1 ty1]] [[bx2 by2] [tx2 ty2]]]
+  (and (<= bx1 bx2) (>= tx1 tx2) (<= by1 by2) (>= ty1 ty2)))
 
 (defn title-length [book]
   :-)
