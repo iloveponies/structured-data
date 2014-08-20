@@ -39,28 +39,36 @@
   (and (<= bx1 bx2) (>= tx1 tx2) (<= by1 by2) (>= ty1 ty2)))
 
 (defn title-length [book]
-  :-)
+  (count (:title book)))
 
 (defn author-count [book]
-  :-)
+  (count (:authors book)))
 
 (defn multiple-authors? [book]
-  :-)
+  (if (> (count (:authors book)) 1)
+    true
+    false))
 
 (defn add-author [book new-author]
-  :-)
+  (let [oauth (get book :authors)
+        nauth (conj oauth new-author)
+        nbook (assoc book :authors nauth)]
+     nbook))
 
 (defn alive? [author]
-  :-)
+   (cond
+     (contains? author :death-year) false
+     :else true))
 
 (defn element-lengths [collection]
-  :-)
+  (map (fn [x] (count x)) collection))
 
 (defn second-elements [collection]
-  :-)
+  (let [secnd (fn [vect] (get vect 1))]
+     (map secnd collection)))
 
 (defn titles [books]
-  :-)
+  (map :title books))
 
 (defn monotonic? [a-seq]
   :-)
