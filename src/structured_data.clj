@@ -72,15 +72,15 @@
   (map count collection))
 
 (defn second-elements [collection]
-  (let [get-second (fn [stuff] (get stuff 1))]
+  (let [get-second (fn [xs] (get xs 1))]
     (map get-second collection)))
 
 (defn titles [books]
   (map :title books))
 
 (defn monotonic? [a-seq]
-  (let [increasing (fn [seq] (apply <= seq))
-        decreasing (fn [seq] (apply >= seq))]
+  (let [increasing (fn [xs] (apply <= xs))
+        decreasing (fn [xs] (apply >= xs))]
     (or (increasing a-seq) (decreasing a-seq))))
 
 (defn stars [n]
@@ -97,31 +97,42 @@
     (not (= (count a-seq) (count a-set)))))
 
 (defn old-book->new-book [book]
-  :-)
+  (let [new-authors (set (:authors book))]
+    (assoc book :authors new-authors)))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author))
 
 (defn authors [books]
-  :-)
+  (let [all-authors (map :authors books)]
+    (apply clojure.set/union all-authors)))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (let [author-name (:name author)
+        author-years (if (:birth-year author)
+                       (str " (" (:birth-year author) " - " (:death-year author) ")"))]
+    (str author-name author-years)))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
-  :-)
+  (let [book-count (count books)
+        book-list (apply str (interpose ". " (map book->string books)))]
+    (str (if (= 0 book-count)
+           "No books."
+           (str (if (= 1 book-count) "1 book. "
+                  (str book-count " books. ")) book-list ".")))))
+
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [book] (has-author? book author)) books))
 
 (defn author-by-name [name authors]
   :-)
