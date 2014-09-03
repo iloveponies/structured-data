@@ -124,13 +124,17 @@
  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
-  :-)
+  (let [func (fn [books] (apply str (interpose ". " (map book->string books))))
+        num (fn [n] (if (== n 1) "1 book. " (str n " books. ")))]
+    (if (empty? books) "No books." (str (num (count books)) (func books) ))))
 
+(defn func [n] (if (== n 1) "1 book." (str n " books.")))
+ 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [book] (has-author? book author)) books))
 
 (defn author-by-name [name authors]
   :-)
