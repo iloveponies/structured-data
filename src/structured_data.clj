@@ -10,7 +10,7 @@
     (+ a b)))
 
 (defn cutify [v]
-  :-)
+  (conj v "<3"))
 
 (defn spiff-destructuring [v]
   (let [[x y z] v]
@@ -39,20 +39,27 @@
     (* w h)))
 
 (defn contains-point? [rectangle point]
-  (let [[p1 p2] point]
-    (println (p1 + ", " + p2))))
+  (let [[p1 p2] point
+        [[x1 y1][x2 y2]] rectangle]
+    (if (and (>= x2 p1 x1) (>= y2 p2 y1)) true false)))
 
 (defn contains-rectangle? [outer inner]
-  :-)
+  (let [[[x1 y1][x2 y2]] inner]
+    (if (and (contains-point? outer (point x1 y1))
+             (contains-point? outer (point x1 y2))
+             (contains-point? outer (point x2 y1))
+             (contains-point? outer (point x2 y2)))
+      true false)))
+
 
 (defn title-length [book]
-  :-)
+  (count (:title book)))
 
 (defn author-count [book]
-  :-)
+  (count (:authors book)))
 
 (defn multiple-authors? [book]
-  :-)
+  (if (= (author-count book) 1) false true))
 
 (defn add-author [book new-author]
   :-)
