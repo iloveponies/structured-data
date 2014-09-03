@@ -62,7 +62,9 @@
   (if (= (author-count book) 1) false true))
 
 (defn add-author [book new-author]
-  :-)
+  (let [original (:auhtors book)
+        new (conj original new-author)]
+  (assoc book :auhtors new)))
 
 (defn alive? [author]
   :-)
