@@ -127,7 +127,7 @@
 (defn books->string [books]
   (let [func (fn [books] (apply str (interpose ". " (map book->string books))))
         num (fn [n] (if (== n 1) "1 book. " (str n " books. ")))]
-    (if (empty? books) "No books." (str (num (count books)) (func books) ))))
+    (if (empty? books) "No books." (str (num (count books)) (func books) "."))))
 
 (defn func [n] (if (== n 1) "1 book." (str n " books.")))
  
