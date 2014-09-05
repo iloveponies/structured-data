@@ -107,7 +107,8 @@
     (:name author)))
 
 (defn authors->string [authors]
-  :-)
+  (let [author-strings (map author->string authors)]
+    (apply str (interpose ", " author-strings))))
 
 (defn book->string [book]
   :-)
