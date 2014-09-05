@@ -126,7 +126,9 @@
         (str (count books) " books. " books-string "."))))
 
 (defn books-by-author [author books]
-  :-)
+  (let [by-author (fn [book]
+                    (contains? (:authors book) author))]
+    (filter by-author books)))
 
 (defn author-by-name [name authors]
   :-)
