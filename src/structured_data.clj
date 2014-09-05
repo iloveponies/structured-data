@@ -131,7 +131,9 @@
     (filter by-author books)))
 
 (defn author-by-name [name authors]
-  :-)
+  (let [by-name (fn [author]
+                  (= (:name author) name))]
+    (first (filter by-name authors))))
 
 (defn living-authors [authors]
   :-)
