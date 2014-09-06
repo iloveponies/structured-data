@@ -99,7 +99,7 @@
     (if byear (str name " (" byear " - " dyear ")") name)))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
   :-)
