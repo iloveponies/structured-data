@@ -50,7 +50,7 @@
   (count (:authors book)))
 
 (defn multiple-authors? [book]
-  :-)
+  (if (> 1 (author-count book)) true false))
 
 (defn add-author [book new-author]
   :-)
