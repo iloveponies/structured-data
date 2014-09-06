@@ -32,7 +32,7 @@
   (if (== (height rectangle) (width rectangle)) true false))
 
 (defn area [rectangle]
-  :-)
+  (* (height rectangle) (width rectangle)))
 
 (defn contains-point? [rectangle point]
   :-)
