@@ -84,7 +84,7 @@
   (assoc book :authors (set (:authors book))))
 
 (defn has-author? [book author]
-  (contains? author (:authors book)))
+  (contains? (:authors book) author))
 
 (defn authors [books]
   (apply clojure.set/union (map :authors books)))
