@@ -50,7 +50,7 @@
   (count (:authors book)))
 
 (defn multiple-authors? [book]
-  (if (> 1 (author-count book)) true false))
+  (not (== 1 (author-count book))))
 
 (defn add-author [book new-author]
   (assoc book :authors (conj (:authors book) new-author)))
