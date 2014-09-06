@@ -44,7 +44,7 @@
     (if (and (contains-point? outer ipoint1) (contains-point? outer ipoint2)) true false)))
 
 (defn title-length [book]
-  :-)
+  (count (:title book)))
 
 (defn author-count [book]
   :-)
