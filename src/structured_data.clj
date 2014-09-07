@@ -115,7 +115,9 @@
   (filter (fn [x] (has-author? x author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (let [result (filter (fn [x] (= (:name x) name)) authors)]
+    (first result))
+  )
 
 (defn living-authors [authors]
   :-)
