@@ -52,7 +52,7 @@
   (count (:authors book)))
 
 (defn multiple-authors? [book]
-  (> 1 (author-count book)))
+  (< 1 (author-count book)))
 
 (defn add-author [book new-author]
   (let [authors (conj (:authors book) new-author)]
@@ -62,63 +62,89 @@
   (not (:death-year author)))
 
 (defn element-lengths [collection]
-  :-)
+  (map count collection))
 
 (defn second-elements [collection]
-  :-)
+  (map second collection))
 
 (defn titles [books]
-  :-)
+  (map :title books))
 
 (defn monotonic? [a-seq]
-  :-)
+  (or 
+   (apply <= a-seq)
+   (apply >= a-seq)))
 
 (defn stars [n]
-  :-)
+  (apply str
+         (repeat n "*")))
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (let [seq-length (count a-seq)
+        set-length (count (set a-seq))]
+    (not (== seq-length set-length))))
 
 (defn old-book->new-book [book]
-  :-)
+  (assoc book :authors (set (:authors book))))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (set (:authors book)) author))
 
 (defn authors [books]
-  :-)
+  (apply clojure.set/union (map :authors books)))
 
 (defn all-author-names [books]
-  :-)
+  (let [all-authors (authors books)]
+    (set (map :name all-authors))))
 
 (defn author->string [author]
-  :-)
+  (let [name (:name author)
+        birth-year (:birth-year author)
+        death-year (:death-year author)
+        years (if birth-year
+                (str " (" birth-year " - " death-year ")")
+                "")]
+    (str name years))) 
 
 (defn authors->string [authors]
-  :-)
+  (apply str 
+         (interpose ", "
+                    (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (apply str
+         (interpose ", "
+                    [(:title book)
+                    (str "written by " (authors->string (:authors book)))])))
 
 (defn books->string [books]
-  :-)
+  (let [all-books (apply str (interpose ". " (map book->string books) ))
+        num-of-books (cond 
+                      (== (count books) 0) "No books"
+                      (== (count books) 1) "1 book. "
+                      :else (str (count books) " books. "))]
+        (str num-of-books all-books ".")))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [book] (has-author? book author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter 
+          (fn [auth] (= name (:name auth))) 
+          authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
