@@ -1,0 +1,144 @@
+(defn author->string [author]
+  (let [name (author :name)
+        {birth-year :birth-year death-year :death-year} author]
+    (str name (if birth-year (str "(" birth-year " - " death-year ")") ""))))
+(author->string {:name "Michael Gilliland"})
+(author->string {:name "Michael Gilliland" :birth-year 1992})
+(author->string {:name "Michael Gilliland" :birth-year 1992 :death-year 1234})
+(defn author->string [author]
+  (let [name (author :name)
+        {birth-year :birth-year death-year :death-year} author]
+    (str name (if birth-year (str " (" birth-year " - " death-year ")") ""))))
+(defn authors->string [authors]
+  (apply str (interpose ", " (author->string authors))))
+(def me {:name "Michael Gilliland" :birth-year 1992})
+(author->string me)
+(def you {:name "Abbey Gilliland" :birth-year 1992})
+(authors->string #{me you})
+(defn books->string [books]
+  (let [n-books (count books)]
+    (if (= n-books 0)
+      "No books."
+      (str n-books (if (= n-books 1) " book." " books.") (apply str (interpose ". " (authors->string)))))))
+(def china {:name "China Miéville", :birth-year 1972})
+(def octavia {:name "Octavia E. Butler"
+              :birth-year 1947
+              :death-year 2006})
+(def friedman {:name "Daniel Friedman" :birth-year 1944})
+(def felleisen {:name "Matthias Felleisen"})
+(def cities {:title "The City and the City" :authors #{china}})
+(def wild-seed {:title "Wild Seed", :authors #{octavia}})
+(def embassytown {:title "Embassytown", :authors #{china}})
+(def little-schemer {:title "The Little Schemer"
+                     :authors #{friedman, felleisen}})
+(def books [cities, wild-seed, embassytown, little-schemer])
+(book->string little-schemer)
+(defn book->string [book]
+  (str (book :title) ", written by " (authors->string (book :authors))))
+(books->string [])
+(books->string [cities])
+(defn authors [books]
+  (apply clojure.set/union (map :authors books)))
+(defn all-author-names [books]
+  (set (map :name (authors books))))
+(defn author->string [author]
+  (let [name (author :name)
+        {birth-year :birth-year death-year :death-year} author]
+    (str name (if birth-year (str " (" birth-year " - " death-year ")") ""))))
+(defn authors->string [authors]
+  (apply str (interpose ", " (map author->string authors))))
+(defn book->string [book]
+  (str (book :title) ", written by " (authors->string (book :authors))))
+(defn books->string [books]
+  (let [n-books (count books)]
+    (if (= n-books 0)
+      "No books."
+      (str n-books (if (= n-books 1) " book." " books.") (apply str (interpose ". " (authors->string)))))))
+(books->string [cities])
+(defn authors [books]
+  (apply clojure.set/union (map :authors books)))
+(defn all-author-names [books]
+  (set (map :name (authors books))))
+(defn author->string [author]
+  (let [name (author :name)
+        {birth-year :birth-year death-year :death-year} author]
+    (str name (if birth-year (str " (" birth-year " - " death-year ")") ""))))
+(defn authors->string [authors]
+  (apply str (interpose ", " (map author->string authors))))
+(defn book->string [book]
+  (str (book :title) ", written by " (authors->string (book :authors))))
+(defn books->string [books]
+  (let [n-books (count books)]
+    (if (= n-books 0)
+      "No books."
+      (str n-books (if (= n-books 1) " book. " " books. ") (apply str (interpose ". " (map #(authors->string (% :authors)) books)))))))
+(defn books->string [books]
+)
+(defn authors [books]
+  (apply clojure.set/union (map :authors books)))
+(defn all-author-names [books]
+  (set (map :name (authors books))))
+(defn author->string [author]
+  (let [name (author :name)
+        {birth-year :birth-year death-year :death-year} author]
+    (str name (if birth-year (str " (" birth-year " - " death-year ")") ""))))
+(defn authors->string [authors]
+  (apply str (interpose ", " (map author->string authors))))
+(defn book->string [book]
+  (str (book :title) ", written by " (authors->string (book :authors))))
+(defn books->string [books]
+  (let [n-books (count books)]
+    (if (= n-books 0)
+      "No books."
+      (str n-books (if (= n-books 1) " book. " " books. ") (apply str (interpose ". " (map #(authors->string (% :authors)) books)))))))
+(books->string [cities])
+(defn authors [books]
+  (apply clojure.set/union (map :authors books)))
+(defn all-author-names [books]
+  (set (map :name (authors books))))
+(defn author->string [author]
+  (let [name (author :name)
+        {birth-year :birth-year death-year :death-year} author]
+    (str name (if birth-year (str " (" birth-year " - " death-year ")") ""))))
+(defn authors->string [authors]
+  (apply str (interpose ", " (map author->string authors))))
+(defn book->string [book]
+  (str (book :title) ", written by " (authors->string (book :authors))))
+(defn books->string [books]
+  (let [n-books (count books)]
+    (if (= n-books 0)
+      "No books."
+      (str n-books (if (= n-books 1) " book. " " books. ") (interpose ". " (map book->string books))))))
+(books->string [])
+(books->string [cities])
+(defn authors [books]
+  (apply clojure.set/union (map :authors books)))
+(defn all-author-names [books]
+  (set (map :name (authors books))))
+(defn author->string [author]
+  (let [name (author :name)
+        {birth-year :birth-year death-year :death-year} author]
+    (str name (if birth-year (str " (" birth-year " - " death-year ")") ""))))
+(defn authors->string [authors]
+  (apply str (interpose ", " (map author->string authors))))
+(defn book->string [book]
+  (str (book :title) ", written by " (authors->string (book :authors))))
+(defn books->string [books]
+  (let [n-books (count books)]
+    (if (= n-books 0)
+      "No books."
+      (str n-books (if (= n-books 1) " book. " " books. ") (apply str (interpose ". " (map book->string books)))))))
+(books->string [cities])
+(books->string [little-schemer, cities, wild-seed])
+(defn books->string [books]
+  (let [n-books (count books)]
+    (if (= n-books 0)
+      "No books."
+      (str n-books (if (= n-books 1) " book. " " books. ") (apply str (interpose ". " (map book->string books)))))) ".")
+(books->string [little-schemer, cities, wild-seed])
+(defn books->string [books]
+  (let [n-books (count books)]
+    (if (= n-books 0)
+      "No books."
+      (str n-books (if (= n-books 1) " book. " " books. ") (apply str (interpose ". " (map book->string books))) "."))))
+(books->string [little-schemer, cities, wild-seed])
