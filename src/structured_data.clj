@@ -23,22 +23,31 @@
   [bottom-left top-right])
 
 (defn width [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (- x2 x1)))
 
 (defn height [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (- y2 y1)))
 
 (defn square? [rectangle]
-  :-)
+  (= (height rectangle) (width rectangle)))
 
 (defn area [rectangle]
-  :-)
+  (* (width rectangle) (height rectangle)))
 
 (defn contains-point? [rectangle point]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle
+        [xp yp] point]
+    (and
+       (<= x1 xp x2)
+       (<= y1 yp y2))))
 
 (defn contains-rectangle? [outer inner]
-  :-)
+  (let [[pi1 pi2] inner]
+    (and
+       (contains-point? outer pi1)
+       (contains-point? outer pi2))))
 
 (defn title-length [book]
   :-)
