@@ -56,10 +56,13 @@
   (count (:authors book)))
 
 (defn multiple-authors? [book]
-  (< 0 (author-count book)))
+  (< 1 (author-count book)))
 
 (defn add-author [book new-author]
-  :-)
+  (assoc book
+    :authors
+    (conj
+      (:authors book) new-author)))
 
 (defn alive? [author]
   :-)
