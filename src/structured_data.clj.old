@@ -1,0 +1,141 @@
+(ns structured-data)
+
+(defn do-a-thing [x]
+  (let [xx (+ x x)]
+    (Math/pow xx xx)))
+
+(defn spiff [v]
+  (+ (get v 0) (get v 2)))
+
+(defn cutify [v]
+  (conj v "<3"))
+
+(defn spiff-destructuring [[a b c]]
+    (+ a c))
+
+(defn point [x y]
+  [x y])
+
+(defn rectangle [bottom-left top-right]
+  [bottom-left top-right])
+
+(defn width [rectangle]
+  (let [[[x1] [x2]] rectangle]
+    (Math/abs (- x1 x2))))
+
+(defn height [rectangle]
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (Math/abs (- y1 y2))))
+
+(defn square? [rectangle]
+  (= (height rectangle) (width rectangle)))
+
+(defn area [rectangle]
+  (* (height rectangle) (width rectangle)))
+
+(defn contains-point? [rectangle point]
+  (let [[[x y] [x2 y2]] rectangle]
+    (let [[px py] point]
+      (if 
+        (and
+          (<= x px x2)
+          (<= y py y2))
+        true
+        false))))
+
+(defn contains-rectangle? [outer inner]
+  (let [[p1 p2] inner]
+    (and (contains-point? outer p1) (contains-point? outer p2))))
+
+(defn title-length [book]
+  (count (:title book)))
+
+(defn author-count [book]
+  (count (:authors book)))
+
+(defn multiple-authors? [book]
+  (> (author-count book) 1))
+
+(defn add-author [book new-author]
+  (let [a (:authors book)]
+    (assoc book :authors (assoc a (count a) new-author))))
+
+(defn alive? [author]
+  (boolean (:death-year author)))
+
+(defn element-lengths [collection]
+  :-)
+
+(defn second-elements [collection]
+  :-)
+
+(defn titles [books]
+  (map (fn [book] (:title book)) books))
+
+(defn monotonic? [a-seq]
+  (apply <= a-seq))
+
+(defn stars [n]
+  (apply str (repeat n "*")))
+
+(defn toggle [a-set elem]
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)))
+
+(defn contains-duplicates? [a-seq]
+  (= (set a-seq) a-seq))
+
+(defn old-book->new-book [book]
+  (assoc book :authors (set (:authors book))))
+
+(defn has-author? [book author]
+  (contains? (:authors book) author))
+
+(defn authors [books]
+  (apply clojure.set/union (map (fn [book] (:authors book)) books)))
+
+(defn all-author-names [books]
+  (set (:name (authors books))))
+
+(defn author->string [author]
+  (str (:name author)
+       (if (:birth-year author)
+         (str " (" (:birth-year author) " - ")
+         "")
+       (if (:death-year author)
+         (str (:death-year author))
+         "")
+       (if (:birth-year author)
+         (str ")"))))
+
+(defn authors->string [authors]
+  (apply str (interpose ", " (map author->string authors))))
+
+(defn book->string [book]
+  (str (:title book) ", written by " (authors->string (:authors book))))
+
+(defn books->string [books]
+  (str
+    (count books) 
+    (if (> (count books) 1)
+      " books. "
+      " book. ")
+    (str (map book->string books))))
+
+(defn books-by-author [author books]
+  :-)
+
+(defn author-by-name [name authors]
+  :-)
+
+(defn living-authors [authors]
+  :-)
+
+(defn has-a-living-author? [book]
+  :-)
+
+(defn books-by-living-authors [books]
+  :-)
+
+; %________%
