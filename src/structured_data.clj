@@ -38,20 +38,27 @@
 (defn area [rectangle]
   (* (width rectangle) (height rectangle)))
 
-(defn contains-point? [rectangle point]
-  :-)
+(defn contains-point?
+  [[[x1 y1] [x2 y2]] ; rect
+   [x y]]           ;point
+  (and (<= x1 x x2) (<= y1 y y2)))
 
-(defn contains-rectangle? [outer inner]
-  :-)
+(defn contains-rectangle? [
+    outer ; outer rect
+    [tl br]] ; inner rect
+  (and (contains-point? outer tl)
+       (contains-point? outer br)))
 
 (defn title-length [book]
-  :-)
+  (let [title (:title book)]
+    (count title)))
 
 (defn author-count [book]
-  :-)
+  (let [authors (:authors book)]
+    (count authors)))
 
 (defn multiple-authors? [book]
-  :-)
+  (< 1 (count (:authors book))))
 
 (defn add-author [book new-author]
   :-)
