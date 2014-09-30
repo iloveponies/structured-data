@@ -78,7 +78,7 @@
   (map :title books))
 
 (defn monotonic? [a-seq]
-  (apply <= a-seq))
+  (or (apply <= a-seq) (apply >= a-seq)))
 
 (defn stars [n]
   (let [rep (repeat n "*")]
@@ -93,7 +93,7 @@
   (not= (count a-seq) (count (set a-seq))))
 
 (defn old-book->new-book [book]
-  (assoc book :authors (set (:authors book)))
+  (assoc book :authors (set (:authors book))))
 
 (defn has-author? [book author]
   (contains? (:authors book) author))
@@ -104,7 +104,7 @@
 
 
 (defn all-author-names [books]
-  (map :name (authors books)))
+  (set (map :name (authors books))))
 
 (defn author->string [author]
   (let [name (:name author)
@@ -113,7 +113,7 @@
         yobyod (
                 if (or yob yod)
                  (str " (" yob " - " yod ")"))]
-    (str name yobyod))
+    (str name yobyod)))
 
 (defn authors->string [authors]
   (apply str (interpose ", " (map author->string authors))))
@@ -133,18 +133,24 @@
     (str result ".")))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [book] (has-author? book author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (let [found
+        (filter (fn [author] (= (:name author) name)) authors)]
+
+    (if (first found)
+      (first found)
+      nil)))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty?
+        (filter alive? (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
