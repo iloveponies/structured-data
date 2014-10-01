@@ -22,7 +22,7 @@
 
 (defn width [rectangle]
   (let [[[x1 _] [x2 _]] rectangle]
-  	(- x2 x1)))
+    (- x2 x1)))
 
 (defn height [rectangle]
   (let [[[_ y1] [_ y2]] rectangle]
@@ -36,13 +36,13 @@
 
 (defn contains-point? [rectangle point]
   (let [[[x1 y1] [x2 y2]] rectangle
-		[px py] point]
-	(and (<= x1 px x2) (<= y1 py y2))))
+        [px py] point]
+    (and (<= x1 px x2) (<= y1 py y2))))
 
 (defn contains-rectangle? [outer inner]
   (let [[[ix1 iy1] [ix2 iy2]] inner
-		[[ox1 oy1] [ox2 oy2]] outer]
-	(and (<= ox1 ix1 ix2 ox2) (<= oy1 iy1 iy2 oy2))))
+        [[ox1 oy1] [ox2 oy2]] outer]
+    (and (<= ox1 ix1 ix2 ox2) (<= oy1 iy1 iy2 oy2))))
 
 (defn title-length [book]
   (count (:title book)))
@@ -55,7 +55,7 @@
 
 (defn add-author [book new-author]
   (let [authors (:authors book)]
-	(assoc book :authors (conj authors new-author))))
+    (assoc book :authors (conj authors new-author))))
 
 (defn alive? [author]
   (not (contains? author :death-year)))
@@ -77,8 +77,8 @@
 
 (defn toggle [a-set elem]
   (if (contains? a-set elem)
-	  (disj a-set elem)
-	  (conj a-set elem)))
+    (disj a-set elem)
+    (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
   (> (count a-seq) (count (set a-seq))))
@@ -97,10 +97,10 @@
 
 (defn author->string [author]
   (let [years
-		(if (contains? author :birth-year)
-		  	(str " (" (:birth-year author) " - " (:death-year author) ")")
-		  	"")]
-  	(str (:name author) years)))
+        (if (contains? author :birth-year)
+          (str " (" (:birth-year author) " - " (:death-year author) ")")
+          "")]
+    (str (:name author) years)))
 
 (defn authors->string [authors]
   (apply str (interpose ", "(map author->string authors))))
@@ -110,21 +110,21 @@
 
 (defn books->string [books]
   (let [bookCounted (count books)
-		firstStr
-		(cond
-		 (= bookCounted 0) 	"No books"
-		 (= bookCounted 1) 	"1 book. "
-		 :else				(str bookCounted " books. "))]
-  (str firstStr (apply str (interpose ". " (map book->string books))) ".")))
+        firstStr
+        (cond
+         (= bookCounted 0) 	"No books"
+         (= bookCounted 1) 	"1 book. "
+         :else				(str bookCounted " books. "))]
+    (str firstStr (apply str (interpose ". " (map book->string books))) ".")))
 
 (defn books-by-author [author books]
   (filter (fn [x] (has-author? x author)) books))
 
 (defn author-by-name [name authors]
   (let [result (filter (fn [x] (= name (:name x))) authors)]
-	(if (seq result)
-		(into (hash-map) result)
-		nil)))
+    (if (seq result)
+      (into (hash-map) result)
+      nil)))
 
 (defn living-authors [authors]
   (filter alive? authors))
