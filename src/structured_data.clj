@@ -181,7 +181,7 @@
 (defn stars [n]
 
 
-  (apply str (repeat 5 "*"))
+  (apply str (repeat n "*"))
 
   )
 
@@ -253,7 +253,7 @@
 
 
   (cond
-     (and (contains? author :birth-year)  (contains? author :death-year)) (str (:name author) "(" (:birth-year author) " - " (:death-year author) ")")
+     (and (contains? author :birth-year)  (contains? author :death-year)) (str (:name author) " (" (:birth-year author) " - " (:death-year author) ")")
      (contains? author :birth-year) (str (:name author) " (" (:birth-year author)  " - )")
      :else
      (str (:name author))
