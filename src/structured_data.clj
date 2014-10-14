@@ -58,7 +58,7 @@
 
   )
 
-(width (rectangle [1 1] [1 1]))
+
 
 (defn square? [rectangle]
 
@@ -123,9 +123,6 @@
 
 
 
-(multiple-authors? cities)         ;=> false
-(multiple-authors? wild-seed)      ;=> false
-(multiple-authors? little-schemer) ;=> true
 
 (defn add-author [book new-author]
 
@@ -164,20 +161,7 @@
 
   )
 
-(def china {:name "China Miéville", :birth-year 1972})
-(def octavia {:name "Octavia E. Butler"
-              :birth-year 1947
-              :death-year 2006})
-(def friedman {:name "Daniel Friedman" :birth-year 1944})
-(def felleisen {:name "Matthias Felleisen"})
 
-(def cities {:title "The City and the City" :authors [china]})
-(def wild-seed {:title "Wild Seed", :authors [octavia]})
-(def embassytown {:title "Embassytown", :authors [china]})
-(def little-schemer {:title "The Little Schemer"
-                     :authors [friedman, felleisen]})
-
-(def books [cities, wild-seed, embassytown, little-schemer])
 
 (defn titles [books]
 
@@ -202,48 +186,149 @@
   )
 
 (defn toggle [a-set elem]
-  :-)
+
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)
+    )
+
+  )
+
 
 (defn contains-duplicates? [a-seq]
-  :-)
+   (< (count (set a-seq)) (count a-seq))
+  )
 
 (defn old-book->new-book [book]
-  :-)
+
+  (let
+    [authors (:authors book)]
+    (assoc book :authors (set authors))
+    )
+
+  )
+
+
 
 (defn has-author? [book author]
-  :-)
+
+  (contains? (:authors book) author)
+
+  )
+
+
+
 
 (defn authors [books]
-  :-)
+
+
+
+  (
+
+   apply clojure.set/union
+   (map (fn [book] (:authors book)) books)
+
+
+   )
+
+
+  )
+    ;=> #{china, friedman, felleisen}
+
+
 
 (defn all-author-names [books]
-  :-)
+
+  (
+
+   set (map (fn [author] (:name author)) (authors books) )
+
+   )
+
+  )
+
+
 
 (defn author->string [author]
-  :-)
+
+
+  (cond
+     (and (contains? author :birth-year)  (contains? author :death-year)) (str (:name author) "(" (:birth-year author) " - " (:death-year author) ")")
+     (contains? author :birth-year) (str (:name author) " (" (:birth-year author)  " - )")
+     :else
+     (str (:name author))
+   )
+)
+
 
 (defn authors->string [authors]
-  :-)
+
+  (apply str (interpose ", " (map author->string authors)))
+
+  )
+
 
 (defn book->string [book]
-  :-)
+
+  (str (:title book) ", written by " (authors->string (:authors book)))
+
+  )
+
+
 
 (defn books->string [books]
-  :-)
+
+  (let
+
+    [found (map book->string books)
+     cnt (count found)
+     ]
+
+    (cond (== 0 cnt) "No books."
+        (== 1 cnt) (str "1 book. " (apply str (interpose ". " found)) ".")
+        (< 1 cnt) (str  cnt " books. " (apply str (interpose ". " found)) ".")
+      )
+
+
+    )
+
+)
+
 
 (defn books-by-author [author books]
-  :-)
+
+  (filter (fn [book] (contains? (:authors book) author)) books)
+
+  )
+
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [author] (= name (:name author))) authors)
+  )
+)
+
+
 
 (defn living-authors [authors]
-  :-)
+
+  (filter alive? authors)
+
+  )
+
 
 (defn has-a-living-author? [book]
-  :-)
+
+  (not (empty? (living-authors (:authors book))))
+
+  )
+
 
 (defn books-by-living-authors [books]
-  :-)
+
+  (filter has-a-living-author? books)
+
+  )
+
+
 
 ; %________%
