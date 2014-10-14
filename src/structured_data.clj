@@ -121,7 +121,8 @@
 )
 
 (defn has-author? [book author]
-  (contains? (:authors old-book->new-book book) author)
+  ;;(contains? (:authors old-book->new-book book) author)
+  (contains? (:authors book) author)
    )
 
 (defn authors [books]
@@ -139,7 +140,7 @@
                   (if (contains? author :death-year)
                     (str(:death-year author)) 
                   )
-                " )")
+                ")")
                 )
               )
         ]
@@ -190,13 +191,17 @@
   )
 
 (defn books-by-author [author books]
-  (filter  (has-author? books author) books)
-    
-  )
+  (filter  #(has-author? % author) books)
+   )
 
 
 (defn author-by-name [name authors]
-  :-)
+  (filter #(= 
+    (first (clojure.string/lower-case (:name %)))
+     name) 
+      authors 
+      )
+  )
 
 (defn living-authors [authors]
   :-)
