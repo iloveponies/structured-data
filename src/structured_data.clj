@@ -196,11 +196,11 @@
 
 
 (defn author-by-name [name authors]
-  (filter #(= 
-    (first (clojure.string/lower-case (:name %)))
-     name) 
+  (first (filter #(= 
+     (:name %) name)
       authors 
       )
+    )
   )
 
 (defn living-authors [authors]
