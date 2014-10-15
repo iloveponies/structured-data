@@ -159,55 +159,36 @@
   (apply str(interpose ", " (map author->string authors)))
   )
 
-;(defn book->string [book]
-;    (let [book-title (apply str (concat (str (:title book)) ", written by "))
-;          author-string (authors->string (:authors book))]
-;          (apply str 
-;                 (concat 
-;                   (str book-title) 
-;                   (str author-string) 
-;                   )
-;                 )
-;      )
-;  )
-
-;gillis
-
 (defn book->string [book]
-(str (book :title) ", written by " (authors->string (book :authors))))
+  (let [book-title (str (:title book) ", written by ") 
+       author-string (authors->string (:authors book))]
+       (str book-title author-string)))
 
-;(defn books->string [books]
-;  (let [book-count
-;        (if (= 0 (count books)) "No books."
-;          (if (= 1 (count books)) "1 book."
-;            (apply str (concat (str (count books) " books. ")))
-;        ))
-;        ]
-;    (if (> (count books) 0 )
-;      (apply str
-;        
-;          (concat 
-;            (str book-count) 
-;              " "
-;              (apply str 
-;                     (interpose ". " 
-;                                (map book->string books)
-;                        )
-;                ) "."
-;            )   
-;        )
-;         (str book-count) 
-;      )
-;    )
-;  )
+;gillis
+
+;(defn book->string [book]
+;(str (book :title) ", written by " (authors->string (book :authors))))
+
+(defn books->string [books]
+  (let [book-count
+        (if (= 0 (count books)) "No books."
+          (if (= 1 (count books)) "1 book. "
+            (str (count books) " books. ")))
+        ]
+    (if (> (count books) 0 )
+      (apply str book-count (apply str (interpose ". " (map book->string books))) ".")
+      (str book-count) 
+      )
+    )
+  )
 
 
 ;gillis
-(defn books->string [books]
-(let [n-books (count books)]
-(if (= n-books 0)
-"No books."
-(str n-books (if (= n-books 1) " book. " " books. ") (apply str (interpose ". " (map book->string books))) "."))))
+;(defn books->string [books]
+;(let [n-books (count books)]
+;(if (= n-books 0)
+;"No books."
+;(str n-books (if (= n-books 1) " book. " " books. ") (apply str (interpose ". " (map book->string books))) "."))))
 
 
 (defn books-by-author [author books]
