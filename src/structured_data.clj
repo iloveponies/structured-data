@@ -133,62 +133,82 @@
    (set (map :name (authors books)))
 )
 
+;(defn author->string [author]
+;  (let [authorname (:name author)
+;        years (if (contains? author :birth-year) 
+;                (apply str(concat " (" (str(:birth-year author)) " - "
+;                  (if (contains? author :death-year)
+;                    (str(:death-year author)) 
+;                  )
+;                ")")
+;                )
+;              )
+;        ]
+;        (apply str(concat authorname years))
+;      )
+;  )
+
+;gillis
 (defn author->string [author]
-  (let [authorname (:name author)
-        years (if (contains? author :birth-year) 
-                (apply str(concat " (" (str(:birth-year author)) " - "
-                  (if (contains? author :death-year)
-                    (str(:death-year author)) 
-                  )
-                ")")
-                )
-              )
-        ]
-        (apply str(concat authorname years))
-      )
-  )
+  (let [name (author :name)
+    {birth-year :birth-year death-year :death-year} author]
+      (str name (if birth-year (str " (" birth-year " - " death-year ")") ""))))
         
               
 (defn authors->string [authors]
   (apply str(interpose ", " (map author->string authors)))
   )
 
-(defn book->string [book]
-    (let [book-title (apply str (concat (str (:title book)) ", written by "))
-          author-string (authors->string (:authors book))]
-          (apply str 
-                 (concat 
-                   (str book-title) 
-                   (str author-string) 
-                   )
-                 )
-      )
-  )
+;(defn book->string [book]
+;    (let [book-title (apply str (concat (str (:title book)) ", written by "))
+;          author-string (authors->string (:authors book))]
+;          (apply str 
+;                 (concat 
+;                   (str book-title) 
+;                   (str author-string) 
+;                   )
+;                 )
+;      )
+;  )
 
+;gillis
+
+(defn book->string [book]
+(str (book :title) ", written by " (authors->string (book :authors))))
+
+;(defn books->string [books]
+;  (let [book-count
+;        (if (= 0 (count books)) "No books."
+;          (if (= 1 (count books)) "1 book."
+;            (apply str (concat (str (count books) " books. ")))
+;        ))
+;        ]
+;    (if (> (count books) 0 )
+;      (apply str
+;        
+;          (concat 
+;            (str book-count) 
+;              " "
+;              (apply str 
+;                     (interpose ". " 
+;                                (map book->string books)
+;                        )
+;                ) "."
+;            )   
+;        )
+;         (str book-count) 
+;      )
+;    )
+;  )
+
+
+;gillis
 (defn books->string [books]
-  (let [book-count
-        (if (= 0 (count books)) "No books."
-          (if (= 1 (count books)) "1 book."
-            (apply str (concat (str (count books) " books. ")))
-        ))
-        ]
-    (if (> (count books) 0 )
-      (apply str
-        
-          (concat 
-            (str book-count) 
-              " "
-              (apply str 
-                     (interpose ". " 
-                                (map book->string books)
-                        )
-                ) "."
-            )   
-        )
-         (str book-count) 
-      )
-    )
-  )
+(let [n-books (count books)]
+(if (= n-books 0)
+"No books."
+(str n-books (if (= n-books 1) " book. " " books. ") (apply str (interpose ". " (map book->string books))) "."))))
+
 
 (defn books-by-author [author books]
   (filter  #(has-author? % author) books)
@@ -204,12 +224,16 @@
   )
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors)
+  )
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (:authors book)))
+    )
+  )
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books)
+  )
 
 ; %________%
