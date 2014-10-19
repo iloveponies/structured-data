@@ -40,46 +40,50 @@
   (if (and (<= x1 p1 x2) (<= y1 p2 y2)) true false)))
 
 (defn contains-rectangle? [outer inner]
-  :-)
+  (let [[[xo1 yo1] [xo2 yo2]] outer
+       [[xi1 yi1] [xi2 yi2]] inner]
+  (if (and (contains-point? outer (point xi1 yi1)) (contains-point? outer (point xi1 yi2))) true false)))
 
 (defn title-length [book]
-  :-)
+  (count (:title book)))
 
 (defn author-count [book]
-  :-)
+  (count (:authors book)))
 
 (defn multiple-authors? [book]
-  :-)
+  (> (author-count book) 1))
 
 (defn add-author [book new-author]
-  :-)
+  (let [origauthors (:authors book)]
+  (assoc book :authors (conj origauthors new-author))))
 
 (defn alive? [author]
-  :-)
+  (not (contains? author :death-year)))
 
 (defn element-lengths [collection]
-  :-)
+  (map count collection))
 
 (defn second-elements [collection]
-  :-)
+  (let [getsecond (fn [x] (get x 1))]
+    (map getsecond collection)))
 
 (defn titles [books]
-  :-)
+  (map :title books))
 
 (defn monotonic? [a-seq]
-  :-)
+  (or (apply <= a-seq) (apply >= a-seq)))
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*")))
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem) (disj a-set elem) (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (> (count a-seq) (count (set a-seq))))
 
 (defn old-book->new-book [book]
-  :-)
+  (assoc book :authors (set (:authors book))))
 
 (defn has-author? [book author]
   :-)
