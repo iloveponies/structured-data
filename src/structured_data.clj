@@ -133,12 +133,14 @@
 (authors [cities, wild-seed, embassytown]) ;=> #{china, octavia}
 (authors [little-schemer, cities])
 
-
 (defn all-author-names [books]
     (authors books))
 
 (defn author->string [author]
-  :-)
+  (let [{name :name birth :birth-year death :death-year } author]
+    (if (= birth nil )
+      (str name)
+      (str name " (" birth " - " death ")"))))
 
 (defn authors->string [authors]
   :-)
