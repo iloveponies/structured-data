@@ -129,10 +129,6 @@
   (let [book-author (fn [book] (set (map :name (:authors book))))]
     (apply clojure.set/union (map book-author books))))
 
-(authors [cities, wild-seed])              ;=> #{china, octavia}
-(authors [cities, wild-seed, embassytown]) ;=> #{china, octavia}
-(authors [little-schemer, cities])
-
 (defn all-author-names [books]
     (authors books))
 
@@ -142,10 +138,6 @@
       (str name)
       (str name " (" birth " - " death ")"))))
 
-(author->string felleisen) ;=> "Matthias Felleisen"
-(author->string friedman)  ;=> "Daniel Friedman (1944 - )"
-(author->string octavia)   ;=> "Octavia E. Butler (1947 - 2006)"
-
 (defn authors->string [authors]
   (apply str ( interpose ", " (map author->string authors))))
 
@@ -153,11 +145,6 @@
 (defn book->string [book]
   (let [{title :title authors :authors} book]
     (str title ", written by " (authors->string authors))))
-
-(book->string wild-seed) ;=> "Wild Seed, written by Octavia E. Butler"
-(book->string little-schemer)
-;=> "The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen"
-;
 
 (defn books->string [books]
   (cond
@@ -167,18 +154,31 @@
 
 
 (defn books-by-author [author books]
-  :-)
+  (filter #(has-author? %1 author) books))
+
+(books-by-author china books)   ;=> (cities embassytown)
+(books-by-author octavia books) ;=> (wild-seed)
 
 (defn author-by-name [name authors]
-  :-)
+  (:name (first (filter #(= (:name %1) name) authors))))
 
 (defn living-authors [authors]
-  :-)
+  (map :name  (filter alive? authors)))
+
+(def jrrtolkien {:name "J. R. R. Tolkien" :birth-year 1892 :death-year 1973})
+(def christopher {:name "Christopher Tolkien" :birth-year 1924})
+(def kay {:name "Guy Gavriel Kay" :birth-year 1954})
+(def silmarillion {:title "Silmarillion"
+                   :authors #{jrrtolkien, christopher, kay}})
+
+(def dick {:name "Philip K. Dick", :birth-year 1928, :death-year 1982})
+(def zelazny {:name "Roger Zelazny", :birth-year 1937, :death-year 1995})
+(def deus-irae {:title "Deus Irae", :authors #{dick, zelazny}})
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
