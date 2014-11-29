@@ -142,11 +142,18 @@
       (str name)
       (str name " (" birth " - " death ")"))))
 
+(author->string felleisen) ;=> "Matthias Felleisen"
+(author->string friedman)  ;=> "Daniel Friedman (1944 - )"
+(author->string octavia)   ;=> "Octavia E. Butler (1947 - 2006)"
+
 (defn authors->string [authors]
-  :-)
+  (apply str ( interpose ", " (map author->string authors))))
+
 
 (defn book->string [book]
-  :-)
+  (let [{title :title authors :authors} book]
+    (str title ", written by " (authors->string authors))))
+
 
 (defn books->string [books]
   :-)
