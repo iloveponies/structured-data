@@ -154,9 +154,17 @@
   (let [{title :title authors :authors} book]
     (str title ", written by " (authors->string authors))))
 
+(book->string wild-seed) ;=> "Wild Seed, written by Octavia E. Butler"
+(book->string little-schemer)
+;=> "The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen"
+;
 
 (defn books->string [books]
-  :-)
+  (cond
+   (= (count books) 0) (str "No books.")
+   (= (count books) 1) (apply str "1 book. " (interpose ". " (map book->string books)))
+   (>= (count books) 2) (apply str (count books) " books. " (interpose ". " (map book->string books)))))
+
 
 (defn books-by-author [author books]
   :-)
