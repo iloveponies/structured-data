@@ -22,16 +22,18 @@
   [bottom-left top-right])
 
 (defn width [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (- x2 x1)))
 
 (defn height [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (- y2 y1)))
 
 (defn square? [rectangle]
-  :-)
+  (if (== (width rectangle) (height rectangle)) true false))
 
 (defn area [rectangle]
-  :-)
+  (* (width rectangle) (height rectangle)))
 
 (defn contains-point? [rectangle point]
   :-)
