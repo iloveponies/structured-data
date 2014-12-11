@@ -11,7 +11,7 @@
   )
 
 (defn cutify [v]
-  (conj v ">3")
+  (conj v "<3")
   )
 
 (defn spiff-destructuring [v]
@@ -50,7 +50,7 @@
 		[[x1 y1] [x2 y2]] rectangle
 		[px py] point
 	]
-	(and (< x1 px x2) (< y1 py y2))
+	(and (<= x1 px x2) (<= y1 py y2))
 	)
   )
 
@@ -136,6 +136,10 @@
          (fn [book] (map :name (:authors book)))]
     (set (apply concat (map author-names books)))))
 	
+(defn authors [books]
+    (set (apply clojure.set/union (map (fn [book] (:authors book)) books)))
+	)
+	
 ;	(let ;
 ;	[
 ;		[[x1 y1] [x2 y2]] rectangle
@@ -151,7 +155,7 @@
 		(if
 			(= nil (:birth-year author)) 
 			""	
-			(str " (" (:birth-year author) "-" (:death-year author) ")")
+			(str " (" (:birth-year author) " - " (:death-year author) ")")
 			)
 		]
 		(str name years)
@@ -171,52 +175,38 @@
 ;The City and the City, written by China Miéville (1972 - ). 
 ;Wild Seed, written by Octavia E. Butler (1947 - 2006)."
 
-(defn books->stringx [books]
-  (str
-	(cond
-		(== 0 (count books)) "No books."
-		(== 1 (count books)) "1 book. "
-		:else (str (count books) " books. ")
-		)
-;	(apply str (count books) " book" (if (> (count books) 1) "s. " ". ") (interpose ". " (map book->string books)))
-		(apply str (interpose ". " (map book->string books)))
-		)
-  )
-
-
-(defn books->stringy [books]
-  (let 
-  [
-	countstring 
-		(cond
-			(== 0 (count books)) "No books."
-			(== 1 (count books)) "1 book. "
-			:else (str (count books) " books. ")
-			)
-	]
-	(apply str countstring (interpose ". " (map book->string books)))
-	
-	)
-)
-
-  
 (defn books->string [books]
   (let 
 	[bookstring (apply str (interpose ". " (map book->string books)))]
 		(cond
 			(== 0 (count books)) (str "No books.")
-			(== 1 (count books)) (str "1 book. "  bookstring)
-			:else (str (count books) " books. " bookstring)
+			(== 1 (count books)) (str "1 book. "  bookstring ".")
+			:else (str (count books) " books. " bookstring ".")
 			)
 	)
 )
 
+;(def china {:name "China Miéville", :birth-year 1972})
+;(def octavia {:name "Octavia E. Butler"
+;              :birth-year 1947
+;              :death-year 2006})
+;(def friedman {:name "Daniel Friedman" :birth-year 1944})
+;(def felleisen {:name "Matthias Felleisen"})
+
+;(def cities {:title "The City and the City" :authors #{china}})
+;(def wild-seed {:title "Wild Seed", :authors #{octavia}})
+;(def embassytown {:title "Embassytown", :authors #{china}})
+;(def little-schemer {:title "The Little Schemer"
+;                     :authors #{friedman, felleisen}})
+
+;(def books [cities, wild-seed, embassytown, little-schemer])
+
 (defn books-by-author [author books]
-	(first (filter (fn [x] (has-author? x author)) books))
+	(filter (fn [x] (has-author? x author)) books)
   )
 
 (defn author-by-name [name authors]
-  (filter (fn [author] (= (:name author) name)) authors)
+  (first (filter (fn [author] (= (:name author) name)) authors))
   )
 
 (defn living-authors [authors]
