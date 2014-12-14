@@ -20,10 +20,10 @@
 (defn rectangle [bottom-left top-right]
   [bottom-left top-right])
 
-(defn width [[x1 y1][x2 y2]]
+(defn width [[[x1 y1][x2 y2]]]
   (- x2 x1))
 
-(defn height [[x1 y1][x2 y2]]
+(defn height [[[x1 y1][x2 y2]]]
   (- y2 y1))
 
 (defn square? [rectangle]
@@ -33,22 +33,27 @@
   (* (width rectangle) (height rectangle)))
 
 (defn contains-point? [rectangle point]
-  :-)
+    (let [[[x1 y1] [x2 y2]] rectangle 
+          [px py] point] 
+      (and (<= x1 px x2) (<= y1 py y2))))
 
 (defn contains-rectangle? [outer inner]
-  :-)
+    (let [[p1 p2] inner] 
+      (and (contains-point? outer p1) (contains-point? outer p2)))) 
 
 (defn title-length [book]
-  :-)
+  (count (:title book)))
 
 (defn author-count [book]
-  :-)
+  (count (:authors book)))
 
 (defn multiple-authors? [book]
-  :-)
+  (> (author-count book) 1))
 
 (defn add-author [book new-author]
-  :-)
+  (let [a (:authors book)
+        new-authors (conj a new-author)]
+        (assoc book :authors new-authors)))
 
 (defn alive? [author]
   :-)
