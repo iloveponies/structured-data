@@ -79,7 +79,7 @@
   :-)
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n \*)))
 
 (defn toggle [a-set elem]
   :-)
