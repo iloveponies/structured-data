@@ -41,11 +41,14 @@
   (let [[[bl-x bl-y] [tr-x tr-y]] rectangle
         [px py] point]
     (and
-       (<= bl-x px tr-x)
-       (<= bl-y py tr-y))))
+      (<= bl-x px tr-x)
+      (<= bl-y py tr-y))))
 
 (defn contains-rectangle? [outer inner]
-  :-)
+  (let [[i-bl i-tr] inner]
+    (and
+      (contains-point? outer i-bl)
+      (contains-point? outer i-tr))))
 
 (defn title-length [book]
   :-)
