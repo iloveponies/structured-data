@@ -80,7 +80,7 @@
   (not (== (count a-seq) (count (set a-seq)))))
 
 (defn old-book->new-book [book]
-  (let [authors (:authors book)]
+  (let [authors (set (:authors book))]
     (assoc (dissoc book :authors) :authors authors)))
 
 (defn has-author? [book author]
@@ -109,7 +109,7 @@
         booknames (apply str (interpose ". " (map book->string books)))]
     (if (empty? books)
       "No books."
-      (str cnt " book" s ". " booknames))))
+      (str cnt " book" s ". " booknames "."))))
 
 (defn books-by-author [author books]
   (let [valid? (fn [x] (has-author? x author))]
