@@ -30,9 +30,7 @@
     (- tr-y bl-y)))
 
 (defn square? [rectangle]
-  (if (== (width rectangle) (height rectangle))
-    true
-    false))
+  (== (width rectangle) (height rectangle)))
 
 (defn area [rectangle]
   (* (width rectangle) (height rectangle)))
@@ -57,7 +55,7 @@
   (count (:authors book)))
 
 (defn multiple-authors? [book]
-  :-)
+  (> (author-count book) 1))
 
 (defn add-author [book new-author]
   :-)
