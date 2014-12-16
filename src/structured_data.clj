@@ -22,10 +22,12 @@
   [bottom-left top-right])
 
 (defn width [rectangle]
-  :-)
+  (let [[[bl-x _] [tr-x _]] rectangle]
+    (- tr-x bl-x)))
 
 (defn height [rectangle]
-  :-)
+  (let [[[_ bl-y] [_ tr-y]] rectangle]
+    (- tr-y bl-y)))
 
 (defn square? [rectangle]
   :-)
