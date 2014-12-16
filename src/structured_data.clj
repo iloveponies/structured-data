@@ -30,7 +30,9 @@
     (- tr-y bl-y)))
 
 (defn square? [rectangle]
-  :-)
+  (if (== (width rectangle) (height rectangle))
+    true
+    false))
 
 (defn area [rectangle]
   :-)
