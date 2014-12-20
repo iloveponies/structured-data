@@ -49,37 +49,44 @@
       (and (<= x1 pointX x2) (<= y1 pointY y2)))))
 
 (defn contains-rectangle? [outer inner]
-  :-)
+  (let [[point1 point2] inner]
+    (and (contains-point? outer point1)
+         (contains-point? outer point2))))
 
 (defn title-length [book]
-  :-)
+  (count (:title book)))
 
 (defn author-count [book]
-  :-)
+  (count (:authors book)))
 
 (defn multiple-authors? [book]
-  :-)
+  (> (author-count book) 1))
 
 (defn add-author [book new-author]
-  :-)
+  (let [authorsSoFar (:authors book)
+        authorsNow (conj authorsSoFar new-author)]
+       (assoc book :authors authorsNow)))
 
 (defn alive? [author]
-  :-)
+  (not (contains? author :death-year)))
 
 (defn element-lengths [collection]
-  :-)
+  (map count collection))
 
 (defn second-elements [collection]
-  :-)
+  (let [second (fn [x] (get x 1))]
+    (map second collection)))
 
 (defn titles [books]
-  :-)
+  (map :title books))
 
 (defn monotonic? [a-seq]
-  :-)
+  (or
+   (apply <= a-seq)
+   (apply >= a-seq)))
 
 (defn stars [n]
-  :-)
+  (apply str(repeat n "*")))
 
 (defn toggle [a-set elem]
   :-)
