@@ -189,12 +189,16 @@
   )
 
 (defn books-by-author [author books]
-;  (filter has-author? books (authors books))
+ (filter #(has-author? % author) books)
 )
 (defn author-by-name [name authors]
+  (first (set (cond (empty?  (filter (fn [x] (=  (:name x) name))  authors)) nil
+        :else (filter (fn [x] (=  (:name x) name))  authors)
+        )
 
   )
-
+)
+  )
 (defn living-authors [authors]
   (filter alive? authors)
   )
@@ -206,5 +210,4 @@
 (defn books-by-living-authors [books]
   (filter has-a-living-author? books)
   )
-
 ; %________%
