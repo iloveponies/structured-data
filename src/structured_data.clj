@@ -27,41 +27,52 @@
   (let [[[x1 y1] [x2 y2]] rectangle]
     (- y2 y1)))
 
-(defn square? [rectangle]
-  :-)
+(defn square? [[[x1 x2] [y1 y2]]]
+  (= (- x1 y1) (- x2 y2)))
 
 (defn area [rectangle]
-  :-)
+  (let [[[x1 x2] [y1 y2]] rectangle]
+    (* (- y1 x1) (- y2 x2))))
 
 (defn contains-point? [rectangle point]
-  :-)
+  (let [[[x1 x2] [y1 y2]] rectangle
+        [z1 z2] point]
+    (and (<= x1 z1 y1)
+         (<= x2 z2 y2))))
 
 (defn contains-rectangle? [outer inner]
-  :-)
+  (let [[[x1 x2] [y1 y2]] outer [[z1 z2] [n1 n2]] inner]
+    (and (<= x1 z1)
+         (<= x2 y2)
+         (>= y1 n1)
+         (>= y2 n2))))
 
 (defn title-length [book]
-  :-)
+  (count (:title book)))
 
 (defn author-count [book]
-  :-)
+  (count (:authors book)))
 
 (defn multiple-authors? [book]
-  :-)
+  (< 1 (author-count book)))
 
 (defn add-author [book new-author]
-  :-)
+  (let [authors (:authors book)]
+    (assoc book :authors (conj authors new-author))))
 
 (defn alive? [author]
-  :-)
+  (not (contains? author :death-year)))
 
 (defn element-lengths [collection]
-  :-)
+  (map (fn [x] (count x)) collection))
 
 (defn second-elements [collection]
-  :-)
+  (let [second (fn [[x y]] y)]
+    (map second collection)))
 
 (defn titles [books]
-  :-)
+  (let [titles (fn [book] (:title book))]
+    (map titles books)))
 
 (defn monotonic? [a-seq]
   :-)
