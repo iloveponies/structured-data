@@ -130,7 +130,7 @@
     (str book-count-str (apply str (interpose ". " stringified-books)) \.)))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [book] (has-author? book author)) books))
 
 (defn author-by-name [name authors]
   :-)
