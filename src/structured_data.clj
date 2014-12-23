@@ -88,7 +88,7 @@
   (map :title books))
 
 (defn monotonic? [a-seq]
-  (apply <= a-seq))
+  (or (apply <= a-seq) (apply >= a-seq)))
 
 ; compare left side to Scala's fn.tupled(tuple)
 ; (apply function [arg1 arg2 arg3 ...]) => (function arg1 arg2 arg3 ...)
