@@ -93,9 +93,6 @@
 (defn authors [books]
   (set (apply concat (map :authors books))))
 
-(defn mapreduce [mfn rfn data]
- (apply rfn (map mfn data)))
-
 (defn all-author-names [books]
   (set (map :name (authors books))))
 
