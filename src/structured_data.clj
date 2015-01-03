@@ -66,7 +66,7 @@
   (map count collection))
 
 (defn second-elements [collection]
-  :-)
+  (map second collection))
 
 (defn titles [books]
   :-)
