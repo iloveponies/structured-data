@@ -130,7 +130,8 @@
     (str (apply str (interpose ". " (cons num-books-string book-strings))) ".")))
 
 (defn books-by-author [author books]
-  :-)
+  (let [author-filter (fn [b] (has-author? b author))]
+    (filter author-filter books)))
 
 (defn author-by-name [name authors]
   :-)
