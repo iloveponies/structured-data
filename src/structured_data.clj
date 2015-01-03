@@ -93,7 +93,7 @@
     (assoc book :authors new-authors)))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author))
 
 (defn authors [books]
   :-)
