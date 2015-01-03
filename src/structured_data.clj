@@ -72,7 +72,8 @@
   (map :title books))
 
 (defn monotonic? [a-seq]
-  :-)
+  (or (apply <= a-seq)
+      (apply >= a-seq)))
 
 (defn stars [n]
   (apply str (repeat n "*")))
