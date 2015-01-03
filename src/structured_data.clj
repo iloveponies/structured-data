@@ -120,7 +120,14 @@
     (str title ", written by " authrs-string)))
 
 (defn books->string [books]
-  :-)
+  (let [num-books (count books)
+        num-books-string
+          (cond
+            (== num-books 0) "No books"
+            (== num-books 1) "1 book"
+            :else (str num-books " books"))
+        book-strings (map book->string books)]
+    (str (apply str (interpose ". " (cons num-books-string book-strings))) ".")))
 
 (defn books-by-author [author books]
   :-)
