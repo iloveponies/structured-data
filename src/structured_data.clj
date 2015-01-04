@@ -104,10 +104,15 @@
   (str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
-  :-)
+  (cond
+   (= 0 (count books)) "No books."
+   (= 1 (count books)) (str "1 book. " (book->string (first books)) ".")
+   :else (str (count books) " books. " (apply str (interpose ". " (map book->string books))) ".")
+  )
+)
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [book] (has-author? book author)) books))
 
 (defn author-by-name [name authors]
   :-)
