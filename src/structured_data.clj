@@ -26,11 +26,11 @@
 (defn square? [[rec1 rec2]] (let [[x1 y1] rec1 [x2 y2] rec2] (= (abs(- x1 x2)) (abs(- y2 y1)))))
 
 
+
 (defn area [[rec1 rec2]] (let [[x1 y1] rec1 [x2 y2] rec2] (* (abs(- y2 y1)) (abs(- x2 x1)))))
 
 
-(defn contains-point? [rectangle point]
-  :-)
+(defn contains-point? [ [rec1 rec2] point] (let [ [x1 y1] rec1 [x2 y2] rec2 [xp yp] point] (if (and  (<= x1 xp x2) (<= y1 yp y2)) true false)))
 
 (defn contains-rectangle? [outer inner]
   :-)
