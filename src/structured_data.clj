@@ -35,18 +35,18 @@
 (defn contains-rectangle? [rec1 rec2] (let [ [pair1 pair2] rec2 [x1 y1] pair1 [x2 y2] pair2] (if (and (contains-point? rec1 [x1 y1]) (contains-point? rec1 [x2 y2])) true false)))
 
 
-(def china {:name "China Miéville", :birth-year 1972})
-(def octavia {:name "Octavia E. Butler"
-              :birth-year 1947
-              :death-year 2006})
-(def friedman {:name "Daniel Friedman" :birth-year 1944})
-(def felleisen {:name "Matthias Felleisen"})
+;(def china {:name "China Miéville", :birth-year 1972})
+;(def octavia {:name "Octavia E. Butler"
+ ;             :birth-year 1947
+  ;            :death-year 2006})
+;(def friedman {:name "Daniel Friedman" :birth-year 1944})
+;(def felleisen {:name "Matthias Felleisen"})
 
-(def cities {:title "The City and the City" :authors [china]})
-(def wild-seed {:title "Wild Seed", :authors [octavia]})
-(def embassytown {:title "Embassytown", :authors [china]})
-(def little-schemer {:title "The Little Schemer"
-                     :authors [friedman, felleisen]})
+;(def cities {:title "The City and the City" :authors [china]})
+;(def wild-seed {:title "Wild Seed", :authors [octavia]})
+;(def embassytown {:title "Embassytown", :authors [china]})
+;(def little-schemer {:title "The Little Schemer"
+ ;                    :authors [friedman, felleisen]})
 
 
 (defn title-length [book] (count (get book :title)))
@@ -60,7 +60,7 @@
 (defn add-author [book author] (let [ authors (get book :authors)] (assoc book :authors (conj (get book :authors) author))))
 
 
-(defn alive? [author] (contains? author :death-year))
+(defn alive? [author] (not(contains? author :death-year)))
 
 
 (defn element-lengths [collection]

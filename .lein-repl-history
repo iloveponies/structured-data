@@ -379,3 +379,8 @@ exit
 (defn alive? [author] (contains? author :death-year))
 (alive? china)
 (alive? octavia)
+(defn alive? [author] (contains? author :death-year)
+(defn alive? [author] (contains? author :death-year))
+(alive? china)
+(defn alive? [author] (not(contains? author :death-year)))
+(alive? china)
