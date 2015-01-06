@@ -34,7 +34,7 @@
 
 (defn contains-rectangle? [rec1 rec2] (let [ [pair1 pair2] rec2 [x1 y1] pair1 [x2 y2] pair2] (if (and (contains-point? rec1 [x1 y1]) (contains-point? rec1 [x2 y2])) true false)))
 
-
+;Only for the test in REPL
 ;(def china {:name "China Miéville", :birth-year 1972})
 ;(def octavia {:name "Octavia E. Butler"
  ;             :birth-year 1947
