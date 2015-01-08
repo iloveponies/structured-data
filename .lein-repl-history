@@ -1,0 +1,5 @@
+(documentation? cons)
+(documentation cons)
+(docs cons)
+(docs? cons)
+quit
