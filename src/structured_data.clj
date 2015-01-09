@@ -115,10 +115,13 @@
       :else author-name)))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (let [title (:title book)
+        authors (:authors book)
+        authorstring (authors->string authors)]
+    (apply str (interpose ", written by " [title authorstring]))))
 
 (defn books->string [books]
   :-)
