@@ -1,16 +1,18 @@
 (ns structured-data)
 
 (defn do-a-thing [x]
-  :-)
+  (let [add (+ x x)]
+    (Math/pow add add)))
 
 (defn spiff [v]
-  :-)
+  (+ (get v 0) (get v 2)))
 
 (defn cutify [v]
-  :-)
+  (conj v "<3"))
 
 (defn spiff-destructuring [v]
-  :-)
+  (let [[x y z] v]
+    (+ x z)))
 
 (defn point [x y]
   [x y])
@@ -19,16 +21,18 @@
   [bottom-left top-right])
 
 (defn width [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (- x2 x1)))
 
 (defn height [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (- y2 y1)))
 
 (defn square? [rectangle]
-  :-)
+  (if (== (height rectangle) (width rectangle)) true false))
 
 (defn area [rectangle]
-  :-)
+  (* (height rectangle) (width rectangle)))
 
 (defn contains-point? [rectangle point]
   :-)
@@ -37,7 +41,7 @@
   :-)
 
 (defn title-length [book]
-  :-)
+:-)
 
 (defn author-count [book]
   :-)
