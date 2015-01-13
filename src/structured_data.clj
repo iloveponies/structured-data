@@ -107,13 +107,21 @@
     (str name years)))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
-  :-)
+  (let [book-count (cond
+                    (== (count books) 0) "No books"
+                    (== (count books) 1) "1 book. "
+                    :else (str (count books) " books. "))
+        formatted-books (apply str (interpose ". " (map book->string books)))]
+  (str
+   book-count
+   formatted-books
+     ".")))
 
 (defn books-by-author [author books]
   :-)
