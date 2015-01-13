@@ -84,7 +84,7 @@
     (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  (> (count sequence) (count (set sequence))))
+  (> (count a-seq) (count (set a-seq))))
 
 (defn old-book->new-book [book]
   (assoc book :authors (set (:authors book))))
@@ -124,18 +124,18 @@
      ".")))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [book] (has-author? book author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [author] (= name (:name author))) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
