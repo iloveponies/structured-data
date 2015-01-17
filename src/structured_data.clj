@@ -1,19 +1,14 @@
 (ns structured-data)
 
-(defn do-a-thing [x]
-  :-)
+(defn do-a-thing [x] (let [self_addition (+ x x)] (Math/pow self_addition self_addition)))
 
-(defn spiff [v]
-  :-)
+(defn spiff [v] (+ (get v 0) (get v 2)))
 
-(defn cutify [v]
-  :-)
+(defn cutify [v] (conj v "<3"))
 
-(defn spiff-destructuring [v]
-  :-)
+(defn spiff-destructuring [v] (let [[one two three] v] (+ one three)))
 
-(defn point [x y]
-  [x y])
+(defn point [x y] [x y])
 
 (defn rectangle [bottom-left top-right]
   [bottom-left top-right])
