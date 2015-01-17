@@ -47,16 +47,18 @@
          (<= y1 y y2))))
 
 (defn contains-rectangle? [outer inner]
-  :-)
+  (let [[pt1 pt2] inner]
+    (and (contains-point? outer pt1)
+         (contains-point? outer pt2))))
 
 (defn title-length [book]
-  :-)
+  (count (:title book)))
 
 (defn author-count [book]
-  :-)
+  (count (:authors book)))
 
 (defn multiple-authors? [book]
-  :-)
+  (> (author-count book) 1))
 
 (defn add-author [book new-author]
   :-)
