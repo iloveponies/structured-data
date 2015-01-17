@@ -21,13 +21,18 @@
   [bottom-left top-right])
 
 (defn width [rectangle]
-  :-)
+  (let [ [p1 p2] rectangle [x1 y1] p1 [x2 y2] p2 ]
+  (- x2 x1)))
 
 (defn height [rectangle]
-  :-)
+  (let [ [p1 p2] rectangle [x1 y1] p1 [x2 y2] p2 ]
+  (- y2 y1)))
 
 (defn square? [rectangle]
-  :-)
+  (if(== (width rectangle) (height rectangle))
+    true
+    false))
+
 
 (defn area [rectangle]
   :-)
