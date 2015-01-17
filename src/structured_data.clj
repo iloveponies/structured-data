@@ -61,10 +61,12 @@
   (> (author-count book) 1))
 
 (defn add-author [book new-author]
-  :-)
+  (let [auth1 (:authors book)
+        auth2 (conj auth1 new-author)]
+    (assoc book :authors auth2)))
 
 (defn alive? [author]
-  :-)
+  (not (contains? author :death-year)))
 
 (defn element-lengths [collection]
   :-)
