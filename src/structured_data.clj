@@ -56,7 +56,8 @@
 (defn multiple-authors? [book] (< 1 (author-count book)))
 
 (defn add-author [book new-author]
-  :-)
+  (let [authors-new (conj (:authors book) new-author)]
+    (assoc book :authors authors-new)))
 
 (defn alive? [author]
   :-)
