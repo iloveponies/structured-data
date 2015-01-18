@@ -92,7 +92,7 @@
   (assoc book :authors (set (:authors book))))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (set (map :name (book :authors))) (author :name)))
 
 (defn authors [books]
   :-)
