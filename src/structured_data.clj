@@ -63,7 +63,8 @@
   (not (contains? author :death-year)))
 
 (defn element-lengths [collection]
-  :-)
+  (let [lol (fn [x] (count x))]
+  (map lol collection)))
 
 (defn second-elements [collection]
   :-)
