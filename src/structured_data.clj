@@ -67,7 +67,8 @@
   (map lol collection)))
 
 (defn second-elements [collection]
-  :-)
+  (let [give-second (fn [x] (get x 1))]
+  (map give-second collection)))
 
 (defn titles [books]
   :-)
