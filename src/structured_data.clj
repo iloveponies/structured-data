@@ -72,16 +72,17 @@
   (map count collection))
 
 (defn second-elements [collection]
-  :-)
+  (let [second-element (fn [xs] (get xs 1))]
+    (map second-element collection)))
 
 (defn titles [books]
-  :-)
+  (map :title books))
 
 (defn monotonic? [a-seq]
   :-)
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*")))
 
 (defn toggle [a-set elem]
   :-)
