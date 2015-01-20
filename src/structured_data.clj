@@ -90,16 +90,19 @@
   (apply str(repeat n \*)))
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (not (= (count (distinct a-seq)) (count a-seq))))
+
 
 (defn old-book->new-book [book]
-  :-)
+  (assoc book :authors (into #{} (:authors book))))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author))
 
 (defn authors [books]
   :-)
