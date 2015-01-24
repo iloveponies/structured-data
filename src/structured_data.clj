@@ -99,7 +99,8 @@
     (assoc book :authors authors)))
 
 (defn has-author? [book author]
-  :-)
+  (let [authors (:authors book)]
+    (contains? authors author)))
 
 (defn authors [books]
   :-)
