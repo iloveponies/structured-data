@@ -136,7 +136,7 @@
                            "1 book. "
                            (str books-size " books. ")))
         books-str (map book->string books)]
-    (str numbooks (apply str (interpose ", " books-str)) ".")))
+    (str numbooks (apply str (interpose ". " books-str)) ".")))
 
 (defn books-by-author [author books]
   :-)
