@@ -105,13 +105,20 @@
   (contains? (:authors book) author))
 
 (defn authors [books]
-  :-)
+  (let [auth
+        (fn [book] (:authors book))]
+    (apply clojure.set/union (map auth books))))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (cond (:death-year author)
+    (clojure.string/join [(:name author) "(" (:birth-year author) " - " (:death-year author) ")"])
+   (:birth-year author)
+        (clojure.string/join [(:name author) " (" (:birth-year author) " - )"])
+        :else (:name author))
+    )
 
 (defn authors->string [authors]
   :-)
