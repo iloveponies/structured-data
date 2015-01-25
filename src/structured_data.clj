@@ -114,7 +114,7 @@
 
 (defn author->string [author]
   (cond (:death-year author)
-    (clojure.string/join [(:name author) "(" (:birth-year author) " - " (:death-year author) ")"])
+    (clojure.string/join [(:name author) " (" (:birth-year author) " - " (:death-year author) ")"])
    (:birth-year author)
         (clojure.string/join [(:name author) " (" (:birth-year author) " - )"])
         :else (:name author))
@@ -124,19 +124,24 @@
   (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
-  :-)
+  (let [stringify (fn[books] (apply str (interpose ". " (map book->string books))))]
+  (cond
+   (= (count books) 1) (str "1 book. " (stringify books) ".")
+    (> (count books) 1) (str (count books) " books. " (stringify books) ".")
+   :else "No books."
+    )))
 
 (defn books-by-author [author books]
-  :-)
+ (filter (fn[book] (has-author? book author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [author] (= (:name author) name)) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter (fn [author] (not (:death-year author))) authors))
 
 (defn has-a-living-author? [book]
   :-)
