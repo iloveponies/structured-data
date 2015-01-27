@@ -41,17 +41,16 @@
          (contains-point? outer pt2))))
 
 (defn title-length [book]
-  (count (get book :title)))
+  (count (:title book)))
 
 (defn author-count [book]
-  (count (get book :authors)))
+  (count (:authors book)))
 
 (defn multiple-authors? [book]
   (> (author-count book) 1))
 
 (defn add-author [book new-author]
-  (let [{:keys [authors]} book]
-    (assoc book :authors (conj authors new-author))))
+  (assoc book :authors (conj (:authors book) new-author)))
 
 (defn alive? [author]
   (not (:death-year author)))
@@ -78,12 +77,10 @@
   (< (count (set a-seq)) (count a-seq)))
 
 (defn old-book->new-book [book]
-  (let [{:keys [authors]} book]
-    (assoc book :authors (set authors))))
+  (assoc book :authors (set (:authors book))))
 
 (defn has-author? [book author]
-  (let [{:keys [authors]} book]
-    (contains? authors author)))
+  (contains? (:authors book) author))
 
 (defn authors [books]
   (reduce clojure.set/union (map :authors books)))
@@ -116,7 +113,7 @@
   (first (filter #(= name (:name %)) authors)))
 
 (defn living-authors [authors]
-  (filter #(nil? (:death-year %)) authors))
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
   (not (empty? (living-authors (:authors book)))))
