@@ -114,27 +114,62 @@
 
 (defn toggle [a-set elem]
 
-  (if (= a-set
-
+  (if (= a-set (conj a-set elem) )
+    (disj a-set elem)
+    (conj a-set elem)
+  )
 )
 
 (defn contains-duplicates? [a-seq]
-  :-)
+ (not (= (count (set a-seq) ) (count a-seq) ) )
+)
 
 (defn old-book->new-book [book]
-  :-)
+  (let [authors-set (set (:authors book) ) ]
+
+    (assoc book :authors authors-set) 
+  )
+)
 
 (defn has-author? [book author]
-  :-)
+  (let [new-book (old-book->new-book book) ] 
+
+    (contains? (:authors new-book) author)
+  )
+)
+
+(defn authrs [old-book]
+  (let [new-book (old-book->new-book old-book) ]
+    
+    (:authors new-book)
+  )
+)
 
 (defn authors [books]
-  :-)
+  (let [authors-set (set (map authrs books) ) ]
+
+    (apply clojure.set/union authors-set)
+  )
+)
 
 (defn all-author-names [books]
-  :-)
+  (let [names (map :name (authors books) ) ]
+
+    (set names)
+  )
+)
 
 (defn author->string [author]
-  :-)
+
+  (if (contains? author :birth-year)
+    (if (contains? author :death-year)
+      (apply str ( (:name author) " (" (:birth-year author) " - " (:death-year author) ")" ) )
+      (apply str ( (:name author) " (" (:birth-year author) ")" ) )
+    )
+
+    (:name author)
+  )
+)
 
 (defn authors->string [authors]
   :-)
