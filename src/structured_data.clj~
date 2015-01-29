@@ -160,39 +160,85 @@
 )
 
 (defn author->string [author]
+  (cond
+    (contains? author :death-year)
+      (str (:name author) " (" (:birth-year author) " - " (:death-year author) ")" )
 
-  (if (contains? author :birth-year)
-    (if (contains? author :death-year)
-      (apply str ( (:name author) " (" (:birth-year author) " - " (:death-year author) ")" ) )
-      (apply str ( (:name author) " (" (:birth-year author) ")" ) )
-    )
-
-    (:name author)
+    (contains? author :birth-year)
+      (str (:name author) " (" (:birth-year author) " - )" )
+    
+    :else
+      (:name author)
   )
 )
 
 (defn authors->string [authors]
-  :-)
+  (let [in-correct-format (set (map author->string authors) ) ]
+
+    (apply str (interpose ", " in-correct-format) )
+  )
+)
 
 (defn book->string [book]
-  :-)
+
+  (str (:title book) ", written by " (authors->string (:authors book) ) )
+)
+
+(defn count-books [books]
+
+  (cond
+    (= (count books) 0 ) "No books. "
+    (= (count books) 1 ) "1 book. "
+    :else (str (count books) " books. ")
+  )
+)
+
+(defn next-book [book]
+
+  (str book ". ")
+)
 
 (defn books->string [books]
-  :-)
+  
+  (let [in-correct-format (map book->string books)
+        string (count-books books)
+        new-string (apply str string (map next-book in-correct-format) ) ]
+  
+    (subs new-string 0 (- (count new-string) 1) )
+  )
+)
 
-(defn books-by-author [author books]
-  :-)
+(defn books-by-author [author books]  
+  (let [author? (fn [book] (has-author? book author) ) ]
+
+    (filter author? books)
+  )
+)
 
 (defn author-by-name [name authors]
-  :-)
+  (let [has-name? (fn [author] (= name (:name author) ) )
+        list (filter has-name? authors) ]
+
+    (if (= (count list) 0)
+      nil
+      (first list)
+    )
+  )
+)
 
 (defn living-authors [authors]
-  :-)
+
+  (filter alive? authors)
+)
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (:authors book) ) ) )
+
+)
 
 (defn books-by-living-authors [books]
-  :-)
+  
+  (filter has-a-living-author? books)
+)
 
 ; %________%<
