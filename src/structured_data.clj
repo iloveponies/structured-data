@@ -124,7 +124,7 @@
       )
   )
 
-
+;E20
 (defn toggle [a-set elem]
   (if (contains? a-set elem )
     (disj a-set elem )
@@ -137,7 +137,7 @@
   )
 
 
-; E22 WIP? OK?
+; E22
 
 (defn old-book->new-book [book]
   ; ( let [ aunames (fn [bok] (map :authors))
