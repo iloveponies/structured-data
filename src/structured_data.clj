@@ -1,4 +1,4 @@
-(ns structured-data)
+2(ns structured-data)
 
 (defn do-a-thing [x]
   (let [xx (+ x x)]
@@ -180,11 +180,14 @@
   (filter (fn [book] (contains? (book :authors) author) ) books)
   )
 
+
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [author] (if (= (author :name) name) author nil)) authors))
+)
 
 (defn living-authors [authors]
-  :-)
+  (filter (fn [author] (if (nil? (author :death-year)) author nil)) authors)
+)
 
 (defn has-a-living-author? [book]
   :-)

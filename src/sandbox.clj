@@ -285,12 +285,25 @@
 
 (books-by-author china books)   ;=> (cities embassytown)
 (books-by-author octavia books) ;=> (wild-seed)
+(def authors #{china, felleisen, octavia, friedman})
+
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [author] (if (= (author :name) name) author nil)) authors))
+)
+
+(author-by-name "Octavia E. Butler" authors)                ;=> octavia
+(author-by-name "Octavia E. Butler" #{felleisen, friedman}) ;=> nil
+(author-by-name "China Miéville" authors)                   ;=> china
+(author-by-name "Goerge R. R. Martin" authors)
 
 (defn living-authors [authors]
-  :-)
+  (filter (fn [author] (if (nil? (author :death-year)) author nil)) authors)
+)
+
+(living-authors authors)             ;=> (china, felleisen, friedman)
+(living-authors #{octavia})          ;=> ()
+(living-authors #{china, felleisen}) ;=> (china, felleisen)
 
 (defn has-a-living-author? [book]
   :-)
