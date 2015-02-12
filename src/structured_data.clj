@@ -190,9 +190,12 @@
 )
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (book :authors))))
+)
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter (fn [book] (if (has-a-living-author? book) book nil)) books)
+)
+
 
 ; %________%

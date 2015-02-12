@@ -305,11 +305,53 @@
 (living-authors #{octavia})          ;=> ()
 (living-authors #{china, felleisen}) ;=> (china, felleisen)
 
+(def jrrtolkien {:name "J. R. R. Tolkien" :birth-year 1892 :death-year 1973})
+(def christopher {:name "Christopher Tolkien" :birth-year 1924})
+(def kay {:name "Guy Gavriel Kay" :birth-year 1954})
+
+(def silmarillion {:title "Silmarillion"
+                   :authors #{jrrtolkien, christopher, kay}})
+
+(def dick {:name "Philip K. Dick", :birth-year 1928, :death-year 1982})
+(def zelazny {:name "Roger Zelazny", :birth-year 1937, :death-year 1995})
+
+(def deus-irae {:title "Deus Irae", :authors #{dick, zelazny}})
+
+
+
+
+
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (book :authors))  ))
+)
+
+
+(has-a-living-author? wild-seed)      ;=> false
+(has-a-living-author? silmarillion)   ;=> true
+(has-a-living-author? little-schemer) ;=> true
+(has-a-living-author? cities)         ;=> true
+(has-a-living-author? deus-irae)      ;=> false
+
+
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter (fn [book] (if (has-a-living-author? book) book nil)) books)
+)
+
+
+(books-by-living-authors books) ;=> (little-schemer cities embassytown)
+(books-by-living-authors (concat books [deus-irae, silmarillion]))
+;=> (little-schemer cities embassytown silmarillion)
+
+
+
+
+
+
+
+
+
+
 
 
 
