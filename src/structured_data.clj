@@ -85,22 +85,29 @@
   )
 
 (defn second-elements [collection]
-  :-)
+  (let [seconds (fn [coll] (get coll 1))]
+    (map seconds collection))
+  )
 
 (defn titles [books]
-  :-)
+  (map :title books))
 
 (defn monotonic? [a-seq]
-  :-)
+  (or (apply <= a-seq)
+      (apply >= a-seq))
+  )
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*")))
 
 (defn toggle [a-set elem]
-  :-)
+  ( (if (contains? a-set elem)
+      disj conj) a-set elem)
+  )
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (not= (count a-seq)(count (set a-seq)))
+  )
 
 (defn old-book->new-book [book]
   :-)
