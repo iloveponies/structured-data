@@ -125,22 +125,33 @@
   )
 
 (defn author->string [author]
-  ; Assumption that if there death year defined, the birth year should be defined as well
-  (let [{name :name birth :birth-year death :death-year :or {death ""}} author
-        years (if (birth) (str "(" birth " - " death ")") "")]
-    (str name " " years)
+  (let [{name :name birth :birth-year death :death-year} author
+        years (if birth
+                (str " (" birth " - " death ")")
+                "")]
+    (str name years)
     )
-
   )
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors)))
+  )
 
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by " (authors->string (:authors book)) )
+  )
 
 (defn books->string [books]
-  :-)
+  (let [_bookstring (apply str (interpose ". " (map book->string books)))
+        _count (count books)
+        _countstring (cond
+                       (< 1 _count) (str _count " books. ")
+                       (< 0 _count) (str _count " book. ")
+                       :else "No books")
+        ]
+    (str _countstring _bookstring ".")
+    )
+  )
 
 (defn books-by-author [author books]
   :-)
