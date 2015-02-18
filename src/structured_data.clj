@@ -125,7 +125,13 @@
   )
 
 (defn author->string [author]
-  :-)
+  ; Assumption that if there death year defined, the birth year should be defined as well
+  (let [{name :name birth :birth-year death :death-year :or {death ""}} author
+        years (if (birth) (str "(" birth " - " death ")") "")]
+    (str name " " years)
+    )
+
+  )
 
 (defn authors->string [authors]
   :-)
