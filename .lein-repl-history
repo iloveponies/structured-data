@@ -1,0 +1,500 @@
+(use 'structured-data :reload)
+(author->string friedman)
+(use 'structured-data :reload)
+(author->string friedman)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(use 'structured-data :reload)
+(author->string felleisen)
+(author->string felleisen) ;=> "Matthias Felleisen"
+(author->string friedman)  ;=> "Daniel Friedman (1944 - )"
+(author->string octavia)   ;=> "Octavia E. Butler (1947 - 2006)"
+(println (if (:birth-year author) (str(:birth-year author "-" :death-year author)) false))
+(println (if (:birth-year friedman) (str(:birth-year friedman "-" :death-year friedman)) false))
+(println (if :birth-year friedman (str(:birth-year friedman "-" :death-year friedman)) false))
+(println (if (:birth-year friedman) (str(:birth-year friedman "-" :death-year friedman)) false))
+(if :birth-year friedman)
+(use 'structured-data :reload)
+(author->string felleisen) ;=> "Matthias Felleisen"
+(author->string friedman)  ;=> "Daniel Friedman (1944 - )"
+(author->string octavia)   ;=> "Octavia E. Butler (1947 - 2006)"
+(use 'structured-data :reload)
+(author->string felleisen) ;=> "Matthias Felleisen"
+(author->string friedman)  ;=> "Daniel Friedman (1944 - )"
+(author->string octavia)   ;=> "Octavia E. Butler (1947 - 2006)"
+(use 'structured-data :reload)
+(author->string felleisen) ;=> "Matthias Felleisen"
+(author->string friedman)  ;=> "Daniel Friedman (1944 - )"
+(author->string octavia)   ;=> "Octavia E. Butler (1947 - 2006)"
+(use 'structured-data :reload)
+(author->string felleisen) ;=> "Matthias Felleisen"
+(author->string friedman)  ;=> "Daniel Friedman (1944 - )"
+(author->string octavia)   ;=> "Octavia E. Butler (1947 - 2006)"
+(use 'structured-data :reload)
+(author->string felleisen) ;=> "Matthias Felleisen"
+(author->string friedman)  ;=> "Daniel Friedman (1944 - )"
+(author->string octavia)   ;=> "Octavia E. Butler (1947 - 2006)"
+(apply author #[friedman,octavia])
+(apply author #{friedman,octavia})
+(apply author->string #{friedman,octavia})
+(map author->string #{friedman,octavia})
+(use 'structured-data :reload)
+(authors->string (:authors little-schemer))
+(use 'structured-data :reload)
+(authors->string (:authors little-schemer))
+(use 'structured-data :reload)
+(authors->string (:authors little-schemer))
+(use 'structured-data :reload)
+(authors->string (:authors little-schemer))
+(use 'structured-data :reload)
+(authors->string (:authors little-schemer))
+(use 'structured-data :reload)
+(authors->string (:authors little-schemer))
+(use 'structured-data :reload)
+(authors->string (:authors little-schemer))
+;=> "Daniel Friedman (1944 - ), Matthias Felleisen"
+(authors->string #{octavia})          ;=> "Octavia E. Butler (1947 - 2006)"
+(authors->string #{})                 ;=> ""
+(authors->string #{octavia, friedman})
+;=> "Octavia E. Butler (1947 - 2006), Daniel Friedman (1944 - )"
+;   order doesn't matter
+(use 'structured-data :reload)
+(book->string wild-seed) ;=> "Wild Seed, written by Octavia E. Butler"
+(book->string little-schemer)
+;=> "The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen"
+(use 'structured-data :reload)
+(book->string wild-seed) ;=> "Wild Seed, written by Octavia E. Butler"
+(book->string little-schemer)
+;=> "The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen"
+;                   
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(books->string []) ;=> "No books."
+(books->string [cities])
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(use 'structured-data :reload)
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+(filter has-author? octavia books))
+(books)
+(println books)
+(filter (has-author? octavia]) books))
+(filter (has-author? octavia) books))
+(filter (fn[book](has-author? octavia)) books)
+(filter (fn[book](has-author? octavia book)) books)
+(filter (fn[book](has-author? authors book)) books)
+(use 'structured-data :reload)
+(books-by-author china books)
+(use 'structured-data :reload)
+(books-by-author china books)
+(use 'structured-data :reload)
+(books-by-author china books)
+(def authors #{china, felleisen, octavia, friedman})
+(use 'structured-data :reload)
+(def authors #{china, felleisen, octavia, friedman})
+(author-by-name "Octavia E. Butler" authors)                ;
+(use 'structured-data :reload)
+(author-by-name "Octavia E. Butler" authors)                ;
+(:name authors)
+(println authors)
+(println (:name authors))
+(println (name authors))
+(println (seq authors))
+(println (first(seq authors)))
+(first(seq authors))
+(println authors)
+(print authors)
+(authors)
+authors
+(:name authors)
+(def authors #{china, felleisen, octavia, friedman})
+(map (get :name authors))
+get :name )authors)
+(map (get :name) authors)
+(map (get authors :name) authors)
+(map (get authors :name))
+(get authors :name)
+(first (seq authors))
+(. System exit 0)
+(use 'structured-data)
+(use 'structured-data :reload)
+(def authors #{china, felleisen, octavia, friedman})
+(first (seq {china, felleisen, octavia, friedman}))
+(first (filter (fn [x] (= (:name x) name)) authors)))
+(def china {:name "China Miéville", :birth-year 1972})
+(def octavia {:name "Octavia E. Butler"
+              :birth-year 1947
+              :death-year 2006})
+(def friedman {:name "Daniel Friedman" :birth-year 1944})
+(def felleisen {:name "Matthias Felleisen"})
+(def cities {:title "The City and the City" :authors #{china}})
+(def wild-seed {:title "Wild Seed", :authors #{octavia}})
+(def embassytown {:title "Embassytown", :authors #{china}})
+(def little-schemer {:title "The Little Schemer"
+                     :authors #{friedman, felleisen}})
+(def books [cities, wild-seed, embassytown, little-schemer])
+(author-by-name "Octavia E. Butler" authors)        
+(def authorz #{china, felleisen, octavia, friedman})
+(author-by-name "Octavia E. Butler" authorz)
+(author-by-name "Octavia E. Butler" authors)                ;=> octavia
+(author-by-name "Octavia E. Butler" #{felleisen, friedman}) ;=> nil
+(author-by-name "China Miéville" authors)                   ;=> china
+(author-by-name "Goerge R. R. Martin" authors)   
+(use 'structured-data :reload)
+(author-by-name "Octavia E. Butler" authorz)
+(author-by-name "Octavia E. Butler" authors)                ;=> octavia
+(author-by-name "Octavia E. Butler" #{felleisen, friedman}) ;=> nil
+(author-by-name "China Miéville" authors)                   ;=> china
+(author-by-name "Goerge R. R. Martin" authors)
+(author-by-name "Octavia E. Butler" authorz)
+(use 'structured-data :reload)
+(living-authors authors)
+(def jrrtolkien {:name "J. R. R. Tolkien" :birth-year 1892 :death-year 1973})
+(def christopher {:name "Christopher Tolkien" :birth-year 1924})
+(def kay {:name "Guy Gavriel Kay" :birth-year 1954})
+(def silmarillion {:title "Silmarillion"
+                   :authors #{jrrtolkien, christopher, kay}})
+(def dick {:name "Philip K. Dick", :birth-year 1928, :death-year 1982})
+(def zelazny {:name "Roger Zelazny", :birth-year 1937, :death-year 1995})
+(def deus-irae {:title "Deus Irae", :authors #{dick, zelazny}})
+(use 'structured-data :reload)
+(has-a-living-author? wild-seed)      ;=> false
+(has-a-living-author? silmarillion)   ;=> true
+(has-a-living-author? little-schemer) ;=> true
+(has-a-living-author? cities)         ;=> true
+(has-a-living-author? deus-irae)      ;=> false
+(use 'structured-data :reload)
+(has-a-living-author? wild-seed)      ;=> false
+(has-a-living-author? silmarillion)   ;=> true
+(has-a-living-author? little-schemer) ;=> true
+(has-a-living-author? cities)         ;=> true
+(has-a-living-author? deus-irae)      ;=> false
+(use 'structured-data :reload)
+(has-a-living-author? wild-seed)      ;=> false
+(has-a-living-author? silmarillion)   ;=> true
+(has-a-living-author? little-schemer) ;=> true
+(has-a-living-author? cities)         ;=> true
+(has-a-living-author? deus-irae)      ;=> false
+books-by-living-authors books) ;=> (little-schemer cities embassytown)
+(books-by-living-authors (concat books [deus-irae, silmarillion]))
+;=> (little-schemer cities embassytown silmarillion)
+books-by-living-authors books) ;=> (little-schemer cities embassytown)
+(books-by-living-authors books) ;=> (little-schemer cities embassytown)
