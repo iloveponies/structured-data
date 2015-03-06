@@ -159,18 +159,29 @@
 
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [books] (contains?
+  (:authors books) author)) books))
+
 
 (defn author-by-name [name authors]
-  :-)
+  (let [x (filter (fn [authors]
+  (= (:name authors) name)) authors)y
+  (first (map :name x))] (if (= x ())
+  nil (first x) )))
 
 (defn living-authors [authors]
-  :-)
+ (filter (fn [authors] (not (contains?
+  authors :death-year ))) authors ))
 
 (defn has-a-living-author? [book]
-  :-)
+  (let [a (first (:authors book)) b
+  (map :death-year a) c (not
+  (contains? a :death-year))] c  ))
 
 (defn books-by-living-authors [books]
-  :-)
+   (let [x (fn [book] (let [a (first (:authors book))
+   c (filter (fn [book] (not (contains? a :death-year))) book)]
+    (set (apply concat c))  )) k   (map x books) p (filter
+    (fn [k] (not (= k () ))) k)]  (set (apply concat p))))
 
 ; %________%
