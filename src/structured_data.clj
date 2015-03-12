@@ -102,44 +102,60 @@
 
 (defn authors [books]
   (let [authors (fn [book] 
-                       (:authors book))]
-    (set (map authors books))))
+                  (:authors book))]
+    (apply clojure.set/union (map :authors books))))
     ;;(clojure.set/union (map authors books))))
+;;(clojure.set/union (map authors books))))
 
 (defn all-author-names [books]
   (let [author-names (fn [book] 
                        (map :name (:authors book)))]
-    ;;(set (apply concat (map author-names books)))))
+    (set (apply concat (map author-names books)))))
 
 (defn author->string [author]
   (let [name (:name author)
         years (str (:birth-year author)
-                   (if (contains? :death-year) 
+                   " - "
+                   (if (contains? author :death-year) 
                      (:death-year author)))]
-    (str name years)))
+    (if (contains? author :birth-year)
+      (str name " (" years ")")
+      name)))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (str (:title book) 
+          ", written by " 
+          (authors->string (:authors book))
+          ))
 
 (defn books->string [books]
-  :-)
+  (let [bookCount (count books)
+        countStr (if (== bookCount 1)
+                   "1 book. "
+                   (str bookCount " books. "))]
+    (if (== bookCount 0)
+      "No books."
+      (str countStr 
+           (apply str (interpose ", " (map book->string books)))
+           "."))
+           ))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [b] (contains? (:authors b) author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [a] (= name (:name a))) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter (fn [a] (not (contains? a :death-year))) authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (= 0 (count (living-authors (:authors book))))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter (fn [b] (has-a-living-author? b)) books))
 
 ; %________%
