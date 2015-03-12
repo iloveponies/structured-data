@@ -69,8 +69,9 @@
   (map count collection))
 
 (defn second-elements [collection]
-  (defn second [alist] (first (rest alist)))
-  (map second collection))
+  (let [second (fn [alist] 
+                 (first (rest alist)))]
+    (map second collection)))
 
 (defn titles [books]
   (map :title books))
@@ -89,23 +90,33 @@
     (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  (defn isThere [x] (contains? x a-seq))
-  (apply isThere a-seq))
-  
+  (not= (count a-seq) (count (set a-seq))))
+
 (defn old-book->new-book [book]
-  :-)
+  (let [authors (:authors book)]
+    (assoc book :authors (set authors))))
 
 (defn has-author? [book author]
-  :-)
+  (let [authors (:authors book)]
+    (contains? authors author)))
 
 (defn authors [books]
-  :-)
+  (let [authors (fn [book] 
+                       (:authors book))]
+    (set (map authors books))))
+    ;;(clojure.set/union (map authors books))))
 
 (defn all-author-names [books]
-  :-)
+  (let [author-names (fn [book] 
+                       (map :name (:authors book)))]
+    ;;(set (apply concat (map author-names books)))))
 
 (defn author->string [author]
-  :-)
+  (let [name (:name author)
+        years (str (:birth-year author)
+                   (if (contains? :death-year) 
+                     (:death-year author)))]
+    (str name years)))
 
 (defn authors->string [authors]
   :-)
