@@ -77,31 +77,40 @@
   (map :title books))
 
 (defn monotonic? [a-seq]
-  :-)
+  (or (apply <= a-seq) (apply >= a-seq)))
 
 (defn stars [n]
   (apply str (repeat n "*")))
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem)
+  (disj a-set elem)
+  (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (let [num_elementi (count a-seq)
+        num_elem_set (count (set a-seq))]
+  (not (= num_elementi num_elem_set))))
 
 (defn old-book->new-book [book]
-  :-)
+  (let [authors-set (set (:authors book))]
+  (assoc book :authors authors-set)))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author))
 
 (defn authors [books]
-  :-)
+  (apply clojure.set/union (map :authors books)))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (let [name (:name author)
+        birth-year (:birth-year author)
+        death-year (:death-year author)
+        str_year (if birth-year (str " (" birth-year " - " death-year ")") "")]
+  (str name str_year)))
 
 (defn authors->string [authors]
   :-)
