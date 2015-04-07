@@ -6,7 +6,7 @@
 )
 
 (defn spiff [v]
-  (+ (get v 1) (get v 3) )
+  (+ (get v 0) (get v 2) )
   )
 
 (defn cutify [v]
@@ -71,13 +71,18 @@
   )
 
 (defn title-length [book]
-  :-)
+  (count (:title book))
+  )
 
 (defn author-count [book]
-  :-)
+  (count (:authors book))
+  )
 
 (defn multiple-authors? [book]
-  :-)
+  (if (= 1 (author-count book) )
+    false
+    true )
+  )
 
 (defn add-author [book new-author]
   :-)
