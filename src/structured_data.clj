@@ -50,10 +50,25 @@
   )
 
 (defn contains-point? [rectangle point]
-  :-)
+  (let [[[x1 y1][x2 y2]] rectangle
+        [x3 y3] point]
+    (if (or 
+          (and (<= x1 x3 x2) (<= y1 y3 y2) ) 
+          (and (<= x2 x3 x1) (<= y2 y3 y2) )
+          )
+      true
+      false
+        )
+    )
+  )
 
 (defn contains-rectangle? [outer inner]
-  :-)
+  (let [[[x1 y1][x2 y2]] inner ]
+    (if (and (contains-point? outer [x1 y1]) (contains-point? outer [x2 y2] ) )
+      true
+      false)
+    )
+  )
 
 (defn title-length [book]
   :-)
