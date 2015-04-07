@@ -85,10 +85,15 @@
   )
 
 (defn add-author [book new-author]
-  :-)
+  (let [old-authors (:authors book)
+        new-authors (conj old-authors new-author)]
+    (assoc book :authors new-authors)
+    )
+  )
 
 (defn alive? [author]
-  :-)
+  (not (contains? author :death-year))
+  )
 
 (defn element-lengths [collection]
   :-)
