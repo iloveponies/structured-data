@@ -6,13 +6,19 @@
 )
 
 (defn spiff [v]
-  :-)
+  (+ (get v 1) (get v 3) )
+  )
 
 (defn cutify [v]
-  :-)
+  (conj v "<3")
+  )
 
 (defn spiff-destructuring [v]
-  :-)
+  (let
+    [[a1 a2 a3] v]
+    (+ a1 a3)
+  )
+)
 
 (defn point [x y]
   [x y])
