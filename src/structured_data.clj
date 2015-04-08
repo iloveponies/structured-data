@@ -121,10 +121,17 @@
   )
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem)
+      (disj a-set elem)
+      (conj a-set elem)
+    )
+  )
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (if (= (count a-seq) (count (set a-seq)))
+    false
+    true)
+  )
 
 (defn old-book->new-book [book]
   :-)
