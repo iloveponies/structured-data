@@ -96,7 +96,8 @@
   )
 
 (defn element-lengths [collection]
-  :-)
+  (map (fn [x] (count x)) collection)
+  )
 
 (defn second-elements [collection]
   :-)
