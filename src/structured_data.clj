@@ -110,10 +110,14 @@
   )
 
 (defn monotonic? [a-seq]
-  :-)
+  (if (or (apply <= a-seq) (apply >= a-seq))
+    true
+    false
+    )
+  )
 
 (defn stars [n]
-   (str (repeat n "*"))
+   (apply str (repeat n "*"))
   )
 
 (defn toggle [a-set elem]
