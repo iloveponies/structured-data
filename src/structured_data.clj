@@ -173,6 +173,7 @@
   )
 
 (defn books->string [books]
+  ; requires a re-write!!!! Ugly and not working!!!
     ( let [book-counter (fn [x] (if (= (count books) 1)
                                     (str "1 book.")
                                     (str (count books) " " "books.")) )
@@ -186,10 +187,15 @@
   )
 
 (defn books-by-author [author books]
-  :-)
+  (let [filt (fn [x] (has-author? x author))]
+    (filter filt books )
+    )
+  )
 
 (defn author-by-name [name authors]
-  :-)
+  (let [from_name? (fn [x] (= (:name x) name))]
+    (first (filter from_name? authors)))
+  )
 
 (defn living-authors [authors]
   :-)
