@@ -173,15 +173,11 @@
   )
 
 (defn books->string [books]
-  ; requires a re-write!!!! Ugly and not working!!!
-    ( let [book-counter (fn [x] (if (= (count books) 1)
-                                    (str "1 book.")
-                                    (str (count books) " " "books.")) )
-           book-texts (fn [x] (apply str (map book->string books)))
-           ]
-      (if (empty? books)
-        (str "No books.")
-        (str (book-counter books) " " (book-texts books) ".") 
+    (let [books-strs (fn [x] (apply str (interpose ". " (map book->string x) )))] 
+      (cond
+        (empty? books) (str "No books.")
+        (= 1 (count books)) (str "1 book. " (book->string (first books)) ".")
+        :else (str (count books) " books. " (books-strs books) "." )
       )
     )
   )
