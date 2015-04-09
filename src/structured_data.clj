@@ -154,10 +154,17 @@
   )
 
 (defn author->string [author]
-  :-)
+  (let [author-name (:name author)
+        birth (str (:birth-year author))
+        death (str (:death-year author))]
+    (if (empty? birth)
+      (str author-name)
+      (apply str (list author-name " (" birth " - " death ")"))))
+  )
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors)))
+  )
 
 (defn book->string [book]
   :-)
