@@ -198,12 +198,18 @@
   )
 
 (defn living-authors [authors]
-  :-)
+  (let [living-author (fn [x] (alive? x))]
+    (filter living-author authors)
+    )
+  )
 
 (defn has-a-living-author? [book]
-  :-)
+  (let [authors (:authors book)] 
+    (not (empty? (living-authors authors))))
+  )
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books)
+  )
 
 ; %________%
