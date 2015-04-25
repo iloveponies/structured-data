@@ -71,7 +71,9 @@
 
 
 (defn add-author [book new-author]
-  )
+(let [authors (:authors book)]
+(assoc book :authors (conj authors new-author)
+  )))
 
 (defn alive? [author]
   (if (contains? author :death-year)false true))
@@ -92,7 +94,8 @@
    )
 
 (defn monotonic? [a-seq]
- ())
+(or (apply <= a-seq) (apply >= a-seq)
+    ))
 
 
 (defn stars [n]
@@ -108,47 +111,66 @@
 
 
 (defn contains-duplicates? [a-seq]
-  nil )
+(let [setti (count (set a-seq))
+      sequ (count a-seq)]
+      (not= setti sequ)))
 
 (defn old-book->new-book [book]
-  :-)
+ (assoc book :authors
+   (set (:authors book))
+   ))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author))
 
 (defn authors [books]
-  :-)
+  (apply clojure.set/union (map :authors books)))
 
 (defn all-author-names [books]
-  :-)
+   (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+   (let [nimi (:name author)]
+    (cond
+      (contains? author :death-year)(str nimi " ("(:birth-year author) " - "(:death-year author) ")")
+      (contains? author :birth-year)(str nimi " (" (:birth-year author) " - )")
+      :else nimi)
+       ))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))
+         ))
 
 (defn book->string [book]
-  :-)
+  (let [kirja (:title book)
+      kirjoittaja (authors->string (:authors book))]
+      (str kirja ", written by " kirjoittaja)))
 
 (defn books->string [books]
   :-)
 
+
 (defn books-by-author [author books]
-  :-)
+(filter (fn [x] (has-author? x author)) books
+        ))
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [x] (= name (:name x)))
+                 authors)
+         ))
+
 
 (defn living-authors [authors]
-  :-)
+    (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (let [elossa (-> book :authors living-authors)]
+  (not (empty? elossa))
+    ))
+
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 
-
-; %________%
+; ^____________________^
