@@ -86,7 +86,10 @@
     (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (let[normal-count (count a-seq)
+    setified-count (count (set a-seq))]
+    (> normal-count setified-count)
+    ))
 
 (defn old-book->new-book [book]
   :-)
