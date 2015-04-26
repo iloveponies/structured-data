@@ -68,7 +68,8 @@
   (map count collection))
 
 (defn second-elements [collection]
-  :-)
+  (let [seconds (fn [vect] (get vect 1))]
+    (map seconds (seq collection))))
 
 (defn titles [books]
   :-)
