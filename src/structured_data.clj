@@ -40,12 +40,13 @@
   (let [[[x1 y1] [x2 y2]] rectangle
         [xp yp] point]
         (and (<= x1 xp x2) (<= y1 yp y2))
-    )
-  )
-
+    ))
 
 (defn contains-rectangle? [outer inner]
-  :-)
+    (let [[bottom-left top-right] inner]
+         (and (contains-point? outer bottom-left)
+          (contains-point? outer top-right))
+         ))
 
 (defn title-length [book]
   :-)
