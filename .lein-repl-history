@@ -3,3 +3,5 @@
 (apply concat (repeat 5 "x"))
 (str "asd" "fasd")
 (apply str (repeat 5 "x"))
+(apply <= [1 2 3])
+(apply <= [1 4 3])
