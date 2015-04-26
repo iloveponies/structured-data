@@ -92,7 +92,10 @@
     ))
 
 (defn old-book->new-book [book]
-  :-)
+  (let [author-set (set (:authors book))]
+    (assoc book :authors author-set)
+    ))
+    
 
 (defn has-author? [book author]
   :-)
