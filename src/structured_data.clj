@@ -128,7 +128,19 @@
     (str title by authors)))
 
 (defn books->string [books]
-  :-)
+  (let [number (count books)
+        of " book"
+        singular ". "
+        plural "s. "
+        books-and-authors
+        (apply str
+          (interpose ". "
+            (map book->string books)))
+        end "."]
+    (cond
+      (= 0 number) "No books."
+      (= 1 number) (str number of singular books-and-authors end)
+      :else (str number of plural books-and-authors end))))
 
 (defn books-by-author [author books]
   :-)
