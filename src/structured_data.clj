@@ -143,7 +143,7 @@
       :else (str number of plural books-and-authors end))))
 
 (defn books-by-author [author books]
-  :-)
+  (filter #(has-author? % author) books))
 
 (defn author-by-name [name authors]
   :-)
