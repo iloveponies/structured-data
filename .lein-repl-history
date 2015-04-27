@@ -1,0 +1,8 @@
+(repeat 5 "x")
+(concat (repeat 5 "x"))
+(apply concat (repeat 5 "x"))
+(str "asd" "fasd")
+(apply str (repeat 5 "x"))
+(apply <= [1 2 3])
+(apply <= [1 4 3])
+(str "ASd Fsgk" " " 1948)
