@@ -23,10 +23,12 @@
   [bottom-left top-right])
 
 (defn width [rectangle]
-  :-)
+  (let [[[x1][x2]] rectangle]
+    (- x2 x1)))
 
 (defn height [rectangle]
-  :-)
+  (let [[[_ y1][_ y2]] rectangle]
+    (- y2 y1)))
 
 (defn square? [rectangle]
   :-)
