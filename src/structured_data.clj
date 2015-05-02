@@ -201,19 +201,54 @@
 
 
 (defn books-by-author [author books]
-    :-
+    (let [getit (fn [book] 
+        (if (contains? (get book :authors) author)
+            book
+            ""
+        ))
+        ]
+        
+    (disj (set (map getit books)) "")
+    )
 )
 
 (defn author-by-name [name authors]
-  :-)
+    (let [getit (fn [author] 
+        (if (.contains (get author :name) name)
+            author
+            ""
+        )
+    )]
+    (first (disj (set (map getit authors)) ""))
+    )
+)
 
 (defn living-authors [authors]
-  :-)
+    (let [getit (fn [author] 
+        (if (alive? author)
+            author
+            ""
+        )
+    )]
+    (disj (set (map getit authors)) "")
+    )
+)
 
 (defn has-a-living-author? [book]
-  :-)
+    (if (> (count (living-authors (get book :authors)))  0 )
+        true
+        false
+    )
+)
 
 (defn books-by-living-authors [books]
-  :-)
+    (let [hasit (fn [book] 
+        (if (has-a-living-author? book)
+            book
+            ""
+        ))]
+    (disj (set (map hasit books)) "")
+    )
+)
 
 ; %________%
