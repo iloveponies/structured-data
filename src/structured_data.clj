@@ -73,7 +73,9 @@
   (map :title books))
 
 (defn monotonic? [a-seq]
-  :-)
+  (let [incr (apply <= a-seq)
+        decr (apply >= a-seq)]
+    (or incr decr)))
 
 (defn stars [n]
   (apply str (repeat n "*")))
