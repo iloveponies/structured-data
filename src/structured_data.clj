@@ -6,7 +6,7 @@
 
 
 (defn spiff [v]
-  (+ (first v) (nth v 3)))
+  (+ (get v 0) (get v 2)))
 
 (defn cutify [v]
   (conj v "<3"))
@@ -108,7 +108,7 @@
 
 (defn author->string [author]
    (let [author_name (:name author)
-         author_years (when (not (nil? (:birth-year author))) (str "(" (:birth-year author) " - " (:death-year author) ")"))]
+         author_years (when (not (nil? (:birth-year author))) (str " (" (:birth-year author) " - " (:death-year author) ")"))]
      (str author_name author_years)))
 
 
@@ -119,9 +119,15 @@
 (defn book->string [book]
   (apply str (interpose ", written by " (vector (:title book) (authors->string (:authors book))))))
 
-
 (defn books->string [books]
-  (apply str (if (< 0 (count books))  (count books) (str "No ") ) " books." (interpose ". " (map book->string books))))
+  (apply str (apply str
+         (if (= 0 (count books))
+           (str "No books")
+           (if (< 1 (count books))
+             (str (count books) " books. ")
+             (str (count books) " book. ")))
+         (interpose ". " (map book->string books))
+          ) "."))
 
 
 (defn books-by-author [author books]
@@ -129,7 +135,7 @@
   (filter auth_filter books)))
 
 (defn author-by-name [name authors]
-  (filter (fn [x] (= (:name x) name)) authors))
+  (first (filter (fn [x] (= (:name x) name)) authors)))
 
 
 (defn living-authors [authors]
