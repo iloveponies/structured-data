@@ -91,7 +91,8 @@
     (not (= c1 c2))))
 
 (defn old-book->new-book [book]
-  :-)
+  (let [s (set (:authors book))]
+    (assoc book :authors s)))
 
 (defn has-author? [book author]
   :-)
