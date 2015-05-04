@@ -117,7 +117,13 @@
   (str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
-  :-)
+  (let [c (count books)
+        b (map book->string books)]
+    (str (cond
+           (< c 1) "No books"
+           (= c 1) (str c " book. " (apply str b))
+           (> c 1) (str c " books. " (apply str (interpose ", " b))))
+         ".")))
 
 (defn books-by-author [author books]
   :-)
