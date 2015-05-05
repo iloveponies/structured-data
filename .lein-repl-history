@@ -1,0 +1,137 @@
+(exit)
+(defn author->string [author]
+  (let [name (str (:name author))
+        years (if (:birth-year author) (str "("(:birth-year author) " - " (:death-year author)")"))]
+    (str name (if years (str " " years)))
+  ))
+(defn authors->string [authors]
+(defn author->string [author]
+  (let [name (str (:name author))
+        years (if (:birth-year author) (str "("(:birth-year author) " - " (:death-year author)")"))]
+    (str name (if years (str " " years)))
+  ))
+(defn authors->string [authors]
+(map author->string authors))
+(defn authors->string [authors]
+(str (interpose ", " (map author->string authors)))
+)
+(def china {:name "China Miéville", :birth-year 1972})
+(def octavia {:name "Octavia E. Butler"
+              :birth-year 1947
+              :death-year 2006})
+(def friedman {:name "Daniel Friedman" :birth-year 1944})
+(def felleisen {:name "Matthias Felleisen"})
+(def cities {:title "The City and the City" :authors #{china}})
+(def wild-seed {:title "Wild Seed", :authors #{octavia}})
+(def embassytown {:title "Embassytown", :authors #{china}})
+(def little-schemer {:title "The Little Schemer"
+                     :authors #{friedman, felleisen}})
+(authors->string (:authors little-schemer))
+(map author->string (:authors little-schemer))
+(interpose ", " (map author->string (:authors little-schemer)))
+(interpose , (map author->string (:authors little-schemer)))
+(interpose "," (map author->string (:authors little-schemer)))
+(str (interpose "," (map author->string (:authors little-schemer))))
+(apply str (interpose "," (map author->string (:authors little-schemer))))
+(apply str (interpose ", " (map author->string (:authors little-schemer))))
+little-schemer
+(:authors little-schemer)
+(:authors->bike (:authors little-schemer))
+(:authors->string (:authors little-schemer))
+(defn authors->string [authors]
+ (apply str (interpose ", " (map author->string authors)))
+  )
+(:authors->string (:authors little-schemer))
+(authors->string (:authors little-schemer))
+(str (:title little-schemer) ", written by " (authors->string (:authors little-schemer)))
+(if (> 5 1) true)
+(if (> 0 1) true)
+(defn authors->string [authors]
+ (apply str (interpose ", " (map author->string authors)))
+  )
+(defn authors->string [authors]
+ (apply str (interpose ", " (map author->string authors)))
+  )
+(defn authors->string [authors]
+ (apply str (interpose ", " (map author->string authors)))
+  )
+(defn books->string [books]
+  (let [numbe-of-books (count books)]
+  (if (> numbe-of-books 0) (str numbe-of-books " books." (apply str (interpose ". " (map books->string books)))) (str "No books.")
+         ))
+  )
+(books->string [little-schemer cities]
+)
+(count [little-schemer cities])
+(let [number-of-books (count [cities little-schemer])] (str number-of-books))
+(> 0 (count [cities]))
+(defn books->string [books]
+(let [nbooks (count books)]
+(if (> nbooks 0) "Good job!")))
+(books->string [little-schemer]
+)
+(defn books->string [books]
+(let [nbooks (count books)]
+(if (> nbooks 0) (apply str (interpose "." (map authors->string (:authors books))))
+))
+)
+(books->string [little-schemer]
+)
+(defn books->string [books]
+(let [nbooks (count books)]
+(if (> nbooks 0) (str (interpose "." (map authors->string (:authors books))))
+)
+(books->string [little-schemer]
+)
+(apply str (map authors->string [cities]))
+(authors->string (:authors cities]
+(authors->string (:authors cities))
+(apply str (map authors->string (:authors cities))
+)
+(apply str (map authors->string [cities]))
+(defn book->string [book]
+  (str (:title book) ", written by " (authors->string (:authors book))) 
+  )
+(map book->string [citites])
+(map book->string [cities])
+citis
+(cities)
+cities
+china
+(defn books-by-author [author books]
+  (filter (has-author? author) books)
+  )
+(defn has-author? [book author]
+  (contains? (:authors book) author)
+ )
+(filter (has-author? china x) [cities little-schemer]) 
+(filter (has-author? china ) [cities little-schemer]) 
+(filter (h(def authors #{china, felleisen, octavia, friedman})as-author? china ) [cities little-schemer]) 
+(def authors #{china, felleisen, octavia, friedman})
+(filter (fn [x] (= (:name x) "Goerge R. R. Martin")) authors)
+(filter (fn [x] (= (:name x) "China Miéville")) authors)
+(seq? (filter (fn [x] (= (:name x) "Goerge R. R. Martin")) authors))
+(coll (filter (fn [x] (= (:name x) "Goerge R. R. Martin")) authors))
+(set (filter (fn [x] (= (:name x) "Goerge R. R. Martin")) authors))
+(set (filter (fn [x] (= (:name x) "China Miéville")) authors))
+2
+ [(filter (fn [x] (= (:name x) "China Miéville")) authors)]
+[(filter (fn [x] (= (:name x) "China Miéville")) authors)]
+(col (filter (fn [x] (= (:name x) "Goerge R. R. Martin")) authors))
+(set (filter (fn [x] (= (:name x) "Goerge R. R. Martin")) authors))
+(hash-map (filter (fn [x] (= (:name x) "Goerge R. R. Martin")) authors))
+(apply hash-map (filter (fn [x] (= (:name x) "Goerge R. R. Martin")) authors))
+(apply hash-map (filter (fn [x] (= (:name x) "China Miéville")) authors))
+(apply hash-map (filter (fn [x] (= (:name x) "China Miéville")) authors)))
+(type china)
+(apply hash-map (filter (fn [x] (= (:name x) "China Miéville")) authors)))
+( hash-map (filter (fn [x] (= (:name x) "China Miéville")) authors)))
+ hash-map (filter (fn [x] (= (:name x) "China Miéville")) authors))
+(hash-map (filter (fn [x] (= (:name x) "China Miéville")) authors))
+(apply hash-map (filter (fn [x] (= (:name x) "China Miéville")) authors))
+(map (fn [x]() (filter (fn [x] (= (:name x) "China Miéville")) authors))
+)
+(map (fn [x]()) (filter (fn [x] (= (:name x) "China Miéville")) authors))
+(map (fn [x](x)) (filter (fn [x] (= (:name x) "China Miéville")) authors))
+(map (fn [x] (x)) (filter (fn [x] (= (:name x) "China Miéville")) authors))
+(map (fn [x] (x)) (filter (fn [x] (= (:name x) "China Miéville")) authors)))
