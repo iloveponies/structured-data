@@ -126,7 +126,8 @@
          ".")))
 
 (defn books-by-author [author books]
-  :-)
+  (let [pred (fn [bs] (has-author? bs author))]
+    (filter pred books)))
 
 (defn author-by-name [name authors]
   :-)
