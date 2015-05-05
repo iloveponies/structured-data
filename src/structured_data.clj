@@ -130,7 +130,8 @@
     (filter pred books)))
 
 (defn author-by-name [name authors]
-  :-)
+  (let [name? (fn [author] (= (:name author) name))]
+    (first (filter name? authors))))
 
 (defn living-authors [authors]
   :-)
