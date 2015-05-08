@@ -2,6 +2,7 @@
 
 (defn do-a-thing [x]
   (let [a (+ x x)]
+    (Math/pow a a)))
 
 (defn spiff [v]
   :-)
