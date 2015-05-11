@@ -5,13 +5,16 @@
     (Math/pow a a)))
 
 (defn spiff [v]
-  :-)
+  (let [a (get v 0)
+        b (get v 2)]
+    (+ a b)))
 
 (defn cutify [v]
-  :-)
+  (conj v "<3"))
 
 (defn spiff-destructuring [v]
-  :-)
+  (let [[a b c] v]
+    (+ a c)))
 
 (defn point [x y]
   [x y])
@@ -20,16 +23,22 @@
   [bottom-left top-right])
 
 (defn width [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (- x2 x1)))
 
 (defn height [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (- y2 y1)))
 
 (defn square? [rectangle]
-  :-)
+  (let [a (width rectangle)
+        b (height rectangle)]
+    (= a b)))
 
 (defn area [rectangle]
-  :-)
+    (let [a (width rectangle)
+        b (height rectangle)]
+    (* a b)))
 
 (defn contains-point? [rectangle point]
   :-)
