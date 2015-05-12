@@ -47,34 +47,34 @@
   (count (:title book)))
 
 (defn author-count [book]
-  :-)
+  (count (:authors book)))
 
 (defn multiple-authors? [book]
-  :-)
+  (not (= 1 (author-count book))))
 
 (defn add-author [book new-author]
-  :-)
+  (assoc book :authors (conj (get book :authors) new-author)))
 
 (defn alive? [author]
-  :-)
+  (not (contains? author :death-year)))
 
 (defn element-lengths [collection]
-  :-)
+  (map count (seq collection)))
 
 (defn second-elements [collection]
-  :-)
+  (seq (map first (map rest collection))))
 
 (defn titles [books]
-  :-)
+  (seq (map :title books)))
 
 (defn monotonic? [a-seq]
-  :-)
+  (or (apply <= a-seq) (apply >= a-seq)))
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n \*)))
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem) (disj a-set elem) (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
   :-)
@@ -119,3 +119,4 @@
   :-)
 
 ; %________%
+; (use 'structured-data :reload)
