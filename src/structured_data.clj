@@ -71,10 +71,14 @@
   (map :title books))
 
 (defn monotonic? [a-seq]
-  :-)
+  (let [ordered (fn [v] (or
+                         (apply <= v)
+                         (apply >= v)))]
+    (ordered a-seq)))
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*")))
+
 
 (defn toggle [a-set elem]
   :-)
