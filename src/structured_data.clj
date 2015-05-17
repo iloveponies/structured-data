@@ -55,10 +55,10 @@
   (> (author-count book) 1))
 
 (defn add-author [book new-author]
-  :-)
+  (assoc book :authors new-author))
 
 (defn alive? [author]
-  :-)
+  (contains? author :death-year))
 
 (defn element-lengths [collection]
   :-)
