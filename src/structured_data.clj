@@ -77,34 +77,45 @@
   (if (contains? a-set elem) (disj a-set elem) (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (not= (count a-seq) (count (set a-seq))))
 
 (defn old-book->new-book [book]
-  :-)
+  (assoc book :authors (set (:authors book))))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author))
 
 (defn authors [books]
-  :-)
+  (set (apply clojure.set/union (map :authors books))))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (let [name (:name author)
+  years (str " (" (:birth-year author) " - " (:death-year author) ")")]
+  (if (:birth-year author) (str name years) (str name))))
 
 (defn authors->string [authors]
-  :-)
+  (let [moby (map author->string authors)]
+    (if (>= (count authors) 2)
+      (apply str (interpose ", " moby))
+      (apply str moby))))
 
 (defn book->string [book]
-  :-)
+  (if (:authors book)
+    (apply str (:title book) ", written by " (authors->string (:authors book)))
+    (apply str (:title book))))
 
 (defn books->string [books]
-  :-)
+  (if (= 0 (count books))
+    "No books."
+    (if (= 1 (count books))
+      (apply str "1 book. " (apply book->string books))
+      (apply str (count books) " books. " (interpose ". " (map book->string books))))))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [x] (has-author? x author)) books))
 
 (defn author-by-name [name authors]
   :-)
@@ -120,3 +131,4 @@
 
 ; %________%
 ; (use 'structured-data :reload)
+; (source fn), prints the source of function
