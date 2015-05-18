@@ -136,9 +136,10 @@
   (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (let [living-auths (living-authors (:authors book))]
+    (not (empty? living-auths))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
