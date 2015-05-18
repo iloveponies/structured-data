@@ -129,10 +129,11 @@
   (filter (fn [bk] (has-author? bk author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (let [names (filter (fn [auth] (= (:name auth) name)) authors)]
+    (first names)))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
   :-)
