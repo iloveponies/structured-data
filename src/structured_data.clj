@@ -120,7 +120,7 @@
 (defn books->string [books]
   (let [book-count (count books)
         bks (if (= book-count 1) " book. " " books. ")
-        book-seq (interpose ", " (map book->string books))]
+        book-seq (apply str (interpose ", " (map book->string books)))]
     (if (= 0 book-count)
       (str "No books.")
       (str book-count bks book-seq "."))))
