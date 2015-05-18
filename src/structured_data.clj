@@ -126,7 +126,7 @@
       (str book-count bks book-seq "."))))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [bk] (has-author? bk author)) books))
 
 (defn author-by-name [name authors]
   :-)
