@@ -121,7 +121,9 @@
   (let [book-count (count books)
         bks (if (= book-count 1) " book. " " books. ")
         book-seq (interpose ", " (map book->string books))]
-    (str book-count bks book-seq ".")))
+    (if (= 0 book-count)
+      (str "No books.")
+      (str book-count bks book-seq "."))))
 
 (defn books-by-author [author books]
   :-)
