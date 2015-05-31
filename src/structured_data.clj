@@ -63,7 +63,9 @@
   (> (author-count book) 1))
 
 (defn add-author [book new-author]
-  :-)
+  (let [authors-list (get book :authors)]
+  (assoc book :authors (conj authors-list new-author))
+  ))
 
 (defn alive? [author]
   :-)
