@@ -118,7 +118,7 @@
   (filter (fn [x] (has-author? x author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (seq (filter (fn [x] (= (:name x) name)) (seq authors))))
 
 (defn living-authors [authors]
   :-)
