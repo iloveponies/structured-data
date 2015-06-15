@@ -111,23 +111,23 @@
   (if (= 0 (count books))
     "No books."
     (if (= 1 (count books))
-      (apply str "1 book. " (apply book->string books))
-      (apply str (count books) " books. " (interpose ". " (map book->string books))))))
+      (apply str "1 book. " (apply book->string books) ".")
+      (str (apply str (count books) " books. " (interpose ". " (map book->string books))) "." ))))
 
 (defn books-by-author [author books]
   (filter (fn [x] (has-author? x author)) books))
 
 (defn author-by-name [name authors]
-  (seq (filter (fn [x] (= (:name x) name)) (seq authors))))
+  (first (filter (fn [x] (= (:name x) name)) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
 ; (use 'structured-data :reload)
