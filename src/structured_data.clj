@@ -7,10 +7,7 @@
   )
 
 (defn spiff [v]
-  (let [a (get v 1)
-        b (get v 3)]
-    (+ a b)
-  )
+   (+ (get v 1) (get v 3))
   )
 
 (defn cutify [v]
@@ -27,22 +24,35 @@
   [bottom-left top-right])
 
 (defn width [rectangle]
-  :-)
+   (let [[[x1 y1] [x2 y2]] rectangle]
+    (- x2 x1)))
 
 (defn height [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (- y2 y1))
+  )
 
 (defn square? [rectangle]
-  :-)
+    (if (= (height rectangle) (width rectangle)) true false)
+)
 
 (defn area [rectangle]
-  :-)
+   (* (height rectangle) (width rectangle))
+  )
 
 (defn contains-point? [rectangle point]
-  :-)
+    (let [[[x1 y1] [x2 y2]] rectangle
+          [x3 y3] point]
+    (if(and (<= x1 x3 x2) (<= y1 y3 y2)) true false))
+  )
 
 (defn contains-rectangle? [outer inner]
-  :-)
+      (let [[[x1 y1] [x2 y2]] outer
+          [[x3 y3] [x4 y4]] inner]
+        (if (and (<= x1 x3) (>= x2 x4) (<= y1 y3) (>= y2 y4)) true false)
+        )
+
+  )
 
 (defn title-length [book]
   (count (:title book)))
@@ -105,7 +115,7 @@
 )
 
 (defn all-author-names [books]
-  :-)
+  (set (apply concat (map :authors books))))
 
 (defn author->string [author]
   :-)
