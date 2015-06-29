@@ -54,7 +54,7 @@
 (square? (rectangle [1 1] [2 3]))
 
 (defn area [rectangle]
-    (* (width rectangle)  (height rectangle)))
+  (* (width rectangle)  (height rectangle)))
 
 (defn contains-point? [rectangle point]
   (let [[[x1 y1] [x2 y2]] rectangle
@@ -101,47 +101,66 @@
     (assoc book :authors new-authors)))
 
 
+
 (defn alive? [author]
-  :-)
+  (nil? (:death-year author)))
+
 
 (defn element-lengths [collection]
-  :-)
+  (map count collection))
 
 (defn second-elements [collection]
-  :-)
+  (map #(nth % 1) collection))
+
+
 
 (defn titles [books]
-  :-)
+  (map :title books))
+
 
 (defn monotonic? [a-seq]
-  :-)
+  ( or (apply <= a-seq)
+    (apply >= a-seq)))
+
 
 (defn stars [n]
-  :-)
+  (repeat n '*'))
+
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)))
+
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (> (count a-seq) (count (set a-seq))))
+
 
 (defn old-book->new-book [book]
-  :-)
+  (assoc book :authors (set (:authors book))))
 
 (defn has-author? [book author]
-  :-)
+  (not (nil? (some #{(#(:name %) author)} (vec (#(map :name (:authors %)) book))))))
+
 
 (defn authors [books]
-  :-)
+  (apply clojure.set/union (map :authors  books)))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
 
-(defn author->string [author]
-  :-)
+(defn
+  author->string
+  "return string representation of author"
+  [author]
+  (cond
+   (= (:birth-year author) nil) (:name author)
+   :else (str (:name author) " (" (:birth-year author) " - " (:death-year author) ")")))
+
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string (:authors  authors)))))
 
 (defn book->string [book]
   :-)
