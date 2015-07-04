@@ -100,34 +100,43 @@
 (defn all-author-names [books]
   (set (map :name (authors books))))
 
-(defn author->string2 [author]
+(defn author->string [author]
   (let [nam (:name author)
-        yrs (str (:birth-year octavia)
-                 " - "
-                 (:death-year octavia))]))
+        bir (:birth-year author)
+        dth (:death-year author)]
+    (str nam (if-not (nil? bir)
+               (str " (" bir " - " dth ")")))))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (let [title (:title book)
+        auths (authors->string (:authors book))]
+    (str title ", written by " auths)))
 
 (defn books->string [books]
-  :-)
+  (let [lkm    (count books)
+        boktxt (if (= lkm 0)
+                 (str "No books")
+                 (if (= lkm 1)
+                   (str "1 book. ")
+                   (str lkm " books. ")))]
+    (str boktxt (apply str (interpose ". " (map book->string books))) ".")))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [x] (has-author? x author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [x] (= (:name x) name)) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter (fn [x] (has-a-living-author? x)) books))
 
-; %________%
+; ^________^ siitäs sait
