@@ -110,9 +110,7 @@
   (map count collection))
 
 (defn second-elements [collection]
-  (map #(nth % 1) collection))
-
-
+  (map #(get (vec %) 1) collection))
 
 (defn titles [books]
   (map :title books))
@@ -124,8 +122,9 @@
 
 
 (defn stars [n]
-  (repeat n '*'))
+  (apply str (repeat n "*")))
 
+(apply str (repeat 5 "*"))
 
 (defn toggle [a-set elem]
   (if (contains? a-set elem)
@@ -160,27 +159,40 @@
 
 
 (defn authors->string [authors]
-  (apply str (interpose ", " (map author->string (:authors  authors)))))
+  (apply str (interpose ", " (map author->string authors))))
+
+
 
 (defn book->string [book]
-  :-)
+  (apply str  (:title book) ", written by " (authors->string (:authors book))))
+
 
 (defn books->string [books]
-  :-)
+  (let [bookCount (count books)
+        bookString (interpose ". " (map book->string books))]
+    (if (<= bookCount 0)
+      "No books."
+      (if (= bookCount 1)
+            (str "1 book. " (apply str bookString) ".")
+            (str bookCount " books. " (apply str bookString) ".")))))
+
 
 (defn books-by-author [author books]
-  :-)
+  (filter #(has-author?  % author) books))
 
-(defn author-by-name [name authors]
-  :-)
+
+ (defn author-by-name [name authors]
+  (let [has-name? (fn [author]
+    (= name (:name author)))]
+    (first (filter has-name? authors))))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
