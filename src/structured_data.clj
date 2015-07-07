@@ -9,7 +9,12 @@
 
 
 (defn spiff [v]
-  :-)
+  (cond
+  (number? (get v 2))
+  (let [a (get v 0)
+        b (get v 2)]
+    (+ a b))
+   :else nil))
 
 (defn cutify [v]
   :-)
