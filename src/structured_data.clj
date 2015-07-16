@@ -65,7 +65,7 @@
 
 (defn second-elements [collection]
   (let [sec (fn [vec] (get vec 1))]
-  (map sec collection)))
+    (map sec collection)))
 
 (defn titles [books]
   (map :title books))
@@ -82,45 +82,61 @@
     (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (not (== (count a-seq) (count (set a-seq)))))
 
 (defn old-book->new-book [book]
-  :-)
+  (assoc book :authors (set (:authors book))))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author))
 
 (defn authors [books]
-  :-)
+  (apply clojure.set/union (map :authors books)))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (let [aname (str (:name author))
+        born (str (:birth-year author))
+        dead (str (:death-year author))]
+    (if (not (empty? born))
+      (str aname " (" born " - " dead ")")
+      (str aname)
+      )))
 
 (defn authors->string [authors]
-  :-)
+  (apply str
+         (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by "
+       (authors->string (:authors book))))
 
 (defn books->string [books]
-  :-)
+  (if (empty? books)
+    "No books."
+    (let [book-count (count books)
+          countstr (if (== book-count 1)
+                     "1 book."
+                     (str book-count " books."))]
+      (str countstr " "
+           (apply str (interpose ". "
+                                 (map book->string books)))"."))))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [b] (contains? (:authors b) author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (first(filter (fn [a] (= name (:name a))) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
