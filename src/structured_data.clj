@@ -36,7 +36,7 @@
 
 (defn width [rectangle]
   (let [a (get rectangle 0)
-        b (get rectangle 0)
+        b (get rectangle 1)
         c (get a 0)
         d(get b 0)]
         (- d c)
@@ -47,7 +47,7 @@
   (defn height [rectangle]
   (let [a (get rectangle 0)
         b (get rectangle 1)
-        c (get a 0)
+        c (get a 1)
         d(get b 1)]
     (- d c)
       )
