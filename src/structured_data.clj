@@ -54,7 +54,22 @@
 )
 
 (defn square? [rectangle]
-  :-)
+   (let [a (get rectangle 0)
+        b (get rectangle 1)
+        c (get a 0)
+        d(get b 0)
+        e (get a 1)
+        f(get b 1)
+         cd (* d c)
+         ef (* e f)]
+      (if (= cd ef)
+    true
+    (if(= cd 0)
+      true
+      (if (= ef 0)
+      true
+      false)
+      ))))
 
 (defn area [rectangle]
   :-)
