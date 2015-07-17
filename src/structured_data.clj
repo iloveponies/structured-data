@@ -72,7 +72,16 @@
       ))))
 
 (defn area [rectangle]
-  :-)
+     (let [a (get rectangle 0)
+        b (get rectangle 1)
+        c (get a 0)
+        d(get b 0)
+        e (get a 1)
+        f(get b 1)
+         cd (- c d)
+         ef (- e f)]
+       (* cd ef)
+      ))
 
 (defn contains-point? [rectangle point]
   :-)
