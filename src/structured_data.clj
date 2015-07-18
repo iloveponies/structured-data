@@ -62,25 +62,30 @@
   (not (contains? author :death-year)))
 
 (defn element-lengths [collection]
-  :-)
+  (map (fn [x] (count x))  collection))
 
 (defn second-elements [collection]
-  :-)
+  (let [extract-second (fn [v] (get v 1))]
+    (map extract-second (seq collection))))
 
 (defn titles [books]
-  :-)
+  (map :title books))
 
 (defn monotonic? [a-seq]
-  :-)
+  (or
+    (apply <= a-seq)
+    (apply >= a-seq)))
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*")))
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem) (disj a-set elem) (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (let [original-element-count (count a-seq)
+        unique-element-count (count (set a-seq))]
+    (not= original-element-count unique-element-count)))
 
 (defn old-book->new-book [book]
   :-)
