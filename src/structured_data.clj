@@ -83,11 +83,29 @@
        (* cd ef)
       ))
 
+
 (defn contains-point? [rectangle point]
-  :-)
+(let [a (get rectangle 0)
+        b (get rectangle 1)
+        c (get a 0)
+        d(get b 0)
+        e (get a 1)
+        f(get b 1)
+      eka (get point 0)
+      toka (get point 1)]
+      (if (and (and (and (<= eka c)(<= toka e)(>= eka 0)(>= toka 0))))
+    true
+    (if(and (and (and (<= eka d) (<= toka f)(>= eka 0)(>= toka 0))))
+      true
+      false)
+    )))
+
 
 (defn contains-rectangle? [outer inner]
-  :-)
+  (if(=(contains-point? outer (get inner 0)) true)
+    true
+    (contains-point? outer (get inner 1)))
+)
 
 (defn title-length [book]
   :-)
