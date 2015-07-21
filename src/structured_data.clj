@@ -114,7 +114,7 @@
     (if (= 1 (count books))
       (str "1 book. " (book->string (first books)) ".")
       (str (count books) " books. "
-           (apply str (interpose " " (map book->string books)))
+           (apply str (interpose ". " (map book->string books)))
            "."))))
 
 (defn books-by-author [author books]
