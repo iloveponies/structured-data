@@ -121,9 +121,9 @@
 (defn books->string [books]
   (let [numbooks (count books)]
     (cond (zero? numbooks) (str "No books.")
-          (= 1 numbooks) (str "1 book. " (book->string (first books)))
+          (= 1 numbooks) (str "1 book. " (book->string (first books)) ".")
           :else (str numbooks " books. "
-                  (apply str (interpose ". " (map book->string books)))))))
+                  (apply str (interpose ". " (map book->string books))) "."))))
 
 (defn books-by-author [author books]
   (filter (fn [x] (has-author? x author)) books))
