@@ -66,63 +66,81 @@
   (not (contains? author :death-year)))
 
 (defn element-lengths [collection]
-  :-)
+  (map count collection))
 
 (defn second-elements [collection]
-  :-)
+  (let [second (fn [vec] (get vec 1))]
+    (map second collection)))
 
 (defn titles [books]
-  :-)
+  (map :title books))
 
 (defn monotonic? [a-seq]
-  :-)
+  (or
+    (apply >= a-seq)
+    (apply <= a-seq)))
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*")))
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (let [myset (set a-seq)]
+    (not (= (count myset) (count a-seq)))))
 
 (defn old-book->new-book [book]
-  :-)
+  (assoc book :authors (set (:authors book))))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author))
 
 (defn authors [books]
-  :-)
+    (apply clojure.set/union (map :authors books)))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (let  [name-string (:name author)
+         byear (:birth-year author)
+         dyear (or (:death-year author) "")]
+    (if (not byear)
+      (str name-string)
+      (str name-string " (" byear " - " dyear ")"))))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
-  :-)
+  (let [numbooks (count books)]
+    (cond (zero? numbooks) (str "No books.")
+          (= 1 numbooks) (str "1 book. " (book->string (first books)))
+          :else (str numbooks " books. "
+                  (apply str (interpose ". " (map book->string books)))))))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [x] (has-author? x author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+   (first (filter (fn [author] (= name (:name author)))
+           authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter (fn [author] (alive? author)) authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter (fn [book] (has-a-living-author? book))
+          books))
+
 
 ; %________%
