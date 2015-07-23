@@ -129,19 +129,26 @@
   )
 
 (defn element-lengths [collection]
-  :-)
+ (map count collection))
 
 (defn second-elements [collection]
-  :-)
+ (let [element (fn [array]
+                 (get array 1))]
+   (map element collection))
+
+  )
 
 (defn titles [books]
-  :-)
+ (map :title books)
+  )
 
 (defn monotonic? [a-seq]
-  :-)
+(or (apply >= a-seq) (apply <= a-seq))
+)
 
 (defn stars [n]
-  :-)
+ (apply str (repeat n "*"))
+  )
 
 (defn toggle [a-set elem]
   :-)
