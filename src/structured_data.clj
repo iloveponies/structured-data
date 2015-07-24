@@ -177,7 +177,12 @@
 
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (let[summa(count (distinct a-seq))
+       summa2(count a-seq)]
+    (if(= summa summa2)
+      false
+      true))
+  )
 
 (defn old-book->new-book [book]
   :-)
