@@ -161,7 +161,10 @@
 )
 
 (defn monotonic? [a-seq]
-  :-)
+  (if (apply <= a-seq)
+   true
+   (apply >= a-seq))
+)
 
 (defn stars [n]
   (apply str(repeat n "*")))
