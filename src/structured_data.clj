@@ -148,8 +148,13 @@
   (map laske collection)
   )
 
+(defn secondIndex [collection2]
+  (get collection2 1))
+
 (defn second-elements [collection]
-  :-)
+  (let [lista (map secondIndex collection)]
+    lista)
+)
 
 (defn titles [books]
   :-)
