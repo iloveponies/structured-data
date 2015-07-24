@@ -122,7 +122,19 @@
 
 
 (defn add-author [book new-author]
-  :-)
+  (let [orgAuth (book :authors)
+        newAuth (conj orgAuth new-author)
+        newBook {:title (book :title)
+                     :authors newAuth}
+        newBook2 {:authors newAuth}]
+    (if (> (title-length newBook) 0)
+      newBook
+      newBook2
+    )
+))
+
+
+
 
 (defn alive? [author]
   :-)
