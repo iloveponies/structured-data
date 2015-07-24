@@ -137,7 +137,11 @@
 
 
 (defn alive? [author]
-  :-)
+  (let[death(contains? author :death-year)
+       really(if (= death true)
+         false
+         true)]
+    really))
 
 (defn element-lengths [collection]
   :-)
