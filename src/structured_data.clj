@@ -134,8 +134,6 @@
 ))
 
 
-
-
 (defn alive? [author]
   (let[death(contains? author :death-year)
        really(if (= death true)
@@ -143,8 +141,12 @@
          true)]
     really))
 
+(defn laske[x]
+  (count x))
+
 (defn element-lengths [collection]
-  :-)
+  (map laske collection)
+  )
 
 (defn second-elements [collection]
   :-)
