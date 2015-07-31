@@ -190,7 +190,9 @@
 
 
 (defn has-author? [book author]
-  :-)
+(contains?(book :authors) author)
+  )
+
 
 (defn authors [books]
   :-)
