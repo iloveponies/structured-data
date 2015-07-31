@@ -118,7 +118,7 @@
    (let [bookcount (count books)] (if (zero? bookcount) "No books." (str bookcount " book" (if (> bookcount 1) "s") ". " (apply str (interpose ". " (map book->string books))) "."))))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [x] (has-author? x author)) books))
 
 (defn author-by-name [name authors]
   :-)
