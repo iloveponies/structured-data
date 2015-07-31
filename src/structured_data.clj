@@ -195,10 +195,15 @@
 
 
 (defn authors [books]
-  :-)
+  (let [author-names
+         (fn [book] (book :authors))]
+    (set (apply concat (map author-names books)))))
+
 
 (defn all-author-names [books]
-  :-)
+  (let [author-names
+         (fn [book] (map :name (:authors book)))]
+    (set (apply concat (map author-names books)))))
 
 (defn author->string [author]
   :-)
