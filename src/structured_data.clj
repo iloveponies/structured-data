@@ -185,7 +185,9 @@
   )
 
 (defn old-book->new-book [book]
-  :-)
+  (assoc book :authors  (set (concat (book :authors))))
+  )
+
 
 (defn has-author? [book author]
   :-)
