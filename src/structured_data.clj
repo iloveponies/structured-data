@@ -1,80 +1,77 @@
 
 (ns structured-data)
-;first (require 'structured-data); then (use 'structured-data)
-;then (require 'clojure.set) then (use 'clojure.set) then (union mySet1 mySet2)
-;user=> (require 'clojure.string)
-;user=> (clojure.string/split "name,address,city,state,zip,email,phone" #",")
+
 (require 'clojure.set)
 (use 'clojure.set)
 
-(def myFuncAddOne(fn[x](+ x 1)))
-(println (myFuncAddOne 2))
+;(def china
+;  {:name "China Miéville",
+;   :birth-year 1972})
+;(def octavia
+;  {:name "Octavia E. Butler"
+;  :birth-year 1947
+;  :death-year 2006})
+;(def friedman
+;  {:name "Daniel Friedman"
+;  :birth-year 1944})
+;(def felleisen
+;  {:name "Matthias Felleisen"})
+;(def dick
+;  {:name "Philip K. Dick",
+;  :birth-year 1928,
+;  :death-year 1982})
+;(def zelazny
+;  {:name "Roger Zelazny",
+;   :birth-year 1937,
+;   :death-year 1995})
+;
+;(def cities
+;  {:title "The City and the City"
+;   :authors [china]})
+;(def wild-seed
+;  {:title "Wild Seed",
+;   :authors [octavia]})
+;(def embassytown
+;  {:title "Embassytown",
+;   :authors [china]})
+;(def little-schemer
+;  {:title "The Little Schemer"
+;   :authors [friedman, felleisen]})
+;(def jrrtolkien
+;  {:name "J. R. R. Tolkien"
+;   :birth-year 1892
+;   :death-year 1973})
+;(def christopher
+;  {:name "Christopher Tolkien"
+;   :birth-year 1924})
+;(def kay
+;  {:name "Guy Gavriel Kay"
+;   :birth-year 1954})
+;(def silmarillion
+;  {:title "Silmarillion"
+;   :authors #{jrrtolkien, christopher, kay}})
+;(def deus-irae
+;  {:title "Deus Irae",
+;   :authors #{dick, zelazny}})
+;
+;(def all-authors #{china, felleisen, octavia, friedman, dick, zelazny})
+;
+;(def books [cities, wild-seed, embassytown, little-schemer, deus-irae, jrrtolkien, christopher, kay, silmarillion])
 
-(def china
-  {:name "China Miéville",
-   :birth-year 1972})
-(def octavia
-  {:name "Octavia E. Butler"
-  :birth-year 1947
-  :death-year 2006})
-(def friedman
-  {:name "Daniel Friedman"
-  :birth-year 1944})
-(def felleisen
-  {:name "Matthias Felleisen"})
-(def dick
-  {:name "Philip K. Dick",
-  :birth-year 1928,
-  :death-year 1982})
-(def zelazny
-  {:name "Roger Zelazny",
-   :birth-year 1937,
-   :death-year 1995})
 
-(def cities
-  {:title "The City and the City"
-   :authors [china]})
-(def wild-seed
-  {:title "Wild Seed",
-   :authors [octavia]})
-(def embassytown
-  {:title "Embassytown",
-   :authors [china]})
-(def little-schemer
-  {:title "The Little Schemer"
-   :authors [friedman, felleisen]})
-(def jrrtolkien
-  {:name "J. R. R. Tolkien"
-   :birth-year 1892
-   :death-year 1973})
-(def christopher
-  {:name "Christopher Tolkien"
-   :birth-year 1924})
-(def kay
-  {:name "Guy Gavriel Kay"
-   :birth-year 1954})
-(def silmarillion
-  {:title "Silmarillion"
-   :authors #{jrrtolkien, christopher, kay}})
-(def deus-irae
-  {:title "Deus Irae",
-   :authors #{dick, zelazny}})
+;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(def authors #{china, felleisen, octavia, friedman, dick, zelazny})
-
-(def sanakirja{"hevonen" "horse", "poni" "pony"})
-
-(def books [cities, wild-seed, embassytown, little-schemer, deus-irae, jrrtolkien, christopher, kay, silmarillion])
 
 (defn do-a-thing [x] (let [a (+ x x)] (Math/pow a a)))
 
 (defn spiff-destructuring [v]
-  [(get v 0) (get v 2)])
+  (+ (get v 0) (get v 2)))
 
 (defn spiff [v]
-  (if (>= (count v) 3)
-    (let [x (spiff-destructuring v)] (+ (get x 0) (get x 1)))
-    :?))
+;  (if (>= (count v) 3)
+;    (let [x (spiff-destructuring v)] (+ (get x 0) (get x 1)))
+;    :?))
+  (+ (get v 2) (get v 0)))
 
 (defn cutify [v]
   (conj v "<3"))
@@ -93,7 +90,7 @@
   (let [[[x1 y1] [x2 y2]] rectangle] (- y2 y1)))
 
 (defn square? [rectangle]
-  :-)
+  (= (width rectangle)(height rectangle)))
 
 (defn area [rectangle]
   (let [[[x1 y1] [x2 y2]] rectangle] (* (- x2 x1) (- y2 y1))))
@@ -118,7 +115,7 @@
   (if (> (author-count book) 1) true false))
 
 (defn add-author [book new-author]
-  (conj (:authors book) new-author))
+  (assoc book :authors (conj (:authors book) new-author)))
 
 (defn alive? [author]
   (not (contains? author :death-year)))
@@ -127,14 +124,13 @@
   (map (fn [x] (count x)) collection)) ;anonymous innerfunction
 
 (defn second-elements [collection]
-  (let [getSecond (fn[innerArray] (innerArray 1))]
-    (map getSecond collection)))
+  (map (fn[col] (get col 1)) collection))
 
 (defn titles [books]
   (map :title books))
 
 (defn stars [n]
-  (repeat n "*"))
+  (apply str (repeat n "*")))
 
 ;Number is monotinic if (<= a b c ... ) or (>= a b c ... )
 (defn monotonic? [a-seq]
@@ -152,8 +148,11 @@
 (defn has-author? [book author]
   (contains? (:authors (old-book->new-book book)) author))
 
+(defn authors [books]
+  (apply union(map :authors (map old-book->new-book books))))
+
 ;(defn authors [books]
-;  (apply union(map :authors (map old-book->new-book books))))
+;  (apply clojure.set/union (map :authors books)))
 
 (defn all-author-names [books]
   (set (map :name (authors books))))
