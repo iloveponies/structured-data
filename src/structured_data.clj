@@ -66,7 +66,7 @@
   (or (apply <= a-seq) (apply >= a-seq)))
 
 (defn stars [n]
-  (str (repeat n "*")))
+  (apply str (repeat n "*")))
 
 (defn toggle [a-set elem]
   (if (contains? a-set elem) (disj a-set elem) (conj a-set elem)))
@@ -118,7 +118,7 @@
   (filter (fn [x] (has-author? x author)) books))
 
 (defn author-by-name [name authors]
-  (filter (fn [x] (= name (:name x))) authors)
+  (first (filter (fn [x] (= name (:name x))) authors))
   )
 
 (defn living-authors [authors]
