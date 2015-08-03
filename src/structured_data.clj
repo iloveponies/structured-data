@@ -125,7 +125,7 @@
    (if (empty? authors) nil (if (= name (:name first-author)) first-author (author-by-name name (rest authors))))))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive?  authors))
 
 (defn has-a-living-author? [book]
   :-)
