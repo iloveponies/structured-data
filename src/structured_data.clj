@@ -205,6 +205,7 @@
          (fn [book] (map :name (:authors book)))]
     (set (apply concat (map author-names books)))))
 
+
 (defn author->string [author]
   (let [nimi (author :name)
         synt (author :birth-year)
@@ -212,12 +213,16 @@
         merkki (str" - ")
         kaari (str "(")
         kaari2 (str ")")]
-    (str (str nimi " " ) kaari synt merkki death kaari2)))
-
+    (if (= synt nil)
+    (str nimi)
+      (str (str nimi " " ) kaari synt merkki death kaari2)))
+  )
 
 
 (defn authors->string [authors]
-  :-)
+(doseq [x authors]
+  (map str (author->string x))))
+
 
 (defn book->string [book]
   :-)
