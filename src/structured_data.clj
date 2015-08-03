@@ -121,7 +121,8 @@
   (filter (fn [x] (has-author? x author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (let [first-author (first authors)]
+   (if (empty? authors) nil (if (= name (:name first-author)) first-author (author-by-name name (rest authors))))))
 
 (defn living-authors [authors]
   :-)
