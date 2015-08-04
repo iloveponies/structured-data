@@ -228,7 +228,11 @@
 
 
 (defn book->string [book]
-  :-)
+   (let [title (book :title)
+        auth (book :authors)
+        authhors (authors->string auth)
+        by (str ", written by ")]
+      (str title by authhors)))
 
 (defn books->string [books]
   :-)
