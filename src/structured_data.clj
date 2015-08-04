@@ -220,8 +220,11 @@
 
 
 (defn authors->string [authors]
-(doseq [x authors]
-  (map str (author->string x))))
+(let [result(for [x authors]
+  (str (author->string x)))
+      result2 (interpose ", " result)
+      result3 (apply str result2)]
+  result3))
 
 
 (defn book->string [book]
