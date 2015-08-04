@@ -248,7 +248,9 @@
 
 
 (defn books-by-author [author books]
-  :-)
+(filter (fn[x] (= (has-author? x author)true)) books))
+
+
 
 (defn author-by-name [name authors]
   :-)
