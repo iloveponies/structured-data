@@ -235,7 +235,17 @@
       (str title by authhors)))
 
 (defn books->string [books]
-  :-)
+  (let [koko (count books)
+        result(for [x books]
+                (str (book->string x)))
+                 result2 (interpose ". " result)
+      result3 (apply str result2)]
+    (if (= koko 0)
+      "No books."
+       (if (= koko 1)
+      (str koko " book. " result3 ".")
+          (str koko " books. " result3 ".")))))
+
 
 (defn books-by-author [author books]
   :-)
