@@ -273,6 +273,7 @@ result2)
     returnvalue))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter (fn[x] (has-a-living-author? x))books))
+
 
 ; %________%
