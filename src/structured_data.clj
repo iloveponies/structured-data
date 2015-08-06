@@ -83,20 +83,38 @@
        (* cd ef)
       ))
 
+"copy-paste from stackoverflow...http://stackoverflow.com/questions/21753243/absolute-value-of-a-number-in-clojure"
+(defn abs "(abs n) is the absolute value of n" [n]
+  (cond
+   (not (number? n)) (throw (IllegalArgumentException.
+                             "abs requires a number"))
+   (neg? n) (- n)
+   :else n))
+
+
+(defn getNumbers?[x y]
+  (if(and (< x 0) (< y 0))
+    [(abs x) (abs y)]
+    [x y]
+))
+
+
 
 (defn contains-point? [rectangle point]
-(let [a (get rectangle 0)
+(let [a (get  rectangle 0)
         b (get rectangle 1)
-        c (get a 0)
-        d(get b 0)
-        e (get a 1)
-        f(get b 1)
-      eka (get point 0)
-      toka (get point 1)]
-      (if (and (and (and (<= eka c)(<= toka e)(>= eka 0)(>= toka 0))))
-    true
-    (if(and (and (and (<= eka d) (<= toka f)(>= eka 0)(>= toka 0))))
-      true
+       aa (getNumbers? (get a 0)(get a 1))
+      bb (getNumbers? (get b 0) (get b 1))
+      eka (abs(get point 0))
+      toka (abs(get point 1))]
+      (if (and (<= eka (aa 0))(<= toka (aa 1)))
+        (if(and(and (= eka 0)(= toka 0)))
+          false
+          true)
+    (if(and (<= eka (bb 0))(<= toka (bb 1)))
+       (if(and(and (= eka 0)(= toka 0)))
+          false
+          true)
       false)
     )))
 
