@@ -262,7 +262,7 @@ result2)
   )
 
 (defn living-authors [authors]
-  :-)
+  (filter (fn[x] (alive? x))authors))
 
 (defn has-a-living-author? [book]
   :-)
