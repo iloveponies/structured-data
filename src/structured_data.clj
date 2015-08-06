@@ -251,9 +251,15 @@
 (filter (fn[x] (= (has-author? x author)true)) books))
 
 
-
 (defn author-by-name [name authors]
-  :-)
+  (let [result(filter (fn[x] (= (:name x) name)) authors)
+        result2(if (= (count result) 0)
+        nil
+        (first result)
+        )
+        ]
+result2)
+  )
 
 (defn living-authors [authors]
   :-)
