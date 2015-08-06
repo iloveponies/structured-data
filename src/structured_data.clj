@@ -265,7 +265,12 @@ result2)
   (filter (fn[x] (alive? x))authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (let [allAutohors(:authors book)
+        living (living-authors allAutohors)
+        returnvalue(if (=(count living) 0)
+        false
+        true)]
+    returnvalue))
 
 (defn books-by-living-authors [books]
   :-)
