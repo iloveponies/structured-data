@@ -116,11 +116,13 @@
   (str title ", written by " (authors->string author))))
 
 (defn books->string [books]
-  (let [count (count books)
-        y (cond (== 0 count) (str "No books")
-                (== 1 count) (str "1 book. ")
-                (== 3 count) (str "3 books. "))]
-      (str y (apply str (map book->string books)) ".")))
+  (let [num-books (count books)]
+    (str (if (pos? num-books)
+           (if (< 1 num-books)
+             (str num-books " books. ")
+             (str num-books " book. "))
+           "No books")
+      (apply str (interpose ", " (map book->string books))) ".")))
 
 (defn books-by-author [author books]
   (filter (fn [book] (has-author? book author)) books))
