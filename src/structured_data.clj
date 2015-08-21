@@ -32,14 +32,21 @@
         [x2 y2] p2]
     (- y2 y1)))
 
-(defn square? [rectangle]
-  :-)
+(defn square? [[p1 p2]]
+  (let [[x1 y1] p1
+        [x2 y2] p2]
+    (= (- x2 x1) (- y2 y1))))
 
-(defn area [rectangle]
-  :-)
+(defn area [[p1 p2]]
+  (let [[x1 y1] p1
+        [x2 y2] p2]
+    (* (- x2 x1) (- y2 y1))))
 
-(defn contains-point? [rectangle point]
-  :-)
+(defn contains-point? [[p1 p2] point]
+  (let [[x1 y1] p1
+        [x2 y2] p2
+        [x y] point]
+    (and (>= x1 x x2) (>= y1 y y2))))
 
 (defn contains-rectangle? [outer inner]
   :-)
