@@ -135,7 +135,7 @@
     (str book-count-string books-string trailing-dot-string)))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [x] (contains? (:authors x) author)) books))
 
 (defn author-by-name [name authors]
   :-)
