@@ -125,7 +125,14 @@
     (apply str (interpose ", written by " [title-string authors-string]))))
 
 (defn books->string [books]
-  :-)
+  (let [book-count (count books)
+        book-count-string (cond
+                             (= 0 book-count) "No books."
+                             (= 1 book-count) "1 book. "
+                             :else (str book-count " books. "))
+        books-string (apply str (interpose ". " (map book->string books)))
+        trailing-dot-string (if (> book-count 0) "." "")]
+    (str book-count-string books-string trailing-dot-string)))
 
 (defn books-by-author [author books]
   :-)
