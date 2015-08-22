@@ -120,7 +120,9 @@
   (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (let [authors-string (authors->string (:authors book))
+        title-string (:title book)]
+    (apply str (interpose ", written by " [title-string authors-string]))))
 
 (defn books->string [books]
   :-)
