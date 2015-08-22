@@ -135,10 +135,12 @@
     (str book-count-string books-string trailing-dot-string)))
 
 (defn books-by-author [author books]
-  (filter (fn [x] (contains? (:authors x) author)) books))
+  (filter (fn [x] (has-author? x author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (let [matching (filter (fn [author] (= (:name author) name)) authors)
+        matches? (> (count matching) 0)]
+    (if matches? (first matching) nil)))
 
 (defn living-authors [authors]
   :-)
