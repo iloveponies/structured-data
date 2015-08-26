@@ -66,49 +66,61 @@
   (map count collection))
 
 (defn second-elements [collection]
-  :-)
+  (let [toiset (fn [x] (get x 1))]
+    (map toiset collection)))
 
 (defn titles [books]
-  :-)
+  (let [nimet (fn [x] (:title x))]
+  (map nimet books)))
 
 (defn monotonic? [a-seq]
-  :-)
+  (or (apply <= a-seq) (apply >= a-seq)))
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*")))
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem) (disj a-set elem)
+    (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (let [bset (set a-seq)]
+    (if (= (count a-seq) (count bset)) false true)))
 
 (defn old-book->new-book [book]
-  :-)
+  (assoc book :authors (set (:authors book))))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author))
 
 (defn authors [books]
-  :-)
+  (let [teki (fn [x] (:authors x))]
+  (apply clojure.set/union (map teki books))))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (let [nimi (:name author)]
+    (let [svuosi (:birth-year author)]
+      (let [kvuosi (:death-year author)]
+        (str nimi (if (not (nil? svuosi)) (str " (" svuosi " - " kvuosi ")")))))))
 
 (defn authors->string [authors]
-  :-)
+   (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
-  :-)
+  (let [luku (count books)]
+    (if (= luku 0) "No books."
+      (str luku (if (= luku 1) " book. " " books. ")
+             (apply str (interpose ". " (map book->string books))) "."))))
 
 (defn books-by-author [author books]
-  :-)
+  (let [apu (fn [book] (has-author? book author))]
+   (filter apu books)))
 
 (defn author-by-name [name authors]
   :-)
@@ -122,4 +134,3 @@
 (defn books-by-living-authors [books]
   :-)
 
-(do-a-thing 7)
