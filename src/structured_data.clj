@@ -123,14 +123,16 @@
    (filter apu books)))
 
 (defn author-by-name [name authors]
-  :-)
+  (if (empty? authors) nil
+  (if (= name (:name (first authors))) (first authors)
+    (author-by-name name (rest authors)))))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (filter alive? (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
