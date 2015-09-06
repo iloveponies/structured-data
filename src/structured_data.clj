@@ -61,7 +61,7 @@
 )
 
 (defn title-length [book]
-  (count (get book :title))
+ (count (get book :title))
 )
 
 (defn author-count [book]
@@ -139,7 +139,6 @@
   )
 )
 
-; todo: parempi splittaus 'letin kanssa
 (defn author->string [author]
   (apply str(cond
               (contains? author :death-year) (str (get author :name) " (" (get author :birth-year) " - " (get author :death-year) ")")
@@ -154,35 +153,42 @@
   )
 
 
-; todo: korjaa koodin tuplaus ..
 (defn book->string [book]
-  (apply str(cond
-              (multiple-authors? book)  (str (get book :title) ", written by " (authors->string (get book :authors)))
-              :else                     (str (get book :title) ", written by " (authors->string (get book :authors)))
-              )
-  )
+  (str (get book :title) ", written by " (authors->string (get book :authors)))
 )
 
 (defn books->string [books]
   (cond
-    (== (count books) 0)  (str "No books.")
-    )
-;  (apply str(interpose ". " (map book->string books)))
+    (== (count books) 0)  
+      (str "No books.")
+    
+    (== (count books) 1)  
+      (str "1 book. " (book->string(get books 0)) ".")
+
+    (>= (count books) 2)  
+      (str (count books) " books. " 
+           (apply str(interpose ". " (map book->string books))) ".")
   )
+)
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [b] (has-author? b author)) books)
+  )
 
 (defn author-by-name [name authors]
-  :-)
+    (first (filter (fn [a] (==(compare (get a :name) name) 0)) authors))
+)
 
 (defn living-authors [authors]
-  :-)
+  (filter (fn [author] (alive? author)) authors)
+  )
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (get book :authors))))
+  )
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter (fn [book] (has-a-living-author? book)) books)
+  )
 
 ; %________%
