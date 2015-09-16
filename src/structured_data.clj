@@ -1,5 +1,20 @@
 (ns structured-data)
 
+;(def china {:name "China Miéville", :birth-year 1972})
+;(def octavia {:name "Octavia E. Butler"
+;                            :birth-year 1947
+;                            :death-year 2006})
+;              (def friedman {:name "Daniel Friedman" :birth-year 1944})
+;              (def felleisen {:name "Matthias Felleisen"})
+;
+;              (def cities {:title "The City and the City" :authors [china]})
+;              (def wild-seed {:title "Wild Seed", :authors [octavia]})
+;              (def embassytown {:title "Embassytown", :authors [china]})
+;              (def little-schemer {:title "The Little Schemer"
+;                                                        :authors [friedman, felleisen]})
+;
+;              (def books [cities, wild-seed, embassytown, little-schemer])
+
 (defn do-a-thing [x]
   (let [xx (+ x x)]
       (Math/pow xx xx)))
@@ -101,19 +116,27 @@
   (set (map (fn [author] (get author :name)) (authors books))))
 
 (defn author->string [author]
-  (let [aname (get author :name)
-        lifespan (str ("(" (get author :birth-year) " - " (get author :death-year) ")"))]
-    aname))
-;    (if (= lifespan "( - )") aname (str aname lifespan))))
+  (let [aname (str (get author :name))
+        lifespan (str "(" (str (get author :birth-year)) " - " (str (get author :death-year)) ")")
+    ]
+    (if (= lifespan "( - )") aname (str aname " " lifespan))
+    ))
+                      
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (str (get book :title) ", written by " (authors->string (get book :authors))))
 
 (defn books->string [books]
-  :-)
+  (let [cnt (count books)
+        cnt-word (if (= cnt 1) "book." "books.")]
+    (if (= cnt 0) (str "No " cnt-word) 
+      (str cnt " " cnt-word " " (apply str (interpose ". " (map book->string books))) ".")
+    )
+  )
+)
 
 (defn books-by-author [author books]
   :-)
