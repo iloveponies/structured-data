@@ -1,0 +1,186 @@
+(defn author->string [author]
+  (let [nm (:name author)
+        death (:death-year author)
+        year  (if (:birth-year author)
+                (str " (" (:birth-year author) " - " death ")")
+                "" )
+        ]
+        (str nm year)))
+(defn authors->string [authors]
+  (apply str(interpose ", " (map author->string authors))))
+(defn book->string [book]
+  (let [ti (:title book)
+        au (authors->string (:authors book))
+        ]
+    (str ti ", written by " au)))
+(defn books->string [books]
+  (let [nu (count books)
+        pl (if > 1 nu) "s" ""
+        ]
+    (apply (str nu " book" pl "." (interpose ", " (map author->string authors))))
+    )
+  )
+(defn books->string [books]
+  (let [nu (count books)
+        pl ((if > 1 nu) "s" "")
+        ]
+    (apply (str nu " book" pl "." (interpose ", " (map author->string authors))))
+    )
+  )
+(defn books->string [books]
+  (let [nu (count books)
+        pl ((if > 1 nu) "s" "")
+        ]
+    (apply (str nu " book" pl "." (interpose ", " (map author->string (:authors books) ))))
+    )
+  )
+(def china {:name "China Mi?ville", :birth-year 1972})
+(def octavia {:name "Octavia E. Butler"
+              :birth-year 1947
+              :death-year 2006})
+(def friedman {:name "Daniel Friedman" :birth-year 1944})
+(def felleisen {:name "Matthias Felleisen"})
+(def cities {:title "The City and the City" :authors #{china}})
+(def wild-seed {:title "Wild Seed", :authors #{octavia}})
+(def embassytown {:title "Embassytown", :authors #{china}})
+(def little-schemer {:title "The Little Schemer"
+                     :authors #{friedman, felleisen}})
+(def books [cities, wild-seed, embassytown, little-schemer])
+(books->string [cities])
+(defn books->string [books]
+  (let [nu (count books)
+        pl ((if > 1 nu) "s" "")
+        ]
+    (str nu " book" pl "." (interpose ", " (map author->string (:authors books) )))
+    ;(apply (str nu " book" pl "." (interpose ", " (map author->string (:authors books) ))))
+    )
+(books->string [cities])
+(defn books->string [books]
+  (let [nu (count books)
+        pl ((if > 1 nu) "s" "")
+        ]
+    ;(apply (str nu " book" pl "." (interpose ", " (map author->string (:authors books) ))))
+    (str nu " book" pl "." (interpose ", " (map author->string (:authors books) )))
+    )
+  
+)
+(defn books->string [books]
+  (let [nu (count books)
+        pl ((if > 1 nu) "s" "")
+        ]
+    (str nu " book" pl "." (interpose ", " (map author->string (:authors books) )))
+    )
+  )
+(books->string [cities])
+(defn books->string [books]
+  (let [nu (count books)
+        pl ((if > 1 nu) "s" "")
+        ]
+    (apply (str " book" pl "." (interpose ", " (map author->string (:authors books) ))))
+    )
+  )
+(books->string [cities])
+(defn books->string [books]
+  (let [nu (count books)
+        pl ((if > 1 nu) "s" "")
+        ]
+    (apply str nu " book" pl "." (interpose ", " (map author->string (:authors books) )))
+    )
+)
+(books->string [cities])
+(defn books->string [books]
+  (let [nu (count books)
+        pl ((if > 1 nu) "s" "")
+        ]
+    (apply str (nu " book" pl "." (interpose ", " (map author->string (:authors books) ))))
+    )
+  )
+(defn books->string [books]
+  (let [nu (count books)
+        pl ((if > 1 nu) "s" "")
+        ]
+    (apply str (nu " book" pl "." (interpose ", " (map author->string (:authors books) ))))
+    )
+  )
+(books->string [cities])
+(defn books->string [books]
+  (let [nu (count books)
+        pl ((if > 1 nu) "s" "")
+        ]
+    (str nu " book" pl "." (interpose ", " (map author->string (:authors books) )))
+    )
+  )
+(books->string [cities])
+(defn books->string [books]
+  (let [nu (count books)
+        pl ((if > 1 nu) "s" "")
+        ]
+    (str (interpose ", " (map author->string (:authors books) )))
+    )
+  )
+(books->string [cities])
+(defn books->string [books]
+  (let [nu (count books)
+        pl ((if > 1 nu) "s" "")
+        ]
+    pl
+    )
+  )
+(books->string [cities])
+(defn books->string [books]
+  (let [nu (count books)
+        pl (if (> 1 nu) "s" "")
+        ]
+    (apply str nu " book" pl "." (interpose ", " (map author->string (:authors books) )))
+    )
+  )
+(defn books->string [books]
+  (let [nu (count books)
+        pl (if (> 1 nu) "s" "")
+        ]
+    (apply str nu " book" pl "." (interpose ", " (map author->string (:authors books) )))
+    )
+(books->string [cities])
+(defn books->string [books]
+  (let [nu (count books)
+        pl (if (> 1 nu) "s" "")
+        ]
+    (apply str nu " book" pl "." (interpose ", " (map book->string books )))
+    )
+  ) 
+(books->string [cities])
+(defn books->string [books] 
+  (let [nu (count books)
+        pl (if (> 1 nu) "s" "")
+        ]
+    if (empty? books) "No books."
+    (apply str nu " book" pl ". " (interpose ", " (map book->string books )))
+    )
+  )
+(defn books->string [books] 
+  (let [nu (count books)
+        pl (if (> 1 nu) "s" "")
+        ]
+    (if (empty? books)) "No books."
+    (apply str nu " book" pl ". " (interpose ", " (map book->string books )))
+    )
+  )
+  
+(books->string [cities])
+(:authors wild-seed)
+(alive? (:authors wild-seed))
+(defn alive? [author]
+  (not(contains? author :death-year )))
+(alive? (:authors wild-seed))
+(filter alive? (:authors wild-seed))
+(alive? (:authors wild-seed))
+(alive? (list(:authors wild-seed)))
+(alive? list(:authors wild-seed))
+(alive? (:authors wild-seed))
+(alive? (:authors little-schemer))
+ (:authors little-schemer)
+(alive? (:authors little-schemer))
+(map alive? (:authors little-schemer))
+(or(map alive? (:authors little-schemer)))
+(filter alive? (:authors little-schemer))
+(map alive? (:authors little-schemer))
