@@ -23,37 +23,54 @@
   [bottom-left top-right])
 
 (defn width [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (let [w (- x2 x1)]
+      (if (> w 0)
+        w
+        (* w -1)))))
 
 (defn height [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (let [h (- y2 y1)]
+      (if (> h 0)
+        h
+        (* h -1)))))
 
 (defn square? [rectangle]
-  :-)
+  (= (height rectangle) (width rectangle)))
 
 (defn area [rectangle]
-  :-)
+  (* (height rectangle) (width rectangle)))
 
 (defn contains-point? [rectangle point]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle
+        [xp yp] point]
+    (and
+      (<= x1 xp x2)
+      (<= y1 yp y2))))
 
 (defn contains-rectangle? [outer inner]
-  :-)
+  (let [[p1 p2] inner]
+    (and
+      (contains-point? outer p1)
+      (contains-point? outer p2))))
 
 (defn title-length [book]
-  :-)
+  (count (:title book)))
 
 (defn author-count [book]
-  :-)
+  (count (:authors book)))
 
 (defn multiple-authors? [book]
-  :-)
+  (> (author-count book) 1))
 
 (defn add-author [book new-author]
-  :-)
+  (let [authors (get :authors book)]
+    (assoc book :authors (conj authors new-author))))
 
 (defn alive? [author]
-  :-)
+  (not
+    (contains? author :death-year)))
 
 (defn element-lengths [collection]
   :-)
