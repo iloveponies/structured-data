@@ -1,0 +1,11 @@
+(defn author->string [author]
+  (let [years (fn [x]
+               (cond
+                 (:death-year x) (str " (" (:birth-year x) " - " (:death-year x) ")")
+                 (:birth-year x) (str " (" (:birth-year x) " - )")
+                 :else ""))]
+    (str (:name author) (years author))))
+(author->string {:name 
+(author->string {:name "Daniel Friedman" :birth-year 1944})
+(author->string {:name "Daniel Friedman" :birth-year 1944 :death-year 1922})
+(author->string {:name "Daniel Friedman"})
