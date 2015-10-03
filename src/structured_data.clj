@@ -89,8 +89,7 @@
   (assoc book :authors (set (:authors book))))
 
 (defn has-author? [book author]
-  (contains? (:authors book) author)
-)
+  (contains? (:authors book) author))
 
 (defn authors [books]
   (apply clojure.set/union (map :authors books)))
@@ -111,8 +110,7 @@
       (str name \space \( birth \space \- \space death \)))))
 
 (defn authors->string [authors]
-  (apply str (interpose ", " (map author->string authors)))
-  )
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
   (let [
@@ -121,8 +119,7 @@
         ]
     (if (nil? authors)
       title
-      (str title \, \space "written by" \space (authors->string authors))
-      )))
+      (str title \, \space "written by" \space (authors->string authors)))))
 
 (defn books->string [books]
   (let [counter (fn [books] 
@@ -134,8 +131,7 @@
     (if (== 0 (count books))
       "No books."
       (str (counter books) \space 
-           (apply str (interpose ". " (map book->string books))) \.)
-      )))
+           (apply str (interpose ". " (map book->string books))) \.))))
 
 (defn books-by-author [author books]
   (filter (fn [book] (has-author? book author)) books))
@@ -153,7 +149,6 @@
   (not (empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
-  (filter (fn[book] (has-a-living-author? book)) books)
-  )
+  (filter (fn[book] (has-a-living-author? book)) books))
 
 ; %________%
