@@ -53,20 +53,39 @@
     (and (contains-point? outer point1) 
          (contains-point? outer point2))))
 
+;test data for functions
+(def china {:name "China Miéville", :birth-year 1972})
+(def octavia {:name "Octavia E. Butler"
+              :birth-year 1947
+              :death-year 2006})
+(def friedman {:name "Daniel Friedman" :birth-year 1944})
+(def felleisen {:name "Matthias Felleisen"})
+
+(def cities {:title "The City and the City" :authors [china]})
+(def wild-seed {:title "Wild Seed", :authors [octavia]})
+(def embassytown {:title "Embassytown", :authors [china]})
+(def little-schemer {:title "The Little Schemer"
+                     :authors [friedman, felleisen]})
+
 (defn title-length [book]
-  :-)
+  (let [title (:title book)]
+    (count title)))
 
 (defn author-count [book]
-  :-)
+  (let [authors (:authors book)]
+    (count authors)))
 
 (defn multiple-authors? [book]
-  :-)
+  (if ( < 1 (author-count book))
+      true
+      false))
 
 (defn add-author [book new-author]
-  :-)
+  (let [authors (:authors book)]
+  (assoc book :authors (conj authors new-author))))
 
 (defn alive? [author]
-  :-)
+  (not (contains? author :death-year)))
 
 (defn element-lengths [collection]
   :-)
