@@ -96,6 +96,7 @@
 (defn alive? [author]
   (not (contains? author :death-year)))
 
+; exercise-15
 (defn element-lengths [collection]
   :-)
 
