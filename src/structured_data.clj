@@ -57,25 +57,6 @@
             (contains-point? outer top-right))))
 
 ; exercise-10
-(def china {:name "China Miéville", :birth-year 1972})
-
-(def octavia {:name "Octavia E. Butler"
-              :birth-year 1947
-              :death-year 2006})
-
-(def friedman {:name "Daniel Friedman" :birth-year 1944})
-
-(def felleisen {:name "Matthias Felleisen"})
-
-(def cities {:title "The City and the City" :authors [china]})
-
-(def wild-seed {:title "Wild Seed", :authors [octavia]})
-
-(def embassytown {:title "Embassytown", :authors [china]})
-
-(def little-schemer {:title "The Little Schemer"
-                     :authors [friedman, felleisen]})
-
 (defn title-length [book]
   (count (:title book)))
 
@@ -98,38 +79,54 @@
 
 ; exercise-15
 (defn element-lengths [collection]
-  :-)
+  (map count collection))
 
+; exercise-16
 (defn second-elements [collection]
-  :-)
+  (let [get-second-element (fn [xs] (get xs 1))]
+    (map get-second-element collection)))
 
+; exercise-17
 (defn titles [books]
-  :-)
+  (map :title books))
 
-(defn monotonic? [a-seq]
-  :-)
-
+; exercise-18
+; apply works like this:
+; (apply function [arg1 arg2 arg3 ...]) => (function arg1 arg2 arg3 ...)
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*")))
 
+; exercise-19
+(defn monotonic? [a-seq]
+  (or (apply <= a-seq) (apply >= a-seq)))
+
+; exercise-20
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)))
 
+; exercise-21
 (defn contains-duplicates? [a-seq]
-  :-)
+  (not= (count a-seq) (count (set a-seq))))
 
+; exercise-22
 (defn old-book->new-book [book]
-  :-)
+  (assoc book :authors (set (:authors book))))
 
+; exercise-23
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author))
 
+; exercise-24
 (defn authors [books]
-  :-)
+  (apply clojure.set/union (map :authors books)))
 
+; exercise-25
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
 
+; exercise-26
 (defn author->string [author]
   :-)
 
