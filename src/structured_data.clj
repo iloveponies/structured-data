@@ -128,29 +128,48 @@
 
 ; exercise-26
 (defn author->string [author]
-  :-)
+  (let [name       (:name author)
+        birth-year (:birth-year author)
+        death-year (:death-year author)
+        years (if (not= birth-year nil)
+                (str " " "(" birth-year " - " death-year ")")
+                (str ""))]
+    (str name years)))
 
+; exercise-27
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
+; exercise-28
 (defn book->string [book]
-  :-)
+  (let [title (:title book)
+        authors (authors->string (:authors book))]
+    (str title ", written by " authors)))
 
+; exercise-29
 (defn books->string [books]
-  :-)
+  (let [total (count books)
+        description (apply str (interpose ". " (map book->string books)))]
+    (cond (== total 0) (str "No books.")
+          (== total 1) (str total " book. "   description ".")
+          (>  total 1) (str total " books. " description "."))))
 
+; exercise-30
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [book] (has-author? book author)) books))
 
-(defn author-by-name [name authors]
-  :-)
+; exercise-31
+(defn author-by-name [name authors])
 
+; exercise-32
 (defn living-authors [authors]
   :-)
 
+; exercise-33
 (defn has-a-living-author? [book]
   :-)
 
+; exercise-34
 (defn books-by-living-authors [books]
   :-)
 
