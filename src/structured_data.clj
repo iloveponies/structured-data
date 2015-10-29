@@ -95,13 +95,15 @@
 )  
 
 (defn alive? [author]
-  :-)
+  (not(boolean (:death-year author))))
 
 (defn element-lengths [collection]
-  :-)
+  (map count collection))
 
 (defn second-elements [collection]
-  :-)
+  (let [getsec (fn [v] (get v 1))]
+    (map getsec collection)
+    ))
 
 (defn titles [books]
   :-)
