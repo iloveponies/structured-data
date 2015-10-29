@@ -70,7 +70,15 @@
   )
 
 (defn contains-rectangle? [outer inner]
-  :-)
+
+  
+  (let [[[x1 y1][x2 y2]] inner]
+    (and(contains-point? outer [x1 y1])(contains-point? outer [x2 y2]))
+
+  )
+    
+  
+)
 
 (defn title-length [book]
   :-)
