@@ -48,19 +48,19 @@
     [[a1 b1] [a2 b2]] inner]
       (if (and (<= x1 a1) (<= y1 b1) (>= x2 a2) (>= y2 b2)) true false)))
 
-(def china {:name "China Miéville", :birth-year 1972})
-(def octavia {:name "Octavia E. Butler"
-              :birth-year 1947
-              :death-year 2006})
-(def friedman {:name "Daniel Friedman" :birth-year 1944})
-(def felleisen {:name "Matthias Felleisen"})
+;(def china {:name "China Miéville", :birth-year 1972})
+;(def octavia {:name "Octavia E. Butler"
+;              :birth-year 1947
+;              :death-year 2006})
+;(def friedman {:name "Daniel Friedman" :birth-year 1944})
+;(def felleisen {:name "Matthias Felleisen"})
 
-(def cities {:title "The City and the City" :authors #{china}})
-(def wild-seed {:title "Wild Seed", :authors #{octavia}})
-(def embassytown {:title "Embassytown", :authors #{china}})
-(def little-schemer {:title "The Little Schemer"
-                     :authors #{friedman, felleisen}})
-(def books [cities, wild-seed, embassytown, little-schemer])
+;(def cities {:title "The City and the City" :authors #{china}})
+;(def wild-seed {:title "Wild Seed", :authors #{octavia}})
+;(def embassytown {:title "Embassytown", :authors #{china}})
+;(def little-schemer {:title "The Little Schemer"
+;                     :authors #{friedman, felleisen}})
+;(def books [cities, wild-seed, embassytown, little-schemer, silmarillion, deus-irae])
 
 (defn title-length [book]
   (count (:title book)))
@@ -119,30 +119,53 @@
 
 
 (defn author->string [author]
-  :-)
+  (let [name (:name author)
+      by (:birth-year author)
+      dy (:death-year author)]
+  (cond
+    by (str name " (" by " - " dy ")")
+   :else (str name))))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (apply str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
-  :-)
+  (cond
+   (== (count books) 0) "No books."
+   (== (count books) 1) (str (apply str (count books) " book. " (interpose ". " (map book->string books))) ".")
+   (> (count books) 1) (str (apply str (count books) " books. " (interpose ". " (map book->string books))) ".")))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [b] (has-author? b author)) books))
+
+;(def authors #{china, felleisen, octavia, friedman, jrrtolkien, christopher, kay, dick, zelazny})
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [a] (= (:name a) name)) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
+
+
+;(def jrrtolkien {:name "J. R. R. Tolkien" :birth-year 1892 :death-year 1973})
+;(def christopher {:name "Christopher Tolkien" :birth-year 1924})
+;(def kay {:name "Guy Gavriel Kay" :birth-year 1954})
+
+;(def silmarillion {:title "Silmarillion"
+;                   :authors #{jrrtolkien, christopher, kay}})
+
+;(def dick {:name "Philip K. Dick", :birth-year 1928, :death-year 1982})
+;(def zelazny {:name "Roger Zelazny", :birth-year 1937, :death-year 1995})
+
+;(def deus-irae {:title "Deus Irae", :authors #{dick, zelazny}})
 
 (defn has-a-living-author? [book]
-  :-)
+  (if (empty? (filter alive? (:authors book))) false true))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
