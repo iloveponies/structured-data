@@ -137,13 +137,26 @@
   )
 
 (defn authors [books]
-  :-)
+  (apply clojure.set/union (map :authors books))
 
+)
+  
+  
 (defn all-author-names [books]
-  :-)
+  (let [authors-set (authors books)]
+   (set (map :name authors-set)))
+  )  
+  
+
 
 (defn author->string [author]
-  :-)
+  (let [named (:name author)
+        born (:birth-year author)
+        died (:death-year author)]
+    (cond died (str named " (" born " - " died ")") 
+          born (str named " (" born " - )") 
+          :else (str named))
+    ))
 
 (defn authors->string [authors]
   :-)
