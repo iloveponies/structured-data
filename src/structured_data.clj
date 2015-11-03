@@ -98,7 +98,10 @@
   )
 
 (defn monotonic? [a-seq]
-  (apply <= a-seq)
+  (or
+   (apply <= a-seq)
+   (apply >= a-seq)
+  )
 )
 
 (defn stars [n]
@@ -128,20 +131,33 @@
 )
 
 (defn all-author-names [books]
-    (map :name (authors books))
+   (set (map :name (authors books)))
 )
 
 (defn author->string [author]
-  :-)
+ (cond
+     (contains? author :death-year) (apply str (:name author) " (" (:birth-year author) " - " (:death-year author) ")")
+     (contains? author :birth-year) (apply str (:name author) " (" (:birth-year author) " - )")
+     :else (str (:name author))
+  )
+)
+
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors)))
+)
 
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by " (authors->string (:authors book)))
+)
 
 (defn books->string [books]
-  :-)
+  (cond
+    (empty? books) "No books."
+    (= (count books) 1) (str "1 book. " (book->string (get books 0)) ".") 
+    :else (str (count books) " books. " (apply str (map (fn [book] (str (book->string book) ". ")) books) ) )
+  ) 
+)
 
 (defn books-by-author [author books]
   :-)
