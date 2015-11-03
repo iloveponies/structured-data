@@ -154,24 +154,33 @@
 (defn books->string [books]
   (cond
     (empty? books) "No books."
-    (= (count books) 1) (str "1 book. " (book->string (get books 0)) ".") 
+    (= (count books) 1) (str "1 book. " (book->string (get books 0)) ".")
     :else (str (count books) " books. " (apply str (map (fn [book] (str (book->string book) ". ")) books) ) )
-  ) 
+  )
 )
 
 (defn books-by-author [author books]
-  :-)
+  (let [ by-this-author (fn [book] (has-author? book author))]
+    (filter  by-this-author  books)
+  )
+)
 
 (defn author-by-name [name authors]
-  :-)
+  (let [has-this-name (fn [author]  (= (:name author) name))]
+    (first (filter has-this-name authors) )
+  )
+)
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors)
+)
 
 (defn has-a-living-author? [book]
-  :-)
+    (not (empty? (living-authors (:authors book))))
+)
 
 (defn books-by-living-authors [books]
-  :-)
+    (filter has-a-living-author? books)
+)
 
 ; %________%
