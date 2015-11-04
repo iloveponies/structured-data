@@ -10,17 +10,6 @@
         y (get v 2)]
     (+ x y)))
 
-(conj [1 2 3] 4 5)
-(conj '(1 2 3) 4 5)
-(conj #{1 2 3} 4 5)
-(conj {2 3} {0 1} {1 2})
-(conj #{2 3} 0 1)
-
-(cons 3 '(1 2 3))
-(cons 3 #{1 2 3})
-(cons 4 [1 2 3])
-(cons {2 3} {0 1 1 2})
-
 (defn cutify [v]
   (conj v "<3"))
 
@@ -49,61 +38,102 @@
   (* (width rectangle) (height rectangle)))
 
 (defn contains-point? [rectangle point]
-  :-)
+  (let [[[x1 y1][x2 y2]] rectangle
+        [x? y?] point]
+    (and (<= x1 x? x2)
+         (<= y1 y? y2))))
 
 (defn contains-rectangle? [outer inner]
-  :-)
+  (let [[[x1 y1][x2 y2]] outer
+        [[x3 y3][x4 y4]] inner]
+    (and (<= x1 x3 x4 x2)
+         (<= y1 y3 y4 y2))))
 
 (defn title-length [book]
-  :-)
+  (count (:title book)))
 
 (defn author-count [book]
-  :-)
+  (count (:authors book)))
 
 (defn multiple-authors? [book]
-  :-)
+  (< 1 (author-count book)))
 
 (defn add-author [book new-author]
-  :-)
+  (let [old-author (:authors book)]
+    (assoc book :authors
+      (conj old-author new-author))))
 
 (defn alive? [author]
-  :-)
+  (not (contains? author :death-year)))
 
 (defn element-lengths [collection]
-  :-)
+  (map count collection))
 
 (defn second-elements [collection]
-  :-)
+  (let [second (fn [[_ x2]] x2)]
+    (map second collection)))
 
 (defn titles [books]
-  :-)
-
-(defn monotonic? [a-seq]
-  :-)
+  (map :title books))
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*")))
+
+(defn monotonic? [a-seq]
+  (or
+   (apply >= a-seq)
+   (apply <= a-seq)))
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (let [count-uniq (fn [a-seq] (count (set a-seq)))]
+    (not= (count a-seq) (count-uniq a-seq))))
 
 (defn old-book->new-book [book]
-  :-)
+  (let [old-authors (:authors book)]
+    (assoc book :authors (set old-authors))))
 
 (defn has-author? [book author]
-  :-)
+  (let [authors (:authors book)]
+    (contains? authors author)))
 
 (defn authors [books]
-  :-)
+  (let [authors-seq (map :authors books)]
+  (apply clojure.set/union authors-seq)))
 
 (defn all-author-names [books]
-  :-)
+  (let [authors-uniq (authors books)]
+  (set (map :name authors-uniq))))
 
 (defn author->string [author]
-  :-)
+  (let [name (:name author)
+        birth-year (:birth-year author)
+        death-year (:death-year author)]
+    (if (:birth-year author)
+      (str name " (" birth-year " - " death-year ")")
+      (str name))))
+
+
+
+(def china {:name "China Miéville", :birth-year 1972})
+(def octavia {:name "Octavia E. Butler"
+              :birth-year 1947
+              :death-year 2006})
+(def friedman {:name "Daniel Friedman" :birth-year 1944})
+(def felleisen {:name "Matthias Felleisen"})
+
+(def cities {:title "The City and the City" :authors #{china}})
+(def wild-seed {:title "Wild Seed", :authors #{octavia}})
+(def embassytown {:title "Embassytown", :authors #{china}})
+(def little-schemer {:title "The Little Schemer"
+                     :authors #{friedman, felleisen}})
+
+(def books [cities, wild-seed, embassytown, little-schemer])
+
 
 (defn authors->string [authors]
   :-)
