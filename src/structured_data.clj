@@ -117,46 +117,38 @@
       (str name " (" birth-year " - " death-year ")")
       (str name))))
 
-
-
-(def china {:name "China Miéville", :birth-year 1972})
-(def octavia {:name "Octavia E. Butler"
-              :birth-year 1947
-              :death-year 2006})
-(def friedman {:name "Daniel Friedman" :birth-year 1944})
-(def felleisen {:name "Matthias Felleisen"})
-
-(def cities {:title "The City and the City" :authors #{china}})
-(def wild-seed {:title "Wild Seed", :authors #{octavia}})
-(def embassytown {:title "Embassytown", :authors #{china}})
-(def little-schemer {:title "The Little Schemer"
-                     :authors #{friedman, felleisen}})
-
-(def books [cities, wild-seed, embassytown, little-schemer])
-
-
 (defn authors->string [authors]
-  :-)
+  (let [authors-str (map author->string authors)]
+  (apply str (interpose ", " authors-str))))
 
 (defn book->string [book]
-  :-)
+  (let [title (:title book)
+        authors-set (:authors book)
+        authors-str (authors->string authors-set)]
+  (str title ", written by " authors-str)))
 
 (defn books->string [books]
-  :-)
+  (let [book-count (count books)
+        books-str (apply str (interpose ". " (map book->string books)))]
+    (if (= book-count 0) "No books."
+      (str book-count
+           (if (= book-count 1) " book. " " books. ")
+           books-str "."))))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [a-book] (has-author? a-book author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (let [eq-author (fn [an-author] (= name (:name an-author)))]
+  (first (filter eq-author  authors))))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
