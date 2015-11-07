@@ -315,25 +315,85 @@
 ;   order doesn't matter
 
 (defn book->string [book]
-  :-)
+  (str (:title book)
+       ", written by "
+       (authors->string (:authors book))))
+
+(book->string wild-seed) ;=> "Wild Seed, written by Octavia E. Butler"
+(book->string little-schemer)
+;=> "The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen"
+;                                   ^-- order doesn't matter
 
 (defn books->string [books]
-  :-)
+  (let [num-books (count books)
+        num-string (cond (= num-books 0) "No books."
+                         (= num-books 1) "1 book. "
+                         :else (str num-books
+                                    " books. "))]
+    (str num-string 
+         (apply str (map book->string books)))))
+
+(books->string [])                                    ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
+
+
+(def authors #{china, felleisen, octavia, friedman})
+
 
 (defn books-by-author [author books]
-  :-)
+  (filter #(has-author? % author) books))
+
+
+(books-by-author china books)   ;=> (cities embassytown)
+(books-by-author octavia books) ;=> (wild-seed)
 
 (defn author-by-name [name authors]
-  :-)
+  (let [result  (filter #(= name (get % :name)) authors)]
+    (if (empty? result)
+      nil
+      result)))
+
+(author-by-name "Octavia E. Butler" authors)                ;=> octavia
+(author-by-name "Octavia E. Butler" #{felleisen, friedman}) ;=> nil
+(author-by-name "China Miéville" authors)                   ;=> china
+(author-by-name "Goerge R. R. Martin" authors)              ;=> nil
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
+
+(living-authors authors)             ;=> (china, felleisen, friedman)
+(living-authors #{octavia})          ;=> ()
+(living-authors #{china, felleisen}) ;=> (china, felleisen)
+
+(def jrrtolkien {:name "J. R. R. Tolkien" :birth-year 1892 :death-year 1973})
+(def christopher {:name "Christopher Tolkien" :birth-year 1924})
+(def kay {:name "Guy Gavriel Kay" :birth-year 1954})
+(def silmarillion {:title "Silmarillion"
+                   :authors #{jrrtolkien, christopher, kay}})
+(def dick {:name "Philip K. Dick", :birth-year 1928, :death-year 1982})
+(def zelazny {:name "Roger Zelazny", :birth-year 1937, :death-year 1995})
+
+(def deus-irae {:title "Deus Irae", :authors #{dick, zelazny}})
+
 
 (defn has-a-living-author? [book]
-  :-)
+  (or (some alive? (:authors book)) false)) 
+
+(has-a-living-author? wild-seed)      ;=> false
+(has-a-living-author? silmarillion)   ;=> true
+(has-a-living-author? little-schemer) ;=> true
+(has-a-living-author? cities)         ;=> true
+(has-a-living-author? deus-irae)      ;=> false
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
+
+(books-by-living-authors books) ;=> (little-schemer cities embassytown)
+(books-by-living-authors (concat books [deus-irae, silmarillion]))
+;=> (little-schemer cities embassytown silmarillion)
 
 ; %________%
 
