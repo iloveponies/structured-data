@@ -1,4 +1,6 @@
-(ns structured-data)
+(ns structured-data
+  (require [clojure.set :as set]))
+  
 
 (defn do-a-thing [x]
   (let [double_x (+ x x)]
@@ -216,26 +218,101 @@
     (disj a-set elem)
     (conj a-set elem)))
 
+(toggle #{:a :b :c} :d) ;=> #{:a :c :b :d}
+(toggle #{:a :b :c} :a) ;=> #{:c :b}
+
 (defn contains-duplicates? [a-seq]
-  :-)
+  (not (= (count a-seq)
+          (count (set a-seq)))))
+
+(contains-duplicates? [1 1 2 3 -40]) ;=> true
+(contains-duplicates? [1 2 3 -40]) ;=> false
+(contains-duplicates? [1 2 3 "a" "a"]) ;=> true
 
 (defn old-book->new-book [book]
-  :-)
+  (let [old-authors (:authors book)]
+    (assoc book :authors (set old-authors))))
+
+(old-book->new-book {:title "The Little Schemer"
+                     :authors [friedman, felleisen]})
+;=> {:title "The Little Schemer" :authors #{friedman, felleisen}}
+(old-book->new-book {:title "Wild Seed", :authors [octavia]})
+;=> {:title "Wild Seed", :authors #{octavia}}
+
+
+(def china {:name "China Miéville", :birth-year 1972})
+(def octavia {:name "Octavia E. Butler"
+              :birth-year 1947
+              :death-year 2006})
+(def friedman {:name "Daniel Friedman" :birth-year 1944})
+(def felleisen {:name "Matthias Felleisen"})
+
+(def cities {:title "The City and the City" :authors #{china}})
+(def wild-seed {:title "Wild Seed", :authors #{octavia}})
+(def embassytown {:title "Embassytown", :authors #{china}})
+(def little-schemer {:title "The Little Schemer"
+                     :authors #{friedman, felleisen}})
+(def books [cities, wild-seed, embassytown, little-schemer])
+
+
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author))
+
+(has-author? cities china)             ;=> true
+(has-author? cities felleisen)         ;=> false
+(has-author? little-schemer felleisen) ;=> true
+(has-author? little-schemer friedman)  ;=> true
+(has-author? little-schemer octavia)   ;=> false
+
 
 (defn authors [books]
-  :-)
+  (reduce set/union (map :authors books)))
+
+(authors [cities, wild-seed])              ;=> #{china, octavia}
+(authors [cities, wild-seed, embassytown]) ;=> #{china, octavia}
+(authors [little-schemer, cities])         ;=> #{china, friedman, felleisen}
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
+
+(all-author-names books)
+;=> #{"Matthias Felleisen" "China Miéville"
+;     "Octavia E. Butler" "Daniel Friedman"}
+(all-author-names [cities, wild-seed])
+;=> #{"China Miéville" "Octavia E. Butler"}
+(all-author-names []) ;=> #{}
 
 (defn author->string [author]
-  :-)
+  (let [name-string (:name author)
+        year-string (cond (and (:birth-year author)
+                               (:death-year author))  (str " ("
+                                                           (:birth-year author)
+                                                           " - "
+                                                           (:death-year author)
+                                                           ")")
+                                            
+                          (:birth-year author)        (str " ("
+                                                           (:birth-year author)
+                                                           " - "
+                                                           ")")
+                          :else                       nil)]
+    (str name-string year-string)))
+
+(author->string felleisen) ;=> "Matthias Felleisen"
+(author->string friedman)  ;=> "Daniel Friedman (1944 - )"
+(author->string octavia)   ;=> "Octavia E. Butler (1947 - 2006)"
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
+
+(authors->string (:authors little-schemer))
+;=> "Daniel Friedman (1944 - ), Matthias Felleisen"
+(authors->string #{octavia})          ;=> "Octavia E. Butler (1947 - 2006)"
+(authors->string #{})                 ;=> ""
+(authors->string #{octavia, friedman})
+;=> "Octavia E. Butler (1947 - 2006), Daniel Friedman (1944 - )"
+;   order doesn't matter
 
 (defn book->string [book]
   :-)
@@ -261,4 +338,3 @@
 ; %________%
 
 
-((foo bar () baz quux))
