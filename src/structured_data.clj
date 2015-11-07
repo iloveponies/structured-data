@@ -356,7 +356,7 @@
   (let [result (filter #(= name (get % :name)) authors)]
     (if (empty? result)
       nil
-      result)))
+      (first result))))
 
 ;(author-by-name "Octavia E. Butler" authors)                ;=> octavia
 ;(author-by-name "Octavia E. Butler" #{felleisen, friedman}) ;=> nil
