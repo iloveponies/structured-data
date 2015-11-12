@@ -96,7 +96,7 @@
     (apply clojure.set/union (map author-set books))))
 
 (defn all-author-names [books]
-  (map :name (authors books)))
+  (set (map :name (authors books))))
 
 (defn author->string [author]
   (let [has-bday      (contains? author :birth-year)
@@ -114,12 +114,12 @@
   (str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
-  (let [b-count   (str (count books)
-                       " book"
-                       (if (< 1 (count books)) "s" "")
-                       ". ")
+  (let [b-count   (cond (== 1 (count books))  "1 book. "
+                        true                  (str (count books) " books. "))
         b-list    (apply str (interpose ". " (map book->string books)))]
-    (str b-count b-list ".")))
+    (if (empty? books)
+      "No books."
+      (str b-count b-list "."))))
 
 (defn books-by-author [author books]
   (filter (fn [book] (has-author? book author)) books))
