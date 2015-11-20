@@ -123,24 +123,26 @@
 (defn books->string [books]
   (let [ini (cond
    (empty? books) "No books."
-   (= (count books) 1) "1 book. "
-   :else (str (count books) " books. "))]
-    (str ini (apply str (map (fn [b] (str (book->string b) ".")) books)))
+   (= (count books) 1) "1 book."
+   :else (str (count books) " books."))]
+    (str ini (apply str (map (fn [b] (str " " (book->string b) ".")) books)))
     ))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [b] (has-author? b author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [a] (= (:name a) name)) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (let [authors (:authors book)
+        living_authors (filter alive? authors)]
+    (> (count living_authors) 0)))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
