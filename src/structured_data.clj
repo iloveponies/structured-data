@@ -18,7 +18,12 @@
   (conj v "<3"))
 
 (defn spiff-destructuring [v]
-  :-)
+    (let [[x drop y] v]
+    (cond
+      (and (nil? x) (nil? y)) 0
+      (nil? y) x
+      :else (+ x y)
+      )))  
 
 (defn point [x y]
   [x y])
