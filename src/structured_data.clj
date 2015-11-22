@@ -6,7 +6,13 @@
   ))
 
 (defn spiff [v]
-  :-)
+  (let [x (get v 0)
+        y (get v 2)]
+    (cond
+      (and (nil? x) (nil? y)) 0
+      (nil? y) x
+      :else (+ x y)
+      )))     
 
 (defn cutify [v]
   :-)
