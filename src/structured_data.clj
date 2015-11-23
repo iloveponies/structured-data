@@ -73,7 +73,7 @@
     ))
 
 (defn alive? [author]
-  :-)
+  (contains? author :deat-year) )
 
 (defn element-lengths [collection]
   :-)
