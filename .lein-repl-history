@@ -376,3 +376,13 @@ author
         ))
 (books->string [cities])
 (books->string [cities little-schemer])
+(defn books-by-author [author books]
+  (filter (fn [book] (has-author? book author)) books))
+(use structured_data)
+(use structured_data.clj)
+(defn has-author? [book author]
+  (contains? (:authors book) author))
+(defn books-by-author [author books]
+  (filter (fn [book] (has-author? book author)) books))
+(books-by-author china books) 
+(books-by-author author books) 
