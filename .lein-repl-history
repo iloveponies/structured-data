@@ -316,3 +316,30 @@ author
 (defn authors->string [authors]
  (apply str (interpose ", " (map author->string authors))))
 (authors->string (:authors little-schemer))
+(defn book->string [book]
+  (apply
+   str (
+        interpose ", written by" [
+                                  (:name book)
+                                  (authors-> string (:authors book))
+                                  ]
+        )))
+(defn book->string [book]
+  (apply
+   str (
+        interpose ", written by" [
+                                  (:name book)
+                                  (authors->string (:authors book))
+                                  ]
+        )))
+(book->string little-schemer)
+(defn book->string [book]
+  (apply
+   str (
+        interpose ", written by" [
+                                  (:title book)
+                                  (authors->string (:authors book))
+                                  ]
+        )))
+(book->string little-schemer)
+(book->string wild-seed)
