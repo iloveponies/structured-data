@@ -1,13 +1,3 @@
-(apply str ("( " (:birth-year auth) " - )"))
-(str  (:birth-year auth))
-(str "( "  (:birth-year auth))
-(str "( "  (:birth-year auth) " - )")
-(str "("  (:birth-year auth) " - )")
-(defn author->string [author]
-  (let [name (:name author)
-        years (cond
-          (contains? author :death-year) (str "( " (interpose " - " [(:birth-year author) (:death-year author)] ) ")")
-          (contains? author :birth-year) (str "("  (:birth-year auth) " - )")
           :else nil
           )
         ]
@@ -498,3 +488,13 @@ name
        ))
 (living-authors #{octavia})
 (living-authors #{octavia, china})
+#{jrrtolkien, christopher, kay}
+(living-authors #{jrrtolkien, christopher, kay})
+(defn has-a-living-author? [book]
+  (not empty? (living-authors (:authors book))))
+(has-a-living-author? wild-seed)  
+(defn has-a-living-author? [book]
+  (not (empty? (living-authors (:authors book)))))
+(has-a-living-author? cities)
+(has-a-living-author? wild-seed)
+(has-a-living-author? silmarillion)
