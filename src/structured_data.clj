@@ -110,10 +110,20 @@
   (apply clojure.set/union (map :authors books)))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (let [name (:name author)
+        years
+        (cond
+          (contains? author :death-year) (apply str  (interpose " - " [(:birth-year author) (:death-year author)] ))
+          (contains? author :birth-year) (str (:birth-year author) " - ")
+          :else nil
+          )]
+    (if (nil? years)
+      (str name)
+      (apply str name " (" years ")"))     
+    ))
 
 (defn authors->string [authors]
   :-)
