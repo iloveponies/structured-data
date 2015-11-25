@@ -343,3 +343,36 @@ author
         )))
 (book->string little-schemer)
 (book->string wild-seed)
+(defn books->string [books]
+  (cond (= (count books) 0) "No books."
+        (= (count books) 1) (apply str "1 book." (book->string (first books)))
+        :else (apply str (count books) " books. " (map book->string books))
+        ))
+(books->string [])
+(books->string [cities])
+(books->string [little-schemer, cities, wild-seed])
+(defn book->string [book]
+  (apply
+   str (
+        interpose ", written by " [
+                                  (:title book)
+                                  (authors->string (:authors book))
+                                  ]
+        )))
+(books->string [cities])
+(books->string [cities little-schemer])
+(defn book->string [book]
+  (apply
+   str (
+        interpose ", written by " [
+                                  (:title book)
+                                  (authors->string (:authors book))
+                                  ]
+        )))
+(defn books->string [books]
+  (cond (= (count books) 0) "No books."
+        (= (count books) 1) (apply str "1 book. " (book->string (first books)))
+        :else (apply str (count books) " books. " (interpose " " (map book->string books)))
+        ))
+(books->string [cities])
+(books->string [cities little-schemer])
