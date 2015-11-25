@@ -1,28 +1,3 @@
-        ]
-    name
-      ;;(apply str (name years))     
-    ))
-(author->string auth)
-auth
-(:birth-year auth)
-(str (:birth-year auth))
-(defn author->string [author]
-  (let [name (:name author)
-        years (cond
-          (contains? author :death-year) (apply str ( "( " (interpose " - " [(:birth-year author) (:death-year author)] ) " )"))
-          (contains? author :birth-year) (apply str ("( " (:birth-year author) " - )"))
-          :else nil
-          )
-        ]
-    name
-      ;;(apply str (name years))     
-    ))
-(author->string auth)
-(author->string (first (:authors cities)))
-(first (:authors cities))
-(first (:authors little-schemer))
-(second (:authors little-schemer))
-(author->string (second (:authors little-schemer)))
 (apply str ("( " (:birth-year auth) " - )"))
 (str  (:birth-year auth))
 (str "( "  (:birth-year auth))
@@ -498,3 +473,28 @@ name
 (author-by-name "Goerge R. R. Martin" authors) 
 (author-by-name "China Miéville" authors)  
 (author-by-name "Octavia E. Butler" #{felleisen, friedman})
+(alive? china)
+(alive? octavia)
+(def jrrtolkien {:name "J. R. R. Tolkien" :birth-year 1892 :death-year 1973})
+(def christopher {:name "Christopher Tolkien" :birth-year 1924})
+(def kay {:name "Guy Gavriel Kay" :birth-year 1954})
+(def silmarillion {:title "Silmarillion"
+                   :authors #{jrrtolkien, christopher, kay}})
+(authors silmarillion)
+(authors cities)
+(defn living-authors [authors]
+  (filter alive? authors))
+(living-authors authors)
+(living-authors #{jrrtokkien christopher})
+(living-authors #{octavia})
+(living-authors #{octavia, jrrtolkien, china})
+(defn living-authors [authors]
+  (let [living-authors] (filter alive? authors)
+       (set living-authors)
+       ))
+(defn living-authors [authors]
+  (let [living-authors (filter alive? authors)]
+       (set living-authors)
+       ))
+(living-authors #{octavia})
+(living-authors #{octavia, china})

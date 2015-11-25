@@ -148,11 +148,9 @@
 
 (defn author-by-name [name authors]
   (:name (first (filter (fn [auth] (= name (:name auth))) authors)))) 
-  
- 
-
+   
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
   :-)
