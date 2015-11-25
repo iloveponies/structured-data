@@ -10,5 +10,309 @@
 (def little-schemer {:title "The Little Schemer"
                      :authors #{friedman, felleisen}})
 (def books [cities, wild-seed, embassytown, little-schemer])
-(autotest)
-exit
+(defn authors [books]
+  (apply clojure.set/union (map :authors books)))
+(authors books)
+(apply :name (authors books))
+(count (authors books))
+(first (authors books))
+(:name (first (authors books)))
+(map :name (authors books))
+(set (map :name (authors books)))
+(first (:authors little-schemer))
+(contains? (first (:authors little-schemer)) :burth-year)
+(contains? (first (:authors little-schemer)) :birth-year)
+(str "(" "1922 -" ")")
+(apply str (interpose " - " [1 2]))
+(apply str (interpose " - " [1]))
+(apply str (interpose " - " [1 ]))
+(defn author->string [author]
+  (let [name (:name author)
+        years (cond
+          (contains? author :death-year) (apply str (interpose " - " [(:birth-year author) (:death-year author)] ))
+          (contains? author :birth-year) (str ("(" (:birth-year author) " - "))
+          :else nil
+          )
+        ]
+    if (years)
+    (apply str (name "(" years ")"))
+    (name)
+  ))
+(defn author->string [author]
+  (let [name (:name author)
+        years (cond
+          (contains? author :death-year) (apply str (interpose " - " [(:birth-year author) (:death-year author)] ))
+          (contains? author :birth-year) (str ("(" (:birth-year author) " - "))
+          :else nil
+          )
+        ]
+    (if (years)
+      (apply str (name "(" years ")"))
+      (name))
+    ))
+(author->string (first (:authors little-schemer)))
+(defn author->string [author]
+  (let [name (:name author)
+        years (cond
+          (contains? author :death-year) (apply str (interpose " - " [(:birth-year author) (:death-year author)] ))
+          (contains? author :birth-year) (str ("(" (:birth-year author) " - "))
+          :else nil
+          )
+        ]
+(years)
+))
+(author->string (first (:authors little-schemer)))
+(first (:authors little-schemer))
+(defn  years (cond
+          (contains? author :death-year) (apply str (interpose " - " [(:birth-year author) (:death-year author)] ))
+          (contains? author :birth-year) (str ("(" (:birth-year author) " - "))
+          :else nil
+          )
+)
+(str "(" (:birth-year (first (:authors little-schemer))) ")")
+(def years "kk")
+(if (years) (0) (1))
+(if (nil? years) (0) (1))
+(years)
+(nil? years)
+(if (FALSE) (0) (1))
+(defn author->string [author]
+  (let [name (:name author)
+        years (cond
+          (contains? author :death-year) (apply str (interpose " - " [(:birth-year author) (:death-year author)] ))
+          (contains? author :birth-year) (str ((:birth-year author) " - "))
+          :else nil
+          )
+        ]
+    (if (nil? years)
+      (name)
+      (apply str (name "(" years ")"))
+     )
+    ))
+(author->string (first (:authors little-schemer)))
+(def auth (first (:authors little-schemer)))
+auth
+years
+(if years (9) (0))
+(defn author->string [author]
+  (let [name (:name author)
+        years (cond
+          (contains? author :death-year) (apply str ( "( " (interpose " - " [(:birth-year author) (:death-year author)] ) " )"))
+          (contains? author :birth-year) (str ("( " (:birth-year author) " - )"))
+          :else nil
+          )
+        ]
+      (apply str (name years))     
+    ))
+(author->string auth)
+(defn author->string [author]
+  (let [name (:name author)
+        years (cond
+          (contains? author :death-year) (apply str ( "( " (interpose " - " [(:birth-year author) (:death-year author)] ) " )"))
+          (contains? author :birth-year) (str ("( " (:birth-year author) " - )"))
+          :else nil
+          )
+        ]
+    years
+      ;;(apply str (name years))     
+    ))
+(author->string auth)
+(defn author->string [author]
+  (let [name (:name author)
+        years (cond
+          (contains? author :death-year) (apply str ( "( " (interpose " - " [(:birth-year author) (:death-year author)] ) " )"))
+          (contains? author :birth-year) (str ("( " (:birth-year author) " - )"))
+          :else nil
+          )
+        ]
+    name
+      ;;(apply str (name years))     
+    ))
+(author->string auth)
+auth
+(:birth-year auth)
+(str (:birth-year auth))
+(defn author->string [author]
+  (let [name (:name author)
+        years (cond
+          (contains? author :death-year) (apply str ( "( " (interpose " - " [(:birth-year author) (:death-year author)] ) " )"))
+          (contains? author :birth-year) (apply str ("( " (:birth-year author) " - )"))
+          :else nil
+          )
+        ]
+    name
+      ;;(apply str (name years))     
+    ))
+(author->string auth)
+(author->string (first (:authors cities)))
+(first (:authors cities))
+(first (:authors little-schemer))
+(second (:authors little-schemer))
+(author->string (second (:authors little-schemer)))
+(apply str ("( " (:birth-year auth) " - )"))
+(str  (:birth-year auth))
+(str "( "  (:birth-year auth))
+(str "( "  (:birth-year auth) " - )")
+(str "("  (:birth-year auth) " - )")
+(defn author->string [author]
+  (let [name (:name author)
+        years (cond
+          (contains? author :death-year) (str "( " (interpose " - " [(:birth-year author) (:death-year author)] ) ")")
+          (contains? author :birth-year) (str "("  (:birth-year auth) " - )")
+          :else nil
+          )
+        ]
+      (apply str (name years))     
+    ))
+(author->string auth)
+(author->string (second (:authors little-schemer))))
+(defn author->string [author]
+  (let [name (:name author)
+        years (cond
+          (contains? author :death-year) (str "( " (interpose " - " [(:birth-year author) (:death-year author)] ) ")")
+          (contains? author :birth-year) (str "("  (:birth-year auth) " - )")
+          :else nil
+          )
+        ]
+    (name)
+      ;;(apply str (name years))     
+    ))
+(author->string (second (:authors little-schemer)))
+(defn author->string [author]
+  (let [name (:name author)
+        years (cond
+          (contains? author :death-year) (str "( " (interpose " - " [(:birth-year author) (:death-year author)] ) ")")
+          (contains? author :birth-year) (str "("  (:birth-year auth) " - )")
+          :else nil
+          )
+        ]
+    (str name)
+      ;;(apply str (name years))     
+    ))
+(author->string (second (:authors little-schemer)))
+(defn author->string [author]
+  (let [name (:name author)
+        years (cond
+          (contains? author :death-year) (str "( " (interpose " - " [(:birth-year author) (:death-year author)] ) ")")
+          (contains? author :birth-year) (str "("  (:birth-year auth) " - )")
+          :else nil
+          )
+        ]
+    (if (nil? years)
+      (str name)
+      (apply str (name years)))     
+    ))
+(author->string (second (:authors little-schemer)))
+(author->string (first (:authors little-schemer)))
+(author->string (second (:authors little-schemer)))
+author
+auth
+(def author auth)
+author
+(def years (cond
+          (contains? author :death-year) (str "( " (interpose " - " [(:birth-year author) (:death-year author)] ) ")")
+          (contains? author :birth-year) (str "("  (:birth-year auth) " - )")
+          :else nil
+          )
+)
+years
+(str ((:name author) years))
+(str (concat (:name author) years))
+(str (concat ((:name author) years)))
+(str (concat (:name author) years))
+ (concat (:name author) years)
+ (map concat (:name author) years)
+ (map str (:name author) years)
+ (str "j" "k")
+ (apply str (:name author) years)
+(defn author->string [author]
+  (let [name (:name author)
+        years (cond
+          (contains? author :death-year) (str "( " (interpose " - " [(:birth-year author) (:death-year author)] ) ")")
+          (contains? author :birth-year) (str "("  (:birth-year auth) " - )")
+          :else nil
+          )
+        ]
+    (if (nil? years)
+      (str name)
+      (apply str name years))     
+    ))
+(author->string auth)
+(author->string (first (:authors cities)))
+(author->string (first (:authors octavia)))
+(:authors octavia)
+(def china {:name "China Miéville", :birth-year 1972})
+(def octavia {:name "Octavia E. Butler"
+              :birth-year 1947
+              :death-year 2006})
+(def friedman {:name "Daniel Friedman" :birth-year 1944})
+(def felleisen {:name "Matthias Felleisen"})
+(def cities {:title "The City and the City" :authors #{china}})
+(def wild-seed {:title "Wild Seed", :authors #{octavia}})
+(def embassytown {:title "Embassytown", :authors #{china}})
+(def little-schemer {:title "The Little Schemer"
+                     :authors #{friedman, felleisen}})
+(author->string (first (:authors wild-seed)))
+(author->string (first (:authors little-schemer)))
+(author->string (first (:authors wild-seed)))
+(def author (first (:authors wild-seed)))
+author
+(str "( " (interpose " - " [(:birth-year author) (:death-year author)] ) ")")
+(str  (interpose " - " [(:birth-year author) (:death-year author)] ))
+  (interpose " - " [(:birth-year author) (:death-year author)] )
+  (interpose -  [(:birth-year author) (:death-year author)] )
+  (interpose "-"  [(:birth-year author) (:death-year author)] )
+  (apply str (interpose "-"  [(:birth-year author) (:death-year author)] ))
+  (apply str (interpose " - "  [(:birth-year author) (:death-year author)] ))
+  (apply str "(" (interpose " - "  [(:birth-year author) (:death-year author)] ) ")")
+  (apply str (interpose " - "  [(:birth-year author) (:death-year author)] ))
+(defn author->string [author]
+  (let [name (:name author)
+        years (cond
+          (contains? author :death-year) (apply str  (interpose " - " [(:birth-year author) (:death-year author)] ))
+          (contains? author :birth-year) (str   (:birth-year auth) " - ")
+          :else nil
+          )
+        ]
+    (if (nil? years)
+      (str name)
+      (apply str name "(" years ")"))     
+    ))
+(author->string author)
+(defn author->string [author]
+  (let [name (:name author)
+        years (cond
+          (contains? author :death-year) (apply str  (interpose " - " [(:birth-year author) (:death-year author)] ))
+          (contains? author :birth-year) (str   (:birth-year auth) " - ")
+          :else nil
+          )
+        ]
+    (if (nil? years)
+      (str name)
+      (apply str name " (" years ")"))     
+    ))
+(author->string author)
+(defn author->string [author]
+  (let [name (:name author)
+        years (cond
+          (contains? author :death-year) (apply str  (interpose " - " [(:birth-year author) (:death-year author)] ))
+          (contains? author :birth-year) (str (:birth-year auth) " - ")
+          :else nil
+          )
+        ]
+    (if (nil? years)
+      (str name)
+      (apply str name " (" years ")"))     
+    ))
+(defn authors->string [authors]
+  (map author->string authors))
+(authors->string (:authors little-schemer))
+(defn authors->string [authors]
+ (apply concat (map author->string authors)))
+(authors->string (:authors little-schemer))
+(defn authors->string [authors]
+ (apply str (map author->string authors)))
+(authors->string (:authors little-schemer))
+(defn authors->string [authors]
+ (apply str (interpose ", " (map author->string authors))))
+(authors->string (:authors little-schemer))
