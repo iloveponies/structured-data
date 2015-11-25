@@ -1,129 +1,3 @@
-(def china {:name "China Miéville", :birth-year 1972})
-(def octavia {:name "Octavia E. Butler"
-              :birth-year 1947
-              :death-year 2006})
-(def friedman {:name "Daniel Friedman" :birth-year 1944})
-(def felleisen {:name "Matthias Felleisen"})
-(def cities {:title "The City and the City" :authors #{china}})
-(def wild-seed {:title "Wild Seed", :authors #{octavia}})
-(def embassytown {:title "Embassytown", :authors #{china}})
-(def little-schemer {:title "The Little Schemer"
-                     :authors #{friedman, felleisen}})
-(def books [cities, wild-seed, embassytown, little-schemer])
-(defn authors [books]
-  (apply clojure.set/union (map :authors books)))
-(authors books)
-(apply :name (authors books))
-(count (authors books))
-(first (authors books))
-(:name (first (authors books)))
-(map :name (authors books))
-(set (map :name (authors books)))
-(first (:authors little-schemer))
-(contains? (first (:authors little-schemer)) :burth-year)
-(contains? (first (:authors little-schemer)) :birth-year)
-(str "(" "1922 -" ")")
-(apply str (interpose " - " [1 2]))
-(apply str (interpose " - " [1]))
-(apply str (interpose " - " [1 ]))
-(defn author->string [author]
-  (let [name (:name author)
-        years (cond
-          (contains? author :death-year) (apply str (interpose " - " [(:birth-year author) (:death-year author)] ))
-          (contains? author :birth-year) (str ("(" (:birth-year author) " - "))
-          :else nil
-          )
-        ]
-    if (years)
-    (apply str (name "(" years ")"))
-    (name)
-  ))
-(defn author->string [author]
-  (let [name (:name author)
-        years (cond
-          (contains? author :death-year) (apply str (interpose " - " [(:birth-year author) (:death-year author)] ))
-          (contains? author :birth-year) (str ("(" (:birth-year author) " - "))
-          :else nil
-          )
-        ]
-    (if (years)
-      (apply str (name "(" years ")"))
-      (name))
-    ))
-(author->string (first (:authors little-schemer)))
-(defn author->string [author]
-  (let [name (:name author)
-        years (cond
-          (contains? author :death-year) (apply str (interpose " - " [(:birth-year author) (:death-year author)] ))
-          (contains? author :birth-year) (str ("(" (:birth-year author) " - "))
-          :else nil
-          )
-        ]
-(years)
-))
-(author->string (first (:authors little-schemer)))
-(first (:authors little-schemer))
-(defn  years (cond
-          (contains? author :death-year) (apply str (interpose " - " [(:birth-year author) (:death-year author)] ))
-          (contains? author :birth-year) (str ("(" (:birth-year author) " - "))
-          :else nil
-          )
-)
-(str "(" (:birth-year (first (:authors little-schemer))) ")")
-(def years "kk")
-(if (years) (0) (1))
-(if (nil? years) (0) (1))
-(years)
-(nil? years)
-(if (FALSE) (0) (1))
-(defn author->string [author]
-  (let [name (:name author)
-        years (cond
-          (contains? author :death-year) (apply str (interpose " - " [(:birth-year author) (:death-year author)] ))
-          (contains? author :birth-year) (str ((:birth-year author) " - "))
-          :else nil
-          )
-        ]
-    (if (nil? years)
-      (name)
-      (apply str (name "(" years ")"))
-     )
-    ))
-(author->string (first (:authors little-schemer)))
-(def auth (first (:authors little-schemer)))
-auth
-years
-(if years (9) (0))
-(defn author->string [author]
-  (let [name (:name author)
-        years (cond
-          (contains? author :death-year) (apply str ( "( " (interpose " - " [(:birth-year author) (:death-year author)] ) " )"))
-          (contains? author :birth-year) (str ("( " (:birth-year author) " - )"))
-          :else nil
-          )
-        ]
-      (apply str (name years))     
-    ))
-(author->string auth)
-(defn author->string [author]
-  (let [name (:name author)
-        years (cond
-          (contains? author :death-year) (apply str ( "( " (interpose " - " [(:birth-year author) (:death-year author)] ) " )"))
-          (contains? author :birth-year) (str ("( " (:birth-year author) " - )"))
-          :else nil
-          )
-        ]
-    years
-      ;;(apply str (name years))     
-    ))
-(author->string auth)
-(defn author->string [author]
-  (let [name (:name author)
-        years (cond
-          (contains? author :death-year) (apply str ( "( " (interpose " - " [(:birth-year author) (:death-year author)] ) " )"))
-          (contains? author :birth-year) (str ("( " (:birth-year author) " - )"))
-          :else nil
-          )
         ]
     name
       ;;(apply str (name years))     
@@ -386,3 +260,241 @@ author
   (filter (fn [book] (has-author? book author)) books))
 (books-by-author china books) 
 (books-by-author author books) 
+(def authors #{china, felleisen, octavia, friedman})
+books
+(defn all-author-names [books]
+  (set (map :name (authors books))))
+(all-author-names books)
+(defn authors [books]
+  (apply clojure.set/union (map :authors books)))
+(all-author-names books)
+(first authors)
+(first (authors))
+authors
+(def authors #{china, felleisen, octavia, friedman})
+authors
+(first authors)
+(authors books)
+(apply clojure.set/union (map :authors books))
+(defn authors [books]
+  (apply clojure.set/union (map :authors books)))
+(authors books)
+(map :name (authors books))
+(contains? (map :name (authors books)) "Daniel Friedman")
+(contains? (set map :name (authors books)) "Daniel Friedman")
+(set map :name (authors books))
+(books-by-author china books) 
+(books-by-author felleison books) 
+authors
+books
+(books-by-author Felleison books) 
+(books-by-author Friedman books) 
+(books-by-author China books) 
+(books-by-author china books) 
+(books-by-author octavia books) 
+(books-by-author friedman books) 
+(books-by-author felleisen books) 
+felleisen
+(def authors #{china, felleisen, octavia, friedman})
+(first authors)
+(all-author-names books)
+(authors books)
+(ns structured-data)
+(defn do-a-thing [x]
+  (let [doublex (+ x x)]
+  (Math/pow doublex doublex)
+  ))
+(defn spiff [v]
+  (let [x (get v 0)
+        y (get v 2)]
+    (cond
+      (and (nil? x) (nil? y)) 0
+      (nil? y) x
+      :else (+ x y)
+      )))     
+(defn cutify [v]
+  (conj v "<3"))
+(defn spiff-destructuring [v]
+    (let [[x drop y] v]
+    (cond
+      (and (nil? x) (nil? y)) 0
+      (nil? y) x
+      :else (+ x y)
+      )))  
+(defn point [x y]
+  [x y])
+(defn rectangle [bottom-left top-right]
+  [bottom-left top-right])
+(defn width [rectangle]
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (- x2 x1)
+    ))
+(defn height [rectangle]
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (- y2 y1)
+    ))
+(defn square? [rectangle]
+  (= (width rectangle) (height rectangle)))
+(defn area [rectangle]
+    (* (width rectangle) (height rectangle)))
+(defn contains-point? [rectangle point]
+  (let [[[x1 y1] [x2 y2]] rectangle
+        [x y] point]
+    (and (<= x1 x x2) (<= y1 y y2))
+    ))
+    
+(defn contains-rectangle? [outer inner]
+  (let [[pt1 pt2] inner]
+        (and (contains-point? outer pt1) (contains-point? outer pt2))
+        ))
+(defn title-length [book]
+  (count (:title book)))
+(defn author-count [book]
+  (count (:authors book)))
+(defn multiple-authors? [book]
+  (> (author-count book) 1))
+(defn add-author [book new-author]
+  (let [newauthors (conj (:authors book) new-author)] 
+       (assoc book :authors newauthors)
+    ))
+(defn alive? [author]
+  (not (contains? author :death-year)))
+(defn element-lengths [collection]
+  (map count collection))
+(defn second-elements [collection]
+  (let [getsecond (fn [c] (get c 1))]
+    (map getsecond collection)
+    ))
+(defn titles [books]
+  (map :title books))
+(defn monotonic? [a-seq]
+  (or (apply <= a-seq) (apply >= a-seq)))
+(defn stars [n]
+  (apply str (repeat n "*")))
+(defn toggle [a-set elem]
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)))
+(defn contains-duplicates? [a-seq]
+  (not (= (count (set a-seq)) (count a-seq))))
+(defn old-book->new-book [bos (set (:authors book))))
+(defn has-author? [book author]
+  (contains? (:authors book) author))
+(defn authors [books]
+  (apply clojure.set/union (map :authors books)))
+(defn all-author-names [books]
+  (set (map :name (authors books))))
+(defn author->string [author]
+  (let [name (:name author)
+        years
+        (cond
+          (contains? author :death-year) (apply str  (interpose " - " [(:birth-year author) (:death-year author)] ))
+          (contains? author :birth-year) (str (:birth-year author) " - ")
+          :else nil
+          )]
+    (if (nil? years)
+      (str name)
+      (apply str name " (" years ")"))     
+    ))
+(defn authors->string [authors]
+  (apply str (interpose ", " (map author->string authors))))
+(defn book->string [book]
+  (apply
+   str (
+        interpose ", written by " [
+                                  (:title book)
+                                  (authors->string (:authors book))
+                                  ]
+        )))
+(defn books->string [books]
+  (cond (= (count."
+        (= (count books) 1) (apply str "1 book. " (book->string (first books)))
+        :else (apply str (count books) " books. " (interpose " " (map book->string books)))
+        ))
+(defn books-by-author [author books]
+  (filter (fn [book] (has-author? book author)) books))
+(defn author-by-name [name authors]
+  :-)
+(defn living-authors [authors]
+  :-)
+(defn has-a-living-author? [book]
+  :-)
+(defn books-by-living-authors [books]
+  :-)
+; %________%
+(all-author-names books)
+books
+authors
+(first authors)
+(def china {:name "China Miéville", :birth-year 1972})
+(def octavia {:name "Octavia E. Butler"
+              :birth-year 1947
+              :death-year 2006})
+(def friedman {:name "Daniel Friedman" :birth-year 1944})
+(def felleisen {:name "Matthias Felleisen"})
+(def cities {:title "The City and the City" :authors #{china}})
+(def wild-seed {:title "Wild Seed", :authors #{octavia}})
+(def embassytown {:title "Embassytown", :authors #{china}})
+(def little-schemer {:title "The Little Schemer"
+                     :authors #{friedman, felleisen}})
+(def books [cities, wild-seed, embassytown, little-schemer])
+(def authors #{china, felleisen, octavia, friedman})
+(all-author-names books)
+(author-names books)
+authors
+(authors->string authors)
+(map :name authors)
+(set (map :name authors))
+(contains? (set (map :name authors)) "Daniel Friedman")
+(filter (fn [n]) (= (:name n) name) authors)
+(filter (fn [n]) (= (:name n) "name") authors)
+(filter (fn [n]) (= (:name n) "name\") authors)
+(= "j" "j")
+(defn author-by-name [name authors]
+  (if (contains? (set (map :name authors)) name)
+    (name)
+    (nil)))
+(defn author-by-name [name authors]
+  (if (contains? (set (map :name authors)) name)
+    (name)
+    (nil)))
+(defn author-by-name [name authors]
+  (if (contains? (set (map :name authors)) name)
+    (name)
+    ([])))
+(author-by-name "Octavia E. Butler" authors) 
+(def name "Octavia E. Butler")
+name
+(contains? (set (map :name authors) name))
+(contains? (set (map :name authors)) name)
+(if (contains? (set (map :name authors)) name) (name) (nil))
+(if (contains? (set (map :name authors)) name) (1) (0))
+(if (contains? (set (map :name authors)) name) (true) (false))
+(filter (fn [n authors] (contains? (set (map :name authors)) n)) name authors)
+(defn author-by-name [name authors]
+  (filter (contains? (set (map :name authors)) name) authors))
+(author-by-name "Octavia E. Butler" authors) 
+  (filter (contains? (set (map :name authors)) name) authors))
+  (filter (contains? (set (map :name authors)) name) authors)
+  (filter (fn [nm auths] (contains? (set (map :name auths)) nm) name auths)
+)
+  (filter (fn [nm auths] (contains? (set (map :name auths)) nm) name auths))
+  (filter (fn [a] (= (:name a)) name))
+  (filter (fn [a] (= (:name a)) name) authors)
+name
+  (filter (fn [a] (= name (:name a))) authors)
+(defn author-by-name [name authors]
+  (let [author] (filter (fn [auth] (= name (:name auth))) authors)
+       if (nil? author) nil
+       (:name author)
+       )) 
+  (filter (fn [a] (= name (:name a))) authors)
+(first  (filter (fn [a] (= name (:name a))) authors))
+(:name first  (filter (fn [a] (= name (:name a))) authors))
+(:name (first  (filter (fn [a] (= name (:name a))) authors)))
+(defn author-by-name [name authors]
+  (:name (first (filter (fn [auth] (= name (:name auth))) authors))))
+(author-by-name "Octavia E. Butler" authors) 
+(author-by-name "Goerge R. R. Martin" authors) 
+(author-by-name "China Miéville" authors)  
+(author-by-name "Octavia E. Butler" #{felleisen, friedman})
