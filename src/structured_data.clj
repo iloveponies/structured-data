@@ -139,15 +139,15 @@
 
 (defn books->string [books]
   (cond (= (count books) 0) "No books."
-        (= (count books) 1) (apply str "1 book. " (book->string (first books)))
-        :else (apply str (count books) " books. " (interpose " " (map book->string books)))
+        (= (count books) 1) (apply str "1 book. " (book->string (first books)) ".")
+        :else (apply str (count books) " books. " (interpose " " (map book->string books)) ".")
         ))
 
 (defn books-by-author [author books]
   (filter (fn [book] (has-author? book author)) books))
 
 (defn author-by-name [name authors]
-  (:name (first (filter (fn [auth] (= name (:name auth))) authors)))) 
+  (first (filter (fn [auth] (= name (:name auth))) authors)))
    
 (defn living-authors [authors]
   (filter alive? authors))
