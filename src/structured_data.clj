@@ -137,7 +137,7 @@
 (defn books->string [books]
   (cond (= (count books) 0) "No books."
         (= (count books) 1) (apply str "1 book. " (book->string (first books)) ".")
-        :else  (apply str (count books) " books. " (apply str (interpose ". " (map book->string books))))
+        :else  (str (apply str (count books) " books. " (apply str (interpose ". " (map book->string books)))) ".")
         ))
 
 (defn books-by-author [author books]

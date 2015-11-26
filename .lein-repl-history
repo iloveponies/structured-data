@@ -1,4 +1,3 @@
-          (contains? author :birth-year) (str "("  (:birth-year auth) " - )")
           :else nil
           )
 )
@@ -498,3 +497,4 @@ name
         :else  (apply str (count books) " books. " (apply str (interpose ". " (map book->string books))))
         ))
 (books->string books)
+(books->string [little-schemer, cities, wild-seed])
