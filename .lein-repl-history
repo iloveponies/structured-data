@@ -1,13 +1,3 @@
-          :else nil
-          )
-        ]
-      (apply str (name years))     
-    ))
-(author->string auth)
-(author->string (second (:authors little-schemer))))
-(defn author->string [author]
-  (let [name (:name author)
-        years (cond
           (contains? author :death-year) (str "( " (interpose " - " [(:birth-year author) (:death-year author)] ) ")")
           (contains? author :birth-year) (str "("  (:birth-year auth) " - )")
           :else nil
@@ -498,3 +488,13 @@ name
 (has-a-living-author? cities)
 (has-a-living-author? wild-seed)
 (has-a-living-author? silmarillion)
+(def dick {:name "Philip K. Dick", :birth-year 1928, :death-year 1982})
+(def zelazny {:name "Roger Zelazny", :birth-year 1937, :death-year 1995})
+(def deus-irae {:title "Deus Irae", :authors #{dick, zelazny}})
+(defn books-by-living-authors [books]
+  (filter (fn [book] (has-a-living-author? book)) books))
+(books-by-living-authors books)
+(books-by-living-authors [silmarillion little-schemer])
+(books-by-living-authors [silmarillion octavia])
+(books-by-living-authors [octavia])
+(books-by-living-authors [octavia deus-irae])
