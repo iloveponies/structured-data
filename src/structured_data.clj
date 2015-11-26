@@ -2,8 +2,8 @@
 
 (defn do-a-thing [x]
   (let [doublex (+ x x)]
-  (Math/pow doublex doublex)
-  ))
+    (Math/pow doublex doublex)
+    ))
 
 (defn spiff [v]
   (let [x (get v 0)
@@ -18,7 +18,7 @@
   (conj v "<3"))
 
 (defn spiff-destructuring [v]
-    (let [[x drop y] v]
+  (let [[x drop y] v]
     (cond
       (and (nil? x) (nil? y)) 0
       (nil? y) x
@@ -45,18 +45,18 @@
   (= (width rectangle) (height rectangle)))
 
 (defn area [rectangle]
-    (* (width rectangle) (height rectangle)))
+  (* (width rectangle) (height rectangle)))
 
 (defn contains-point? [rectangle point]
   (let [[[x1 y1] [x2 y2]] rectangle
         [x y] point]
     (and (<= x1 x x2) (<= y1 y y2))
     ))
-    
+
 (defn contains-rectangle? [outer inner]
   (let [[pt1 pt2] inner]
-        (and (contains-point? outer pt1) (contains-point? outer pt2))
-        ))
+    (and (contains-point? outer pt1) (contains-point? outer pt2))
+    ))
 
 (defn title-length [book]
   (count (:title book)))
@@ -69,7 +69,7 @@
 
 (defn add-author [book new-author]
   (let [newauthors (conj (:authors book) new-author)] 
-       (assoc book :authors newauthors)
+    (assoc book :authors newauthors)
     ))
 
 (defn alive? [author]
@@ -130,17 +130,14 @@
 
 (defn book->string [book]
   (apply
-   str (
-        interpose ", written by " [
-                                  (:title book)
-                                  (authors->string (:authors book))
-                                  ]
-        )))
+   str (interpose ", written by " [(:title book)
+                                   (authors->string (:authors book))]
+                  )))
 
 (defn books->string [books]
   (cond (= (count books) 0) "No books."
         (= (count books) 1) (apply str "1 book. " (book->string (first books)) ".")
-        :else (apply str (count books) " books. " (interpose " " (map book->string books)) ".")
+        :else  (apply str (count books) " books. " (apply str (interpose ". " (map book->string books))))
         ))
 
 (defn books-by-author [author books]
@@ -148,7 +145,7 @@
 
 (defn author-by-name [name authors]
   (first (filter (fn [auth] (= name (:name auth))) authors)))
-   
+
 (defn living-authors [authors]
   (filter alive? authors))
 

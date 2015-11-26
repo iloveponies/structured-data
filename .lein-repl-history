@@ -1,45 +1,3 @@
-          (contains? author :death-year) (str "( " (interpose " - " [(:birth-year author) (:death-year author)] ) ")")
-          (contains? author :birth-year) (str "("  (:birth-year auth) " - )")
-          :else nil
-          )
-        ]
-    (name)
-      ;;(apply str (name years))     
-    ))
-(author->string (second (:authors little-schemer)))
-(defn author->string [author]
-  (let [name (:name author)
-        years (cond
-          (contains? author :death-year) (str "( " (interpose " - " [(:birth-year author) (:death-year author)] ) ")")
-          (contains? author :birth-year) (str "("  (:birth-year auth) " - )")
-          :else nil
-          )
-        ]
-    (str name)
-      ;;(apply str (name years))     
-    ))
-(author->string (second (:authors little-schemer)))
-(defn author->string [author]
-  (let [name (:name author)
-        years (cond
-          (contains? author :death-year) (str "( " (interpose " - " [(:birth-year author) (:death-year author)] ) ")")
-          (contains? author :birth-year) (str "("  (:birth-year auth) " - )")
-          :else nil
-          )
-        ]
-    (if (nil? years)
-      (str name)
-      (apply str (name years)))     
-    ))
-(author->string (second (:authors little-schemer)))
-(author->string (first (:authors little-schemer)))
-(author->string (second (:authors little-schemer)))
-author
-auth
-(def author auth)
-author
-(def years (cond
-          (contains? author :death-year) (str "( " (interpose " - " [(:birth-year author) (:death-year author)] ) ")")
           (contains? author :birth-year) (str "("  (:birth-year auth) " - )")
           :else nil
           )
@@ -498,3 +456,45 @@ name
 (books-by-living-authors [silmarillion octavia])
 (books-by-living-authors [octavia])
 (books-by-living-authors [octavia deus-irae])
+(books->string [silmarillion cities])
+(defn books->string [books]
+  (cond (= (count books) 0) "No books."
+        (= (count books) 1) (apply str "1 book. " (book->string (first books)) ".")
+        :else (apply str (count books) " books. " (interpose " " (map book->string books)) ".")
+        ))
+(books->string [cities silmarillion])
+(book->string cities)
+(map book->string [cities silmarillion])
+(apply str (map book->string [cities silmarillion]))
+(apply str (interpose " " (map book->string [cities silmarillion])))
+(apply str (interpose " " (map book->string [cities silmarillion])) ".")
+(apply str (interpose " " (map book->string [cities silmarillion])))
+(apply str (interpose " " (map book->string [cities silmarillion])) "." )
+(apply str ((interpose " " (map book->string [cities silmarillion]))) "." )
+(apply str (interpose " " (map book->string [cities silmarillion])) "." )
+(apply str (interpose " " (map book->string [cities silmarillion])) )
+(str (apply str (interpose " " (map book->string [cities silmarillion]))) ".")
+(defn books->string [books]
+  (cond (= (count books) 0) "No books."
+        (= (count books) 1) (apply str "1 book. " (book->string (first books)) ".")
+        :else (str (apply str (count books) " books. " ((interpose ". " (map book->string books)))) ".")
+        ))
+(books->string books)
+(books->string [cities])
+(books->string [cities silmarillion])
+(defn books->string [books]
+  (cond (= (count books) 0) "No books."
+        (= (count books) 1) (apply str "1 book. " (book->string (first books)) ".")
+        :else  (apply str (count books) " books. " ((interpose ". " (map book->string books))))
+        ))
+(books->string books)
+(apply str (count books) " books. " ((interpose ". " (map book->string books))))
+(interpose ". " (map book->string books))
+(str (interpose ". " (map book->string books)))
+(apply str (interpose ". " (map book->string books)))
+(defn books->string [books]
+  (cond (= (count books) 0) "No books."
+        (= (count books) 1) (apply str "1 book. " (book->string (first books)) ".")
+        :else  (apply str (count books) " books. " (apply str (interpose ". " (map book->string books))))
+        ))
+(books->string books)
