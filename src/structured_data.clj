@@ -75,45 +75,50 @@
   (if (contains? a-set elem) (disj a-set elem) (conj a-set elem) ))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (not (== (count a-seq) (count (set a-seq)))))
 
 (defn old-book->new-book [book]
-  :-)
+  (assoc book :authors (set (:authors book))))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author))
 
 (defn authors [books]
-  :-)
+  (apply clojure.set/union (map :authors books)))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (let [name (:name author)
+        by (:birth-year author)
+        dy (:death-year author)]
+    (if (contains? author :birth-year) (apply str name " (" by " - " dy ")") (str name))))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (apply str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
-  :-)
+  (let [c (count books)]
+  (if (== c 0)  (str "No books.") (apply str c " book" (if (> c 1) (str "s")) ". " (apply str (interpose ". " (map book->string books))) "."))
+               ) )
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [book] (has-author? book author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [author] (= name (:name author))) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter (fn [author] (alive? author)) authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (authors [book])))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter (fn [book] (has-a-living-author? book)) books))
 
 ; %________%
