@@ -122,8 +122,8 @@
 (defn books-by-author [author books]
   (filter (fn [book] (has-author? book author)) books))
 
-(defn author-by-name [aname authors]
-  (let [[author] (filter (fn [author] (= aname (:name author))) authors)] author))
+(defn author-by-name [name authors]
+  (let [[author] (filter (fn [author] (= name (:name author))) authors)] author))
 
 (defn living-authors [authors]
   (filter (fn [author] (= nil (:death-year author))) authors))
