@@ -128,7 +128,7 @@
     "No books."
     (if (= 1 (count books))
       (str "1 book. " (book->string (get books 0)) ".")
-      (let [lazybitch (doall (map book->string books))]
+      (let [lazybitch (apply str (interpose ". " (map book->string books)))]
         (str (count books) " books. " lazybitch ".")))))
 
 (defn books-by-author [author books]
