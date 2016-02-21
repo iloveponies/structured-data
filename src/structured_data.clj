@@ -119,24 +119,31 @@
   (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (if (= "" (authors->string (:authors book)))
+    (:title book)
+    (str (:title book) ", written by " (authors->string (:authors book)))))
 
 (defn books->string [books]
-  :-)
+  (if (= 0 (count books))
+    "No books."
+    (if (= 1 (count books))
+      (str "1 book. " (book->string (get books 0)) ".")
+      (let [lazybitch (doall (map book->string books))]
+        (str (count books) " books. " lazybitch ".")))))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [book] (contains? (:authors book) author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [author] (= (:name author) name)) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (> (count (filter alive? (:authors book))) 0))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
