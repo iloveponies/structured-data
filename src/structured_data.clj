@@ -144,8 +144,7 @@
   (not (empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
-  (let [hasLivingAuthor (fn [book] (has-a-living-author? book))]
-    (filter hasLivingAuthor books)))
+  (filter has-a-living-author? books))
 
 ; %________%
 
