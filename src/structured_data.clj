@@ -63,7 +63,7 @@
     (map getLength collection)))
 
 (defn second-elements [collection]
-  (let [getSecond (fn [vector] (vector 1))]
+  (let [getSecond (fn [vector] (get vector 1))]
     (map getSecond collection)))
 
 (defn titles [books]
