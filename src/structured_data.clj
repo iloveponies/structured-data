@@ -30,8 +30,8 @@
 (defn height [[[bottom-leftX bottom-leftY][top-rightX top-rightY]]]
   (- top-rightY bottom-leftY))
 
-(defn square? [[[bottom-leftX bottom-leftY][top-rightX top-rightY]]]
-  (== (- top-rightX bottom-leftX) (- top-rightY bottom-leftY)))
+(defn square? [rectangle]
+  (== (width rectangle) (height rectangle)))
 
 (defn area [rectangle]
   (* (width rectangle) (height rectangle)))
