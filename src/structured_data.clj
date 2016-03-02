@@ -27,8 +27,7 @@
 (defn width [[[bottom-leftX][top-rightX]]]
   (- top-rightX bottom-leftX))
 
-(defn height [[[bottom-leftX bottom-leftY]
-               [top-rightX top-rightY]]]
+(defn height [[[_ bottom-leftY][_ top-rightY]]]
   (- top-rightY bottom-leftY))
 
 (defn square? [rectangle]
