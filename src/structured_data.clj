@@ -61,36 +61,64 @@
       (contains-point? (rectangle [x1 y1] [x2 y2]) (point x4 y4)))
   ))
 
+;(def china {:name "China Miéville", :birth-year 1972})
+;(def octavia {:name "Octavia E. Butler":birth-year 1947 :death-year 2006})
+;(def friedman {:name "Daniel Friedman" :birth-year 1944})
+;(def felleisen {:name "Matthias Felleisen"})
+
+;(def cities {:title "The City and the City" :authors [china]})
+;(def wild-seed {:title "Wild Seed", :authors [octavia]})
+;(def embassytown {:title "Embassytown", :authors [china]})
+;(def little-schemer {:title "The Little Schemer" :authors [friedman, felleisen]})
+;(def books [cities, wild-seed, embassytown, little-schemer])
 
 (defn title-length [book]
-  :-)
+  (count (book :title))
+  )
 
 (defn author-count [book]
-  :-)
+  (count (book :authors)))
 
 (defn multiple-authors? [book]
-  :-)
+  (if (not (= (count (book :authors)) 1)) true false)
+  )
 
 (defn add-author [book new-author]
-  :-)
+  (assoc book :authors (conj (:authors book) new-author))
+  )
 
 (defn alive? [author]
-  :-)
+  (not (contains? author :death-year))
+  )
 
 (defn element-lengths [collection]
-  :-)
+  (map (fn [x] (count x)) collection)
+  )
+
+;(defn second-elements [collection]
+;  (map (fn [x] (get x 1)) collection)
+;  )
+; exercise requires let so...
 
 (defn second-elements [collection]
-  :-)
+  (let [get-second (fn [x] (get x 1))] (map get-second collection)))
 
 (defn titles [books]
-  :-)
+  (map :title books)
+  )
+;; pregunta!
+;; (titles books) funciona
+;; (titles cities) no funciona
+;; (title [citites]) funciona
+;; veo que books es un vector y cities un mapa
+;; la pregunta seria, por que un mapa no puede ser parametro?
 
 (defn monotonic? [a-seq]
   :-)
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*"))
+  )
 
 (defn toggle [a-set elem]
   :-)
