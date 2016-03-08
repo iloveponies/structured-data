@@ -1,16 +1,36 @@
 (ns structured-data)
 
+Math/PI
+
+(Math/pow 2 3)
+
 (defn do-a-thing [x]
-  :-)
+    (let [y (+ x x)]
+       (Math/pow y y)))
+
+(do-a-thing 2)
 
 (defn spiff [v]
-  :-)
+ (if (< (count v) 2)
+     nil
+     (+ (v 0) (v 1))))
+
+(spiff [1 2 3])
+(spiff [1 2 3 4 5 6])
+(spiff [1 2])
+(spiff [])
 
 (defn cutify [v]
-  :-)
+  (conj v "<3"))
+
+(cutify [])
+(cutify [1 2 3])
+(cutify ["a" "b"])
+
+
 
 (defn spiff-destructuring [v]
-  :-)
+  v)
 
 (defn point [x y]
   [x y])
@@ -19,19 +39,50 @@
   [bottom-left top-right])
 
 (defn width [rectangle]
-  :-)
+    (let [[[x1 y1] [x2 y2]] rectangle]
+        (Math/abs (- x2 x1))))
 
 (defn height [rectangle]
-  :-)
+    (let [[[x1 y1] [x2 y2]] rectangle]
+        (Math/abs (- y2 y1))))
+
+
+(height (rectangle [1 1] [5 1]))
+(height (rectangle [1 1] [5 5]))
+(height (rectangle [0 0] [2 3]))
+
+(width (rectangle [1 1] [5 1]))
+(width (rectangle [1 1] [1 1]))
+(width (rectangle [3 1] [10 4]))
 
 (defn square? [rectangle]
-  :-)
+    (===
+        (width rectangle)
+        (height rectangle)))
+
+
+(square? (rectangle [1 1] [2 2]))
+(square? (rectangle [1 1] [2 3]))
+(square? (rectangle [1 1] [1 1]))
+(square? (rectangle [3 2] [1 0]))
+(square? (rectangle [3 2] [1 1]))
+
 
 (defn area [rectangle]
-  :-)
+(*
+    (width rectangle)
+    (height rectangle)))
+
+
+(area (rectangle [1 1] [5 1]))
+(area (rectangle [0 0] [1 1]))
+(area (rectangle [0 0] [4 3]))
+(area (rectangle [3 1] [10 4]))
+
 
 (defn contains-point? [rectangle point]
-  :-)
+
+    )
 
 (defn contains-rectangle? [outer inner]
   :-)
