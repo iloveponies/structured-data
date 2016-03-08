@@ -56,7 +56,7 @@ Math/PI
 (width (rectangle [3 1] [10 4]))
 
 (defn square? [rectangle]
-    (===
+    (==
         (width rectangle)
         (height rectangle)))
 
