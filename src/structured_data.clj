@@ -80,7 +80,7 @@
   (count (book :authors)))
 
 (defn multiple-authors? [book]
-  (if (not (= (count (book :authors)) 1)) true false)
+  (not (= (count (book :authors)) 1))
   )
 
 (defn add-author [book new-author]
@@ -114,44 +114,83 @@
 ;; la pregunta seria, por que un mapa no puede ser parametro?
 
 (defn monotonic? [a-seq]
-  :-)
+  (or (apply >= a-seq) (apply <= a-seq))
+  )
 
 (defn stars [n]
   (apply str (repeat n "*"))
   )
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem)
+    (disj a-set elem) (conj a-set elem)
+  ))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (not= (count a-seq) (count (set a-seq)))
+  )
 
 (defn old-book->new-book [book]
-  :-)
+  (assoc book :authors (set (:authors book)))
+  )
+
+;(def china {:name "China Miéville", :birth-year 1972})
+;(def octavia {:name "Octavia E. Butler"
+;              :birth-year 1947
+;              :death-year 2006})
+;(def friedman {:name "Daniel Friedman" :birth-year 1944})
+;(def felleisen {:name "Matthias Felleisen"})
+
+;(def cities {:title "The City and the City" :authors #{china}})
+;(def wild-seed {:title "Wild Seed", :authors #{octavia}})
+;(def embassytown {:title "Embassytown", :authors #{china}})
+;(def little-schemer {:title "The Little Schemer"
+;                     :authors #{friedman, felleisen}})
+
+;(def books [cities, wild-seed, embassytown, little-schemer])
+
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author)
+  )
 
 (defn authors [books]
-  :-)
+  (let [get-authors (fn [x] (:authors x))]
+    (apply clojure.set/union (map get-authors books))
+  ))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books)))
+  )
 
 (defn author->string [author]
-  :-)
+  (let [years (fn [x] (str "("(:birth-year x)" - "(:death-year x)")"))]
+    (if (contains? author :birth-year) (str (:name author)" "(years author)) (:name author))
+    )
+  )
 
 (defn authors->string [authors]
-  :-)
+  (let [auth-str (fn [x] (author->string x))]
+    (apply str(interpose ", "(map auth-str authors)))
+  ))
 
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by " (apply str (interpose ", " (map author->string (:authors book)))))
+  )
 
 (defn books->string [books]
-  :-)
+ (let [strings (fn [x] (book->string x))]
+  (cond
+   (empty? books)
+    "No books."
+   (= (count books) 1)
+   (str (count books) " book. " (apply str (interpose ". " (map strings books))) ".")
+    :else (str (count books) " books. " (apply str (interpose ". " (map strings books))) ".")
+  )))
 
 (defn books-by-author [author books]
   :-)
+
 
 (defn author-by-name [name authors]
   :-)
