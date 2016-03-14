@@ -134,7 +134,7 @@
                       :else (str lkm " books. "))
         book->str (fn [book] (str (book->string book) "."))
         books-as-str (map book->str books)
-        books-str (apply str (interpose ". " books-as-str))]
+        books-str (apply str (interpose " " books-as-str))]
     (str lkm-str books-str)))
 
 (defn books-by-author [author books]
