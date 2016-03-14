@@ -149,7 +149,6 @@
 
 ;(def books [cities, wild-seed, embassytown, little-schemer])
 
-
 (defn has-author? [book author]
   (contains? (:authors book) author)
   )
@@ -189,19 +188,38 @@
   )))
 
 (defn books-by-author [author books]
-  :-)
+  (let [func (fn [x] (contains? (:authors x) author))]
+  (filter func books)
+  ))
 
+;(def authors #{china, felleisen, octavia, friedman})
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [authors] (= (:name authors) name)) authors))
+  )
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors)
+  )
+
+;(def jrrtolkien {:name "J. R. R. Tolkien" :birth-year 1892 :death-year 1973})
+;(def christopher {:name "Christopher Tolkien" :birth-year 1924})
+;(def kay {:name "Guy Gavriel Kay" :birth-year 1954})
+
+;(def silmarillion {:title "Silmarillion"
+;                   :authors #{jrrtolkien, christopher, kay}})
+
+;(def dick {:name "Philip K. Dick", :birth-year 1928, :death-year 1982})
+;(def zelazny {:name "Roger Zelazny", :birth-year 1937, :death-year 1995})
+
+;(def deus-irae {:title "Deus Irae", :authors #{dick, zelazny}})
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (filter alive? (:authors book))))
+  )
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books)
+  )
 
 ; %________%
