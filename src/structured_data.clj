@@ -34,13 +34,10 @@
      (- y2 y1)))
 
 (defn square? [rectangle]
-    (let [[[x1 y1] [x2 y2]]
-    rectangle] (= (- x2 x1)
-    (- y2 y1))))
+   (= (width rectangle) (height rectangle)))
 
 (defn area [rectangle]
-   (let [[[x1 y1] [x2 y2]] rectangle]
-      (* (- y2 y1)(- x2 x1))))
+   (* (width rectangle) (height rectangle)))
 
 (defn contains-point? [rectangle point]
      (let [[[x1 y1] [x2 y2]]
