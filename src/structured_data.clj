@@ -171,28 +171,85 @@ Math/PI
 (alive? octavia) ;=> false
 
 (defn element-lengths [collection]
-    :-)
+    (map count collection))
+
+(element-lengths ["foo" "bar" "" "quux"])  ;=> (3 3 0 4)
+(element-lengths ["x" [:a :b :c] {:y 42}]) ;=> (1 3 1)
+
 
 (defn second-elements [collection]
-    :-)
+    (map second collection))
+
 
 (defn titles [books]
-    :-)
+    (map :title books))
+
+
+(def china {:name "China Miéville", :birth-year 1972})
+(def octavia {:name "Octavia E. Butler"
+              :birth-year 1947
+              :death-year 2006})
+(def friedman {:name "Daniel Friedman" :birth-year 1944})
+(def felleisen {:name "Matthias Felleisen"})
+
+(def cities {:title "The City and the City" :authors [china]})
+(def wild-seed {:title "Wild Seed", :authors [octavia]})
+(def embassytown {:title "Embassytown", :authors [china]})
+(def little-schemer {:title "The Little Schemer"
+                     :authors [friedman, felleisen]})
+
+(def books [cities, wild-seed, embassytown, little-schemer])
+
+(titles [cities]) ;=> ("The City and the City" )
+(titles books) ;=> ("The City and the City" "Wild Seed"
+
 
 (defn monotonic? [a-seq]
-    :-)
+   (or
+       (apply <= a-seq)
+       (apply >= a-seq)))
+
+(monotonic? [1 2 3])     ;=> true
+(monotonic? [0 1 10 11]) ;=> true
+(monotonic? [3 2 0 -3])  ;=> true
+(monotonic? [3 2 2])     ;=> true    Not strictly monotonic
+(monotonic? [1 2 1 0])   ;=> false
 
 (defn stars [n]
-    :-)
+    (apply
+        str (repeat n "*")))
+
+(stars 1) ;=> "*"
+(stars 7) ;=> "*******"
+(stars 3) ;=> "***"
 
 (defn toggle [a-set elem]
-    :-)
+    (if
+        (contains? a-set elem)
+            (disj a-set elem)
+            (conj a-set elem)))
+
+(toggle #{:a :b :c} :d) ;=> #{:a :c :b :d}
+(toggle #{:a :b :c} :a) ;=> #{:c :b}
+
 
 (defn contains-duplicates? [a-seq]
-    :-)
+    (not=
+        (count a-seq)
+        (count (set a-seq))))
+
+(contains-duplicates? [1 1 2 3 -40]) ;=> true
+(contains-duplicates? [1 2 3 -40]) ;=> false
+(contains-duplicates? [1 2 3 "a" "a"]) ;=> true
 
 (defn old-book->new-book [book]
-    :-)
+    (assoc
+        book
+        :authors
+        (set (:authors book))))
+
+(old-book->new-book {:title "The Little Schemer" :authors [friedman, felleisen]}) ;=> {:title "The Little Schemer" :authors #{friedman, felleisen}}
+(old-book->new-book {:title "Wild Seed", :authors [octavia]}) ;=> {:title "Wild Seed", :authors #{octavia}}
 
 (defn has-author? [book author]
     :-)
