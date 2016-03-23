@@ -45,7 +45,10 @@
 )
 
 (defn contains-rectangle? [outer inner]
-  :-)
+  (let [[[i-btm-x i-btm-y] [i-top-x i-top-y]] inner]
+    (and (contains-point? outer [i-btm-x i-btm-y]) (contains-point? outer [i-top-x i-top-y]))
+  )
+)
 
 (defn title-length [book]
   :-)
