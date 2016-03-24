@@ -45,58 +45,69 @@
 )
 
 (defn contains-rectangle? [outer inner]
-  (let [[[i-btm-x i-btm-y] [i-top-x i-top-y]] inner]
-    (and (contains-point? outer [i-btm-x i-btm-y]) (contains-point? outer [i-top-x i-top-y]))
+  (let [[[i-btm-x i-btm-y] [i-top-x i-top-y]] inner
+        bottom-point [i-btm-x i-btm-y]
+        top-point [i-top-x i-top-y]]
+    (and (contains-point? outer bottom-point) (contains-point? outer top-point))
   )
 )
 
 (defn title-length [book]
-  :-)
+  (count (:title book)))
 
 (defn author-count [book]
-  :-)
+  (count (:authors book)))
 
 (defn multiple-authors? [book]
-  :-)
+  (< 1 (count (:authors book))))
 
 (defn add-author [book new-author]
-  :-)
+    (assoc book :authors (conj (:authors book) new-author))) ; replace the whole authors-map with a new one
 
 (defn alive? [author]
-  :-)
+  (not (contains? author :death-year)))
 
 (defn element-lengths [collection]
-  :-)
+  (let [countItems (fn [x] (count x))]
+  (map countItems collection)))
 
 (defn second-elements [collection]
-  :-)
+  (let [getSecond (fn [coll] (get coll 1))]
+    (map getSecond collection)
+  )
+)
 
 (defn titles [books]
-  :-)
+  (map :title books))
 
 (defn monotonic? [a-seq]
-  :-)
+  (or (apply <= a-seq) (apply >= a-seq)))
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*")))
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)
+    ))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (not (= (count a-seq) (count (set a-seq)))))
 
 (defn old-book->new-book [book]
-  :-)
+  (assoc book :authors (set (:authors book))))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author))
 
 (defn authors [books]
-  :-)
+  (let [authors
+         (fn [book] (:authors book))]
+    (set (apply concat (map authors books)))))
 
 (defn all-author-names [books]
-  :-)
+   (set (map :name (authors books))))
 
 (defn author->string [author]
   :-)
