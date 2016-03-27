@@ -52,7 +52,7 @@
 (defn contains-rectangle? [outer inner]
   (let [[pointa pointb] inner]
     (and (contains-point? outer pointa) (contains-point? outer pointb))
-  ))
+    ))
 
 (defn title-length [book]
   (count (get book :title)))
@@ -93,45 +93,53 @@
     (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  (> (count a-seq) (count(set a-seq))))
+  (> (count a-seq) (count (set a-seq))))
 
 (defn old-book->new-book [book]
-  :-)
+  (let [new-authors (set (get book :authors))]
+    (assoc book :authors new-authors)))
 
 (defn has-author? [book author]
-  :-)
+  (contains? ((old-book->new-book book) :authors) author))
 
 (defn authors [books]
-  :-)
+  (apply clojure.set/union (map :authors books)))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (cond
+    (contains? author :death-year) (str (author :name) " (" (author :birth-year) " - " (author :death-year) ")")
+    (contains? author :birth-year) (str (author :name) " (" (author :birth-year) " - )")
+    :else (str (author :name))))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (str (book :title) ", written by " (authors->string (book :authors))))
 
 (defn books->string [books]
-  :-)
+  (let [bookstring (str (apply str (interpose ", " (map book->string books))) ".")]
+    (cond
+      (= (count books) 0) (str "No books.")
+      (= (count books) 1) (str "1 book. " bookstring)
+      :else (str (count books) " books. " bookstring))))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [x] (has-author? x author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [x] (= (x :name) name)) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (book :authors)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
