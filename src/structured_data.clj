@@ -1,16 +1,18 @@
 (ns structured-data)
 
 (defn do-a-thing [x]
-  :-)
+  (let [+xx ( + x x)]
+  (Math/pow +xx +xx)))
 
 (defn spiff [v]
-  :-)
+  (+ (get v 0) (get v 2)))
 
 (defn cutify [v]
-  :-)
+  (conj v "<3"))
 
 (defn spiff-destructuring [v]
-  :-)
+  (let [ [x y z] v]
+    (+ x z)))
 
 (defn point [x y]
   [x y])
@@ -19,31 +21,43 @@
   [bottom-left top-right])
 
 (defn width [rectangle]
-  :-)
+  (let [ [[bl_x bl_y] [tr_x tr_y]] rectangle]
+    (-  tr_x bl_x)
+  ))
 
 (defn height [rectangle]
-  :-)
+  (let [ [[bl_x bl_y] [tr_x tr_y]] rectangle]
+    (-  tr_y bl_y)
+  ))
 
 (defn square? [rectangle]
-  :-)
+  (= (height rectangle) (width rectangle)))
 
 (defn area [rectangle]
-  :-)
+  (* (height rectangle) (width rectangle)))
 
 (defn contains-point? [rectangle point]
-  :-)
+  (let [ [[bl_x bl_y] [tr_x tr_y]] rectangle
+         [x y] point]
+  (and (<= bl_x x tr_x)
+       (<= bl_y y tr_y))))
 
 (defn contains-rectangle? [outer inner]
-  :-)
-
+  (let [ [[obl_x obl_y] [otr_x otr_y]] outer
+         [[ibl_x ibl_y] [itr_x itr_y]] inner]
+    (and(<= obl_x ibl_x)
+        (<= obl_y ibl_y)
+        (>= otr_x itr_x)
+        (>= otr_y itr_y)
+    )))
 (defn title-length [book]
-  :-)
+  (count (:title book) ))
 
 (defn author-count [book]
-  :-)
+ (count (:authors book) ))
 
 (defn multiple-authors? [book]
-  :-)
+  (> (author-count book) 1))
 
 (defn add-author [book new-author]
   :-)
