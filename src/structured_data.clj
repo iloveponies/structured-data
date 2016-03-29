@@ -50,68 +50,102 @@
         (>= otr_x itr_x)
         (>= otr_y itr_y)
     )))
+
 (defn title-length [book]
   (count (:title book) ))
 
 (defn author-count [book]
  (count (:authors book) ))
 
+
 (defn multiple-authors? [book]
   (> (author-count book) 1))
 
+
+
 (defn add-author [book new-author]
-  :-)
+  (let [newAuthors (conj (:authors book)  new-author)]
+   (assoc book :authors newAuthors)
+    ))
+
 
 (defn alive? [author]
-  :-)
+  (not (contains? author :death-year)))
 
 (defn element-lengths [collection]
-  :-)
+  (map count collection))
 
 (defn second-elements [collection]
-  :-)
+  (let [sec (fn[x](get x 1))]
+    (map sec collection)
+  ))
 
 (defn titles [books]
-  :-)
+  (map :title books)
+  )
 
 (defn monotonic? [a-seq]
-  :-)
+  (or (apply <= a-seq)
+      (apply >= a-seq)
+    ))
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*")))
 
 (defn toggle [a-set elem]
-  :-)
+  (if(contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)
+    ))
+
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (not(= (count a-seq) (count(set a-seq))))
+  )
 
 (defn old-book->new-book [book]
-  :-)
+    (assoc book :authors (set(:authors book)))
+   )
 
 (defn has-author? [book author]
-  :-)
+  (contains? (set (map :name (:authors book))) (:name author) ))
 
 (defn authors [books]
-  :-)
+  (apply clojure.set/union   (map :authors books)))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name ( authors books))))
 
 (defn author->string [author]
-  :-)
+  (let [name (:name author)
+      b_year (:birth-year author)
+      d_year (:death-year author)
+      ]
+     (if (boolean b_year)
+                (str name " (" b_year " - " d_year ")" )
+                (str name)
+
+         )
+  ))
+
+
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map  author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (str (:title book ) ", written by "  (authors->string (:authors book)) ))
 
 (defn books->string [books]
-  :-)
+  (let [bcount (count books)]
+  (cond
+    (= 1 bcount ) (str bcount " book. " (apply str (map book->string books)) ".")
+    (< 1 bcount ) (str bcount " books. " (apply str (map book->string books)) "." )
+    :else                 "No books."
+    )))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [x] (has-author? x author)) books))
 
 (defn author-by-name [name authors]
   :-)
