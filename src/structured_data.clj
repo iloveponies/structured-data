@@ -140,7 +140,7 @@
   (let [bcount (count books)]
   (cond
     (= 1 bcount ) (str bcount " book. " (apply str (map book->string books)) ".")
-    (< 1 bcount ) (str bcount " books. " (apply str (map book->string books)) "." )
+    (< 1 bcount ) (str bcount " books. " (apply str (interpose ", " (map book->string books))) "." )
     :else                 "No books."
     )))
 
@@ -148,15 +148,15 @@
   (filter (fn [x] (has-author? x author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [x] (= (:name x) name)) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not(empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
