@@ -164,12 +164,12 @@
 ;=============================================
 
 (defn author->string [author]
-  (let [na (:name author)]
-    (let [by (:birth-year author)]
-      (let [dy (:death-year author)]
+  (let [na (:name author)
+        by (:birth-year author)
+        dy (:death-year author)]
         (if (or by dy)
           (str na " (" by " - " dy ")")
-          na)))))
+          na)))
 
 ;=============================================
 
