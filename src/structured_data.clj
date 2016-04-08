@@ -110,13 +110,18 @@
    (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (let [authorname (:name author)
+        life (str "(" (:birth-year author) " - " (:death-year author) ")" )]
+  (if (contains? author :birth-year)
+    (str authorname " " life)
+    authorname)))
 
 (defn authors->string [authors]
-  :-)
+  (let [authornames (map author->string authors)]
+  (apply str (interpose ", " authornames))))
 
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
   :-)
