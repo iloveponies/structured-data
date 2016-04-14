@@ -41,9 +41,10 @@
     (<= y3 y2)))
 
 (defn contains-rectangle? [outer [a b]]
-  (and
-    (contains-point? outer a)
-    (contains-point? outer b)))
+  (let [cp (partial contains-point? outer)]
+    (and
+      (cp a)
+      (cp b))))
 
 (defn title-length [book]
   :-)
