@@ -30,8 +30,10 @@
         w (width r)]
     (= h w)))
 
-(defn area [rectangle]
-  :-)
+(defn area [r]
+  (let [h (height r)
+        w (width r)]
+    (* h w)))
 
 (defn contains-point? [rectangle point]
   :-)
