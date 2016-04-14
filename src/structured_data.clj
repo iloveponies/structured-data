@@ -35,8 +35,10 @@
         w (width r)]
     (* h w)))
 
-(defn contains-point? [rectangle point]
-  :-)
+(defn contains-point? [[[x1 y1] [x2 y2]] [x3 y3]]
+  (and
+    (>= x3 x1)
+    (<= y3 y2)))
 
 (defn contains-rectangle? [outer inner]
   :-)
