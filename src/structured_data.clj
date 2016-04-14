@@ -40,8 +40,10 @@
     (>= x3 x1)
     (<= y3 y2)))
 
-(defn contains-rectangle? [outer inner]
-  :-)
+(defn contains-rectangle? [outer [a b]]
+  (and
+    (contains-point? outer a)
+    (contains-point? outer b)))
 
 (defn title-length [book]
   :-)
