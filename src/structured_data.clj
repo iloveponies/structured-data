@@ -47,7 +47,7 @@
       (cp b))))
 
 (defn title-length [book]
-  :-)
+  (count (:title book)))
 
 (defn author-count [book]
   :-)
