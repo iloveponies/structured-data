@@ -1,3 +1,0 @@
-(repeat 3 "*")
-(apply str repeat 3 "*")
-(apply str (repeat 3 "*"))
