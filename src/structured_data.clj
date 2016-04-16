@@ -113,42 +113,40 @@
   (set
     (map :name (authors books))))
 
-(defn lifespan [birth death]
-  (if
-    (and (nil? birth) (nil? death))
-    ""
-    (str " (" birth " - " death ")")))
-
-(defn author->string
-  [{:keys [name birth-year death-year]}]
-  (str name (lifespan birth-year death-year)))
+(defn author->string [{:keys [name birth-year death-year]}]
+  (if birth-year
+    (str name " (" birth-year " - " death-year ")")
+    (str name)))
 
 (defn authors->string [authors]
-  (if
-    (>= 1 (count authors))
-    (author->string (first authors))
-    (interpose ", " (map author->string authors))))
+  (apply str (interpose ", " (map author->string authors))))
 
-
-(defn book->string [{:keys [title authors]}]
-  (str title ", written by " (authors->string authors)))
+(defn book->string [book]
+  (let [title (:title book)
+        authors (authors->string (:authors book))]
+    (str title ", written by " authors)))
 
 (defn books->string [books]
-  :-)
+  (let [books' (apply str (interpose ". " (map book->string books)))
+        n      (count books)]
+    (cond
+      (= n 0) "No books."
+      (= n 1) (str n " book. " books' ".")
+      :else    (str n " books. " books' "."))))
 
 (defn books-by-author [author books]
-  :-)
+  (filter #(has-author? % author) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter #(= name (:name %)) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
