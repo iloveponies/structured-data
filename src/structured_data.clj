@@ -132,7 +132,7 @@
     (cond
       (= n 0) "No books."
       (= n 1) (str n " book. " books' ".")
-      :else    (str n " books. " books' "."))))
+      :else   (str n " books. " books' "."))))
 
 (defn books-by-author [author books]
   (filter #(has-author? % author) books))
