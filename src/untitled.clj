@@ -63,7 +63,39 @@
 (def embassytown {:title "Embassytown", :authors [china]})
 (def little-schemer {:title "The Little Schemer"
                      :authors [friedman, felleisen]})
+(def books [cities, wild-seed, embassytown, little-schemer])
 
 (title-length cities)         ;=> 21
 (title-length wild-seed)      ;=> 9
 (title-length little-schemer) ;=> 18
+
+(author-count cities)         ;=> 1
+(author-count wild-seed)      ;=> 1
+(author-count little-schemer) ;=> 2
+
+(multiple-authors? cities)         ;=> false
+(multiple-authors? wild-seed)      ;=> false
+(multiple-authors? little-schemer) ;=> true
+
+(add-author little-schemer {:name "Gerald J. Sussman"})
+;=> {:title "The Little Schemer"
+;    :authors [{:birth-year 1944, :name "Daniel Friedman"}
+;              {:name "Matthias Felleisen"}
+;              {:name "Gerald J. Sussman"}]}
+(add-author {:authors [{:name "Juhana"}]} {:name "Jani"})
+;=> {:authors [{:name "Juhana"} {:name "Jani"}]}
+
+(alive? china)   ;=> true
+(alive? octavia) ;=> false
+
+(element-lengths ["foo" "bar" "" "quux"])  ;=> (3 3 0 4)
+(element-lengths ["x" [:a :b :c] {:y 42}]) ;=> (1 3 1)
+
+(second-elements [[1 2] [2 3] [3 4]]) ;=> (2 3 4)
+(second-elements [[1 2 3 4] [1] ["a" "s" "d" "f"]])
+;=> (2 nil "s")
+
+(titles [cities]) ;=> ("The City and the City" )
+(titles books)
+;=> ("The City and the City" "Wild Seed"
+;    "Embassytown" "The Little Schemer")

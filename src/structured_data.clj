@@ -45,25 +45,27 @@
   (count (:title book)))
 
 (defn author-count [book]
-  :-)
+  (count (:authors book)))
 
 (defn multiple-authors? [book]
-  :-)
+  (< 1 (author-count book)))
 
 (defn add-author [book new-author]
-  :-)
+  (let [authors (book :authors)]
+  (assoc book :authors (conj authors new-author))))
 
 (defn alive? [author]
-  :-)
+  (not(contains? author :death-year)))
 
 (defn element-lengths [collection]
-  :-)
+  (map count collection))
 
 (defn second-elements [collection]
-  :-)
+  (let [sec (fn [x] (get x 1))]
+  (map sec collection)))
 
 (defn titles [books]
-  :-)
+  (map :title books))
 
 (defn monotonic? [a-seq]
   :-)
