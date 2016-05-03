@@ -1,24 +1,19 @@
 (ns structured-data)
 
-Math/PI
-
-(Math/pow 2 3)
 
 (defn do-a-thing [x]
   (let [y (+ x x)]
     (Math/pow y y)))
 
-(do-a-thing 2)
 
 (defn spiff [v]
-  (if (< (count v) 2)
+  (if (< (count v) 3)
     nil
-    (+ (v 0) (v 1))))
+    (+ (v 0) (v 2))))
 
-(spiff [1 2 3])
-(spiff [1 2 3 4 5 6])
-(spiff [1 2])
-(spiff [])
+(spiff [1 2 3])                                             ;=> 4
+(spiff [1 2 -34 4 5 6])                                     ;=> -33
+
 
 (defn cutify [v]
   (conj v "<3"))
@@ -127,24 +122,6 @@ Math/PI
     (:title book)))
 
 
-(def china {:name "China Miéville", :birth-year 1972})
-(def octavia {:name       "Octavia E. Butler"
-              :birth-year 1947
-              :death-year 2006})
-(def friedman {:name "Daniel Friedman" :birth-year 1944})
-(def felleisen {:name "Matthias Felleisen"})
-
-(def cities {:title "The City and the City" :authors [china]})
-(def wild-seed {:title "Wild Seed", :authors [octavia]})
-(def embassytown {:title "Embassytown", :authors [china]})
-(def little-schemer {:title   "The Little Schemer"
-                     :authors [friedman, felleisen]})
-
-(def books [cities, wild-seed, embassytown, little-schemer])
-
-
-(title-length cities)                                       ;=> 21
-
 (defn author-count [book]
   (count
     (:authors book)))
@@ -158,26 +135,13 @@ Math/PI
     (assoc book :authors new-authors)))
 
 
-(contains? {"a" 1} "a")                                     ;=> true
-(contains? {"a" 1} 1)                                       ;=> false
-(contains? {"a" nil} "a")                                   ;=> true
-(contains? cities :title)                                   ;=> true
-(contains? cities :name)                                    ;=> false
-
-
 (defn alive? [author]
   (not
     (contains? author :death-year)))
-
-(alive? china)                                              ;=> true
-(alive? octavia)                                            ;=> false
+;=> false
 
 (defn element-lengths [collection]
   (map count collection))
-
-(element-lengths ["foo" "bar" "" "quux"])                   ;=> (3 3 0 4)
-(element-lengths ["x" [:a :b :c] {:y 42}])                  ;=> (1 3 1)
-
 
 (defn second-elements [collection]
   (map second collection))
@@ -185,10 +149,6 @@ Math/PI
 
 (defn titles [books]
   (map :title books))
-
-
-(titles [cities])                                           ;=> ("The City and the City" )
-(titles books)                                              ;=> ("The City and the City" "Wild Seed"
 
 
 (defn monotonic? [a-seq]
@@ -216,18 +176,11 @@ Math/PI
     (disj a-set elem)
     (conj a-set elem)))
 
-(toggle #{:a :b :c} :d)                                     ;=> #{:a :c :b :d}
-(toggle #{:a :b :c} :a)                                     ;=> #{:c :b}
-
-
 (defn contains-duplicates? [a-seq]
   (not=
     (count a-seq)
     (count (set a-seq))))
 
-(contains-duplicates? [1 1 2 3 -40])                        ;=> true
-(contains-duplicates? [1 2 3 -40])                          ;=> false
-(contains-duplicates? [1 2 3 "a" "a"])                      ;=> true
 
 (defn old-book->new-book [book]
   (assoc
@@ -235,8 +188,6 @@ Math/PI
     :authors
     (set (:authors book))))
 
-(old-book->new-book {:title "The Little Schemer" :authors [friedman, felleisen]}) ;=> {:title "The Little Schemer" :authors #{friedman, felleisen}}
-(old-book->new-book {:title "Wild Seed", :authors [octavia]}) ;=> {:title "Wild Seed", :authors #{octavia}}
 
 (defn has-author? [book author]
   )
