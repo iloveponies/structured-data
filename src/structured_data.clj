@@ -150,17 +150,29 @@
     )
   )
 
+;Ex22 Write the function (old-book->new-book book) that takes a book with the previous representation (authors in a vector) and returns the same book in the new representation (authors in a set).
+;Use assoc to change the representation. Do not construct a new map using the map literal syntax.
 (defn old-book->new-book [book]
-  :-)
+  (assoc book :authors (set (:authors book)))
+  )
 
+
+;Ex23 Write the function (has-author? book author) that returns true if author is in the authors of book and otherwise false.
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author)
+  )
 
+;Ex24 Write the function (authors books) that returns the authors of every book in books as a set.
 (defn authors [books]
-  :-)
+  (let [author (fn [book] (:authors book))]
+    (apply clojure.set/union (map author books))
+    )
+  )
 
+;Ex25 Write the function (all-author-names books) that works like the previous one and uses authors.
 (defn all-author-names [books]
-  :-)
+  (map :name (authors books))
+  )
 
 (defn author->string [author]
   :-)
