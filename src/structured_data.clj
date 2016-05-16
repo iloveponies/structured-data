@@ -1,16 +1,23 @@
 (ns structured-data)
 
-;Change the function do-a-thing so that it uses let to give a name to the common expression (+ x x) in its body.
+;Ex1 Change the function do-a-thing so that it uses let to give a name to the common expression (+ x x) in its body.
 (defn do-a-thing [x]
   (let [xx (+ x x)]
     (Math/pow xx xx)
     ))
 
+;Ex2 Write the function (spiff v) that takes a vector and returns the sum of the first and third elements of the vector. What happens when you pass in a vector that is too short?
 (defn spiff [v]
-  :-)
+  (if (> (count v) 2)
+    (+ (get v 0) (get v 2))
+    nil
+    )
+  )
 
+;Ex3 Write the function (cutify v) that takes a vector as a parameter and adds "<3" to its end.
 (defn cutify [v]
-  :-)
+  (conj v "<3")
+  )
 
 (defn spiff-destructuring [v]
   :-)
