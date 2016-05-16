@@ -171,7 +171,7 @@
 
 ;Ex25 Write the function (all-author-names books) that works like the previous one and uses authors.
 (defn all-author-names [books]
-  (map :name (authors books))
+  (set (map :name (authors books)))
   )
 
 (defn author->string [author]
