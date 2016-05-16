@@ -48,10 +48,9 @@
     )
   )
 
-
 ;Ex6 Write the function (square? rectangle) that returns true if rectangle is a square and otherwise false.
 (defn square? [rectangle]
-    (= (height rectangle) (width rectangle))
+  (= (height rectangle) (width rectangle))
   )
 
 ;Ex7 Write the function (area rectangle) that returns the area of the given rectangle.
@@ -59,8 +58,14 @@
   (* (height rectangle) (width rectangle))
   )
 
+;Ex8 Write the function (contains-point? rectangle point) that returns true if rectangle contains point and otherwise false.
+;Remember that you can give <= multiple parameters. (<= x y z) returns true if x≤y≤zx≤y≤z holds. Otherwise false.
 (defn contains-point? [rectangle point]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle
+    [x y] point]
+    (and (<= x1 x x2) (<= y1 y y2))
+    )
+  )
 
 (defn contains-rectangle? [outer inner]
   :-)
