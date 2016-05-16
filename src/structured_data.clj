@@ -19,8 +19,15 @@
   (conj v "<3")
   )
 
+;Ex4 Rewrite our earlier function spiff by destructuring its parameter. Call this new function spiff-destructuring.
 (defn spiff-destructuring [v]
-  :-)
+  (let [[x _ y] v]
+    (if (and x y)
+      (+ x y)
+      nil
+      )
+    )
+  )
 
 (defn point [x y]
   [x y])
