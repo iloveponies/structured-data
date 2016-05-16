@@ -87,13 +87,19 @@
 
 ;Ex12 Write the function (multiple-authors? book) that returns true if book has multiple authors, otherwise false
 (defn multiple-authors? [book]
-  (> (author-count book) 1) )
+  (> (author-count book) 1))
 
+;Ex13 Use assoc and conj to write the function (add-author book new-author) that takes a book and an author as a parameter and adds author to books authors.
 (defn add-author [book new-author]
-  :-)
+  (let [newAuthor (conj (:authors book) new-author)]
+    (assoc book :authors newAuthor)
+    )
+  )
 
+;Ex14 Write the function (alive? author) which takes an author map and returns true if the author is alive, otherwise false.
+;An author is alive if the author does not have a death year.
 (defn alive? [author]
-  :-)
+  (not (contains? author :death-year)))
 
 (defn element-lengths [collection]
   :-)
