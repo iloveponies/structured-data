@@ -54,8 +54,10 @@
     (= (height rectangle) (width rectangle))
   )
 
+;Ex7 Write the function (area rectangle) that returns the area of the given rectangle.
 (defn area [rectangle]
-  :-)
+  (* (height rectangle) (width rectangle))
+  )
 
 (defn contains-point? [rectangle point]
   :-)
