@@ -62,13 +62,19 @@
 ;Remember that you can give <= multiple parameters. (<= x y z) returns true if x≤y≤zx≤y≤z holds. Otherwise false.
 (defn contains-point? [rectangle point]
   (let [[[x1 y1] [x2 y2]] rectangle
-    [x y] point]
+        [x y] point]
     (and (<= x1 x x2) (<= y1 y y2))
     )
   )
 
+;Ex9 Write the function (contains-rectangle? outer inner) that returns true if the rectangle inner is inside the rectangle outer and otherwise false.
 (defn contains-rectangle? [outer inner]
-  :-)
+  (let [[inn_bottom-left inn_top-right] inner]
+    (and
+      (contains-point? outer inn_bottom-left)
+      (contains-point? outer inn_top-right)
+      )
+    ))
 
 (defn title-length [book]
   :-)
