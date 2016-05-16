@@ -81,11 +81,13 @@
   (count (:title book))
   )
 
+;Ex11 Write the function (author-count book) that returns the amount of authors that book has.
 (defn author-count [book]
-  :-)
+  (count (:authors book)))
 
+;Ex12 Write the function (multiple-authors? book) that returns true if book has multiple authors, otherwise false
 (defn multiple-authors? [book]
-  :-)
+  (> (author-count book) 1) )
 
 (defn add-author [book new-author]
   :-)
