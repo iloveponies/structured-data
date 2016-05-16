@@ -32,14 +32,21 @@
 (defn point [x y]
   [x y])
 
+;Ex5 Write the functions (height rectangle) and (width rectangle) that return the height and width of the given rectangle. Use destructuring.
 (defn rectangle [bottom-left top-right]
   [bottom-left top-right])
 
 (defn width [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (Math/abs (- x2 x1))
+    )
+  )
 
 (defn height [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (Math/abs (- y2 y1))
+    )
+  )
 
 (defn square? [rectangle]
   :-)
