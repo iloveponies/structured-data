@@ -101,11 +101,20 @@
 (defn alive? [author]
   (not (contains? author :death-year)))
 
+;Ex15 Write the function (element-lengths collection) that returns the lengths of every item in collection.
 (defn element-lengths [collection]
-  :-)
+  (map count collection)
+  )
 
+
+;Ex16 Use map to write the function (second-elements collection) that takes a vector of vectors and returns a sequence of the second elements.
+;Remember that you can use get to index a vector.
+;Use fn and let to create a helper function and use it with map.
 (defn second-elements [collection]
-  :-)
+  (let [sec (fn [x] (second x))]
+    (map sec collection)
+    )
+  )
 
 (defn titles [books]
   :-)
