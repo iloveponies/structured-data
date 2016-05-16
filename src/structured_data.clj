@@ -116,20 +116,39 @@
     )
   )
 
+;Ex17 Write the function (titles books) that takes a collection of books and returns their titles.
 (defn titles [books]
-  :-)
+  (map :title books))
 
-(defn monotonic? [a-seq]
-  :-)
 
+;Ex18 Write the function (stars n) that returns a string with n aterisks \*.
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*")))
 
+
+;Ex19 Write the function (monotonic? a-seq) that returns true if a-seq is monotonic and otherwise false.
+;A sequence is monotonic if is either inceasing or decreasing. In a decreasing sequence every element is at most as large as the previous one and in an increasing sequence every member is at least as large as the previous one.
+(defn monotonic? [a-seq]
+  (or
+    (apply <= a-seq)
+    (apply >= a-seq)
+    )
+  )
+
+;Ex20 Write the function (toggle a-set elem) that removes elem from a-set if a-set contains elem, and adds it to the set otherwise.
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)
+    )
+  )
 
+;Ex21 Write the function (contains-duplicates? sequence) that takes a sequence as a parameter and returns true if sequence contains some element multiple times. Otherwise it returns false.
 (defn contains-duplicates? [a-seq]
-  :-)
+  (let [unique (set a-seq)]
+    (not= (count unique) (count a-seq))
+    )
+  )
 
 (defn old-book->new-book [book]
   :-)
