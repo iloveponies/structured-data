@@ -48,8 +48,11 @@
     )
   )
 
+
+;Ex6 Write the function (square? rectangle) that returns true if rectangle is a square and otherwise false.
 (defn square? [rectangle]
-  :-)
+    (= (height rectangle) (width rectangle))
+  )
 
 (defn area [rectangle]
   :-)
