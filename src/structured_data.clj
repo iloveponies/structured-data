@@ -213,21 +213,31 @@
   )
 
 
-
+;Ex30 Write the function (books-by-author author books).
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [book] (has-author? book author)) books)
+  )
 
+;Ex31 Write the function (author-by-name name authors) that takes a string name and a sequence of authors and returns an author with the given name if one is found.
+;If one is not found, then nil should be returned.
 (defn author-by-name [name authors]
-  :-)
+  (let [findAuthor (fn [author] (= (:name author) name))]
+    (first (set (filter findAuthor authors)))
+    )
+  )
 
+;Ex32 Write the function (living-authors authors) that takes a sequence of authors and returns those that are alive. Remember alive?.
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
+;Ex33 Write the function (has-a-living-author? book) that returns true if book has a living author, and otherwise false.
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (authors [book]))))
+  )
 
+;Ex34 Write the function (books-by-living-authors books) that takes a sequence of books as a parameter and returns those that have a living author.
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
 
