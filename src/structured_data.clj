@@ -174,17 +174,45 @@
   (set (map :name (authors books)))
   )
 
+;Ex26 Write the function (author->string author) that returns a string representation of author as follows:
+;You can assume that every author with a :death-year also has a :birth-year.
 (defn author->string [author]
-  :-)
+  (let [name (:name author)
+        year (if (contains? author :birth-year)
+               (str " (" (:birth-year author) " - " (:death-year author) ")")
+               )]
+    (str name year)
+    )
+  )
 
+;Ex27 Write the function (authors->string authors) which takes a sequence of authors as a parameter and returns a string representation of authors
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors)))
+  )
 
+;Ex28 Write the function (book->string book) takes a single book as a parameter and returns a string representation of book
 (defn book->string [book]
-  :-)
+  (let [title (:title book)
+        authors (authors->string (:authors book))]
+    (str title ", written by " authors)
+    )
+  )
 
+;Ex29 Write the function (books->string books) that takes a sequence of books as a parameter and returns a string representation of books
 (defn books->string [books]
-  :-)
+  (let [cnt (count books)
+        titles (set (map book->string books))
+        titlesSet (apply str (interpose ". " titles))]
+    (str
+      (case cnt
+        0 "No books"
+        1 "1 book. "
+        (str cnt " books. ")
+        ) titlesSet ".")
+    )
+  )
+
+
 
 (defn books-by-author [author books]
   :-)
@@ -202,3 +230,4 @@
   :-)
 
 ; %________%
+
