@@ -129,8 +129,7 @@
    (filter (fn [book] (has-author? book author)) books))
 
 (defn author-by-name [name authors]
-  :-)
-
+  (first (filter (fn [author] (= name (:name author))) authors)))
 (defn living-authors [authors]
   :-)
 
