@@ -138,6 +138,6 @@
   (not (empty? (filter (fn [author] (alive? author)) (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter (fn [book] (has-a-living-author? book)) books))
 
 ; %________%
