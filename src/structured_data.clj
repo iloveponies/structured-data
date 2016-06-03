@@ -135,7 +135,7 @@
   (filter (fn [author] (alive? author)) authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (filter (fn [author] (alive? author)) (:authors book)))))
 
 (defn books-by-living-authors [books]
   :-)
