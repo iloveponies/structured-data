@@ -11,7 +11,8 @@
   (conj v "<3"))
 
 (defn spiff-destructuring [v]
-  :-)
+   (let [[x y z] v]
+    (+ x z)))
 
 (defn point [x y]
   [x y])
@@ -90,7 +91,7 @@
   (contains? (:authors book) author))
 
 (defn authors [books]
-  :-)
+  (apply clojure.set/union (map :authors books)))
 
 (defn all-author-names [books]
   (let [author-names
