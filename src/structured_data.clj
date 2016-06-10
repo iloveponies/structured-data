@@ -116,7 +116,7 @@
     (== (count books) 0) "No books"
     (== (count books) 1) "1 book. "
     :else (str (count books) " books. "))
-  (apply str (interpose ", " (set (map book->string books))))"."))
+  (apply str (interpose ". " (seq (map book->string books))))"."))
 
 (defn books-by-author [author books]
    (filter (fn [book](has-author? book author)) books))
