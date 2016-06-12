@@ -44,25 +44,29 @@
          (contains-point? outer p2))))
 
 (defn title-length [book]
-  :-)
+  (count (:title book)))
 
 (defn author-count [book]
-  :-)
+  (count (:authors book)))
 
 (defn multiple-authors? [book]
-  :-)
+  (< 1 (author-count book)))
 
 (defn add-author [book new-author]
-  :-)
+  (let [authors (:authors book)]
+    (let [new-authors (conj authors new-author)]
+      (assoc book :authors new-authors))))
 
 (defn alive? [author]
-  :-)
+  (let [does-not-contain? (complement contains?)]
+    (does-not-contain? author :death-year)))
 
 (defn element-lengths [collection]
-  :-)
+  (map count collection))
 
 (defn second-elements [collection]
-  :-)
+  (let [seconds (fn [x] (get x 1))]
+    (map seconds collection)))
 
 (defn titles [books]
   :-)
