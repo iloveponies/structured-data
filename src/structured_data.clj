@@ -69,13 +69,14 @@
     (map seconds collection)))
 
 (defn titles [books]
-  :-)
+  (map :title books))
 
 (defn monotonic? [a-seq]
-  :-)
+  (let [a (apply <= a-seq)]
+    (or a (apply >= a-seq))))
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*")))
 
 (defn toggle [a-set elem]
   :-)
