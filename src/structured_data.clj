@@ -13,7 +13,9 @@
   
 
 (defn spiff-destructuring [v]
-  :-)
+  (if (< (count v) 3) "?"
+    (let [[x y z] v]
+      (+ x z))))
 
 (defn point [x y]
   [x y])
