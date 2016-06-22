@@ -80,31 +80,43 @@
     (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (not= (count a-seq) (count (set a-seq))))
 
 (defn old-book->new-book [book]
-  :-)
+  (let [authors (:authors book)]
+    (assoc book :authors (set authors))))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author))
 
 (defn authors [books]
-  :-)
+  (apply clojure.set/union (map :authors books)))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (let [name (:name author)
+        birth (:birth-year author)
+        death (:death-year author)
+        years (if (contains? author :birth-year) (str " (" birth " - " death ")") "")]
+    (str name years)))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
-  :-)
+  (let [book-strings (map #(str (book->string %) ".") books)
+        books-string (apply str (interpose " " book-strings))
+        counter (count books)
+        counter-string (cond
+                         (= counter 0) "No books."
+                         (= counter 1) "1 book. "
+                         :else (str counter " books. "))]
+    (str counter-string books-string)))
 
 (defn books-by-author [author books]
   :-)
