@@ -98,46 +98,35 @@
   (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (let [aname (:name author)
+        birth-year (:birth-year author)
+        death-year (:death-year author)]
+     (str aname (if birth-year (str " (" birth-year " - " (if death-year death-year "") ")")))))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
-  :-)
+  (let [book-count (count books)
+        book-num-str (if (> book-count 0) (str book-count " book" (if (> book-count 1) "s" "") ". ") "No books")]
+    (str book-num-str (apply str (interpose ". " (map book->string books))) ".")))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [book] (has-author? book author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [x] (= (:name x) name)) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter (fn [x] (alive? x)) authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (filter (fn [x] (not (:death-year x))) (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter (fn [x] (has-a-living-author? x)) books))
 
 ; %________%
-
-(def china {:name "China Miéville", :birth-year 1972})
-(def octavia {:name "Octavia E. Butler"
-              :birth-year 1947
-              :death-year 2006})
-(def friedman {:name "Daniel Friedman" :birth-year 1944})
-(def felleisen {:name "Matthias Felleisen"})
-
-(def cities {:title "The City and the City" :authors #{china}})
-(def wild-seed {:title "Wild Seed", :authors #{octavia}})
-(def embassytown {:title "Embassytown", :authors #{china}})
-(def little-schemer {:title "The Little Schemer"
-                     :authors #{friedman, felleisen}})
-
-(def books [cities, wild-seed, embassytown, little-schemer])
-
