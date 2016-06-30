@@ -80,29 +80,56 @@
   (let [authors (:authors book)]
      (assoc book :authors (conj authors new-author))))
 
-(defn alive? [author]
-  :-)
+(defn alive?
+  "takes an author map and returns true if the author is alive, otherwise false.
+  An author is alive if the author does not have a death year."
+  [author]
+  (not (contains? author :death-year)))
 
-(defn element-lengths [collection]
-  :-)
+(defn element-lengths
+  "returns the lengths of every item in collection"
+  [collection]
+  (map count collection)
+  )
 
-(defn second-elements [collection]
-  :-)
+(defn second-elements
+  "takes a vector of vectors and returns a sequence of the second elements"
+  [collection]
+  (let [get-second (fn [collection] (get collection 1))]
+    (map get-second collection)
+   ))
 
-(defn titles [books]
-  :-)
+(defn titles
+  "takes a collection of books and returns their titles."
+  [books]
+  (map :title books))
 
-(defn monotonic? [a-seq]
-  :-)
+(defn monotonic?
+  "that returns true if a-seq is monotonic and otherwise false.
+  A sequence is monotonic if is either inceasing or decreasing.
+  In a decreasing sequence every element is at most as large as the previous one
+  and in an increasing sequence every member is at least as large as the previous one."
+  [a-seq]
+  (or
+   (apply <= a-seq)
+   (apply >= a-seq)))
 
-(defn stars [n]
-  :-)
+(defn stars
+  "that returns a string with n aterisks. \\*."
+  [n]
+  (apply str (repeat n "*")))
 
-(defn toggle [a-set elem]
-  :-)
+(defn toggle
+  "removes elem from a-set if a-set contains elem, and adds it to the set otherwise."
+  [a-set elem]
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)))
 
-(defn contains-duplicates? [a-seq]
-  :-)
+(defn contains-duplicates?
+  "takes a sequence as a parameter and returns true if sequence contains some element multiple times. Otherwise it returns false."
+  [a-seq]
+  (> (count a-seq) (count (set a-seq))))
 
 (defn old-book->new-book [book]
   :-)
