@@ -1,0 +1,46 @@
+(defn do-a-thing [x]
+  let [plussa (+ x x)]
+    (Math/pow plussa plussa))
+(defn increasing [x y]
+  (if (or (< x y) (= y nil)) true false))
+(defn decreasing [x y]
+  (if (or (> x y) (= y nil)) true false))
+(defn monotonic? [a-seq] (if (or (map increasing a-seq (rest a-seq)) (map decreasing a-seq (rest a-seq)) ) true false ))
+(monotonic? [1 2 3])
+ (monotonic? [0 1 10 11])
+monotonic? [3 2 0 -3])
+(monotonic? [3 2 0 -3])
+(defn increasing [x y]
+  (if (or (<= x y) (= y nil)) true false))
+(defn decreasing [x y]
+  (if (or (>= x y) (= y nil)) true false))
+(defn monotonic? [a-seq] (if (or (map increasing a-seq (rest a-seq)) (map decreasing a-seq (rest a-seq)) ) true false ))
+ (monotonic? [1 2 1 0])
+(defn monotonictest? [a-seq] (map increasing a-seq (rest a-seq))
+(defn monotonictest? [a-seq] (map increasing a-seq (rest a-seq)))
+(monotonictest? [1 2 1 0])
+into #{} [2, 2, 3]
+(into #{} [2, 2, 3])
+(defn contains-duplicates? [a-seq] ((if (= (count a-seq) (count (into #{} a-seq) )) true false) ))
+(contains_duplicates? [1, 1, 2])
+(contains-duplicates? [1, 1, 2])
+(= (count [2, 2]) (count (into #{} a-seq) ))
+(= (count [2, 2]) (count (into #{} [3, 3]) ))
+(= (count [2]) (count (into #{} [3]) ))
+(= (count [2, 2]) (count (into #{} [3]) ))
+(defn contains-duplicates? [a-seq] ((if (= (count a-seq) (count (into #{} a-seq) )) true false) ))
+(contains-duplicates? [1, 1, 2])
+(defn author-names [authors]
+  (map :name authors))
+[china {:name "China Miéville", :birth-year 1972}
+      octavia {:name "Octavia E. Butler"
+               :birth-year 1947
+               :birth-year 1947}]
+let authors  [china {:name "China Miéville", :birth-year 1972}]
+((defn authors->string [authors] (let [nimet (author-names authors)]
+   (join ", " nimet) ))  [{:name "pihla"}, {:name "asd"}, {:name "asd1213"}] )
+(join ", " [{:name "pihla"}, {:name "asd"}, {:name "asd1213"}])
+(join ", " ["asd", "asd"])
+(def first-relation #{ {:a 1} {:a 2} })
+(def second-relation #{ {:b 1} {:b 2} })
+(join first-relation second-relation)
