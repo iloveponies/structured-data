@@ -87,35 +87,56 @@
 
 
 (defn author-names [authors]
-  (map :name authors))
+  (map author->string authors))
 
 (defn add-pilkku [x y]
   (if (= y nil) x (str x ", ") ))
 
-((defn authors->string [authors] (let [nimet (author-names authors)]
+(defn add-piste [x]
+  (str x ". ") )
 
- (str  (apply str (map add-pilkku nimet (rest nimet) ) ) (last nimet) )) )  [{:name "pihla"}, {:name "asd"}, {:name "asd1213"}] )
+(defn authors->string [authors] (let [nimet (author-names authors)]
 
-(defn book->string [book]
-  :-)
+ (str  (apply str (map add-pilkku nimet (rest nimet) ) ) (last nimet) )) )
+
+(defn book->string [book] (str (:title book) ", written by " (authors->string (:authors book))))
+
+(defn kirjojen-kuvaukset [books]
+  (map book->string books))
+
+(defn remove-from-end [s end]
+  (if (.endsWith s end)
+      (.substring s 0 (- (count s)
+                         (count end)))
+    s))
 
 
-(defn books->string [books]
-  :-)
+(defn books->string [books] ( let [kirjat (kirjojen-kuvaukset books)]
+
+ (remove-from-end
+ (cond
+   (= (count books) 0) "No books."
+   (= (count books) 1) (str "1 book. " (apply str (map add-piste kirjat)) )
+    :else  (str (count books) " books. " (apply str (map add-piste kirjat)) ) )  " ")) )
 
 (defn books-by-author [author books]
-  :-)
+
+  (filter (fn [book] (if (contains? (:authors book) author) true false ) ) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [author] (if (= (:name author) name) true false ) ) authors )))
 
 (defn living-authors [authors]
-  :-)
+  (filter (fn [author] (if (= (:death-year author) nil) true false )) authors ))
+
 
 (defn has-a-living-author? [book]
-  :-)
+
+  (if (empty? (living-authors (:authors book)) ) false true)
+  )
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter (fn [book] (if (has-a-living-author? book) true false) ) books)
+  )
 
 ; %________%
