@@ -19,3 +19,21 @@ monotonic? [3 2 0 -3])
 (defn monotonictest? [a-seq] (map increasing a-seq (rest a-seq))
 (defn monotonictest? [a-seq] (map increasing a-seq (rest a-seq)))
 (monotonictest? [1 2 1 0])
+into #{} [2, 2, 3]
+(into #{} [2, 2, 3])
+(defn contains-duplicates? [a-seq] ((if (= (count a-seq) (count (into #{} a-seq) )) true false) ))
+(contains_duplicates? [1, 1, 2])
+(contains-duplicates? [1, 1, 2])
+(= (count [2, 2]) (count (into #{} a-seq) ))
+(= (count [2, 2]) (count (into #{} [3, 3]) ))
+(= (count [2]) (count (into #{} [3]) ))
+(= (count [2, 2]) (count (into #{} [3]) ))
+(defn contains-duplicates? [a-seq] ((if (= (count a-seq) (count (into #{} a-seq) )) true false) ))
+(contains-duplicates? [1, 1, 2])
+(defn author-names [authors]
+  (map :name authors))
+[china {:name "China Miéville", :birth-year 1972}
+      octavia {:name "Octavia E. Butler"
+               :birth-year 1947
+               :birth-year 1947}]
+let authors  [china {:name "China Miéville", :birth-year 1972}]
