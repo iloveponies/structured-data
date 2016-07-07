@@ -37,3 +37,10 @@ into #{} [2, 2, 3]
                :birth-year 1947
                :birth-year 1947}]
 let authors  [china {:name "China Miéville", :birth-year 1972}]
+((defn authors->string [authors] (let [nimet (author-names authors)]
+   (join ", " nimet) ))  [{:name "pihla"}, {:name "asd"}, {:name "asd1213"}] )
+(join ", " [{:name "pihla"}, {:name "asd"}, {:name "asd1213"}])
+(join ", " ["asd", "asd"])
+(def first-relation #{ {:a 1} {:a 2} })
+(def second-relation #{ {:b 1} {:b 2} })
+(join first-relation second-relation)

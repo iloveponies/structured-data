@@ -94,7 +94,7 @@
 
 ((defn authors->string [authors] (let [nimet (author-names authors)]
 
-  str (apply str (map add-pilkku nimet (rest nimet)  ) ) last nimet) )  [{:name "pihla"}, {:name "asd"}, {:name "asd1213"}] )
+ (str  (apply str (map add-pilkku nimet (rest nimet) ) ) (last nimet) )) )  [{:name "pihla"}, {:name "asd"}, {:name "asd1213"}] )
 
 (defn book->string [book]
   :-)
