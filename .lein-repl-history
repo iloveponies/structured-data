@@ -1,0 +1,21 @@
+(defn do-a-thing [x]
+  let [plussa (+ x x)]
+    (Math/pow plussa plussa))
+(defn increasing [x y]
+  (if (or (< x y) (= y nil)) true false))
+(defn decreasing [x y]
+  (if (or (> x y) (= y nil)) true false))
+(defn monotonic? [a-seq] (if (or (map increasing a-seq (rest a-seq)) (map decreasing a-seq (rest a-seq)) ) true false ))
+(monotonic? [1 2 3])
+ (monotonic? [0 1 10 11])
+monotonic? [3 2 0 -3])
+(monotonic? [3 2 0 -3])
+(defn increasing [x y]
+  (if (or (<= x y) (= y nil)) true false))
+(defn decreasing [x y]
+  (if (or (>= x y) (= y nil)) true false))
+(defn monotonic? [a-seq] (if (or (map increasing a-seq (rest a-seq)) (map decreasing a-seq (rest a-seq)) ) true false ))
+ (monotonic? [1 2 1 0])
+(defn monotonictest? [a-seq] (map increasing a-seq (rest a-seq))
+(defn monotonictest? [a-seq] (map increasing a-seq (rest a-seq)))
+(monotonictest? [1 2 1 0])
