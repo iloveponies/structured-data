@@ -92,7 +92,7 @@
     (assoc-in book [:authors] (set authors))))
 
 (defn has-author? [book author]
-  (= (get book :authors) #{author}))
+  (contains? (:authors book) author))
 
 (defn authors [books]
   (into #{} (apply concat (map :authors books))))
@@ -134,9 +134,9 @@
   (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  (not-any? false? (map alive? (book :authors))))
+  (not (empty? (living-authors (book :authors)))))
 
 (defn books-by-living-authors [books]
-  (filter #(has-a-living-author? %) books))
+  (filter has-a-living-author? books))
 
 ; %________%
