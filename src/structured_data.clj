@@ -131,32 +131,73 @@
   [a-seq]
   (> (count a-seq) (count (set a-seq))))
 
-(defn old-book->new-book [book]
-  :-)
+(defn old-book->new-book
+  "takes a book with the previous representation (authors in a vector) and returns the same book in the new representation (authors in a set)."
+  [book]
+  (assoc book :authors (set (:authors book))))
 
-(defn has-author? [book author]
-  :-)
+(defn has-author?
+  "returns true if author is in the authors of book and otherwise false."
+  [book author]
+  (contains? (:authors book) author))
 
-(defn authors [books]
-  :-)
+(defn authors
+  "returns the authors of every book in books as a set."
+  [books]
+  (apply clojure.set/union (map :authors books)))
 
-(defn all-author-names [books]
-  :-)
+(defn all-author-names
+  "that works like the previous one and uses authors."
+  [books]+
+  (set (map :name (authors books))))
 
-(defn author->string [author]
-  :-)
+(defn author->string
+  "returns a string representation of author."
+  [author]
+  (let [existence-date->string
+        (fn [author]
+          (cond
+           (:death-year author) (str " (" (:birth-year author) " - " (:death-year author) ")")
+           (:birth-year author) (str " (" (:birth-year author) " - )")
+           :else ""))]
+        (str (:name author) (existence-date->string author)))
+  )
 
-(defn authors->string [authors]
-  :-)
+(defn authors->string
+  "takes a sequence of authors as a parameter and returns a string representation of authors"
+  [authors]
+  (apply str (interpose ", " (map author->string authors)))
+  )
 
-(defn book->string [book]
-  :-)
+(defn book->string
+  "takes a single book as a parameter and returns a string representation of book"
+  [book]
+  (str (:title book) ", written by " (authors->string (:authors book)))
+  )
 
-(defn books->string [books]
-  :-)
+(defn books->string
+  "that takes a sequence of books as a parameter and returns a string representation of books"
+  [books]
+  (let [books-count
+        (fn [books]
+        (cond
+         (> (count books) 1) (str (count books) " books. ")
+         (> (count books) 0) (str (count books) " book. ")
+         :else (str "No books.")))
+
+        print-dot
+        (fn [books]
+          (if (> (count books) 0)
+            (str ".")))]
+
+  (str (books-count books) (apply str (interpose ". " (map book->string books))) (print-dot books)))
+  )
 
 (defn books-by-author [author books]
-  :-)
+  (let [book-has-author?
+        (fn [book] (has-author? book author))]
+    (filter book-has-author? books))
+  )
 
 (defn author-by-name [name authors]
   :-)
