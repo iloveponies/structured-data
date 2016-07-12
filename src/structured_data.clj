@@ -199,16 +199,29 @@
     (filter book-has-author? books))
   )
 
-(defn author-by-name [name authors]
-  :-)
+(defn author-by-name
+  "Takes a string name and a sequence of authors and returns an author with the given name if one is found. If one is not found, then nil"
+  [name authors]
+   (let [name-equals?
+         (fn [author] (= (:name author) name))]
+     (first (filter name-equals? authors))
+  )
+)
 
-(defn living-authors [authors]
-  :-)
+(defn living-authors
+  "takes a sequence of authors and returns those that are alive. Remember alive?"
+  [authors]
+  (filter alive? authors)
+  )
 
-(defn has-a-living-author? [book]
-  :-)
+(defn has-a-living-author?
+  "that returns true if book has a living author, and otherwise false."
+  [book]
+  (not (empty? (living-authors (:authors book)))))
 
-(defn books-by-living-authors [books]
-  :-)
+(defn books-by-living-authors
+  "takes a sequence of books as a parameter and returns those that have a living author."
+  [books]
+  (filter has-a-living-author? books))
 
 ; %________%
