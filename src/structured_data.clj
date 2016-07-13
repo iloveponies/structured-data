@@ -114,8 +114,7 @@
 ;(def embassytown {:title "Embassytown", :authors #{china}})
 ;(def little-schemer {:title "The Little Schemer"
 ;                     :authors #{friedman, felleisen}})
-
-(def books [cities, wild-seed, embassytown, little-schemer])
+;(def books [cities, wild-seed, embassytown, little-schemer])
 
 (defn has-author? [book author]
   (contains? (get book :authors) author))
@@ -127,6 +126,8 @@
   (let [author-names
          (fn [book] (map :name (:authors book)))]
     (set (apply clojure.set/union (map author-names books)))))
+
+;(authors [cities, wild-seed])
 
 (defn author->string [author]
   :-)
