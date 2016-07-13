@@ -91,21 +91,6 @@
   (contains? (get book :authors) author))
 
 
-
-(def china {:name "China Miéville", :birth-year 1972})
-(def octavia {:name "Octavia E. Butler"
-              :birth-year 1947
-              :death-year 2006})
-(def friedman {:name "Daniel Friedman" :birth-year 1944})
-(def felleisen {:name "Matthias Felleisen"})
-
-(def cities {:title "The City and the City" :authors #{china}})
-(def wild-seed {:title "Wild Seed", :authors #{octavia}})
-(def embassytown {:title "Embassytown", :authors #{china}})
-(def little-schemer {:title "The Little Schemer"
-                     :authors #{friedman, felleisen}})
-(def books [cities, wild-seed, embassytown, little-schemer])
-
 (defn authors [books]
     (set (apply clojure.set/union (map :authors books))))
 
@@ -120,18 +105,11 @@
                         (str " (" (:birth-year author) " - " (:death-year author) ")")
                         )))
 
-
-(author->string felleisen)
-
 (defn authors->string [authors]
   (apply str (interpose ", " (map author->string authors))))
 
-(authors->string (:authors little-schemer))
-
 (defn book->string [book]
   (str (:title book) ", written by " (authors->string (:authors book))))
-
-(book->string little-schemer)
 
 (defn bah [books]
   (apply str (interpose ". " (map book->string books))))
@@ -146,22 +124,29 @@
   (if (empty? books) "No books."
     (str (meh (count books)) (bah books) ".")))
 
-(books->string [])
-(books->string [little-schemer, cities, wild-seed])
-
 (defn books-by-author [author books]
-  :-)
+  (let [grr (fn [x] (has-author? x author))]
+  (filter grr books)))
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [bah] (= name (:name bah))) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
+
+(def jrrtolkien {:name "J. R. R. Tolkien" :birth-year 1892 :death-year 1973})
+(def christopher {:name "Christopher Tolkien" :birth-year 1924})
+(def kay {:name "Guy Gavriel Kay" :birth-year 1954})
+
+(def silmarillion {:title "Silmarillion"
+                   :authors #{jrrtolkien, christopher, kay}})
+(def dick {:name "Philip K. Dick", :birth-year 1928, :death-year 1982})
+(def zelazny {:name "Roger Zelazny", :birth-year 1937, :death-year 1995})
+
+(def deus-irae {:title "Deus Irae", :authors #{dick, zelazny}})
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
-
-; %________%
+  (filter has-a-living-author? books))
