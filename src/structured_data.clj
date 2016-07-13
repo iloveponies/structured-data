@@ -138,13 +138,13 @@
 
 (defn meh [c]
   (cond
-    (== c 0) "No books."
+    (== c 0) "No books"
     (== c 1) "1 book. "
     :else (str c " books. ")))
 
 (defn books->string [books]
   (if (empty? books) "No books."
-    (str (meh (count books)) (bah books))))
+    (str (meh (count books)) (bah books) ".")))
 
 (books->string [])
 (books->string [little-schemer, cities, wild-seed])
