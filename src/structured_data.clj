@@ -87,13 +87,6 @@
 (defn old-book->new-book [book]
   (assoc book :authors (set (get book :authors))))
 
-
-
-
-
-
-(def books [cities, wild-seed, embassytown, little-schemer])
-
 (defn has-author? [book author]
   (contains? (get book :authors) author))
 
