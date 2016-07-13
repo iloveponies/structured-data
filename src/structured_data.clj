@@ -90,6 +90,22 @@
 (defn has-author? [book author]
   (contains? (get book :authors) author))
 
+
+
+(def china {:name "China Miéville", :birth-year 1972})
+(def octavia {:name "Octavia E. Butler"
+              :birth-year 1947
+              :death-year 2006})
+(def friedman {:name "Daniel Friedman" :birth-year 1944})
+(def felleisen {:name "Matthias Felleisen"})
+
+(def cities {:title "The City and the City" :authors #{china}})
+(def wild-seed {:title "Wild Seed", :authors #{octavia}})
+(def embassytown {:title "Embassytown", :authors #{china}})
+(def little-schemer {:title "The Little Schemer"
+                     :authors #{friedman, felleisen}})
+(def books [cities, wild-seed, embassytown, little-schemer])
+
 (defn authors [books]
     (set (apply clojure.set/union (map :authors books))))
 
@@ -98,19 +114,40 @@
          (fn [book] (map :name (:authors book)))]
     (set (apply clojure.set/union (map author-names books)))))
 
-;(authors [cities, wild-seed])
 
 (defn author->string [author]
-  :-)
+  (str (:name author) (if (:birth-year author)
+                        (str " (" (:birth-year author) " - " (:death-year author) ")")
+                        )))
+
+
+(author->string felleisen)
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
+
+(authors->string (:authors little-schemer))
 
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by " (authors->string (:authors book))))
+
+(book->string little-schemer)
+
+(defn bah [books]
+  (apply str (interpose ". " (map book->string books))))
+
+(defn meh [c]
+  (cond
+    (== c 0) "No books."
+    (== c 1) "1 book. "
+    :else (str c " books. ")))
 
 (defn books->string [books]
-  :-)
+  (if (empty? books) "No books."
+    (str (meh (count books)) (bah books))))
+
+(books->string [])
+(books->string [little-schemer, cities, wild-seed])
 
 (defn books-by-author [author books]
   :-)
