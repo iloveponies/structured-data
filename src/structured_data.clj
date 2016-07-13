@@ -82,8 +82,6 @@
 (defn titles [books]
   (map :title books))
 
-(def books [cities, wild-seed, embassytown, little-schemer])
-
 (defn author-names [book]
   (map :name (:authors book)))
 
