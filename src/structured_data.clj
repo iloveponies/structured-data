@@ -1,4 +1,4 @@
-(ns structured-data)
+ (ns structured-data)
 
 (defn do-a-thing [x]
   (let [xx (+ x x)]
@@ -14,7 +14,9 @@
   (conj v "<3"))
 
 (defn spiff-destructuring [v]
-  :-)
+  (if (< (count v) 3) "?"
+    (let [[x y z] v]
+      (+ x z))))
 
 (defn point [x y]
   [x y])
