@@ -61,7 +61,7 @@
   (not (contains? author :death-year)))
 
 (defn element-lengths [collection]
-      (map count collection))
+  (map count collection))
 
 (defn second-elements [collection]
   (let [get-second-element (fn [v] (get v 1))]
