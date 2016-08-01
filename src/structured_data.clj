@@ -14,7 +14,8 @@
   (conj v "<3"))
 
 (defn spiff-destructuring [v]
-  (if (< (count v) 3) "?"
+  (if (< (count v) 3) 
+    "?"
     (let [[x y z] v]
       (+ x z))))
 
@@ -127,12 +128,12 @@
   (first (filter (fn [author] (= name (:name author))) authors)))
   
 (defn living-authors [authors]
-      (filter alive? authors))
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
   (not (empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
-      (filter has-a-living-author? books))
+  (filter has-a-living-author? books))
 
 ; %________%
