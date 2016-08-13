@@ -97,7 +97,7 @@
   (apply clojure.set/union (map :authors books)))
 
 (defn all-author-names [books]
-  (map :name (seq (authors1 books))))
+  (map :name (seq (authors books))))
 
 (defn author->string [author]
     (let [nimi (fn [author] (str (:name author)))
