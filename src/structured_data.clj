@@ -118,28 +118,25 @@
 
 (defn books->string [books]
   (let [n-books (count books)
-        n-books-word (str "book" (if (or (< 1 n-books) (= 0 n-books)) "s" ""))
-        n-books-str (str (if (< 0 n-books) n-books "No") " " n-books-word)
-        books-str (apply str (interpose ". " (map book->string books)))]
-    (str n-books-str ". " books-str ".")))
-
-(defn books->string [books]
-  (let [n-books (count books)
-        n-books-word (str "book" (if (or (< 1 n-books) (= 0 n-books)) "s" ""))
-        n-books-str (str (if (< 0 n-books) n-books "No") " " n-books-word ".")
-        books-str-seq (map book->string books)
+        n-books-str (cond
+                      (= 0 n-books) "No books."
+                      (= 1 n-books) "1 book."
+                      :else (str n-books " books."))
         add-dot (fn [x] (str x "."))
-        books-str (apply str (interpose " " (map add-dot books-str-seq)))]
-    (if (< 0 (count books-str)) (str n-books-str " " books-str) n-books-str)))
+        book-str-seq (map book->string books)
+        books-str (str (apply str (interpose " " (map add-dot book-str-seq))))
+        sep (if (= 0 n-books) "" " ")]
+    (str n-books-str sep books-str)))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [book] (has-author? book author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (let [filter-fn (fn [author] (= name (:name author)))]
+    (first (filter filter-fn authors))))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
   :-)
