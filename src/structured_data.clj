@@ -123,10 +123,8 @@
                       (= 1 n-books) "1 book."
                       :else (str n-books " books."))
         add-dot (fn [x] (str x "."))
-        book-str-seq (map book->string books)
-        books-str (str (apply str (interpose " " (map add-dot book-str-seq))))
-        sep (if (= 0 n-books) "" " ")]
-    (str n-books-str sep books-str)))
+        book-str-seq (map book->string books)]
+    (apply str (interpose " " (cons n-books-str (map add-dot book-str-seq))))))
 
 (defn books-by-author [author books]
   (filter (fn [book] (has-author? book author)) books))
