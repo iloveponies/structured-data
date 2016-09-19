@@ -47,28 +47,36 @@
 )
 
 (defn contains-rectangle? [outer inner]
-  :-)
+  (let [[bottomleft topright] inner]
+    (and
+      (contains-point? outer bottomleft)
+      (contains-point? outer topright)
+    )
+  )
+)
 
 (defn title-length [book]
-  :-)
+  (count (:title book)))
 
 (defn author-count [book]
-  :-)
+  (count (:authors book)))
 
 (defn multiple-authors? [book]
-  :-)
+  (> (author-count book) 1))
 
 (defn add-author [book new-author]
-  :-)
+  (let [authors (conj (:authors book) new-author)]
+  (assoc book :authors authors)))
 
 (defn alive? [author]
-  :-)
+  (= nil (:death-year author)))
 
 (defn element-lengths [collection]
-  :-)
+  (map count collection))
 
 (defn second-elements [collection]
-  :-)
+  (let [second-element (fn [coll] (get coll 1))]
+    (map second-element collection)))
 
 (defn titles [books]
   :-)
