@@ -66,8 +66,14 @@
     )
   )
 
-(defn contains-rectangle? [outer inner]
-  :-)
+(defn contains-rectangle? [outer inner] "(contains-rectangle? (rectangle [0 0] [3 3]) (rectangle [1 1] [2 2]))"
+  (let [[[x1 y1] [x2 y2]] outer 
+        [[a1 b1] [a2 b2]] inner]
+    (and (contains-point? (rectangle [x1 y1] [x2 y2]) (point a1 b1))
+         (contains-point? (rectangle [x1 y1] [x2 y2]) (point a2 b2))
+         )
+    )
+  )
 
 (defn title-length [book]
   :-)
