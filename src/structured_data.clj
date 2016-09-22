@@ -53,13 +53,18 @@
   )
 
 (defn square? [rectangle]
-  :-)
+  (if (= (width rectangle) (height rectangle)) true false)
+  )
 
 (defn area [rectangle]
-  :-)
+  (* (width rectangle) (height rectangle))
+  )
 
-(defn contains-point? [rectangle point]
-  :-)
+(defn contains-point? [rectangle point] "(contains-point? (rectangle [0 0] [2 2]) (point 1 1))"
+  (let [[[x1 y1] [x2 y2]] rectangle [z1 z2] point]
+   (and (<= x1 z1 x2) (<= y1 z2 y2))
+    )
+  )
 
 (defn contains-rectangle? [outer inner]
   :-)
