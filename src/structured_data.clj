@@ -35,6 +35,9 @@
 (sum-pairs [42 5]   [-42 -5])   ;=> [0 0]
 (sum-pairs [64 256] [-51 -219]) ;=> [13 37]
 
+; ====================================================================
+; let s doing some geometry
+; ====================================================================
 
 (defn point [x y]
   [x y])
@@ -75,14 +78,32 @@
     )
   )
 
+; ====================================================================
+; After geometry, books
+; ====================================================================
+
+(def china {:name "China Miéville", :birth-year 1972})
+(def octavia {:name "Octavia E. Butler" :birth-year 1947 :death-year 2006})
+(def friedman {:name "Daniel Friedman" :birth-year 1944})
+(def felleisen {:name "Matthias Felleisen"})
+
+(def cities {:title "The City and the City" :authors [china]})
+(def wild-seed {:title "Wild Seed", :authors [octavia]})
+(def embassytown {:title "Embassytown", :authors [china]})
+(def little-schemer {:title "The Little Schemer" :authors [friedman, felleisen]})
+
+(assoc cities :awards ["Hugo", "World Fantasy Award",
+                       "Arthur C. Clarke Award",
+                       "British Science Fiction Award"])
+
 (defn title-length [book]
-  :-)
+  (count (:title book)))
 
 (defn author-count [book]
-  :-)
+  (count (:authors book)))
 
 (defn multiple-authors? [book]
-  :-)
+  (> (author-count book) 1))
 
 (defn add-author [book new-author]
   :-)
