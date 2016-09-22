@@ -53,7 +53,7 @@
   )
 
 (defn square? [rectangle]
-  (if (= (width rectangle) (height rectangle)) true false)
+  (= (width rectangle) (height rectangle))
   )
 
 (defn area [rectangle]
