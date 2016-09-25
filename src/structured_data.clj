@@ -92,10 +92,6 @@
 (def embassytown {:title "Embassytown", :authors [china]})
 (def little-schemer {:title "The Little Schemer" :authors [friedman, felleisen]})
 
-(assoc cities :awards ["Hugo", "World Fantasy Award",
-                       "Arthur C. Clarke Award",
-                       "British Science Fiction Award"])
-
 (defn title-length [book]
   (count (:title book)))
 
@@ -105,11 +101,12 @@
 (defn multiple-authors? [book]
   (> (author-count book) 1))
 
-(defn add-author [book new-author]
-  :-)
+(defn add-author [book new-author] "(add-author little-schemer {:name \"Gerald J. Sussman\"})"
+  (assoc book :authors (conj (book :authors) new-author))
+  )
 
 (defn alive? [author]
-  :-)
+  (not (contains? author :death-year)))
 
 (defn element-lengths [collection]
   :-)
