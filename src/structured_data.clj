@@ -82,15 +82,16 @@
 ; After geometry, books
 ; ====================================================================
 
-(def china {:name "China Miéville", :birth-year 1972})
-(def octavia {:name "Octavia E. Butler" :birth-year 1947 :death-year 2006})
-(def friedman {:name "Daniel Friedman" :birth-year 1944})
-(def felleisen {:name "Matthias Felleisen"})
-
-(def cities {:title "The City and the City" :authors [china]})
-(def wild-seed {:title "Wild Seed", :authors [octavia]})
-(def embassytown {:title "Embassytown", :authors [china]})
-(def little-schemer {:title "The Little Schemer" :authors [friedman, felleisen]})
+;(def china {:name "China Miéville", :birth-year 1972})
+;(def octavia {:name "Octavia E. Butler" :birth-year 1947 :death-year 2006})
+;(def friedman {:name "Daniel Friedman" :birth-year 1944})
+;(def felleisen {:name "Matthias Felleisen"})
+;(
+;(def cities {:title "The City and the City" :authors [china]})
+;(def wild-seed {:title "Wild Seed", :authors [octavia]})
+;(def embassytown {:title "Embassytown", :authors [china]})
+;(def little-schemer {:title "The Little Schemer" :authors [friedman, felleisen]})
+(def books [cities, wild-seed, embassytown, little-schemer])
 
 (defn title-length [book]
   (count (:title book)))
@@ -109,19 +110,20 @@
   (not (contains? author :death-year)))
 
 (defn element-lengths [collection]
-  :-)
+  (map count collection))
 
 (defn second-elements [collection]
-  :-)
+  (let [secondelem (fn [coll] (get coll 1))]
+    (map secondelem collection)))
 
 (defn titles [books]
-  :-)
+  (map :title books))
 
 (defn monotonic? [a-seq]
   :-)
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*")))
 
 (defn toggle [a-set elem]
   :-)
