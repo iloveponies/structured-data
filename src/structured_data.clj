@@ -82,17 +82,6 @@
 ; After geometry, books
 ; ====================================================================
 
-;(def china {:name "China Miéville", :birth-year 1972})
-;(def octavia {:name "Octavia E. Butler" :birth-year 1947 :death-year 2006})
-;(def friedman {:name "Daniel Friedman" :birth-year 1944})
-;(def felleisen {:name "Matthias Felleisen"})
-;(
-;(def cities {:title "The City and the City" :authors [china]})
-;(def wild-seed {:title "Wild Seed", :authors [octavia]})
-;(def embassytown {:title "Embassytown", :authors [china]})
-;(def little-schemer {:title "The Little Schemer" :authors [friedman, felleisen]})
-(def books [cities, wild-seed, embassytown, little-schemer])
-
 (defn title-length [book]
   (count (:title book)))
 
@@ -120,19 +109,20 @@
   (map :title books))
 
 (defn monotonic? [a-seq]
-  :-)
+  (or (apply >= a-seq)(apply <= a-seq)))
 
 (defn stars [n]
   (apply str (repeat n "*")))
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem) (disj a-set elem) (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (not (= (count a-seq) (count (set a-seq)))))
 
 (defn old-book->new-book [book]
-  :-)
+  (let [authorName (fn [book] (map :authors book))]
+    (set (apply concat (map authorName books)))))
 
 (defn has-author? [book author]
   :-)
