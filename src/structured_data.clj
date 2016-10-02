@@ -110,14 +110,16 @@
   (let [strBooks (fn [x] (apply str (interpose ". " (map book->string x))))]
     (cond
       (= (count books) 0) "No books."
-      (= (count books) 1) (str "1 book. " (strBooks books))
-      :else (str (count books) " books. " (strBooks books)))))
+      (= (count books) 1) (str "1 book. " (strBooks books) ".")
+      :else (str (count books) " books. " (strBooks books) "."))))
 
 (defn books-by-author [author books]
   (filter (fn [book] (has-author? book author)) books))
 
 (defn author-by-name [name authors]
-  (first (filter (fn [author] (= name (:name authors))) authors)))
+   (let [result (filter (fn [author] (= name (:name author))) authors)]
+     (if (= (count result) 0) nil (first result))))
+
 
 (defn living-authors [authors]
   (filter (fn [author] (alive? author)) authors))
