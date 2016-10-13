@@ -102,16 +102,30 @@
   (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (let [{name :name
+         born :birth-year
+         died :death-year} author
+         year (if born (str " (" born " - " died ")") "")]
+    (str name year)))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (let [title (:title book)
+        authors (authors->string (:authors book))]
+    (str title ", written by " authors)))
 
 (defn books->string [books]
-  :-)
+  (let [bc (count books)
+        bookCount (condp = bc
+                    0 "No books."
+                    1 "1 book."
+                    (str bc " books."))
+        delimiter (if (> bc 0) " " "")
+        bookList (apply str (interpose ". " (map book->string books)))
+        period (if (> bc 0) "." "")]
+    (str bookCount delimiter bookList period)))
 
 (defn books-by-author [author books]
   :-)
