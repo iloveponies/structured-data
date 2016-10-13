@@ -10,7 +10,8 @@
    (+ first third)))
 
 (defn cutify [v]
-  :-)
+  (let [❤ "<3"]
+    (conj v ❤)))
 
 (defn spiff-destructuring [v]
   :-)
