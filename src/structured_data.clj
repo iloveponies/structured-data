@@ -47,13 +47,13 @@
     (and (contains-point? outer bottom-left) (contains-point? outer top-right))))
 
 (defn title-length [book]
-  :-)
+  (count (book :title)))
 
 (defn author-count [book]
-  :-)
+  (count (book :authors)))
 
 (defn multiple-authors? [book]
-  :-)
+  (> (author-count book) 1))
 
 (defn add-author [book new-author]
   :-)
