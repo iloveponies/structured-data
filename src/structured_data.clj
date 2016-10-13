@@ -65,10 +65,11 @@
 (def alive? (complement dead?))
 
 (defn element-lengths [collection]
-  :-)
+  (map count collection))
 
 (defn second-elements [collection]
-  :-)
+  (let [second (fn [arr] (get arr 1))]
+    (map second collection)))
 
 (defn titles [books]
   :-)
