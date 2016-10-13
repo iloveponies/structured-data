@@ -14,7 +14,8 @@
     (conj v ❤)))
 
 (defn spiff-destructuring [v]
-  :-)
+  (let [[first second third] v]
+    (+ first third)))
 
 (defn point [x y]
   [x y])
