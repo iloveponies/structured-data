@@ -128,7 +128,7 @@
     (str bookCount delimiter bookList period)))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [book] (has-author? book author)) books))
 
 (defn author-by-name [name authors]
   :-)
