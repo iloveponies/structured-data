@@ -134,12 +134,13 @@
   (first (filter (fn [author] (= (author :name) name)) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (let [authors (:authors book)]
+    (not (empty? (living-authors authors)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
