@@ -95,10 +95,11 @@
     (contains? authors author)))
 
 (defn authors [books]
-  :-)
+  (let [authors (fn [book] (:authors book))]
+    (set (apply concat (map authors books)))))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
 
 (defn author->string [author]
   :-)
