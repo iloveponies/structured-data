@@ -5,7 +5,9 @@
     (Math/pow dub dub)))
 
 (defn spiff [v]
-  :-)
+  (let [first (get v 0)
+        third (get v 2)]
+   (+ first third)))
 
 (defn cutify [v]
   :-)
