@@ -110,7 +110,7 @@
 (defn books->string [books]
   (if (= 0 (count books))
     "No books."
-    (let [books-string (apply str (map book->string books))]
+    (let [books-string (apply str (interpose ". " (map book->string books)))]
       (str (count books) " book" (if (> (count books) 1) "s") ". " books-string "."))))
 
 (defn books-by-author [author books]
