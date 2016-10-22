@@ -20,7 +20,6 @@
 (defn cutify [v]
   (conj v "<3"))
 
-
 (defn spiff-destructuring [v]
   (let [[eka toka] [(get v 0) (get v 2)]]
     (+ eka toka)))
@@ -112,8 +111,6 @@
     true
     false))
 
-
-
 (defn add-author [book new-author]
   (assoc book :authors (conj (get book :authors) new-author)))
 
@@ -124,25 +121,37 @@
     false))
 
 (defn element-lengths [collection]
-  )
+  (map count collection))
+
 
 (defn second-elements [collection]
-  :-)
+  (let [temp (fn [col] (get col 1))]
+    (map temp collection)))
+
 
 (defn titles [books]
-  :-)
+  (map :title books))
 
 (defn monotonic? [a-seq]
-  :-)
+  (cond
+    (apply <= a-seq) true
+    (apply >= a-seq) true
+    :else false))
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*")))
+
+(stars 5)
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (if (< (count (set a-seq)) (count a-seq))
+    true
+    false))
 
 (defn old-book->new-book [book]
   :-)
