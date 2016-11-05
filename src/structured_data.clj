@@ -121,10 +121,10 @@
       (> n 1) (str n " books. " (apply str (interpose ". " (map book->string books)) )"."))))
 
 (defn books-by-author [author books]
-  :-)
+  (filter #(has-author? % author) books))
 
 (defn author-by-name [name authors]
-  :-)
+  ())
 
 (defn living-authors [authors]
   :-)
