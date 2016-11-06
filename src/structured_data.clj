@@ -135,6 +135,7 @@
     false))
 
 (defn books-by-living-authors [books]
-  :-)
+  (let [living (living-authors (authors books))]
+    (apply clojure.set/union (set (map #(books-by-author % books) living)))))
 
 ; %________%
