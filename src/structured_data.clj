@@ -26,19 +26,41 @@
   [bottom-left top-right])
 
 (defn width [rectangle]
-  :-)
+  (let [ [[x1 y1] [x2 y2]] rectangle ]
+    (- x2 x1)
+    )
+  )
 
 (defn height [rectangle]
-  :-)
+  (let [ [[x1 y1] [x2 y2]] rectangle ]
+    (- y2 y1)
+    )
+  )
 
 (defn square? [rectangle]
-  :-)
+  (let [ [[x1 y1] [x2 y2]] rectangle ]
+    (if (= (- x2 x1) (- y2 y1) )
+      true
+      false
+    )
+  )
+)
 
 (defn area [rectangle]
-  :-)
+  (let [ [[x1 y1] [x2 y2]] rectangle ]
+    (* (- x2 x1) (- y2 y1))
+  )
+)
 
 (defn contains-point? [rectangle point]
-  :-)
+  (let [ [[x1 y1] [x2 y2] ] rectangle
+          [px py]  point]
+    (if (and (<= x1 px x2) (<= y1 py y2))
+      true
+      false
+      )
+  )
+)
 
 (defn contains-rectangle? [outer inner]
   :-)
