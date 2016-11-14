@@ -39,3 +39,42 @@
 (monotonic? [3 2 0 -3])  ;=> true
 (monotonic? [3 2 2])     ;=> true    Not strictly monotonic
 (monotonic? [1 2 1 0])   ;=> false
+
+(defn toggle [a-set elem]
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem))
+) 
+
+(toggle #{:a :b :c} :d) ;=> #{:a :c :b :d}
+(toggle #{:a :b :c} :a) ;=> #{:c :b}
+
+
+(defn contains-duplicates? [sequence]
+  (if (= (count(set sequence))(count sequence))
+    false
+    true )
+)
+
+(contains-duplicates? [1 1 2 3 -40]) ;=> true
+(contains-duplicates? [1 2 3 -40]) ;=> false
+(contains-duplicates? [1 2 3 "a" "a"]) ;=> true
+
+(defn all-author-names [books]
+  (let [author-names
+         (fn [book] (map :name (:authors book)))]
+    (set (apply concat (map author-names books)))))
+
+; exercise 22
+(defn old-book->new-book [book]
+  (let [ uniq-auths (set (:authors book)) ]
+    (assoc book :authors uniq-auths) )
+)
+
+
+(old-book->new-book {:title "The Little Schemer"
+                     :authors [friedman, felleisen]})
+;=> {:title "The Little Schemer" :authors #{friedman, felleisen}}
+(old-book->new-book {:title "Wild Seed", :authors [octavia]})
+
+
