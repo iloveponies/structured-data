@@ -73,46 +73,74 @@
 )
 
 (defn title-length [book]
-  :-)
+  (count (get book :title))
+)
 
 (defn author-count [book]
-  :-)
+  (count (get book :authors))
+  )
 
 (defn multiple-authors? [book]
-  :-)
+  (if (> (count (get book :authors)) 1)
+    true
+    false
+  )
+)
 
 (defn add-author [book new-author]
-  :-)
+  (let [ authors (get book :authors)
+         new-authors (conj authors new-author) ]
+    (assoc book :authors new-authors))
+  )
 
 (defn alive? [author]
-  :-)
+  (if (nil? (get author :death-year))
+    true
+    false
+    )
+  )
+
 
 (defn element-lengths [collection]
-  :-)
+  (map count collection))
 
 (defn second-elements [collection]
-  :-)
+  (let [ second-element (fn [elem] (get elem 1)) ]
+    (map second-element collection)))
 
 (defn titles [books]
-  :-)
+  (map :title books))
 
-(defn monotonic? [a-seq]
-  :-)
 
-(defn stars [n]
-  :-)
+(defn monotonic? [seq]
+  (if (or (apply <= seq) (apply >= seq))
+       true
+       false ))
+
+(defn stars [num]
+  (let [tmp_stars (repeat num "*") ]
+    (apply str tmp_stars)))
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)))
 
-(defn contains-duplicates? [a-seq]
-  :-)
+(defn contains-duplicates? [sequence]
+  (if (= (count(set sequence))(count sequence))
+    false
+    true ))
 
 (defn old-book->new-book [book]
-  :-)
+  (let [ uniq-auths (set (:authors book)) ]
+    (assoc book :authors uniq-auths)))
 
 (defn has-author? [book author]
-  :-)
+  (let [book-authors (set (map :name (:authors book)))
+        book-author (:name author)]
+    (if (contains? book-authors book-author)
+      true
+      false)))
 
 (defn authors [books]
   :-)
