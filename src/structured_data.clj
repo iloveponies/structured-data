@@ -168,10 +168,26 @@
     (apply str (interpose ", " tmp-authors))))
 
 (defn book->string [book]
-  :-)
+  (let [ title (:title book)
+         authors (authors->string (:authors book)) ]
+    (str title ", written by " authors)))
+
+(defn book-num-helper [num] 
+  (cond
+    (= num 0) (str "No books.")
+    (= num 1) (str "1 book. ")
+    :else
+    (str num " books. ")))
+
+(defn books-string-helper [books]
+  (let [ tmp-books (interpose ". " (map book->string books)) ]
+    (str (book-num-helper (count books)) (apply str tmp-books) ".")))
+
 
 (defn books->string [books]
-  :-)
+  ( if (= (count books) 0)
+    (book-num-helper 0)
+    (books-string-helper books)))
 
 (defn books-by-author [author books]
   :-)
