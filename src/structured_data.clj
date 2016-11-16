@@ -172,6 +172,7 @@
          authors (authors->string (:authors book)) ]
     (str title ", written by " authors)))
 
+; books->string helpers
 (defn book-num-helper [num] 
   (cond
     (= num 0) (str "No books.")
@@ -190,18 +191,30 @@
     (books-string-helper books)))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [book] (has-author? book author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter 
+   (fn [author] 
+     (if (= (:name author) name)
+       true
+       false)) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter 
+   (fn [author] 
+     (if (nil? (:death-year author))
+       true
+       false)) authors))
+       
 
 (defn has-a-living-author? [book]
-  :-)
+  (let [ authors (:authors book) ]
+    (if (not (empty? (living-authors authors)))
+      true
+      false)))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter (fn [book] (has-a-living-author? book)) books))
 
 ; %________%
