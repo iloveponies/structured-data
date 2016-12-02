@@ -8,3 +8,8 @@
 (use 'structured-data :reload)
 (cutify [1 2 3])
 (cutify [])
+(use 'structured-data :reload)
+(spiff-destructing [1 2 3])
+(spiff-destructuring [1 2 3])
+(spiff-destructuring [1 2 10])
+(spiff-destructuring [1 2])
