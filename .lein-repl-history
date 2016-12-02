@@ -1,0 +1,7 @@
+(use 'structured-data)
+(spiff [1 2 3])
+(spiff [1 2 3 4 5 6])
+(spiff [1 2])
+(spiff [])
+1 + nil
+(+ 1 nil)
