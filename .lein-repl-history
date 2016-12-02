@@ -13,3 +13,9 @@
 (spiff-destructuring [1 2 3])
 (spiff-destructuring [1 2 10])
 (spiff-destructuring [1 2])
+clear
+(use 'structured-data :reload)
+(width (rectangle [1 1] [5 1]))
+(use 'structured-data :reload)
+(height (rectangle [1 1] [5 1]))
+(height (rectangle [1 1] [5 5]))
