@@ -82,3 +82,81 @@ contains-point? (rectangle [0 0] [2 2])
 (book->string little-schemer)
 (= "The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen" (book->string little-schemer))
 (book->string little-schemer)
+def china {:name "China Miéville", :birth-year 1972})
+(def octavia {:name "Octavia E. Butler"
+              :birth-year 1947
+              :death-year 2006})
+(def friedman {:name "Daniel Friedman" :birth-year 1944})
+(def felleisen {:name "Matthias Felleisen"})
+(def cities {:title "The City and the City" :authors #{china}})
+(def wild-seed {:title "Wild Seed", :authors #{octavia}})
+(def embassytown {:title "Embassytown", :authors #{china}})
+(def little-schemer {:title "The Little Schemer"
+                     :authors #{friedman, felleisen}})
+(def books [cities, wild-seed, embassytown, little-schemer])
+(use 'structured-data)
+def china {:name "China Miéville", :birth-year 1972})
+(def octavia {:name "Octavia E. Butler"
+              :birth-year 1947
+              :death-year 2006})
+(def friedman {:name "Daniel Friedman" :birth-year 1944})
+(def felleisen {:name "Matthias Felleisen"})
+(def cities {:title "The City and the City" :authors #{china}})
+(def wild-seed {:title "Wild Seed", :authors #{octavia}})
+(def embassytown {:title "Embassytown", :authors #{china}})
+(def little-schemer {:title "The Little Schemer"
+                     :authors #{friedman, felleisen}})
+(def books [cities, wild-seed, embassytown, little-schemer])
+def china {:name "China Miéville", :birth-year 1972})
+(def octavia {:name "Octavia E. Butler"
+              :birth-year 1947
+              :death-year 2006})
+(def friedman {:name "Daniel Friedman" :birth-year 1944})
+(def felleisen {:name "Matthias Felleisen"})
+(def cities {:title "The City and the City" :authors #{china}})
+(def wild-seed {:title "Wild Seed", :authors #{octavia}})
+(def embassytown {:title "Embassytown", :authors #{china}})
+(def little-schemer {:title "The Little Schemer"
+                     :authors #{friedman, felleisen}})
+(def books [cities, wild-seed, embassytown, little-schemer])
+cities
+(def china {:name "China Miéville", :birth-year 1972})
+(def octavia {:name "Octavia E. Butler"
+              :birth-year 1947
+              :death-year 2006})
+(def friedman {:name "Daniel Friedman" :birth-year 1944})
+(def felleisen {:name "Matthias Felleisen"})
+(def cities {:title "The City and the City" :authors #{china}})
+(def wild-seed {:title "Wild Seed", :authors #{octavia}})
+(def embassytown {:title "Embassytown", :authors #{china}})
+(def little-schemer {:title "The Little Schemer"
+                     :authors #{friedman, felleisen}})
+(def books [cities, wild-seed, embassytown, little-schemer])
+(books)
+book
+books
+(books->string books)
+(books->str [])
+(use 'structured-data)
+(def china {:name "China Miéville", :birth-year 1972})
+(def octavia {:name "Octavia E. Butler"
+              :birth-year 1947
+              :death-year 2006})
+(def friedman {:name "Daniel Friedman" :birth-year 1944})
+(def felleisen {:name "Matthias Felleisen"})
+(def cities {:title "The City and the City" :authors #{china}})
+(def wild-seed {:title "Wild Seed", :authors #{octavia}})
+(def embassytown {:title "Embassytown", :authors #{china}})
+(def little-schemer {:title "The Little Schemer"
+                     :authors #{friedman, felleisen}})
+(def books [cities, wild-seed, embassytown, little-schemer])
+(books->string [])
+(books->string books)
+(use 'structured-data :reload)
+(books->string books)
+(use 'structured-data :reload)
+(books->string books)
+(books->string [])
+(first [])
+(doc contains?)
+(doc assoc)
