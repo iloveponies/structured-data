@@ -21,25 +21,48 @@
   )
 
 (defn point [x y]
-  [x y])
+  [x y]
+  )
 
 (defn rectangle [bottom-left top-right]
   [bottom-left top-right])
 
 (defn width [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (- x2 x1)
+    )
+  )
 
 (defn height [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (- y2 y1)
+    )
+  )
 
 (defn square? [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (=
+      (height rectangle)
+      (width rectangle)
+      )
+    )
+  )
 
 (defn area [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (*
+      (height rectangle)
+      (width rectangle)
+      )
+    )
+  )
 
-(defn contains-point? [rectangle point]
-  :-)
+(defn contains-point? [[[x1 y1] [x2 y2]] [x y]]
+  (and
+    (<= x1 x x2)
+    (<= y1 y y2)
+    )
+  )
 
 (defn contains-rectangle? [outer inner]
   :-)
