@@ -15,7 +15,10 @@
   )
 
 (defn spiff-destructuring [v]
-  :-)
+  (let [[a b c] v]
+    (+ a c)
+    )
+  )
 
 (defn point [x y]
   [x y])
