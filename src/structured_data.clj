@@ -227,7 +227,17 @@
   )
 
 (defn author-by-name [name authors]
-  :-)
+  (let [ testi (filter
+    (fn [x] (= name (:name x)))
+    authors
+    )]
+    (if (empty? testi)
+      nil
+      (first testi)
+      )
+    )
+  )
+
 
 (defn living-authors [authors]
   :-)
