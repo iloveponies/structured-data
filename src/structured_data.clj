@@ -144,31 +144,87 @@
 
 
 (defn old-book->new-book [book]
-  :-)
+  (assoc book :authors
+    (set
+      (:authors book)
+      )
+    )
+  )
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author)
+  )
 
 (defn authors [books]
-  :-)
+  (apply clojure.set/union
+         (map :authors books)
+         )
+  )
 
 (defn all-author-names [books]
-  :-)
+  (set
+    (map :name (authors books))
+    )
+  )
 
 (defn author->string [author]
-  :-)
+  (let
+    [by (:birth-year author)
+     dy (:death-year author)
+     name (:name author)]
+    (if by
+      (str name " (" by " - " dy ")")
+      (str name)
+      )
+    )
+  )
 
 (defn authors->string [authors]
-  :-)
+  (apply str
+    (interpose
+      ", "
+      (map author->string authors)
+      )
+    )
+  )
 
 (defn book->string [book]
-  :-)
+  (let [newb (old-book->new-book book)
+        title (:title newb)
+        authors (:authors newb)
+        astr (authors->string authors)]
+    (str title ", written by " astr))
+    )
+
 
 (defn books->string [books]
-  :-)
+  (let
+    [bc (count books)
+     bstrings (apply str
+                (interpose
+                  ". "
+                  (map book->string books)))
+     ]
+    (apply str
+       (if (= bc 0)
+         (str "No books")
+         (cond
+           (> bc 1) (str bc " books. " bstrings)
+           (= bc 1) (str bc " book. " bstrings)
+           )
+         )
+        "."
+       )
+    )
+  )
 
 (defn books-by-author [author books]
-  :-)
+  (filter
+    (fn [x]
+      (has-author? x author))
+    books
+    )
+  )
 
 (defn author-by-name [name authors]
   :-)
