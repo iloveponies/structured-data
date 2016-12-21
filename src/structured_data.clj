@@ -240,10 +240,23 @@
 
 
 (defn living-authors [authors]
-  :-)
+  (filter
+    (fn [x] (alive? x))
+      authors
+    )
+  )
+
 
 (defn has-a-living-author? [book]
-  :-)
+  (let
+    [living (living-authors (:authors book))]
+    (if
+      (empty? living)
+      false
+      true
+      )
+    )
+  )
 
 (defn books-by-living-authors [books]
   :-)
