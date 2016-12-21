@@ -259,6 +259,11 @@
   )
 
 (defn books-by-living-authors [books]
-  :-)
+  (let
+    [labooks (filter has-a-living-author? books)
+     lista (filter (fn [x] books-by-author x books) labooks)]
+    lista
+    )
+  )
 
 ; %________%
