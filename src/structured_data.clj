@@ -89,7 +89,7 @@
   (contains? (:authors book) author))
 
 (defn authors [books]
-  (apply clojure.set/union (map :authors (map old-book->new-book books))))
+  (apply clojure.set/union (map :authors books)))
 
 (defn all-author-names1 [books]
   (let [author-names
@@ -111,7 +111,7 @@
   (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by " (authors->string (authors book))))
 
 (defn books->string [books]
   :-)
