@@ -125,17 +125,30 @@
   [collection]
   (map (fn [x] (count x)) collection))
 
-(defn second-elements [collection]
-  :-)
+(defn second-elements
+  "Returns a sequence of second elements given a collection"
+  [collection]
+  (let [extract-second (fn [x] (second x))]
+    (map extract-second collection)))
 
-(defn titles [books]
-  :-)
+(defn titles
+  "Returns titles given a collection of books"
+  [books]
+  (let [extract-title (fn [x] (:title x))]
+    (map extract-title books)))
 
-(defn monotonic? [a-seq]
-  :-)
+(defn monotonic?
+  "Returns true if a sequence is monotonic, false otherwise"
+  [a-seq]
+  (cond
+    (apply <= a-seq) true
+    (apply >= a-seq) true
+    :else false))
 
-(defn stars [n]
-  :-)
+(defn stars
+  "Returns a sequence of n stars"
+  [n]
+  (apply str (repeat n "*")))
 
 (defn toggle [a-set elem]
   :-)
