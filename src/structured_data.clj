@@ -9,11 +9,12 @@
 ;(def friedman {:name "Daniel Friedman" :birth-year 1944})
 ;(def felleisen {:name "Matthias Felleisen"})
 ;
-;(def cities {:title "The City and the City" :authors [china]})
-;(def wild-seed {:title "Wild Seed", :authors [octavia]})
-;(def embassytown {:title "Embassytown", :authors [china]})
-;(def little-schemer {:title "The Little Schemer"
-;                     :authors [friedman, felleisen]})
+;(def cities {:title "The City and the City" :authors #{china}})
+;(def wild-seed {:title "Wild Seed", :authors #{octavia}})
+;(def embassytown {:title "Embassytown", :authors #{china}})
+;(def little-schemer {:title   "The Little Schemer"
+;                     :authors #{friedman, felleisen}})
+;(def books [cities, wild-seed, embassytown, little-schemer])
 ; Placed here for reference. PLEASE DELETE WHEN DONE!!!
 ; ********************** Authors/Books definitions **********************
 (defn do-a-thing
@@ -150,26 +151,43 @@
   [n]
   (apply str (repeat n "*")))
 
-(defn toggle [a-set elem]
-  :-)
+(defn toggle
+  "Removes elem from a-set if it exists, else adds it to a-set"
+  [a-set elem]
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)))
 
-(defn contains-duplicates? [a-seq]
-  :-)
+(defn contains-duplicates?
+  "Returns true if collection returns duplicates, false otherwise"
+  [a-seq]
+  (if (> (count a-seq) (count (set a-seq)))
+    true
+    false))
 
-(defn old-book->new-book [book]
-  :-)
+(defn old-book->new-book
+  "Converts the author format from vector to set"
+  [book]
+  (assoc book :authors (set (:authors book))))
 
-(defn has-author? [book author]
-  :-)
+(defn has-author?
+  "Returns true if given book has author, else false"
+  [book author]
+  (if (contains? (:authors book) author)
+    true
+    false))
 
-(defn authors [books]
-  :-)
+(defn authors
+  "Returns a set of authors given books"
+  [books]
+  (let [author (fn [book] (:authors book))]
+    (apply clojure.set/union (map author books))))
 
 (defn all-author-names
   "Retuns all authors given a collection of books"
   [books]
-  ;(set (apply concat (map (map :name (:authors books)) books)))
-  :-)
+  (let [author (fn [book] (:authors book))]
+    (set (map :name (apply clojure.set/union (map author books))))))
 
 (defn author->string [author]
   :-)
