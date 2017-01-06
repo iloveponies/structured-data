@@ -189,17 +189,51 @@
   (let [author (fn [book] (:authors book))]
     (set (map :name (apply clojure.set/union (map author books))))))
 
-(defn author->string [author]
-  :-)
+(defn author->string
+  "Return the string representation of an author"
+  [author]
+  ;Alternate solution
+  ;(let [name (:name author)
+  ;      birth (:birth-year author)
+  ;      death (:death-year author)]
+  ;  (cond
+  ;    (and birth death) (str name " (" birth " - " death ")")
+  ;    (and birth (not death)) (str name " (" birth " - )")
+  ;    :else (str name)))
+  (if (:birth-year author)
+    (if (:death-year author)
+      (str (:name author) " (" (:birth-year author) " - " (:death-year author) ")")
+      (str (:name author) " (" (:birth-year author) " - )"))
+    (str (:name author))))
 
-(defn authors->string [authors]
-  :-)
+(defn authors->string
+  "Return the string representation of one or more authors"
+  [authors]
+  (let [stringify (fn [author] (:name author)
+                    (if (:birth-year author)
+                      (if (:death-year author)
+                        (str (:name author) " (" (:birth-year author) " - " (:death-year author) ")")
+                        (str (:name author) " (" (:birth-year author) " - )"))
+                      (str (:name author))))]
+    (apply str (interpose ", " (map stringify authors)))))
 
-(defn book->string [book]
-  :-)
 
-(defn books->string [books]
-  :-)
+(defn book->string
+  "Return the string representation of a book"
+  [book]
+  (str (:title book) ", written by " (authors->string (:authors book))))
+
+(defn books->string
+  "Returns a string representation of 0 or more books"
+  [books]
+  (let [book-string (fn [book] (str (book->string book) "."))
+        num-books   (count books)]
+    (cond
+      (= num-books 0) (str "No books.")
+      (= num-books 1) (str num-books " book. " (apply str (interpose " " (map book-string books))))
+      :else (str num-books " books. " (apply str (interpose " " (map book-string books)))))
+    )
+)
 
 (defn books-by-author [author books]
   :-)
@@ -217,3 +251,4 @@
   :-)
 
 ; %________%
+()
