@@ -8,6 +8,11 @@
 ;              :death-year 2006})
 ;(def friedman {:name "Daniel Friedman" :birth-year 1944})
 ;(def felleisen {:name "Matthias Felleisen"})
+;(def jrrtolkien {:name "J. R. R. Tolkien" :birth-year 1892 :death-year 1973})
+;(def christopher {:name "Christopher Tolkien" :birth-year 1924})
+;(def kay {:name "Guy Gavriel Kay" :birth-year 1954})
+;(def dick {:name "Philip K. Dick", :birth-year 1928, :death-year 1982})
+;(def zelazny {:name "Roger Zelazny", :birth-year 1937, :death-year 1995})
 ;
 ;(def cities {:title "The City and the City" :authors #{china}})
 ;(def wild-seed {:title "Wild Seed", :authors #{octavia}})
@@ -15,6 +20,10 @@
 ;(def little-schemer {:title   "The Little Schemer"
 ;                     :authors #{friedman, felleisen}})
 ;(def books [cities, wild-seed, embassytown, little-schemer])
+;(def authors-names #{china, felleisen, octavia, friedman})
+;(def silmarillion {:title "Silmarillion"
+;                   :authors #{jrrtolkien, christopher, kay}})
+;(def deus-irae {:title "Deus Irae", :authors #{dick, zelazny}})
 ; Placed here for reference. PLEASE DELETE WHEN DONE!!!
 ; ********************** Authors/Books definitions **********************
 (defn do-a-thing
@@ -117,7 +126,7 @@
     (assoc book :authors (conj authors new-author))))
 
 (defn alive?
-  "Returns true if the author "
+  "Returns true if the given author is alive (has no death-year)"
   [author]
   (not (contains? author :death-year)))
 
@@ -235,20 +244,33 @@
     )
 )
 
-(defn books-by-author [author books]
-  :-)
+(defn books-by-author
+  "Return the book(s) by a given author"
+  [author books]
+  (let [author-exists? (fn [book]
+                         (if (has-author? book author) book))]
+    (into [] (filter #(if (nil? %) false true) (map author-exists? books)))))
 
-(defn author-by-name [name authors]
-  :-)
+(defn author-by-name
+  "Returns the author by the given name from a list of authors, nil otherwise"
+  [target-name authors]
+  (first (filter (fn [{:keys [name]}] (= name target-name)) authors)))
 
-(defn living-authors [authors]
-  :-)
+(defn living-authors
+  "Returns living authors from a given collection of authors"
+  [authors]
+  (filter alive? authors))
 
-(defn has-a-living-author? [book]
-  :-)
+(defn has-a-living-author?
+  "Returns true if given book has living authors"
+  [book]
+  (not (empty? (filter alive? (:authors book)))))
 
-(defn books-by-living-authors [books]
-  :-)
+(defn books-by-living-authors
+  "Returns books that contain living authors"
+  [books]
+  (filter has-a-living-author? books))
+
 
 ; %________%
 ()
