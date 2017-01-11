@@ -108,10 +108,10 @@
 (defn books->string [books]
   (let [nbooks-str (cond
                      (empty? books) "No books."
-                     (== (count books) 1) "1 book"
-                     :else (str (count books) " books"))
-        book-strs (map book->string books)]
-    (apply str (interpose ". " (concat [nbooks-str] book-strs)))))
+                     (== (count books) 1) "1 book."
+                     :else (str (count books) " books."))
+        book-strs (map (fn [book] (str (book->string book) \.)) books)]
+    (apply str (interpose " " (concat [nbooks-str] book-strs)))))
 
 (defn books-by-author [author books]
   (filter (fn [book] (has-author? book author)) books))
