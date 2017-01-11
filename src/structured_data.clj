@@ -106,9 +106,9 @@
   (str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
-  (let [nbooks-str (if (empty? books) "No books" (str (count books) "books"))
-        books-str (map book->string books)]
-    (apply str (interpose ". " (concat [nbooks-str] books-str)))))
+  (let [nbooks-str (if (empty? books) "No books." (str (count books) "books"))
+        book-strs (map book->string books)]
+    (apply str (interpose ". " (concat [nbooks-str] book-strs)))))
 
 (defn books-by-author [author books]
   (filter (fn [book] (has-author? book author)) books))
@@ -120,7 +120,7 @@
   (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  (not (empty? (living-authors book))))
+  (not (empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
   (filter has-a-living-author? books))
