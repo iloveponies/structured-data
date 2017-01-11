@@ -22,10 +22,10 @@
 (defn rectangle [bottom-left top-right]
   [bottom-left top-right])
 
-(defn width [[x0] [x1]]
+(defn width [[[x0] [x1]]]
   (- x1 x0))
 
-(defn height [[_ y0] [_ y1]]
+(defn height [[[_ y0] [_ y1]]]
   (- y1 y0))
 
 (defn square? [rectangle]
@@ -47,7 +47,7 @@
   (count (:authors book)))
 
 (defn multiple-authors? [book]
-  (> (author-count book) 0))
+  (> (author-count book) 1))
 
 (defn add-author [book new-author]
   (let [new-authors (conj (:authors book) new-author)]
@@ -95,7 +95,7 @@
 
 (defn author->string [author]
   (let [year-rep (if (contains? author :birth-year)
-                   (str " (" (:birth-year) " - " (:death-year author) ")")
+                   (str " (" (:birth-year author) " - " (:death-year author) ")")
                    "")]
     (str (:name author) year-rep)))
 
