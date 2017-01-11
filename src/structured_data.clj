@@ -100,7 +100,7 @@
     (str (:name author) year-rep)))
 
 (defn authors->string [authors]
-  (apply str (interpose ", " (map author->string authors)))
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
   (str (:title book) ", written by " (authors->string (:authors book))))
@@ -108,7 +108,7 @@
 (defn books->string [books]
   (let [nbooks-str (if (empty? books) "No books" (str (count books) "books"))
         books-str (map book->string books)]
-    (apply str (interpose ". " (concat [nbooks-str] books-str))))))
+    (apply str (interpose ". " (concat [nbooks-str] books-str)))))
 
 (defn books-by-author [author books]
   (filter (fn [book] (has-author? book author)) books))
