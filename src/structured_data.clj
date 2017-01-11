@@ -14,7 +14,7 @@
 
 (defn spiff-destructuring [v]
   (let [[x _ z] v]
-    (if z (+x z) nil))
+    (if z (+x z) nil)))
 
 (defn point [x y]
   [x y])
