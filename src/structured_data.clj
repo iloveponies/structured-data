@@ -1,16 +1,24 @@
 (ns structured-data)
 
 (defn do-a-thing [x]
-  :-)
+    (let [xx (+ x x)]
+    (Math/pow (+ x x) (+ x x))
+    )
+)
 
 (defn spiff [v]
-  :-)
+  (+(get v 0)(get v 2))
+)
 
 (defn cutify [v]
-  :-)
+  (conj v "<3")
+
+)
 
 (defn spiff-destructuring [v]
-  :-)
+  (let [[x b c] v]
+  (+ x c))
+)
 
 (defn point [x y]
   [x y])
@@ -19,13 +27,22 @@
   [bottom-left top-right])
 
 (defn width [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (- x2 x1)
+  )
+)
 
 (defn height [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (- y2 y1)
+  )
+)
 
 (defn square? [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (if (= 0 (- (- y2 y1) (- x2 x1))) true false)
+  )
+)
 
 (defn area [rectangle]
   :-)
