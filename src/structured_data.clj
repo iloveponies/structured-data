@@ -45,28 +45,47 @@
 )
 
 (defn area [rectangle]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (* (- x2 x1) (- y2 y1) )
+  )
+)
 
 (defn contains-point? [rectangle point]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle
+        [x3 y3] point]
+   (if (and (<= x1 x3 x2) (<= y1 y3 y2))true false)
+  )
+
+)
 
 (defn contains-rectangle? [outer inner]
-  :-)
+  (let [[[x1 y1] [x2 y2]] outer
+        [[x3 y3] [x4 y4]] inner]
+   (if (and (contains-point? (rectangle [x1 y1] [x2 y2]) (point x3 y3))
+            (contains-point? (rectangle [x1 y1] [x2 y2]) (point x4 y4))
+      )true false)
+  )
+)
 
 (defn title-length [book]
-  :-)
+  (count(:title book))
+)
 
 (defn author-count [book]
-  :-)
+  (count (:authors book))
+)
 
 (defn multiple-authors? [book]
-  :-)
+  (if(< 1 (author-count book)) true false)
+)
 
 (defn add-author [book new-author]
-  :-)
+  (assoc book :authors (conj (get book :authors) new-author))
+)
 
 (defn alive? [author]
-  :-)
+  (not (contains? author :death-year))
+)
 
 (defn element-lengths [collection]
   :-)
