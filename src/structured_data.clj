@@ -101,7 +101,8 @@
 )
 
 (defn monotonic? [a-seq]
-  :-)
+  (or (apply >= a-seq) (apply <= a-seq))
+)
 
 (defn stars [n]
   (apply str (repeat n "*"))
@@ -116,17 +117,21 @@
 )
 
 (defn old-book->new-book [book]
-  (assoc book :authors (get book :authors))
+  (assoc book :authors (set (get book :authors)))
 )
 
 (defn has-author? [book author]
-  :-)
+  (contains? (book :authors) author)
+)
 
 (defn authors [books]
   :-)
 
 (defn all-author-names [books]
-  :-)
+  (let [author-names
+         (fn [book] (map :name (:authors book)))]
+    (set (apply concat (map author-names books))))
+)
 
 (defn author->string [author]
   :-)
