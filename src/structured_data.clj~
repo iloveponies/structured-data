@@ -126,7 +126,9 @@
   (filter (fn [book] (has-author? book author)) books))
 
 (defn author-by-name [name authors]
-   (first (filter (fn [author] (if (= (:name author) name) true false)) authors)))
+  (if (first (filter (fn [author] (if (= (:name author) name) true false)) authors))
+      true
+      false))
 
 (defn living-authors [authors]
   (filter alive? authors))
