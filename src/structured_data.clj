@@ -67,7 +67,7 @@
 (defn monotonic? [a-seq]
   (cond
     (apply <= a-seq) true
-    (apply >= a-seq) false
+    (apply >= a-seq) true
     :else false))
 
 (defn stars [n]
@@ -112,7 +112,7 @@
   (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  (str (:title book) ", written by " (authors->string (:authors book)))
+  (str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
   (let [strBooks (apply str (interpose ", " (map book->string books)))
@@ -123,18 +123,18 @@
       :else (str nbr " books. " strBooks "."))))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [book] (has-author? book author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+   (first (filter (fn [author] (if (= (:name author) name) true false)) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  )
+  (if (empty? (living-authors (:authors book))) false true))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
