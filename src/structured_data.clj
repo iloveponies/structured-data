@@ -43,6 +43,10 @@
   (let [[p1 p2] inner]
     (and (contains-point? outer p1) (contains-point? outer p2))))
 
+(defn contains-rectangle? [outer inner]
+  (let [[bottom-left top-right] inner]
+    (and (contains-point? outer bottom-left) (contains-point? outer top-right))))
+
 (defn title-length [book]
   (count (:title book)))
 
@@ -86,15 +90,11 @@
   (assoc book :authors (set (:authors book))))
 
 (defn has-author? [book author]
-  (contains? (:authors book) author))
+  (contains? (:authors (old-book->new-book book)) author))
 
 (defn authors [books]
-  (apply clojure.set/union (map :authors books)))
-
-(defn all-author-names1 [books]
-  (let [author-names
-        (fn [book] (map :name (:authors book)))]
-    (set (apply concat (map author-names books)))))
+  (let [new-books (map old-book->new-book books)]
+    (apply clojure.set/union (map :authors new-books))))
 
 (defn all-author-names [books]
   (set (map :name (authors books))))
@@ -111,24 +111,29 @@
   (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  (str (:title book) ", written by " (authors->string (authors book))))
+  (str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
-  :-)
+  (let [book-number (count books)]
+    (case book-number
+      0 "No books."
+      1 (str "1 book. " (book->string (get books 0)) ".")
+      (str "" book-number " books. " (apply str (interpose ". " (map book->string books))) "."))
+  ))
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [book] (has-author? book author)) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [author] (= (:name author) name)) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter (fn [author] (alive? author)) authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
