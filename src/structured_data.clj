@@ -1,114 +1,316 @@
 (ns structured-data)
 
-(defn do-a-thing [x]
-  :-)
+(defn
+  do-a-thing
+  "Does sumthing"
+  [x]
+  (let [express (+ x x)]
+    (Math/pow express express))
+)
 
-(defn spiff [v]
-  :-)
 
-(defn cutify [v]
-  :-)
+(defn
+  spiff
+  "Spiff vectors"
+  [v]
+    (if (< (count v) 3)
+     ("?")
+     (+ (get v 0) (get v 2))
+  )
+  )
 
-(defn spiff-destructuring [v]
-  :-)
+(defn
+  cutify
+  "Vector + <3"
+  [v]
+    (conj v "<3")
+)
 
-(defn point [x y]
+(defn
+  spiff-destructuring
+  "Destroy spiff!"
+  [v]
+     (if (< (count v) 3)
+       ("?")
+       (let [[a b c] v]
+         (+ a c))
+     )
+)
+
+
+(defn
+  point
+  [x y]
   [x y])
 
-(defn rectangle [bottom-left top-right]
+(defn
+  rectangle
+  [bottom-left top-right]
   [bottom-left top-right])
 
-(defn width [rectangle]
-  :-)
+(defn
+  width
+  [rectangle]
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (- x2 x1)
+  )
+)
 
-(defn height [rectangle]
-  :-)
+(defn
+  height
+  [rectangle]
+  (let [[[x1 y1] [x2 y2]] rectangle]
+    (- y2 y1)
+  )
+)
 
-(defn square? [rectangle]
-  :-)
+(defn
+  square?
+  [rect]
+  (let [hth (height rect)
+        wth (width rect)]
+          (= hth wth)
+  )
+)
 
-(defn area [rectangle]
-  :-)
+(defn
+  area
+  [rect]
+  (let [hth (height rect)
+        wth (width rect)]
+          (* hth wth)
+  )
+)
 
-(defn contains-point? [rectangle point]
-  :-)
+(defn
+  contains-point?
+  [rectangle point]
+  (let [[[botx boty] [topx topy]] rectangle
+        [puntx punty] point]
+         (and (<= botx puntx topx) (<= boty punty topy))
+  )
+)
 
-(defn contains-rectangle? [outer inner]
-  :-)
 
-(defn title-length [book]
-  :-)
+(defn
+  contains-rectangle?
+  [outer inner]
+    (let [[[blix bliy] [tlix tliy]] inner
+        [[blox bloy] [tlox tloy]] outer]
+          (and (>= blix blox) (>= bliy bloy) (<= tlix tlox) (<= tliy tloy))
+  )
+)
 
-(defn author-count [book]
-  :-)
+(defn
+  title-length
+  [book]
+ (count (:title book))
+)
 
-(defn multiple-authors? [book]
-  :-)
+(defn
+  author-count
+  [book]
+  (count (:authors book))
+)
 
-(defn add-author [book new-author]
-  :-)
+(defn
+  multiple-authors?
+  [book]
+  (> (author-count book) 1)
+)
 
-(defn alive? [author]
-  :-)
+(defn
+  add-author
+  [book new-author]
+  (let [ababel (:authors book)]
+         (assoc book :authors (conj ababel new-author))
+      )
+)
 
-(defn element-lengths [collection]
-  :-)
+(defn
+  alive?
+  [author]
+ (not (contains? author :death-year))
+)
 
-(defn second-elements [collection]
-  :-)
+(defn
+  element-lengths
+  [collection]
+  (map count collection)
+  )
 
-(defn titles [books]
-  :-)
+(defn
+  second-elements
+  [collection]
+    (let [funge (fn [v] (get v 1))]
+      (map funge collection)
+    )
+)
 
-(defn monotonic? [a-seq]
-  :-)
+(defn
+  titles
+  [books]
+    (map :title books)
+  )
 
-(defn stars [n]
-  :-)
+(defn
+  monotonic?
+  [a]
+  (or
+    (apply <= a)
+    (apply >= a)
+  )
+)
 
-(defn toggle [a-set elem]
-  :-)
+(defn
+  stars
+  [n]
+  (let [aaa (seq (repeat n "*"))]
+    (apply str aaa)
+  )
+)
 
-(defn contains-duplicates? [a-seq]
-  :-)
+(defn
+  toggle
+  [a e]
+  (if (contains? a e)
+    (disj a e)
+    (conj a e))
+)
 
-(defn old-book->new-book [book]
-  :-)
+(defn
+  contains-duplicates?
+  [a-seq]
+  (let [abel a-seq
+        babel (count abel)
+        cabel (set abel)
+        dabel (count cabel)
+        ]
+          (not (= babel dabel))
+  )
+)
 
-(defn has-author? [book author]
-  :-)
+(defn
+  old-book->new-book
+  [book]
+  (let [fabel (set (:authors book))]
+         (assoc book :authors fabel)
+  )
+)
 
-(defn authors [books]
-  :-)
+(defn
+  has-author?
+  [book author]
+  (let [gabel (:authors book)]
+         (contains? gabel author)
+  )
+)
 
-(defn all-author-names [books]
-  :-)
 
-(defn author->string [author]
-  :-)
+(defn
+  authors
+  [books]
+   (apply clojure.set/union (map :authors books))
+  )
 
-(defn authors->string [authors]
-  :-)
+(defn
+  all-author-names
+  [books]
+   (set (map :name (authors books)))
+  )
 
-(defn book->string [book]
-  :-)
+(defn
+  author->string
+  [author]
+  (let [habel (:name author)
+        jabel (:birth-year author)
+        kabel (:death-year author)]
+          (if (contains? author :birth-year)
+            (str habel " (" jabel " - " kabel ")")
+            (str habel)
+          )
+  )
+)
 
-(defn books->string [books]
-  :-)
+(defn
+  authors->string
+  [authors]
+   (let [label (map  author->string authors)
+          mabel (apply str (interpose ", " label))
+          ]
+           mabel
+      )
+)
 
-(defn books-by-author [author books]
-  :-)
+(defn
+  book->string
+  [book]
+  (let [nabel (authors->string (:authors book))
+        obel (:title book)
+        pabel (str obel  ", written by " nabel)
+        ]
+          pabel
+  )
 
-(defn author-by-name [name authors]
-  :-)
+)
 
-(defn living-authors [authors]
-  :-)
+(defn
+  books->string
+  [books]
+  (let [rabel ""
+        qabel (count books)
+        sabel (map  book->string books)
+        tabel (apply str (interpose ". " sabel))]
+            (cond
+              (= qabel 0) (str rabel "No books." tabel)
+              (= qabel 1) (str rabel "1 book. " tabel ".")
+              (> qabel 1) (str rabel qabel " books. " tabel ".")
+             )
+    )
+)
 
-(defn has-a-living-author? [book]
-  :-)
+(defn
+  books-by-author
+  [author books]
+  (let [vabel (filter  (fn [book] (contains? (:authors book) author)) books)]
+      vabel
+      )
+  )
 
-(defn books-by-living-authors [books]
-  :-)
+(defn
+  author-by-name
+  [name authors]
+    (let [wabel (filter (fn [x] (= name (:name x))) authors)]
+    (first wabel)
+  )
+)
 
-; %________%
+(defn
+  living-authors
+  [authors]
+  (let [xabel (filter (fn [x] (alive? x)) authors)]
+    (if (empty? xabel)
+      ()
+      (seq xabel)
+      )
+    )
+)
+
+(defn
+  has-a-living-author?
+  [book]
+  (let [zabel (authors [book])
+      yabel (living-authors zabel)]
+        (not (empty? yabel))
+  )
+)
+
+(defn
+  books-by-living-authors
+  [books]
+    (let [aabel (filter (fn [x] (has-a-living-author? x)) books)]
+    aabel
+    )
+  )
+
+; X________X
