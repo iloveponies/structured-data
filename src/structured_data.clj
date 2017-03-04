@@ -2,12 +2,10 @@
 
 (defn
   do-a-thing
-  "Does sumthing"
+  "Does something"
   [x]
   (let [express (+ x x)]
-    (Math/pow express express))
-)
-
+    (Math/pow express express)))
 
 (defn
   spiff
@@ -15,28 +13,21 @@
   [v]
     (if (< (count v) 3)
      ("?")
-     (+ (get v 0) (get v 2))
-  )
-  )
+     (+ (get v 0) (get v 2))))
 
 (defn
   cutify
   "Vector + <3"
   [v]
-    (conj v "<3")
-)
+    (conj v "<3"))
 
 (defn
   spiff-destructuring
-  "Destroy spiff!"
   [v]
      (if (< (count v) 3)
        ("?")
        (let [[a b c] v]
-         (+ a c))
-     )
-)
-
+         (+ a c))))
 
 (defn
   point
@@ -52,265 +43,202 @@
   width
   [rectangle]
   (let [[[x1 y1] [x2 y2]] rectangle]
-    (- x2 x1)
-  )
-)
+    (- x2 x1)))
 
 (defn
   height
   [rectangle]
   (let [[[x1 y1] [x2 y2]] rectangle]
-    (- y2 y1)
-  )
-)
+    (- y2 y1)))
 
 (defn
   square?
   [rect]
   (let [hth (height rect)
         wth (width rect)]
-          (= hth wth)
-  )
-)
+          (= hth wth)))
 
 (defn
   area
   [rect]
   (let [hth (height rect)
         wth (width rect)]
-          (* hth wth)
-  )
-)
+          (* hth wth)))
 
 (defn
   contains-point?
   [rectangle point]
-  (let [[[botx boty] [topx topy]] rectangle
-        [puntx punty] point]
-         (and (<= botx puntx topx) (<= boty punty topy))
-  )
-)
-
+  (let [[[bottom-left-x bottom-left-y] [top-right-x top-right-y]] rectangle
+        [point-x point-y] point]
+         (and (<= bottom-left-x point-x top-right-x) (<= bottom-left-y point-y top-right-y))))
 
 (defn
   contains-rectangle?
   [outer inner]
-    (let [[[blix bliy] [tlix tliy]] inner
-        [[blox bloy] [tlox tloy]] outer]
-          (and (>= blix blox) (>= bliy bloy) (<= tlix tlox) (<= tliy tloy))
-  )
-)
+    (let [[[inner-bottom-left-x inner-bottom-left-y] [tlix inner-top-left-y]] inner
+          [[outer-bottom-left-x outer-bottom-left-y] [outer-top-right-x outer-top-right-y]] outer]
+            (and (>= inner-bottom-left-x outer-bottom-left-x)
+                 (>= inner-bottom-left-y outer-bottom-left-y)
+                 (<= tlix outer-top-right-x)
+                 (<= inner-top-left-y outer-top-right-y))))
+
 
 (defn
   title-length
   [book]
- (count (:title book))
-)
+ (count (:title book)))
 
 (defn
   author-count
   [book]
-  (count (:authors book))
-)
+  (count (:authors book)))
 
 (defn
   multiple-authors?
   [book]
-  (> (author-count book) 1)
-)
+  (> (author-count book) 1))
 
 (defn
   add-author
   [book new-author]
   (let [ababel (:authors book)]
-         (assoc book :authors (conj ababel new-author))
-      )
-)
+         (assoc book :authors (conj ababel new-author))))
 
 (defn
   alive?
   [author]
- (not (contains? author :death-year))
-)
+  (not (contains? author :death-year)))
 
 (defn
   element-lengths
   [collection]
-  (map count collection)
-  )
+  (map count collection))
 
 (defn
   second-elements
   [collection]
-    (let [funge (fn [v] (get v 1))]
-      (map funge collection)
-    )
-)
+    (let [get-second-elements (fn [v] (get v 1))]
+      (map get-second-elements collection)))
 
 (defn
   titles
   [books]
-    (map :title books)
-  )
+    (map :title books))
 
 (defn
   monotonic?
   [a]
   (or
     (apply <= a)
-    (apply >= a)
-  )
-)
+    (apply >= a)))
 
 (defn
   stars
   [n]
-  (let [aaa (seq (repeat n "*"))]
-    (apply str aaa)
-  )
-)
+  (let [add-n-stars (seq (repeat n "*"))]
+    (apply str add-n-stars)))
 
 (defn
   toggle
   [a e]
   (if (contains? a e)
     (disj a e)
-    (conj a e))
-)
+    (conj a e)))
 
 (defn
   contains-duplicates?
   [a-seq]
-  (let [abel a-seq
-        babel (count abel)
-        cabel (set abel)
-        dabel (count cabel)
+  (let [count-sequence (count a-seq)
+        sequence-as-set (set a-seq)
+        count-set (count sequence-as-set)
         ]
-          (not (= babel dabel))
-  )
-)
+          (not (= count-sequence count-set))))
 
 (defn
   old-book->new-book
   [book]
-  (let [fabel (set (:authors book))]
-         (assoc book :authors fabel)
-  )
-)
+  (let [set-of-book (set (:authors book))]
+         (assoc book :authors set-of-book)))
 
 (defn
   has-author?
   [book author]
-  (let [gabel (:authors book)]
-         (contains? gabel author)
-  )
-)
+  (let [authors-of-book (:authors book)]
+         (contains? authors-of-book author)))
 
 
 (defn
   authors
   [books]
-   (apply clojure.set/union (map :authors books))
-  )
+   (apply clojure.set/union (map :authors books)))
 
 (defn
   all-author-names
   [books]
-   (set (map :name (authors books)))
-  )
+   (set (map :name (authors books))))
 
 (defn
   author->string
   [author]
-  (let [habel (:name author)
-        jabel (:birth-year author)
-        kabel (:death-year author)]
+  (let [author-name (:name author)
+        birth-year (:birth-year author)
+        death-year (:death-year author)]
           (if (contains? author :birth-year)
-            (str habel " (" jabel " - " kabel ")")
-            (str habel)
-          )
-  )
-)
+            (str author-name " (" birth-year " - " death-year ")")
+            (str author-name))))
 
 (defn
   authors->string
   [authors]
-   (let [label (map  author->string authors)
-          mabel (apply str (interpose ", " label))
-          ]
-           mabel
-      )
-)
+   (let [authors-as-strings (map author->string authors)
+          format-author-strings(apply str (interpose ", " authors-as-strings))]
+    format-author-strings))
 
 (defn
   book->string
   [book]
-  (let [nabel (authors->string (:authors book))
-        obel (:title book)
-        pabel (str obel  ", written by " nabel)
-        ]
-          pabel
-  )
-
-)
+  (let [authors-as-strings (authors->string (:authors book))
+        book-title (:title book)
+        format-title-and-authors (str book-title  ", written by " authors-as-strings)]
+  format-title-and-authors ))
 
 (defn
   books->string
   [books]
-  (let [rabel ""
-        qabel (count books)
-        sabel (map  book->string books)
-        tabel (apply str (interpose ". " sabel))]
+  (let [book-count (count books)
+        books-as-strings (map  book->string books)
+        format-book-list (apply str (interpose ". " books-as-strings))]
             (cond
-              (= qabel 0) (str rabel "No books." tabel)
-              (= qabel 1) (str rabel "1 book. " tabel ".")
-              (> qabel 1) (str rabel qabel " books. " tabel ".")
-             )
-    )
-)
+              (= book-count 0) (str "No books." format-book-list)
+              (= book-count 1) (str "1 book. " format-book-list ".")
+              (> book-count 1) (str book-count " books. " format-book-list "."))))
 
 (defn
   books-by-author
   [author books]
-  (let [vabel (filter  (fn [book] (contains? (:authors book) author)) books)]
-      vabel
-      )
-  )
+  (filter  (fn [book] (contains? (:authors book) author)) books))
 
 (defn
   author-by-name
   [name authors]
-    (let [wabel (filter (fn [x] (= name (:name x))) authors)]
-    (first wabel)
-  )
-)
+  (first (filter (fn [x] (= name (:name x))) authors)))
 
 (defn
   living-authors
   [authors]
-  (let [xabel (filter (fn [x] (alive? x)) authors)]
-    (if (empty? xabel)
+  (let [list-of-living-authors (filter (fn [x] (alive? x)) authors)]
+    (if (empty? list-of-living-authors)
       ()
-      (seq xabel)
-      )
-    )
-)
+      (seq list-of-living-authors))))
 
 (defn
   has-a-living-author?
   [book]
-  (let [zabel (authors [book])
-      yabel (living-authors zabel)]
-        (not (empty? yabel))
-  )
-)
+  (let [authors-of-book (authors [book])
+        living-authors-of-book (living-authors authors-of-book)]
+           (not (empty? living-authors-of-book))))
 
 (defn
   books-by-living-authors
   [books]
-    (let [aabel (filter (fn [x] (has-a-living-author? x)) books)]
-    aabel
-    )
-  )
-
-; X________X
+    (filter (fn [x] (has-a-living-author? x)) books))
