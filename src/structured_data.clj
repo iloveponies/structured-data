@@ -65,24 +65,37 @@
       (and (contains-point? outer [ix1 iy1]) (contains-point? outer [ix2 iy2]) true))))
 
 
-
 (defn title-length [book]
-  :-)
+  "Exercise 10"
+  (count (:title book)))
+
 
 (defn author-count [book]
-  :-)
+  "Exercise 11"
+  (count (:authors book)))
+
 
 (defn multiple-authors? [book]
-  :-)
+  "Exercise 12"
+  (> (count (:authors book)) 1))
 
+; (assoc a-map a-key a-value) sets the value of a-key in a-map to be a-value
 (defn add-author [book new-author]
-  :-)
+  "Exercise 13"
+  (let [orig_authors (:authors book)]
+    (let [orig_title (:title book)]
+      (assoc (if orig_title {:title orig_title}) :authors (conj (:authors book) new-author)))))
 
+
+;(contains? a-map a-key) can be used to check if a-map has a value for a-key
 (defn alive? [author]
-  :-)
+  "Exercise 14"
+  (not (contains? author :death-year)))
+
 
 (defn element-lengths [collection]
   :-)
+
 
 (defn second-elements [collection]
   :-)
