@@ -90,16 +90,18 @@
    (if (== seq-length set-length) false true)))
 
 (defn old-book->new-book [book]
-  :-)
+  (assoc book :authors (set (:authors book))))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author))
 
 (defn authors [books]
-  :-)
+  (let [authors (fn [book] (:authors book))]
+    (apply clojure.set/union (map authors books))))
 
 (defn all-author-names [books]
-  :-)
+  (let [author-names (fn [author] (:name author))]
+  (set (map author-names (authors books)))))
 
 (defn author->string [author]
   :-)
