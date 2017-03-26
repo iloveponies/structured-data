@@ -57,16 +57,20 @@
   (> (author-count book) 1))
 
 (defn add-author [book new-author]
-  :-)
+  (let [origauthors (:authors book)
+        newauthors (conj origauthors new-author)]
+    (assoc book :authors newauthors)))
 
 (defn alive? [author]
-  :-)
+  (not (contains? author :death-year)))
 
 (defn element-lengths [collection]
-  :-)
+  (let [elementlength (fn [x] (count x))]
+  (map elementlength collection)))
 
 (defn second-elements [collection]
-  :-)
+  (let [get-second (fn [coll] (get coll 1))]
+  (map get-second collection)))
 
 (defn titles [books]
   :-)
