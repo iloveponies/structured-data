@@ -139,7 +139,7 @@
   (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (filter alive? (:authors book)))))
 
 (defn books-by-living-authors [books]
   :-)
