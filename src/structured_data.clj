@@ -19,11 +19,11 @@
 (defn rectangle [bottom-left top-right]
   [bottom-left top-right])
 
-(defn width [rectangle]
-  :-)
+(defn width [[[w1 h1] [w2 h2]]]
+  (- w2 w1))
 
-(defn height [rectangle]
-  :-)
+(defn height [[[wi1 h1] [w2 h2]]]
+  (- h2 h1))
 
 (defn square? [rectangle]
   :-)
