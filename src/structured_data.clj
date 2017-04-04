@@ -5,9 +5,7 @@
     (Math/pow sum sum)))
 
 (defn spiff [v]
-  (let [first (get v 0)
-        third (get v 2)]
-    (+ first third)))
+  (+ (get v 0) (get v 2)))
 
 (defn cutify [v]
   (conj v "<3"))
