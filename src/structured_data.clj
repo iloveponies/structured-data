@@ -86,13 +86,14 @@
     true))
 
 (defn old-book->new-book [book]
-  :-)
+  (let [authors (:authors book)]
+    (assoc book :authors (set authors))))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author))
 
 (defn authors [books]
-  :-)
+  (set (map :authors books)))
 
 (defn all-author-names [books]
   :-)
