@@ -79,6 +79,7 @@
   "Exercise 12"
   (> (count (:authors book)) 1))
 
+
 ; (assoc a-map a-key a-value) sets the value of a-key in a-map to be a-value
 (defn add-author [book new-author]
   "Exercise 13"
@@ -94,38 +95,65 @@
 
 
 (defn element-lengths [collection]
-  :-)
+  "Exercise 15"
+  (map count collection))
 
 
 (defn second-elements [collection]
-  :-)
+  "Exercise 16"
+  (let [dumdum (fn [x] (get x 1))]
+    (map dumdum collection)))
+
 
 (defn titles [books]
-  :-)
+  "Exercise 17"
+  (map :title books))
+
 
 (defn monotonic? [a-seq]
-  :-)
+  "Exercise 19"
+  (or (apply <= a-seq) (apply >= a-seq)) )
+
 
 (defn stars [n]
-  :-)
+  "Exercise 18"
+  (apply str (repeat n "*")))
+
 
 (defn toggle [a-set elem]
-  :-)
+  "Exercise 20"
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)))
 
+;(assoc [1 2 3 4] 2 "foo") ;=> [1 2 "foo" 4]
 (defn contains-duplicates? [a-seq]
-  :-)
+  "Exercise 21"
+  (> (count a-seq) (count (set a-seq))))
 
+
+;(assoc {:a 1} :a 2) ;=> {:a 2}
 (defn old-book->new-book [book]
-  :-)
+  "Exercise 22"
+  (assoc book :authors (set (:authors book))))
+
 
 (defn has-author? [book author]
-  :-)
+  "Exercise 23"
+  (contains? (:authors book) author))
+
 
 (defn authors [books]
-  :-)
+  "Exercise 24"
+  (let [dada (fn [x] (apply clojure.set/union (:authors x)) )]          ;new set that has all the elements of its parameters
+    (set (map dada books)) ))
+
+
 
 (defn all-author-names [books]
-  :-)
+  "Exercise 25"
+  (let [dada (fn [x] (apply clojure.set/union (:name (:authors x)) ) )]          ;new set that has all the elements of its parameters
+    (set (map dada books)) ))
 
 (defn author->string [author]
   :-)
