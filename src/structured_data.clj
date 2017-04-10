@@ -209,7 +209,9 @@
 
 (defn has-a-living-author? [book]
   "Exercise 33"
-  :-)
+  (let [result (filter (fn [author] (alive? author)) (:authors book))]
+    (not (empty? result))))
+
 
 (defn books-by-living-authors [books]
   "Exercise 34"
