@@ -44,7 +44,7 @@
 (defn square? [rectangle]
   "Exercise 6"
   (let [[[x1 y1] [x2 y2]] rectangle]
-    (and (== x1 y1) (== x2 y2) true)))
+    (= (- x1 x2)  (- y1 y2))))
 
 
 (defn area [rectangle]
