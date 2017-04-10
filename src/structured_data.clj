@@ -174,7 +174,10 @@
 
 (defn book->string [book]
   "Exercise 28"
-  :-)
+  (let [book-name (:title book)]
+    (let [authors (authors->string (:authors book))]
+      (str book-name ", written by " authors))))
+
 
 (defn books->string [books]
   "Exercise 29"
