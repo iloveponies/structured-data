@@ -1,4 +1,5 @@
-(ns structured-data)
+(ns structured-data
+  (:require [clojure.string :as str]))
 
 (defn do-a-thing [x]
   "Exercise 1"
@@ -197,7 +198,9 @@
 
 (defn author-by-name [name authors]
   "Exercise 31"
-  :-)
+  (let [result (filter (fn [author] (= (:name author) name)) authors)]
+    (first result)))
+
 
 (defn living-authors [authors]
   "Exercise 32"
