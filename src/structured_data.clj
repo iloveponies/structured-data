@@ -181,7 +181,15 @@
 
 (defn books->string [books]
   "Exercise 29"
-  :-)
+  (let [books-to-str (fn [books] (apply str (interpose ". " (map book->string books))))]
+    (let [num-of-books (count books)]
+      (if (== num-of-books 0)
+        (str "No books.")
+        (if (== num-of-books 1)
+          (str "1 book. " (books-to-str books) ".")
+          (str num-of-books " books. " (books-to-str books) "."))))))
+
+
 
 (defn books-by-author [author books]
   "Exercise 30"
