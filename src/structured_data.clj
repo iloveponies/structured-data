@@ -112,7 +112,7 @@
 
 (defn monotonic? [a-seq]
   "Exercise 19"
-  (or (apply <= a-seq) (apply >= a-seq)) )
+  (or (apply <= a-seq) (apply >= a-seq)))
 
 
 (defn stars [n]
@@ -145,41 +145,50 @@
 
 (defn authors [books]
   "Exercise 24"
-  (let [dada (fn [x] (apply clojure.set/union (:authors x)) )]          ;new set that has all the elements of its parameters
-    (set (map dada books)) ))
-
+  (let [authors (fn [book] (concat (:authors book)))]
+    (set (apply concat (map authors books)))))
 
 
 (defn all-author-names [books]
   "Exercise 25"
-  (let [dada (fn [x] (apply clojure.set/union (:name (:authors x)) ) )]          ;new set that has all the elements of its parameters
-    (set (map dada books)) ))
+  (let [author-names (fn [book] (map :name (:authors book)))]
+    (set (apply concat (map author-names books)))))
+
 
 (defn author->string [author]
+  "Exercise 26"
   :-)
 
 (defn authors->string [authors]
+  "Exercise 27"
   :-)
 
 (defn book->string [book]
+  "Exercise 28"
   :-)
 
 (defn books->string [books]
+  "Exercise 29"
   :-)
 
 (defn books-by-author [author books]
+  "Exercise 30"
   :-)
 
 (defn author-by-name [name authors]
+  "Exercise 31"
   :-)
 
 (defn living-authors [authors]
+  "Exercise 32"
   :-)
 
 (defn has-a-living-author? [book]
+  "Exercise 33"
   :-)
 
 (defn books-by-living-authors [books]
+  "Exercise 34"
   :-)
 
 ; %________%
