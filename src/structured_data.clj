@@ -215,6 +215,7 @@
 
 (defn books-by-living-authors [books]
   "Exercise 34"
-  :-)
+  (filter (fn [book] (has-a-living-author? book)) books))
+
 
 ; %________%
