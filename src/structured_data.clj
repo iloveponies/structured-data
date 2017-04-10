@@ -190,10 +190,10 @@
           (str num-of-books " books. " (books-to-str books) "."))))))
 
 
-
 (defn books-by-author [author books]
   "Exercise 30"
-  :-)
+  (filter (fn [book] (has-author? book author)) books))
+
 
 (defn author-by-name [name authors]
   "Exercise 31"
