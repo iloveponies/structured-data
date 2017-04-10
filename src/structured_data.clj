@@ -169,7 +169,8 @@
 
 (defn authors->string [authors]
   "Exercise 27"
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
+
 
 (defn book->string [book]
   "Exercise 28"
