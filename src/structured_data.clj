@@ -204,7 +204,8 @@
 
 (defn living-authors [authors]
   "Exercise 32"
-  :-)
+  (filter (fn [author] (alive? author)) authors))
+
 
 (defn has-a-living-author? [book]
   "Exercise 33"
