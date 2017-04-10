@@ -157,7 +157,15 @@
 
 (defn author->string [author]
   "Exercise 26"
-  :-)
+  (let [author-name (:name author)]
+    (let [d-year (:death-year author)]
+      (let [b-year (:birth-year author)]
+        (if d-year
+          (str author-name " (" b-year " - " d-year ")")
+          (if b-year
+            (str author-name " (" b-year " - )")
+            (str author-name)))))))
+
 
 (defn authors->string [authors]
   "Exercise 27"
