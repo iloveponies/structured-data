@@ -175,7 +175,10 @@
   )
 
 (defn books-by-author [author books]
-  )
+  (let [predicate
+        (fn [book] (has-author? book author))]
+  (filter predicate books)
+    ))
 
 (defn author-by-name [name authors]
   :-)
