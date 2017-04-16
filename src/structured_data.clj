@@ -146,7 +146,12 @@
   )
 
 (defn author->string [author]
-  :-)
+  (let [name (:name author)
+        birth (:birth-year author)
+        death (:death-year author)]
+  (str name " (" birth " - " death ")")
+    )
+  )
 
 (defn authors->string [authors]
   :-)
