@@ -78,20 +78,28 @@
   (< 1 (count (:authors book)))
   )
 
+; Add new-author as a author of the book
 (defn add-author [book new-author]
-  :-)
+  (let [book-authors (:authors book)]
+  (assoc book :authors (conj book-authors new-author))
+  ))
 
+;
 (defn alive? [author]
-  :-)
+  (not (contains? author :death-year))
+  )
 
 (defn element-lengths [collection]
-  :-)
+  (map count collection)
+  )
 
 (defn second-elements [collection]
-  :-)
+  (let [secondz (fn [col] (get col 1))]
+    (seq (map secondz collection)))
+  )
 
 (defn titles [books]
-  :-)
+  )
 
 (defn monotonic? [a-seq]
   :-)
