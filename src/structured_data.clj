@@ -134,8 +134,12 @@
   (contains? (:authors book) author)
   )
 
+; Example usage of clojure.set/union -function
 (defn authors [books]
-  :-)
+  (let [authorz
+        (fn [book] (clojure.set/union (:authors book)))]
+  (set (apply clojure.set/union (map authorz books)))
+  ))
 
 (defn all-author-names [books]
   :-)
