@@ -67,13 +67,16 @@
   )
 
 (defn title-length [book]
-  :-)
+  (count (:title book))
+  )
 
 (defn author-count [book]
-  :-)
+  (count (:authors book))
+  )
 
 (defn multiple-authors? [book]
-  :-)
+  (< 1 (count (:authors book)))
+  )
 
 (defn add-author [book new-author]
   :-)
