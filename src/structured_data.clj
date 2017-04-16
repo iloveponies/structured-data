@@ -106,6 +106,7 @@
 
 ; Check if sequence is monotonic -> either increasing or decreasing
 (defn monotonic? [a-seq]
+  (or (apply <= a-seq) (apply >= a-seq))
   )
 
 ; Retunr n start-asterisks inside a string
