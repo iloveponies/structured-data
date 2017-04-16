@@ -123,7 +123,8 @@
   )
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (if (< (count (set a-seq)) (count a-seq)) true false)
+  )
 
 (defn old-book->new-book [book]
   :-)
