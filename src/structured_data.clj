@@ -99,13 +99,19 @@
   )
 
 (defn titles [books]
+  (let [titlez (fn [book] (:title book))]
+    (seq (map titlez books))
+    )
   )
 
+; Check if sequence is monotonic -> either increasing or decreasing
 (defn monotonic? [a-seq]
-  :-)
+  )
 
+; Retunr n start-asterisks inside a string
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*"))
+  )
 
 (defn toggle [a-set elem]
   :-)
