@@ -181,7 +181,11 @@
     ))
 
 (defn author-by-name [name authors]
-  :-)
+  (let [predicate
+        (fn [author] (= (:name author) name))]
+    (first (filter predicate authors))
+    )
+  )
 
 (defn living-authors [authors]
   :-)
