@@ -76,7 +76,10 @@
 
 
 (defn title-length [book]
-  :-)
+  (let [bookname (:title book)]
+    (count bookname)
+  )
+)
 
 (defn author-count [book]
   :-)
