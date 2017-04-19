@@ -82,22 +82,41 @@
 )
 
 (defn author-count [book]
-  :-)
+  (count (:authors book))
+)
 
 (defn multiple-authors? [book]
-  :-)
+  (cond
+   (> 2 (count (:authors book))) false
+    :else true)
+)
 
 (defn add-author [book new-author]
-  :-)
+  (let [bookname (:title book)]
+    (cond
+      (= nil bookname)  (let [author (book :authors)]
+   (assoc book :authors (conj author new-author)))
+      :else
+      (let [auth (book :authors)]
+      (assoc book :authors (conj auth new-author)))))
+)
 
 (defn alive? [author]
-  :-)
+  (cond
+    (contains? author :death-year) false
+    :else true)
+)
+
 
 (defn element-lengths [collection]
-  :-)
+  (let [el-len (fn [x] (count x))]
+  (map el-len collection))
+)
 
 (defn second-elements [collection]
-  :-)
+  (let [el-seq(fn[x] (get x 1))]
+  (map el-seq collection))
+)
 
 (defn titles [books]
   :-)
