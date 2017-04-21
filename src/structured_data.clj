@@ -119,13 +119,22 @@
 )
 
 (defn titles [books]
-  :-)
+  (let [thetitles [books]]
+    (map :title books)
+  )
+)
 
 (defn monotonic? [a-seq]
-  :-)
+  (let [mon (fn[x]
+    (cond
+      (>= x) true
+      :else false))]
+    (map mon [a-seq]))
+)
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*"))
+)
 
 (defn toggle [a-set elem]
   :-)
