@@ -125,11 +125,7 @@
 )
 
 (defn monotonic? [a-seq]
-  (let [mon (fn[x]
-    (cond
-      (>= x) true
-      :else false))]
-    (map mon [a-seq]))
+  (or (apply <= a-seq) (apply >= a-seq))
 )
 
 (defn stars [n]
@@ -137,10 +133,15 @@
 )
 
 (defn toggle [a-set elem]
-  :-)
+  (cond
+    (contains? a-set elem) (disj a-set elem)
+    :else  (conj a-set elem)
+  )
+)
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (not= (count (distinct a-seq)) (count a-seq))
+)
 
 (defn old-book->new-book [book]
   :-)
