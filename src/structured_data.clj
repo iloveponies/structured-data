@@ -89,12 +89,12 @@
 (defn old-book->new-book [book]
   (assoc book :authors (set (:authors book))))
 
+(defn author-names [book]
+  (map :name (:authors book)))
+
 (defn has-author? [book author]
   (let [names (set (author-names book))]
     (contains? names (:name author))))
-
-(defn author-names [book]
-  (map :name (:authors book)))
 
 (defn authors [books]
   (set (apply concat (map :authors books))))
@@ -126,7 +126,7 @@
   (filter (fn [b] (has-author? b author)) books))
 
 (defn author-by-name [name authors]
-  (filter (fn [a] (= (:name a) name)) authors))
+  (first (filter (fn [a] (= (:name a) name)) authors)))
 
 (defn living-authors [authors]
   (filter alive? authors))
