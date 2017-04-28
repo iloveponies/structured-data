@@ -144,16 +144,25 @@
 )
 
 (defn old-book->new-book [book]
-  :-)
+  (let [new-book book]
+    (assoc new-book :authors (set (:authors book))))
+)
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author)
+)
 
 (defn authors [books]
-  :-)
+  (let [the-authors
+    (fn [book] ( :authors book))]
+    (set (apply concat (map the-authors books))))
+)
 
 (defn all-author-names [books]
-  :-)
+  (let [the-names
+    (fn [the-name] ( :name the-name))]
+    (set (map the-names (authors books))))
+)
 
 (defn author->string [author]
   :-)
