@@ -165,13 +165,32 @@
 )
 
 (defn author->string [author]
-  :-)
+  (let [the-name (:name author)]
+     (let [birth (:birth-year author)]
+       (let [death (:death-year author)]
+        (cond
+         (= 0(count (str birth))) (str the-name)
+          :else  (str the-name " (" birth " - " death ")"))
+       )
+    )
+)
+)
 
 (defn authors->string [authors]
-  :-)
+  (let [all-authors
+    (fn [author]
+       (author->string author)
+      )]
+   (apply str (interpose ", " (map all-authors authors))))
+)
+
 
 (defn book->string [book]
-  :-)
+  (str
+    (:title book) ", written by "
+    (authors->string (:authors book)))
+)
+
 
 (defn books->string [books]
   :-)
