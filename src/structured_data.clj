@@ -193,21 +193,64 @@
 
 
 (defn books->string [books]
-  :-)
+  (let [bookcount (count books)]
+  (cond
+    (== 0 bookcount) "No books."
+    (== 1 bookcount) (str bookcount " book. " (book->string (get books 0)) ".")
+    :else
+    (str bookcount " books. " (apply str (interpose ", " (map book->string books))) ".")
+    )
+  )
+)
 
 (defn books-by-author [author books]
-  :-)
+  (let [books?
+  (fn [book]
+
+      (cond
+        (has-author? book author) book
+        :else false)
+  )]
+  (filter books? books))
+)
 
 (defn author-by-name [name authors]
-  :-)
+    (let [auth?
+  (fn [author]
+      (cond
+      (= name (:name author)) author
+        :else nil)
+  )]
+  (some auth? authors))
+)
 
 (defn living-authors [authors]
-  :-)
+    (let [auth?
+  (fn [author]
+      (cond
+      (alive? author)  (apply str (interpose ", " author))
+        :else nil)
+  )]
+  (filter auth? authors))
+)
 
 (defn has-a-living-author? [book]
-  :-)
+  (let [auths (:authors book)]
+     (not (empty? (living-authors auths)))
+    )
+)
 
 (defn books-by-living-authors [books]
-  :-)
+  (let [the-books
+    (fn [book]
+       (cond
+       (has-a-living-author? book) (:title book)
+       :else "")
+      )
+  ]
+  (map the-books books))
+)
+
+
 
 ; %________%
