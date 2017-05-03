@@ -243,12 +243,10 @@
 (defn books-by-living-authors [books]
   (let [the-books
     (fn [book]
-       (cond
-       (has-a-living-author? book) (:title book)
-       :else "")
+       (has-a-living-author? book)
       )
   ]
-  (map the-books books))
+  (filter the-books books))
 )
 
 
