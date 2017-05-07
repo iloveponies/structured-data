@@ -135,7 +135,7 @@
     (cond
      (== cnt 0) "No books."
      (== cnt 1) (str "1 book. " books_str ".")
-     :else       (str cnt " books. " books_str)))
+     :else       (str cnt " books. " books_str ".")))
   )
 
 (defn books-by-author [author books]
