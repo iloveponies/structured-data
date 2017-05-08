@@ -96,35 +96,40 @@
   (set (apply concat (map :authors books))))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (let [years (str " (" (:birth-year author) " - " (:death-year author) ")")
+        name (:name author)]
+    (if (not (:birth-year author)) (str name)
+      (str name years))))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
-  :-)
+  (let [bookCount (count books)]
+    (cond (empty? books) "No Books"
+          (= bookCount 1) (str bookCount " book. " (apply str (map book->string books)))
+          :else (str bookCount " books. " (apply str (map book->string books))))))
 
 (defn books-by-author [author books]
-  :-)
+  (filter #(has-author? % author) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter #(= (:name %) name) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
-
 
