@@ -112,9 +112,9 @@
 
 (defn books->string [books]
   (let [bookCount (count books)]
-    (cond (empty? books) "No Books"
-          (= bookCount 1) (str bookCount " book. " (apply str (map book->string books)))
-          :else (str bookCount " books. " (apply str (map book->string books))))))
+    (cond (empty? books) "No Books."
+          (= bookCount 1) (str bookCount " book. " (apply str (map book->string books)) ".")
+          :else (str bookCount " books. " (apply str (map book->string books)) "."))))
 
 (defn books-by-author [author books]
   (filter #(has-author? % author) books))
@@ -132,4 +132,3 @@
   (filter has-a-living-author? books))
 
 ; %________%
-
