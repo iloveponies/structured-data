@@ -101,7 +101,8 @@
 (defn author->string [author]
   (let [years (str " (" (:birth-year author) " - " (:death-year author) ")")
         name (:name author)]
-    (if (not (:birth-year author)) (str name)
+    (if (not (:birth-year author))
+      (str name)
       (str name years))))
 
 (defn authors->string [authors]
@@ -112,7 +113,7 @@
 
 (defn books->string [books]
   (let [bookCount (count books)]
-    (cond (empty? books) "No Books."
+    (cond (empty? books) "No books."
           (= bookCount 1) (str bookCount " book. " (apply str (map book->string books)) ".")
           :else (str bookCount " books. " (apply str (interpose ". " (map book->string books))) "."))))
 
@@ -132,3 +133,11 @@
   (filter has-a-living-author? books))
 
 ; %________%
+
+
+
+(books->string []) ;=> "No books."
+(books->string [cities])
+;=> "1 book. The City and the City, written by China Miéville (1972 - )."
+(books->string [little-schemer, cities, wild-seed])
+;=> "3 books. The Little Schemer, written by Daniel Friedman (1944 - ), Matthias Felleisen. The City and the City, written by China Miéville (1972 - ). Wild Seed, written by Octavia E. Butler (1947 - 2006)."
