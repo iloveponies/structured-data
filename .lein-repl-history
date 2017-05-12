@@ -1,0 +1,500 @@
+(width (rectangle [3 1] [10 4])) => 7
+(height (rectangle [1 1] [5 1]))
+exit
+(height (rectangle [1 1] [5 1]))
+(width (rectangle [1 1] [5 1]))
+using 'structured-data
+(using 'structured-data)
+(using 'structured_data)
+(use 'structured_data)
+exit
+(use 'structured_data)
+exit
+(use 'structured_data)
+(height (rectangle [1 1] [5 1]))
+exit
+(use 'structured-data )
+(height (rectangle [1 1] [5 1]))
+exit
+(def china {:name "China Miéville", :birth-year 1972})
+(def octavia {:name "Octavia E. Butler"
+              :birth-year 1947
+              :death-year 2006})
+(def friedman {:name "Daniel Friedman" :birth-year 1944})
+(def felleisen {:name "Matthias Felleisen"})
+(def cities {:title "The City and the City" :authors [china]})
+(def wild-seed {:title "Wild Seed", :authors [octavia]})
+(def embassytown {:title "Embassytown", :authors [china]})
+(def little-schemer {:title "The Little Schemer"
+                     :authors [friedman, felleisen]})
+(get little-schemer)
+(get little-schemer :title)
+(get little-schemer :authors)
+(add-author little-schemer {:name "Gerald"})
+(defn add-author [book new-author]
+    (assoc book :authors (conj (get book :authors) new-author))
+)
+(add-author little-schemer {:name "Gerald"})
+exit
+(repeat 5 "*")
+(apply concat (repeat 5 "*"))
+(apply str (repeat 5 "*"))
+quit
+(1 2 3)
+[1 2 3]
+(first [1 2 3])
+(rest [1 2 3])
+(first (rest [1 2 3])(
+(first (rest [1 2 3]))
+(<= (first (rest [1 2 3])))
+(apply <= (first (rest [1 2 3])))
+(apply first [1 2 3])
+(apply <= [1 2 3]))
+(apply <= [1 2 3])
+(apply <= [1 2 2])
+(apply <= [1 2 0])
+quit
+(def book Left-Right Gauge Symmetry and an Isoconjugate Model of CP Violation - Mohapatra, Rabindra N. et al. Phys.Rev. D11 (1975) 566-571 MDDP-TR-74-085
+(def book {:title "The Little Schemer"
+                     :authors [friedman, felleisen]})
+(def little-schemer {:title "The Little Schemer"
+                     :authors [friedman, felleisen]})
+(def ma {:name "Hahaa"})
+(def book {:title "Huhhahhei" :authors [ma])
+(def book {:title "Huhhahhei" :authors [ma]})
+(get book)
+(book)
+(get book :title)
+quit
+(def china {:name "China Miéville", :birth-year 1972})
+(def octavia {:name "Octavia E. Butler"
+              :birth-year 1947
+              :death-year 2006})
+(def friedman {:name "Daniel Friedman" :birth-year 1944})
+(def felleisen {:name "Matthias Felleisen"})
+(def cities {:title "The City and the City" :authors #{china}})
+(def wild-seed {:title "Wild Seed", :authors #{octavia}})
+(def embassytown {:title "Embassytown", :authors #{china}})
+(def little-schemer {:title "The Little Schemer"
+                     :authors #{friedman, felleisen}})
+(def books [cities, wild-seed, embassytown, little-schemer])
+(get books :authors)
+(get books)
+(apply (get :authors) books))
+(apply (get :authors) books)
+(apply get books)
+(get :authors little-schemer)
+(get :title little-schemer)
+(get cities)
+(get cities :title)
+(get cities :authors)
+exit
+(def china {:name "China Miéville", :birth-year 1972})
+(def octavia {:name "Octavia E. Butler"
+              :birth-year 1947
+              :death-year 2006})
+(def friedman {:name "Daniel Friedman" :birth-year 1944})
+(def felleisen {:name "Matthias Felleisen"})
+(def cities {:title "The City and the City" :authors #{china}})
+(def wild-seed {:title "Wild Seed", :authors #{octavia}})
+(def embassytown {:title "Embassytown", :authors #{china}})
+(def little-schemer {:title "The Little Schemer"
+                     :authors #{friedman, felleisen}})
+(def books [cities, wild-seed, embassytown, little-schemer])
+(get cities :authors)
+(apply (get cities :authors) books)
+(apply (get :authors) books)
+(apply get  books)
+(first books)
+(apply (get :authors) books)
+(let [get1 (fn [book] (get book :authors))] (apply get1 books))
+(let [get1 (fn [book] (get book :authors))] (apply get1 (set books)))
+(let [get1 (fn [book] (get book :authors))] (apply get1 [cities, wild-seed]))]
+(let [get1 (fn [book] (get book :authors))] (apply get1 [cities, wild-seed]))
+(let [get1 (fn [book] (get book :authors))] (apply get1 [cities, wild-seed]))])
+(let [get1 (fn [book] (get book :authors))] (apply get1 [cities, wild-seed]))
+(defn all-author-names [books]
+  (let [author-names
+         (fn [book] (map :name (:authors book)))]
+    (set (apply concat (map author-names books)))))
+(all-author-names books)
+exit
+(defn all-author-names [books]
+  (let [author-names
+         (fn [book] (map :name (:authors book)))]
+    (set (apply concat (map author-names books))))
+)
+(def china {:name "China Miéville", :birth-year 1972})
+(def octavia {:name "Octavia E. Butler"
+              :birth-year 1947
+              :death-year 2006})
+(def friedman {:name "Daniel Friedman" :birth-year 1944})
+(def felleisen {:name "Matthias Felleisen"})
+(def cities {:title "The City and the City" :authors #{china}})
+(def wild-seed {:title "Wild Seed", :authors #{octavia}})
+(def embassytown {:title "Embassytown", :authors #{china}})
+(def little-schemer {:title "The Little Schemer"
+                     :authors #{friedman, felleisen}})
+(def books [cities, wild-seed, embassytown, little-schemer])
+(all-author-names books)
+(defn authors [books]
+  (let [get-author
+         (fn [book] (get author))]
+    (set (apply concat (map author-names books))))
+)
+(defn authors [books]
+  (let [get-author
+         (fn [book] (get author))]
+    (set (apply concat (map author-names books))))
+)
+(defn authors [books]
+  (let [get-author
+         (fn [book] (get :authors))]
+    (set (apply concat (map author-names books))))
+)
+(defn authors [books]
+  (let [get-author
+         (fn [book] (get :authors))]
+    (set (apply concat (map get-author books))))
+)
+(authors books)
+(get :authors cities)
+(get :title cities)
+(title cities)
+(:title cities)
+(:authors cities)
+(defn authors [books]
+  (let [get-author
+         (fn [book] (:authors book))]
+    (set (apply concat (map get-author books))))
+)
+(authors books)
+exit
+(defn authors [books]
+  (let [get-author
+         (fn [book] (:authors book))]
+    (set (apply concat (map get-author books))))
+)
+(def china {:name "China Miéville", :birth-year 1972})
+(def octavia {:name "Octavia E. Butler"
+              :birth-year 1947
+              :death-year 2006})
+(def friedman {:name "Daniel Friedman" :birth-year 1944})
+(def felleisen {:name "Matthias Felleisen"})
+(def cities {:title "The City and the City" :authors #{china}})
+(def wild-seed {:title "Wild Seed", :authors #{octavia}})
+(def embassytown {:title "Embassytown", :authors #{china}})
+(def little-schemer {:title "The Little Schemer"
+                     :authors #{friedman, felleisen}})
+(def books [cities, wild-seed, embassytown, little-schemer])
+(apply :name (authors books)
+)
+(:name (authors books)
+)
+(authors books)
+(first authors books)
+(first (authors books))
+(:name (first (authors books)))
+(apply :name  (authors books))
+(defn all-author-names [books]
+  (let [get-name (fn [author] (:name author))]
+  (apply get-name (authors books))  
+  )
+)
+(all-author-names books)
+(defn all-author-names [books]
+  (let [get-name (fn [author] (:name author))]
+  (set (apply concat (map get-name (authors books))  ))
+  )
+)
+(all-author-names books)
+(let [get-name (fn [author] (:name author))]
+  (set (apply concat (map get-name (authors books))  ))
+  )
+(let [get-name (fn [author] (:name author))]
+  (map get-name (authors books))
+  )
+(let [get-name (fn [author] (:name author))]
+  (set (map get-name (authors books))
+  ))
+exit
+str( 'x' 3)
+str( "x" 3)
+(str 'x' 3)
+(str "x" 3)
+(def china {:name "China Miéville", :birth-year 1972})
+(def octavia {:name "Octavia E. Butler"
+              :birth-year 1947
+              :death-year 2006})
+(def friedman {:name "Daniel Friedman" :birth-year 1944})
+(def felleisen {:name "Matthias Felleisen"})
+(defn alive? [author]
+    (not (contains? author :death-year))
+)
+(and (contains? felleisen :birth-year) (alive? author))
+(and (contains? felleisen :birth-year) (alive? felleisen))
+(str nimi " (" (author :birth-year) " - )")
+(str nimi " (" (felleisen :birth-year) " - )")
+(str nimi " (" (octavia :birth-year) " - )")
+(str (:name octavia) " (" (octavia :birth-year) " - )")
+(str (:name octavia) " (" (octavia :birth-year) " - " (octavia :death-year) ")")
+exit
+(use 'structured-data)
+(spiff v)
+(spiff [0 1 2])
+(def china {:name "China Miéville", :birth-year 1972})
+(def octavia {:name "Octavia E. Butler"
+              :birth-year 1947
+              :death-year 2006})
+(def friedman {:name "Daniel Friedman" :birth-year 1944})
+(def felleisen {:name "Matthias Felleisen"})
+(def cities {:title "The City and the City" :authors #{china}})
+(def wild-seed {:title "Wild Seed", :authors #{octavia}})
+(def embassytown {:title "Embassytown", :authors #{china}})
+(def little-schemer {:title "The Little Schemer"
+                     :authors #{friedman, felleisen}})
+(def books [cities, wild-seed, embassytown, little-schemer])
+(and (contains? octavia :birth-year) (alive? octavia)
+)
+if (and (contains? octavia :birth-year) (not (alive? octavia))
+)
+(if (and (contains? octavia :birth-year) (not (alive? octavia))
+)
+(if (and (contains? octavia :birth-year) (not (alive? octavia))))
+(and (contains? octavia :birth-year) (not (alive? octavia))
+(and (contains? octavia :birth-year) (not (alive? octavia)))
+)
+(and (contains? octavia :birth-year) (not (alive? octavia)))
+exit
+(use 'structured-data)
+(:name china)
+(and (contains?? china :birth-year) (alive? china))
+(and (contains? china :birth-year) (alive? china))
+(str (:name china) " (" (:birth-year china) " - )") 
+(and (contains? octavia :birth-year) (alive? china))
+(and (contains? octavia :birth-year) (alive? octavia))
+(and (contains? octavia :birth-year) (not (alive? octavia)))
+(str (:name author) " (" (:birth-year octavia) " -  " (:death-year octavia) ")")
+(str (:name octavia) " (" (:birth-year octavia) " -  " (:death-year octavia) ")")
+(and (contains? felleisen :birth-year) (alive? felleisen))
+(and (contains? felleisen :birth-year) (not (alive? felleisen)))
+(str (:name felleisen))
+exit
+q
+quit
+(author->string china)
+(use 'structured-data)
+quit
+(use 'structured-data)
+(author->string china)
+(map [1 2 3])
+(seq [1 2 3])
+(concat (seq [1 2 3[))
+(concat (seq [1 2 3]))
+(str (:name china) " (" (:birth-year china) " - )")
+quit
+(use 'structured-data)
+(author->string china)
+(author->string octavia)
+(author->string friedman)
+(author->string felleisen)
+exit
+(author->string china)
+(use 'structured-data)
+(author->string china)
+(author->string octavia)
+exit
+(use 'structured-data)
+(author->string china)
+(author->string octavia)
+(alive? octavia)
+(not (alive? octavia))
+(and (contains? octavia :birth-year) (not (alive? octavia)))
+(str (:name octavia) " (" (:birth-year octavia) " -  " (:death-year octavia) ")")
+quit
+(use 'structured-data)
+(author->string octavia)
+(author->string china)
+(author->string felleisen)
+(if (and (contains? author :birth-year) (not (alive? author)))
+          (str (:name author) " (" (:birth-year author) " -  " (:death-year author) ")")
+          (str (:name author))
+        )
+(if (and (contains? octavia :birth-year) (not (alive? octavia)))
+          (str (:name octavia) " (" (:birth-year octavia) " -  " (:death-year octavia) ")")
+          (str (:name octavia))
+        )
+(author->string octavia)
+quit
+(use 'structured-data)
+(author->string china)
+exit
+(use 'structured-data)
+(author->string china)
+(author->string octavia)
+(author->string friedman)
+(author->string felleisen)
+exit
+(use 'structured-data)
+(author->string china)
+(author->string octavia)
+(author->string friedman)
+(author->string felleisen)
+exit
+(use 'structured-data)
+(author->string felleisen)
+(author->string china)
+(author->string octavia)
+(author->string friedman)
+quit
+(use 'structured-data)
+(author->string felleisen)
+(author->string china)
+(author->string octavia)
+exit
+(use 'structured-data)
+(apply author-> string (:authors little-schemer))
+(:authors little-schemer)
+(apply author->string (:authors little-schemer))
+(seq (:authors little-schemer))
+(apply author->string (seq (:authors little-schemer)))
+(seq (:authors little-schemer))
+(map (:authors little-schemer))
+(map :authors little-schemer)
+(map :name (:authors little-schemer))
+(apply concat (map :name (:authors little-schemer)))
+(apply str (map :name (:authors little-schemer)))
+(apply str (:authors little-schemer)))
+(apply str (:authors little-schemer))
+(map :name (:authors little-schemer))
+(map :authors little-schemer)
+(:authors little-schemer)
+(apply author-> string (:authors little-schemer))
+(apply author->string (:authors little-schemer))
+(interpose ", " (:authors little-schemer))
+(apply str (:authors little-schemer))
+(apply str (interpose ", " (:authors little-schemer)))
+(apply author->string #{friedman, felleisen})}
+(apply author->string #{friedman, felleisen})
+seq( #{1,2})
+(seq (:authors little-schemer))
+(apply author->string (seq (:authors little-schemer)))
+(seq (:authors little-schemer))
+(map author->string (seq (:authors little-schemer)))
+(apply str (interpose ", " (map author->string (seq (:authors little-schemer)))))
+quit
+(books->string [])
+(empty? books)
+(use 'structured-data)
+(books->string [])
+(books->string [cities])
+(books->string [cities, wild-seed])
+(map book->string (seq books))
+(interpose ". " (map book->string (seq books)))
+(apply str (interpose ". " (map book->string (seq books))))
+q
+quit
+(books-> string books)
+(use 'structured-data)
+(books-> string books)
+(books->string books)
+quit
+(use 'structured-data)
+quit
+(has-author? cities china)
+(use 'structured-data)
+(has-author? cities china)
+(has-author? books china)
+(filter (has-author? books china))
+(filter (has-author? china) books)
+(filter (has-author? books china)
+)
+((has-author? books china))
+(has-author? books china)
+(has-author? cities china)
+quit
+(use 'structured-data)
+(books-by-author china books)
+(defn check [bk] has-author? bk author)
+(defn check [bk] (has-author? bk china))
+(filter check books)
+(books)
+(get books)
+exit
+(= "Hei" "Hei")
+(== "Hei" "Hei")
+(= "Hei" "Hei")
+(def friedman {:name "Daniel Friedman" :birth-year 1944})
+(def felleisen {:name "Matthias Felleisen"})
+quit
+(use 'structured-data)
+(authors little-schemer)
+(authors)
+(:authors little-schemer)
+(seq (:authors little-schemer))
+(map author-> string (seq (:authors little-schemer)))
+(map author->string (seq (:authors little-schemer)))
+ (let [getname (fn [a] (:name a))]
+    (map getname authors)
+  )
+(contains? authors "Daniel Friedman")
+(set "China Miéville" "Daniel Friedman" "Matthias Felleisen" "Octavia E. Butler")
+(set ("China Miéville" "Daniel Friedman" "Matthias Felleisen" "Octavia E. Butler"))
+(seq ("China Miéville" "Daniel Friedman" "Matthias Felleisen" "Octavia E. Butler"))
+(seq authors)
+(let [getname (fn [a] (:name a))]
+    (getname authors)
+  )
+(let [getname (fn [a] (:name a))]
+    (map getname authors)
+  )
+(contains? "Daniel Friedman" "China Miéville" "Daniel Friedman" "Matthias Felleisen" "Octavia E. Butler")
+(contains? "Daniel Friedman" ("China Miéville" "Daniel Friedman" "Matthias Felleisen" "Octavia E. Butler"))
+(seq "1" "2" "a")
+(seq ("1" "2" "a"))
+(apply count ("China Miéville" "Daniel Friedman" "Matthias Felleisen" "Octavia E. Butler")
+)
+    (map getname authors)
+(map (fn [a] (:name a)) authors)
+(first (map (fn [a] (:name a)) authors))
+(= "Daniel Friedman" (map (fn [a] (:name a)) authors)))
+(= "Daniel Friedman" (map (fn [a] (:name a)) authors))
+(== "Daniel Friedman" (map (fn [a] (:name a)) authors))
+(= "Daniel Friedman" (map (fn [a] (:name a)) authors))
+(first (map (fn [a] (:name a)) authors))
+(map (fn [a] (:name a)) authors)
+(set (map (fn [a] (:name a)) authors))
+(contains? (set (map (fn [a] (:name a)) authors)) "Daniel Friedman")
+(contains? (set (map (fn [a] (:name a)) authors)) "Daniel Friedmann")
+exit
+(nil)
+quit
+(use 'structured-data)
+(set authors)
+(seq (set authors))
+(first (seq (set authors)))
+(name (first (seq (set authors))))
+(:name (first (seq (set authors))))
+(= (:name (first (seq (set authors)))) "China")
+(= (:name (first (seq (set authors)))) "China Miéville")
+(= "a" "b")
+exit
+(contains? (set (map (fn [a] (:name a)) authors)) name)
+(use 'structured-data)
+(contains? (set (map (fn [a] (:name a)) authors)) name)
+(contains? (set (map (fn [a] (:name a)) authors)) "Daniel Friedman"))
+(contains? (set (map (fn [a] (:name a)) authors)) "Daniel Friedman")
+(seq (set authors))
+(filter (fn [a] (= "Daniel Friedman" (:name a))) (seq (set authors)))
+quit
+(use 'structured-data)
+(map authors)
+(set authors)
+(contains? (set authors) :death-year)
+(:authors silmarillion=
+(:authors silmarillion)
+quit
+(use 'structured-data)
+(filter has-a-living-author? [deus-irea, silmarillion])
+(filter has-a-living-author? [deus-irae, silmarillion])
+quit
