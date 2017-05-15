@@ -134,11 +134,19 @@
       true
       false)))
 
-(defn element-lengths [collection]
-  :-)
+(defn
+  element-lengths
+  "Returns the length of every element in the collection."
+  [collection]
+  (let [lengths (map count collection)]
+    lengths))
 
-(defn second-elements [collection]
-  :-)
+(defn
+  second-elements
+  "Return a sequence of second elements inside a collection."
+  [collection]
+  (let [seconds (fn [c] (get c 1))]
+    (map seconds collection)))
 
 (defn titles [books]
   :-)
