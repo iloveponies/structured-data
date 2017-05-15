@@ -97,13 +97,17 @@
 
 (defn
   title-length
-  "Calculates the length of the books title."
+  "Returns the length of the books title."
   [book]
   (let [title (get book :title)]
     (count title)))
 
-(defn author-count [book]
-  :-)
+(defn
+  author-count
+  "Returns the amount of authors for the book."
+  [book]
+  (let [authors (get book :authors)]
+    (count authors)))
 
 (defn multiple-authors? [book]
   :-)
