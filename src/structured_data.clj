@@ -65,8 +65,13 @@
       true
       false)))
 
-(defn area [rectangle]
-  :-)
+(defn
+  area
+  "Returns the area of input rectangle."
+  [rectangle]
+  (let [xx (width rectangle)
+        yy (height rectangle)]
+    (* xx yy)))
 
 (defn contains-point? [rectangle point]
   :-)
