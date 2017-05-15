@@ -21,7 +21,10 @@
     (conj v xx)))
 
 (defn spiff-destructuring [v]
-  :-)
+  "Returns the sum of the first and third index of the input vector."
+  [v]
+  (let [[x _ y] v]
+    (+ x y)))
 
 (defn point [x y]
   [x y])
