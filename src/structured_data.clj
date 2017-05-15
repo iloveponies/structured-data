@@ -1,11 +1,18 @@
 (ns structured-data)
 
-(defn do-a-thing [x]
+(defn
+  do-a-thing
+  "First, doubles the input value. Then, returns the power of the result value by itself."
+  [x]
   (let [xx (+ x x)]
     (Math/pow xx xx)))
 
-(defn spiff [v]
-  :-)
+(defn spiff
+  "Returns the sum of the first and third index of the input vector."
+  [v]
+  (let [xx (get v 0)
+        yy (get v 2)]
+    (+ xx yy)))
 
 (defn cutify [v]
   :-)
