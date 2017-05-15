@@ -148,8 +148,11 @@
   (let [seconds (fn [c] (get c 1))]
     (map seconds collection)))
 
-(defn titles [books]
-  :-)
+(defn
+  titles
+  "Returns the titles of the books."
+  [books]
+  (map :title books))
 
 (defn monotonic? [a-seq]
   :-)
