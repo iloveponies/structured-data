@@ -14,8 +14,11 @@
         yy (get v 2)]
     (+ xx yy)))
 
-(defn cutify [v]
-  :-)
+(defn cutify
+  "Adds a '<3' to the end of the input vector."
+  [v]
+  (let [xx "<3"]
+    (conj v xx)))
 
 (defn spiff-destructuring [v]
   :-)
