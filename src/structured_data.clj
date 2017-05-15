@@ -73,8 +73,16 @@
         yy (height rectangle)]
     (* xx yy)))
 
-(defn contains-point? [rectangle point]
-  :-)
+(defn
+  contains-point?
+  "Returns true if the rectangle contains the input point."
+  [rectangle point]
+  (let [
+        [[^int x1 y1] [^int x2 y2]] rectangle
+        [^int xx yy] point]
+    (if (and (<= x1 xx x2) (<= y1 yy y2))
+      true
+      false)))
 
 (defn contains-rectangle? [outer inner]
   :-)
