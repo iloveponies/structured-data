@@ -118,8 +118,12 @@
       true
       false)))
 
-(defn add-author [book new-author]
-  :-)
+(defn
+  add-author
+  "Adds a new author to the input book."
+  [book new-author]
+  (let [authors (get book :authors)]
+    (assoc book :authors (conj authors new-author))))
 
 (defn alive? [author]
   :-)
