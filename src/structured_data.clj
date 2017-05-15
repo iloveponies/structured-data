@@ -95,8 +95,12 @@
       true
       false)))
 
-(defn title-length [book]
-  :-)
+(defn
+  title-length
+  "Calculates the length of the books title."
+  [book]
+  (let [title (get book :title)]
+    (count title)))
 
 (defn author-count [book]
   :-)
