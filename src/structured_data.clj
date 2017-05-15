@@ -7,36 +7,53 @@
   (let [xx (+ x x)]
     (Math/pow xx xx)))
 
-(defn spiff
+(defn
+  spiff
   "Returns the sum of the first and third index of the input vector."
   [v]
   (let [xx (get v 0)
         yy (get v 2)]
     (+ xx yy)))
 
-(defn cutify
+(defn
+  cutify
   "Adds a '<3' to the end of the input vector."
   [v]
   (let [xx "<3"]
     (conj v xx)))
 
-(defn spiff-destructuring [v]
+(defn
+  spiff-destructuring [v]
   "Returns the sum of the first and third index of the input vector."
   [v]
   (let [[x _ y] v]
     (+ x y)))
 
-(defn point [x y]
+(defn
+  point
+  "Representation for a simple point with x and y values."
+  [x y]
   [x y])
 
-(defn rectangle [bottom-left top-right]
+(defn
+  rectangle
+  "Representation of a rectangle, which takes two points as an input."
+  [bottom-left top-right]
   [bottom-left top-right])
 
-(defn width [rectangle]
-  :-)
+(defn
+  width
+  "Calculates the width of the rectangle."
+  [rectangle]
+  (let [[[^int x1 _] [^int x2 _]] rectangle]
+    (Math/abs (- x1 x2))))
 
-(defn height [rectangle]
-  :-)
+(defn
+  height
+  "Calculates the height of the rectangle."
+  [rectangle]
+  (let [[[_ ^int y1] [_ ^int y2]] rectangle]
+    (Math/abs (- y1 y2))))
 
 (defn square? [rectangle]
   :-)
