@@ -157,8 +157,11 @@
 (defn monotonic? [a-seq]
   :-)
 
-(defn stars [n]
-  :-)
+(defn
+  stars
+  "Returns a string with n-amount of asterisks."
+  [n]
+  (apply str (apply concat (repeat n "*"))))
 
 (defn toggle [a-set elem]
   :-)
