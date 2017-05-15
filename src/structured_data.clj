@@ -55,8 +55,15 @@
   (let [[[_ ^int y1] [_ ^int y2]] rectangle]
     (Math/abs (- y1 y2))))
 
-(defn square? [rectangle]
-  :-)
+(defn
+  square?
+  "Returns true if the rectangle is a square."
+  [rectangle]
+  (let [xx (width rectangle)
+        yy (height rectangle)]
+    (if (== xx yy)
+      true
+      false)))
 
 (defn area [rectangle]
   :-)
