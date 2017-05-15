@@ -125,8 +125,14 @@
   (let [authors (get book :authors)]
     (assoc book :authors (conj authors new-author))))
 
-(defn alive? [author]
-  :-)
+(defn
+  alive?
+  "Returns true if the author doesn't have a death-year."
+  [author]
+  (let [xx (contains? author :death-year)]
+    (if (false? xx)
+      true
+      false)))
 
 (defn element-lengths [collection]
   :-)
