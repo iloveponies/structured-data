@@ -109,8 +109,14 @@
   (let [authors (get book :authors)]
     (count authors)))
 
-(defn multiple-authors? [book]
-  :-)
+(defn
+  multiple-authors?
+  "Returns true if the book has multiple authors."
+  [book]
+  (let [author-amount (author-count book)]
+    (if (> author-amount 1)
+      true
+      false)))
 
 (defn add-author [book new-author]
   :-)
