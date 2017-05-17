@@ -154,8 +154,11 @@
   [books]
   (map :title books))
 
-(defn monotonic? [a-seq]
-  :-)
+(defn
+  monotonic?
+  "Returns true if the sequence is monotonic."
+  [a-seq]
+  (or (apply <= a-seq) (apply >= a-seq)))
 
 (defn
   stars
