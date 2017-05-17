@@ -218,8 +218,11 @@
     (str name (if byear
                 (str " (" byear " - " dyear ")")))))
 
-(defn authors->string [authors]
-  :-)
+(defn
+  authors->string
+  "Creates a string representation of the fiven set of authors"
+  [authors]
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
   :-)
