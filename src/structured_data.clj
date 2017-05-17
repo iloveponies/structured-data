@@ -189,8 +189,12 @@
   (let [authors (get book :authors)]
     (assoc book :authors (set authors))))
 
-(defn has-author? [book author]
-  :-)
+(defn
+  has-author?
+  "Returns true if the given author is in the book."
+  [book author]
+  (let [authors (get book :authors)]
+    (contains? authors author)))
 
 (defn authors [books]
   :-)
