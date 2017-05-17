@@ -271,7 +271,10 @@
     false
     true))
 
-(defn books-by-living-authors [books]
-  :-)
+(defn
+  books-by-living-authors
+  "Returns those books that have a living author."
+  [books]
+  (filter (fn [book] (= true (has-a-living-author? book))) books))
 
 ; %________%
