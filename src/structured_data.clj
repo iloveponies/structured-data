@@ -202,8 +202,11 @@
   [books]
   (apply clojure.set/union (map :authors books)))
 
-(defn all-author-names [books]
-  :-)
+(defn
+  all-author-names
+  "Returns a set of names of all the authors in the books."
+  [books]
+  (set (map :name (authors books))))
 
 (defn author->string [author]
   :-)
