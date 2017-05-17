@@ -251,8 +251,11 @@
   [author books]
   (filter (fn [book] (has-author? book author)) books))
 
-(defn author-by-name [name authors]
-  :-)
+(defn
+  author-by-name
+  "Searches for authors from collection with given name. Returns nil if the author doesn't exist."
+  [name authors]
+  (first (filter (fn [author] (= name (:name author))) authors)))
 
 (defn living-authors [authors]
   :-)
