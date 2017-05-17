@@ -77,8 +77,8 @@
   contains-point?
   "Returns true if the rectangle contains the input point."
   [rectangle point]
-  (let [ [[^int x1 y1] [^int x2 y2]] rectangle
-         [^int xx yy] point ]
+  (let [[[^int x1 y1] [^int x2 y2]] rectangle
+        [^int xx yy] point]
     (if (and (<= x1 xx x2) (<= y1 yy y2))
       true
       false)))
@@ -87,10 +87,10 @@
   contains-rectangle?
   "Returns true if the inner rectangle is inside the outer rectangle."
   [outer inner]
-  (let [ p1 (get inner 0)
+  (let [p1 (get inner 0)
         p2 (get inner 1)
         xx (contains-point? outer p1)
-        yy (contains-point? outer p2) ]
+        yy (contains-point? outer p2)]
     (if (and xx yy)
       true
       false)))
@@ -232,8 +232,18 @@
        (if (:authors book)
          (str ", written by " (authors->string (:authors book))))))
 
-(defn books->string [books]
-  :-)
+(defn
+  books->string
+  "Creates a string representation of the given set of books"
+  [books]
+  (let [book-count (count books)]
+    (str
+      (cond
+        (== book-count 0) "No books."
+        (== book-count 1) "1 book."
+        :else (str book-count " books.")
+        )
+      (apply str (map (fn [book] (str " " (book->string book) ".")) books)))))
 
 (defn books-by-author [author books]
   :-)
