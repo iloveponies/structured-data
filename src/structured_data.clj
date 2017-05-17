@@ -196,8 +196,11 @@
   (let [authors (get book :authors)]
     (contains? authors author)))
 
-(defn authors [books]
-  :-)
+(defn
+  authors
+  "Returns all authors as a set."
+  [books]
+  (apply clojure.set/union (map :authors books)))
 
 (defn all-author-names [books]
   :-)
