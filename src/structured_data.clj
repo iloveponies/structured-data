@@ -208,8 +208,15 @@
   [books]
   (set (map :name (authors books))))
 
-(defn author->string [author]
-  :-)
+(defn
+  author->string
+  "Creates a string representation of the given author."
+  [author]
+  (let [name (:name author)
+        byear (:birth-year author)
+        dyear (:death-year author)]
+    (str name (if byear
+                (str " (" byear " - " dyear ")")))))
 
 (defn authors->string [authors]
   :-)
