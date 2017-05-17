@@ -179,12 +179,15 @@
   "Returns true if the sequence contains duplicates, otherwise false."
   [a-seq]
   (let [seq-count (count a-seq)
-        set-seq (set a-seq)
-        set-count (count set-seq)]
+        set-count (count (set a-seq))]
     (not= seq-count set-count)))
 
-(defn old-book->new-book [book]
-  :-)
+(defn
+  old-book->new-book
+  "Modifies the book authors map into a set."
+  [book]
+  (let [authors (get book :authors)]
+    (assoc book :authors (set authors))))
 
 (defn has-author? [book author]
   :-)
