@@ -166,11 +166,22 @@
   [n]
   (apply str (apply concat (repeat n "*"))))
 
-(defn toggle [a-set elem]
-  :-)
+(defn
+  toggle
+  "Adds the element to the set if it doesn't exists OR removes the element from the set if it does exist."
+  [a-set elem]
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)))
 
-(defn contains-duplicates? [a-seq]
-  :-)
+(defn
+  contains-duplicates?
+  "Returns true if the sequence contains duplicates, otherwise false."
+  [a-seq]
+  (let [seq-count (count a-seq)
+        set-seq (set a-seq)
+        set-count (count set-seq)]
+    (not= seq-count set-count)))
 
 (defn old-book->new-book [book]
   :-)
