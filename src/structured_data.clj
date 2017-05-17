@@ -263,8 +263,13 @@
   [authors]
   (filter (fn [author] (alive? author)) authors))
 
-(defn has-a-living-author? [book]
-  :-)
+(defn
+  has-a-living-author?
+  "Returns true if there is a living author for the book."
+  [book]
+  (if (empty? (living-authors (:authors book)))
+    false
+    true))
 
 (defn books-by-living-authors [books]
   :-)
