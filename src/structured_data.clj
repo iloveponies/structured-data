@@ -210,7 +210,7 @@
 
 (defn
   author->string
-  "Creates a string representation of the given author."
+  "Creates a string representation of a single author."
   [author]
   (let [name (:name author)
         byear (:birth-year author)
@@ -220,12 +220,17 @@
 
 (defn
   authors->string
-  "Creates a string representation of the fiven set of authors"
+  "Creates a string representation of the given set of authors"
   [authors]
   (apply str (interpose ", " (map author->string authors))))
 
-(defn book->string [book]
-  :-)
+(defn
+  book->string
+  "Creates a string representation of a single book."
+  [book]
+  (str (:title book)
+       (if (:authors book)
+         (str ", written by " (authors->string (:authors book))))))
 
 (defn books->string [books]
   :-)
