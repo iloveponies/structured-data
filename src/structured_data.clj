@@ -245,8 +245,11 @@
         )
       (apply str (map (fn [book] (str " " (book->string book) ".")) books)))))
 
-(defn books-by-author [author books]
-  :-)
+(defn
+  books-by-author
+  "Returns the books written by given author."
+  [author books]
+  (filter (fn [book] (has-author? book author)) books))
 
 (defn author-by-name [name authors]
   :-)
