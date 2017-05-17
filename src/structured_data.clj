@@ -257,8 +257,11 @@
   [name authors]
   (first (filter (fn [author] (= name (:name author))) authors)))
 
-(defn living-authors [authors]
-  :-)
+(defn
+  living-authors
+  "Returns a sequence of living authors from the input authors."
+  [authors]
+  (filter (fn [author] (alive? author)) authors))
 
 (defn has-a-living-author? [book]
   :-)
