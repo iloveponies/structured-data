@@ -99,14 +99,12 @@
 
 (defn authors [books]
   (let [author-names
-        (fn [book]
-          (:authors book))]
+        (fn [book] (:authors book))]
     (apply clojure.set/union (map author-names books))))
 
 (defn all-author-names [books]
   (let [author-name
-        (fn [author]
-          (:name author))]
+        (fn [author] (:name author))]
     (set (map author-name (authors books)))))
 
 (defn author->string [author]
@@ -139,18 +137,26 @@
 
 
 (defn books-by-author [author books]
-  :-)
+  (let [book-has-author
+        (fn [book] (has-author? book author))]
+    (filter book-has-author books)))
 
 (defn author-by-name [name authors]
-  :-)
+ (let [equal-name
+       (fn [author] (= (:name author) name))]
+   (first (filter equal-name authors))))
 
 (defn living-authors [authors]
-  :-)
+  (let [living
+       (fn [author] (alive? author))]
+    (filter living authors)))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (let [book-with-living-author
+         (fn [book] (has-a-living-author? book))]
+    (filter book-with-living-author books)))
 
 ; %________%
