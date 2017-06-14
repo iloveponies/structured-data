@@ -62,40 +62,52 @@
   (not (contains? author :death-year)))
 
 (defn element-lengths [collection]
-  :-)
+  (map count collection))
 
 (defn second-elements [collection]
-  :-)
+  (let [seconds (fn [x] (get x 1))]
+    (map seconds collection )))
 
 (defn titles [books]
-  :-)
+  (map :title books))
 
 (defn monotonic? [a-seq]
-  :-)
+  (cond
+    (apply <= a-seq) true
+    (apply >= a-seq) true
+    :else false))
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*")))
 
 (defn toggle [a-set elem]
-  :-)
+  (cond
+    (contains? a-set elem) (disj a-set elem)
+    :else (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (if (= (count a-seq) (count (set a-seq)))
+    false
+    true))
 
 (defn old-book->new-book [book]
-  :-)
+  (assoc book :authors (set (:authors book))))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author))
 
 (defn authors [books]
-  :-)
+  (set (apply concat (map :authors books))))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (let [[names years] [(str (:name author)) (str "("(:birth-year author) " - " (:death-year author) ")")]]
+    (cond
+      (contains? author :birth-year) (str names " " years)
+      (not (contains? author :birth-year)) (str names)
+      :else "")))
 
 (defn authors->string [authors]
   :-)
