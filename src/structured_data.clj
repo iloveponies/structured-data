@@ -42,22 +42,24 @@
       (and (<= x1 px x2) (<= y1 py y2)))))
 
 (defn contains-rectangle? [outer inner]
-  :-)
+  (let [[inner-bottom inner-top] inner]
+    (and (contains-point? outer inner-bottom) (contains-point? outer inner-top))))
 
 (defn title-length [book]
-  :-)
+  (count (:title book)))
 
 (defn author-count [book]
-  :-)
+  (count (:authors book)))
 
 (defn multiple-authors? [book]
-  :-)
+  (< 1 (author-count book)))
 
 (defn add-author [book new-author]
-  :-)
+  (let [[authors] [(:authors book)]]
+    (assoc book :authors (conj authors new-author))))
 
 (defn alive? [author]
-  :-)
+  (not (contains? author :death-year)))
 
 (defn element-lengths [collection]
   :-)
