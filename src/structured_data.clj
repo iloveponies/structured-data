@@ -1,5 +1,6 @@
 (ns structured-data)
 
+
 (defn do-a-thing [x]
   (let [xx (+ x x)]
     (Math/pow xx xx)))
@@ -94,29 +95,56 @@
 (defn contains-duplicates? [a-seq]
   (not (== (count a-seq)
        (count (set a-seq)))))
+
 (defn old-book->new-book [book]
-  :-)
+  (let [new-authors (set (:authors book))]
+    (assoc book
+           :authors
+           new-authors)))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book)
+             author))
 
 (defn authors [books]
-  :-)
+  (set (apply concat (map :authors books))))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (let [author-name (:name author)
+        birth-year (:birth-year author)
+        death-year (:death-year author)]
+    (str author-name
+         (if (nil? birth-year)
+           nil
+           (str " ("
+                birth-year
+                " - "
+                death-year
+                ")")))))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", "
+                        (map author->string
+                             authors))))
 
 (defn book->string [book]
-  :-)
+  (str (:title book)
+       ", written by "
+       (authors->string (:authors book))))
 
 (defn books->string [books]
-  :-)
+  (str (cond 
+         (= 0 (count books)) "No books."
+         (= 1 (count books)) (str "1 book. "
+                                  (book->string (first books))
+                                  ".")
+         :else (str (count books)
+                    " books. "
+                    (apply str (interpose ". "
+                                    (map book->string books)))))))
 
 (defn books-by-author [author books]
   :-)
