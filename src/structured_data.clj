@@ -130,30 +130,60 @@
     (set (apply concat (map author-names books)))))
 
 (defn author->string [author]
-  :-)
+  (let [author-name (fn [auth] (:name auth))
+        author-years (fn [auth] 
+                       (if (contains?  auth :birth-year)
+                         (str " (" (:birth-year auth) " - " (:death-year auth) ")")
+                         ""))]
+     (str  (author-name author) (author-years author)))
+  )
 
 (defn authors->string [authors]
-  :-)
+ (apply str (interpose ", " (map author->string authors)))
+  )
 
 (defn book->string [book]
-  :-)
-
+   (apply str (interpose ", written by " (concat [(:title book)] [(authors->string (:authors book))])))
+  )
 (defn books->string [books]
-  :-)
+  (let [book-count (fn [vect] (if (> 1 (count vect))
+                                "No books"
+                                (if (== 1 (count vect))
+                                  "1 book"
+                                  (str (count vect) " books"))))
+        book-names (fn [vect] (if (< 0 (count vect))
+                               (str ". " (apply str (interpose ". " (map book->string books))) ".")
+                                "."))]
+    (str (book-count books) (book-names books))
+  )
+  )
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [book] (has-author? book author)) books)
+  )
 
 (defn author-by-name [name authors]
-  :-)
+  (let [found (filter (fn [author] (if (= (:name author) name)
+                         true
+                         false))
+          authors)] 
+  (if (< 0 (count found))
+    (first found)
+    nil
+    )
+  )
+  )
 
 (defn living-authors [authors]
-  :-)
+  (filter (fn [author] (alive? author)) authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (if (empty? (living-authors (:authors book)))
+    false
+    true)
+  )
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
