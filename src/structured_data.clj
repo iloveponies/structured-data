@@ -137,15 +137,25 @@
   (
     if ( not ( > ( count books ) 0 ) )
       "No books."
-      ( apply str ( concat ( str ( count books ) ) " books. " ( apply str ( map book->string books ) ) "." ) )
+      (
+        if( == (count books) 1)
+        ( apply str ( concat ( str ( count books ) ) " book. " ( apply str ( map book->string books ) ) "." ) )
+        ( apply str ( concat ( str ( count books ) ) " books. " ( apply str ( interpose ". " ( map book->string books ) ) ) "." ) )
+      )
   )
 )
 
 (defn books-by-author [author books]
-  :-)
+  (
+    filter (fn [book] (has-author? book author)) books
+  )
+)
 
 (defn author-by-name [name authors]
-  :-)
+  (
+    filter (fn [author] (== (:name author) name)) authors
+  )
+)
 
 (defn living-authors [authors]
   :-)
