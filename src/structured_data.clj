@@ -164,9 +164,18 @@
 )
 
 (defn has-a-living-author? [book]
-  :-)
+  (
+    let [
+      authorers (:authors book)
+    ]
+    ( not (empty? (living-authors authorers) ) )
+  )
+)
 
 (defn books-by-living-authors [books]
-  :-)
+  (
+    filter has-a-living-author? books
+  )
+)
 
 ; %________%
