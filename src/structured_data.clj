@@ -120,10 +120,10 @@
 
 (defn books->string [books]
   (let
-    [bs (if (> (count books) 1) " books. " " book. ")]
-    (if (empty? books)
-      "No books."
-      (str (count books) bs (apply str (interpose ". " (map book->string books))) "."))))
+    [bs (if (> (count books) 1) " books. " " book. ")
+     (if (empty? books)
+       "No books."
+       (str (count books) bs (apply str (interpose ". " (map book->string books))) "."))]))
 
 (defn books-by-author [author books]
   (let [ha (fn [b] (has-author? b author))]
