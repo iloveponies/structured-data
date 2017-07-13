@@ -153,12 +153,15 @@
 
 (defn author-by-name [name authors]
   (
-    filter (fn [author] (== (:name author) name)) authors
+    first ( filter (fn [author] ( == (compare (:name author) name) 0 ) ) authors )
   )
 )
 
 (defn living-authors [authors]
-  :-)
+  (
+    filter (fn [author] (alive? author) ) authors
+  )
+)
 
 (defn has-a-living-author? [book]
   :-)
