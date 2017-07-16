@@ -71,20 +71,16 @@
   (map :title books))
 
 (defn monotonic? [a-seq]
-  (cond
-    (apply <= a-seq) true
-    (apply >= a-seq) true
-    :else false))
+  (or (apply <= a-seq) (apply >= a-seq)))
 
 (defn stars [n]
   (apply str (repeat n "*")))
 
 (defn toggle [a-set elem]
   (if (contains? a-set elem) (disj a-set elem) (conj a-set elem)))
-    
 
 (defn contains-duplicates? [a-seq]
-  (if (== (count a-seq) (count (set a-seq))) false true))
+  (not (== (count a-seq) (count (set a-seq)))))
 
 (defn old-book->new-book [book]
   (assoc book :authors (set (:authors book))))
@@ -100,10 +96,10 @@
 
 (defn author->string [author]
   (let [name (:name author)
-        birth (:birth-year author)
-        death (:death-year author)
-        year (if (contains? author :birth-year) true false)]
-    (if year (str name " (" birth " - " death ")") name)))
+        year (str " ("
+                  (:birth-year author) " - "
+                  (:death-year author) ")")]
+    (if (contains? author :birth-year) (str name year) name)))
 
 (defn authors->string [authors]
   (apply str (interpose ", " (map author->string authors))))
@@ -114,16 +110,14 @@
     (str title ", written by " author)))
 
 (defn books->string [books]
-  (let [book (count books)]
-    (if (not (== book 0))
-      (str book " book"
-           (if (== book 1) "" "s" ) ". "
-           (apply str (interpose ". " (map book->string books))) ".")
-      "No books.")))
+  (let [amount (cond
+                 (== (count books) 0) "No books"
+                 (== (count books) 1) "1 book. "
+                 :else (str (count books) " books. "))]
+    (str amount (apply str (interpose ". " (map book->string books))) ".")))
 
 (defn books-by-author [author books]
-  (let [has-author? (fn [x] (contains? (:authors x) author))]
-    (filter has-author? books)))
+    (filter (fn [x] (has-author? x author)) books))
 
 (defn author-by-name [name authors]
   (let [has-name? (fn [x] (= (:name x) name))]
