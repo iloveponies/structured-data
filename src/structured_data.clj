@@ -1,20 +1,22 @@
 (ns structured-data)
 
 (defn do-a-thing [x]
-  (let [dt (+ x x)]
-    (Math/pow dt dt)))
+  (let [xx (+ x x)]
+    (Math/pow xx xx)))
 
 (defn spiff [v]
-  (if (< (count v) 3) nil
+  (if (< (count v) 3)
+    nil
     (+ (get v 0) (get v 2))))
 
 (defn cutify [v]
   (conj v "<3"))
 
 (defn spiff-destructuring [v]
-  (if (< (count v) 3) nil
-    (let [[x y z] v]
-      (+ x z))))
+  (if (< (count v) 3)
+    nil
+    (let [[a b c] v]
+      (+ a c))))
 
 (defn point [x y]
   [x y])
@@ -40,8 +42,9 @@
 
 (defn contains-point? [rectangle point]
   (let [[[x1 y1] [x2 y2]] rectangle [xp yp] point]
-    (and (<= x1 xp x2) (<= y1 yp y2)))
-      
+    (if (and (<= x1 xp x2) (<= y1 yp y2))
+      true
+      false)))
 
 (defn contains-rectangle? [outer inner]
   (let [[p1 p2] inner]
@@ -57,16 +60,19 @@
   (count (:authors book)))
 
 (defn multiple-authors? [book]
-  (if (< 1 (author-count book)) true
+  (if (< 1 (author-count book))
+    true
     false))
 
 (defn add-author [book new-author]
-  (assoc book :authors (conj (:authors book) new-author)))
+  (let [auths (:authors book)
+        updated-auths (conj auths new-author)]
+    (assoc book :authors updated-auths)))
 
 (defn alive? [author]
-  (if (not (contains? author :death-year)) true
+  (if (contains? author :death-year)
     false
-    ))
+    true))
 
 (defn element-lengths [collection]
   (map count collection))
@@ -78,7 +84,8 @@
   (map :title books))
 
 (defn monotonic? [a-seq]
-  (or (apply <= a-seq)
+  (or
+    (apply <= a-seq)
     (apply >= a-seq)))
 
 (defn stars [n]
@@ -107,30 +114,32 @@
   (set (map :name (authors books))))
 
 (defn author->string [author]
-  (let [ na (:name author)
-         da (cond
-                  (contains? author :birth-year)
-                    (str " (" (:birth-year author) " - )")   
-                  (contains? author :death-year)
-                    (str " (" (:birth-year author) " - " (:death-year author) ")")
-                  :else nil)]
-    (str na da)))
+  (let [auth-name (:name author)
+         auth-date (cond
+                     (contains? author :death-year)
+                       (str " (" (:birth-year author) " - " (:death-year author) ")")
+                     (contains? author :birth-year)
+                       (str " (" (:birth-year author) " - )")
+                     :else "")]
+    (str auth-name auth-date)))
 
 (defn authors->string [authors]
-  (apply str (interpose ", " (map author->string authors))))
+  (apply str
+         (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
   (str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
-  (let [p (count books)
-        p (cond
-                (== 0 num) "No books"
-                (== 1 num) "1 book"
+  (let [num (count books)
+        book-num (cond
+                   (== 0 num) "No books"
+                   (== 1 num) "1 book"
                    :else (str num " books"))
-        k (if (< 0 num) (apply str ". "(interpose ". " (map book->string books)))
+        book-list (if (< 0 num)
+                    (apply str ". "(interpose ". " (map book->string books)))
                     "")]
-    (str p k ".")))
+    (str book-num book-list ".")))
 
 (defn books-by-author [author books]
   (filter (fn [x] (has-author? x author)) books))
@@ -142,11 +151,10 @@
   (filter (fn [x] (alive? x)) authors))
 
 (defn has-a-living-author? [book]
-   (if (empty? (living-authors (:authors book)))
-         false
-         true))
+  (let [live-list (filter #(alive? %) (:authors book))]
+    (not (empty? live-list))))
 
-  (defn books-by-living-authors [books]
+(defn books-by-living-authors [books]
   (filter has-a-living-author? books))
 
 ; %________%
