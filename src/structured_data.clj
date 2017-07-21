@@ -1,12 +1,12 @@
 (ns structured-data)
 
 (defn do-a-thing [x]
-  (let [x1 (+ x x)]
-    (Math/pow x1 x1)))
+  (let [xx (+ x x)]
+    (Math/pow xx xx)))
 
 (defn spiff [v]
   (if (< (count v) 3)
-    nill
+    nil
     (+ (get v 0) (get v 2)))
 
 (defn cutify [v]
