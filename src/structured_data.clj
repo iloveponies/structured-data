@@ -97,16 +97,25 @@
   (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (let [name (:name author)
+  years (cond
+    (contains? author :death-year) (str " (" (:birth-year author) " - " (:death-year author) ")")
+    (contains? author :birth-year) (str " (" (:birth-year author) " - )")
+  )]
+  (str name years)))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (str (:title book) ", written by " (authors->string (:authors book))))
 
 (defn books->string [books]
-  :-)
+  (cond
+    (empty? books) "No books."
+    (== 1 (count books)) (str "1 book. " (book->string (get books 0)) ".")
+    :else (str (count books) " books. " (apply str (interpose ". " (map book->string books))) ".")
+  ))
 
 (defn books-by-author [author books]
   :-)
