@@ -11,7 +11,8 @@
   (conj v "<3"))
 
 (defn spiff-destructuring [v]
-  :-)
+  (let [[x y z] v]
+    (+ x z)))
 
 (defn point [x y]
   [x y])
