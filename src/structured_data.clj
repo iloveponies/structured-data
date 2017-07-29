@@ -32,13 +32,15 @@
   (= (width rectangle) (height rectangle)))
 
 (defn area [rectangle]
-  :-)
+  (* (width rectangle) (height rectangle)))
 
 (defn contains-point? [rectangle point]
-  :-)
+  (let [[[x1 y1] [x2 y2]] rectangle [px py] point]
+    (and (<= x1 px x2) (<= y1 py y2))))
 
 (defn contains-rectangle? [outer inner]
-  :-)
+  (let [[[x1 y1] [x2 y2]] inner]
+    (and (contains-point? outer [x1 y1]) (contains-point? outer [x2 y2]))))
 
 (defn title-length [book]
   :-)
