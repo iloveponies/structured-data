@@ -249,8 +249,8 @@
   )
 )
 
-(defn has-a-living-author? [book]
-  (let [auths (:authors book)]
+(defn has-a-living-author? [b]
+  (let [auths (:authors b)]
     (cond
       (empty? (living-authors auths)) false
       :else true
