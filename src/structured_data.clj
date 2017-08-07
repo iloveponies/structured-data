@@ -43,6 +43,11 @@
     (* (- x2 x1) (- y2 y1)))
   )
 
+;  (defn area [rec]
+ ;       (* ((height (rec))) ((width (rec))))
+  ;)
+
+
 (defn contains-point? [rectangle point]
   (let [[[x1 y1] [x2 y2]] rectangle
         x3 (get point 0)
@@ -53,7 +58,12 @@
 
 
 (defn contains-rectangle? [outer inner]
-  :-)
+  (let [[[x1 y1] [x2 y2]] outer
+        [[xx1 yy1] [xx2 yy2]] inner
+        ]
+        (if(and (contains-point? (outer) (point xx1 yy1)) (contains-point? (outer) (point xx2 yy2)) ) true false)
+  ))
+
 
 (defn title-length [book]
   :-)
