@@ -66,16 +66,24 @@
 
 
 (defn title-length [book]
-  :-)
+  (count (get book :title))
+  )
 
 (defn author-count [book]
-  :-)
+  (count (get book :authors))
+  )
 
 (defn multiple-authors? [book]
-  :-)
+  (if (< 1 (count (get book :authors))) true false)
+  )
 
-(defn add-author [book new-author]
-  :-)
+;!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+;(defn add-author [book new-author]
+;  (let [auts (get book :authors)]
+;  (conj auts new-author)
+;  (assoc book :authors auts)
+;    ))
+;!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 (defn alive? [author]
   :-)
