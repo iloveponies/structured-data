@@ -1,16 +1,14 @@
 (ns structured-data)
 
-(defn do-a-thing [x]
-  :-)
+(defn do-a-thing [x] (let [y (+ x x)]
+  (Math/pow y y)))
 
-(defn spiff [v]
-  :-)
+(defn spiff [v] (+ (get v 0) (get v 2)))
 
-(defn cutify [v]
-  :-)
+(defn cutify [v] (conj v "<3"))
 
-(defn spiff-destructuring [v]
-  :-)
+(defn spiff-destructuring [v] (let [[x y z] v]
+                                (+ x z)))
 
 (defn point [x y]
   [x y])
@@ -18,97 +16,89 @@
 (defn rectangle [bottom-left top-right]
   [bottom-left top-right])
 
-(defn width [rectangle]
-  :-)
+(defn width [rectangle] (let [[[x1 y1] [x2 y2]] rectangle]
+                          (- x2 x1)))
 
-(defn height [rectangle]
-  :-)
+(defn height [rectangle] (let [[[x1 y1] [x2 y2]] rectangle]
+                          (- y2 y1)))
 
-(defn square? [rectangle]
-  :-)
+(defn square? [rectangle] (let [[[x1 y1] [x2 y2]] rectangle]
+                          (== (- x2 x1) (- y2 y1))))
 
-(defn area [rectangle]
-  :-)
+(defn area [rectangle] (let [[[x1 y1] [x2 y2]] rectangle]
+                          (* (- x2 x1) (- y2 y1))))
 
-(defn contains-point? [rectangle point]
-  :-)
+(defn contains-point? [rectangle point] (let [[[x1 y1] [x2 y2]] rectangle]
+                          (and (<= x1 (get point 0) x2) (<= y1 (get point 1) y2))))
 
-(defn contains-rectangle? [outer inner]
-  :-)
 
-(defn title-length [book]
-  :-)
+(defn contains-rectangle? [outer inner] (let [[[r1x1 r1y1] [r1x2 r1y2]] outer
+                                       [[r2x1 r2y1] [r2x2 r2y2]] inner]
+                                  (and (<= r1x1 r2x1) (<= r1y1 r2y1) (>= r1x2 r2x2) (>= r1y2 r2y2))))
 
-(defn author-count [book]
-  :-)
+(defn title-length [book] (count (:title book)))
 
-(defn multiple-authors? [book]
-  :-)
+(defn author-count [book] (count (:authors book)))
 
-(defn add-author [book new-author]
-  :-)
+(defn multiple-authors? [book] (< 1 (count (:authors book))))
 
-(defn alive? [author]
-  :-)
+(defn add-author [book new-author] (let [original book
+      updated (assoc original :authors (conj (:authors original) new-author))]
+  updated))
 
-(defn element-lengths [collection]
-  :-)
+(defn alive? [author] (not (contains? author :death-year)))
 
-(defn second-elements [collection]
-  :-)
+(defn element-lengths [collection] (map (fn [x] (count x)) collection))
 
-(defn titles [books]
-  :-)
+(defn second-elements [collection] (let [second-el (fn [x] (get x 1))]
+                                     (map second-el collection)))
 
-(defn monotonic? [a-seq]
-  :-)
+(defn titles [books] (map :title books))
 
-(defn stars [n]
-  :-)
+(defn monotonic? [a-seq] (or (apply <= a-seq) (apply >= a-seq)))
 
-(defn toggle [a-set elem]
-  :-)
+(defn stars [n] (apply str (repeat n "*")))
 
-(defn contains-duplicates? [a-seq]
-  :-)
+(defn toggle [a-set elem] (if (contains? a-set elem) (disj a-set elem) (conj a-set elem)))
 
-(defn old-book->new-book [book]
-  :-)
+(defn contains-duplicates? [a-seq] (if (== (count a-seq) (count (set a-seq))) false true))
 
-(defn has-author? [book author]
-  :-)
+(defn old-book->new-book [book] (assoc book :authors (set (book :authors))))
 
-(defn authors [books]
-  :-)
+(defn has-author? [book author] (contains? (book :authors) author))
 
-(defn all-author-names [books]
-  :-)
+(defn authors [books] (apply clojure.set/union (map :authors books)))
 
-(defn author->string [author]
-  :-)
+(defn all-author-names [books] (set (map :name (apply clojure.set/union (map :authors books)))))
 
-(defn authors->string [authors]
-  :-)
+(defn author->string [author] (let [aname (:name author)
+      byear (:birth-year author)
+      dyear (:death-year author)]
+  (str aname (if byear
+               (if dyear (str " (" (str byear) " - " dyear ")") (str " (" byear " - )"))
+               nil))))
 
-(defn book->string [book]
-  :-)
+(defn authors->string [authors] (apply str (interpose ", " (map author->string authors))))
 
-(defn books->string [books]
-  :-)
+(defn book->string [book] (let [btitle (:title book)
+       bauthors (:authors book)]
+      (str btitle ", written by " (authors->string bauthors))))
 
-(defn books-by-author [author books]
-  :-)
+(defn books->string [books] (let [bcount (count books)]
+                              (if (== bcount 0)
+                                (str "No books.")
+                                (if (== bcount 1)
+                                  (str bcount " book. " (book->string (get books 0)) ".")
+                                  (str bcount " books. " (apply str (interpose ". " (map book->string books))) ".")))))
 
-(defn author-by-name [name authors]
-  :-)
+(defn books-by-author [author books] (filter (fn [book] (has-author? book author)) books))
 
-(defn living-authors [authors]
-  :-)
+(defn author-by-name [name authors] (first (filter (fn [x] (= name (:name x))) authors)))
 
-(defn has-a-living-author? [book]
-  :-)
+(defn living-authors [authors] (filter (fn [x] (if (:death-year x) false true)) authors))
 
-(defn books-by-living-authors [books]
-  :-)
+(defn has-a-living-author? [book] (not (empty? (living-authors (:authors book)))))
+
+(defn books-by-living-authors [books] (filter (fn [x] (has-a-living-author? x)) books))
 
 ; %________%
