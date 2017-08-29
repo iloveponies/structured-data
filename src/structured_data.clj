@@ -101,7 +101,8 @@
   ))
 
 (defn titles [books]
-  :-)
+  (map :title books)
+  )
 
 (defn monotonic? [a-seq]
   :-)
