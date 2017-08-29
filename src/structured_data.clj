@@ -88,13 +88,17 @@
 
 
 (defn alive? [author]
-  :-)
+  (if (contains? author :death-year) false true)
+    )
 
 (defn element-lengths [collection]
-  :-)
+  (map count collection)
+  )
 
 (defn second-elements [collection]
-  :-)
+  (let [getsecond (fn[x] (get x 1))]
+  (map getsecond collection)
+  ))
 
 (defn titles [books]
   :-)
