@@ -38,20 +38,20 @@
     (if (== (- x2 x1) (- y2 y1)) true false))
   )
 
-(defn area [rectangle]
- (let [[[x1 y1] [x2 y2]] rectangle]
-    (* (- x2 x1) (- y2 y1)))
+;(defn area [rectangle]
+; (let [[[x1 y1] [x2 y2]] rectangle]
+;    (* (- x2 x1) (- y2 y1)))
+;  )
+
+  (defn area [rec]
+        (* ((height (rec))) ((width (rec))))
   )
 
-;  (defn area [rec]
- ;       (* ((height (rec))) ((width (rec))))
-  ;)
 
-
-(defn contains-point? [rectangle point]
-  (let [[[x1 y1] [x2 y2]] rectangle
-        x3 (get point 0)
-        y3 (get point 1)]
+(defn contains-point? [recta poi]
+  (let [[[x1 y1] [x2 y2]] recta
+        x3 (get poi 0)
+        y3 (get poi 1)]
    (if(and (<= x1 x3 x2) (<= y1 y3 y2)) true false)
   ))
 
@@ -61,7 +61,7 @@
   (let [[[x1 y1] [x2 y2]] outer
         [[xx1 yy1] [xx2 yy2]] inner
         ]
-        (if(and (contains-point? (outer) (point xx1 yy1)) (contains-point? (outer) (point xx2 yy2)) ) true false)
+        (if(and (contains-point? (rectangle [x1 y1] [x2 y2]) (point xx1 yy1)) (contains-point? (rectangle [x1 y1] [x2 y2]) (point xx2 yy2))) true false)
   ))
 
 
@@ -77,13 +77,15 @@
   (if (< 1 (count (get book :authors))) true false)
   )
 
-;!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-;(defn add-author [book new-author]
-;  (let [auts (get book :authors)]
-;  (conj auts new-author)
-;  (assoc book :authors auts)
-;    ))
-;!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+(defn add-author [book new-author]
+  (let [auts (get book :authors)
+        new_auts (conj auts new-author)
+        ]
+
+  (assoc book :authors new_auts)
+   ))
+
 
 (defn alive? [author]
   :-)
