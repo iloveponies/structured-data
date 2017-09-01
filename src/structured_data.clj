@@ -41,7 +41,8 @@
 
 (defn contains-rectangle? [outer inner]
   (let [[p1 p2] inner]
-    (and (contains-point? outer p1) (contains-point? outer p2))))
+    (and (contains-point? outer p1)
+         (contains-point? outer p2))))
 
 (defn title-length [book]
   (count (:title book)))
@@ -50,7 +51,7 @@
   (count (:authors book)))
 
 (defn multiple-authors? [book]
-  (>= (author-count book) 2))
+  (> (author-count book) 1))
 
 (defn add-author [book new-author]
   (assoc book :authors (conj (:authors book) new-author)))
