@@ -119,10 +119,10 @@
        "."))
 
 (defn books-by-author [author books]
-  (filter (fn [book] (has-author? book author)) books))
+  (filter #(has-author? % author) books))
 
 (defn author-by-name [name authors]
-  (first (filter (fn [author] (= (:name author) name)) authors)))
+  (first (filter #(= (:name %) name) authors)))
 
 (defn living-authors [authors]
   (filter alive? authors))
