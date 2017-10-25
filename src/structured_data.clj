@@ -36,13 +36,13 @@
 
 (defn contains-point? [rectangle point]
   (let [[[x1 y1] [x2 y2]] rectangle
-  		[x y] point]
+  		  [x y] point]
   	(and (<= x1 x x2) (<= y1 y y2))))
 
 (defn contains-rectangle? [outer inner]
   (let [[point1 point2] inner]
   	(and (contains-point? outer point1)
-  		 (contains-point? outer point2))))
+  		   (contains-point? outer point2))))
 
 (defn title-length [book]
   (count (:title book)))
@@ -99,9 +99,9 @@
 
 (defn author->string [author]
   (let [birth (:birth-year author)
-  		years (if birth
-  				(str " (" birth " - " (:death-year author) ")")
-  				"")]
+  		  years (if birth
+  				      (str " (" birth " - " (:death-year author) ")")
+  				      "")]
   	(str (:name author) years)))
 
 (defn authors->string [authors]
@@ -132,5 +132,3 @@
 
 (defn books-by-living-authors [books]
   (filter has-a-living-author? books))
-
- ; %________%
