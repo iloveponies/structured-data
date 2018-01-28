@@ -107,31 +107,67 @@
 (defn all-author-names [books]
   (set (map :name (authors books))))
 
+
+(defn a-birth-and-death-years [b-y, d-y]
+  (cond
+   (nil? b-y) ""
+   (nil? d-y) (format " (%s - )" b-y)
+   :else (format " (%s - %s)" b-y, d-y))
+)
+
 (defn author->string [author]
-  :-)
+  (let [a-name (author :name)]
+    (let [b-y (author :birth-year)]
+      (let [d-y (author :death-year)]
+        (format "%s%s" a-name (a-birth-and-death-years b-y d-y))
+      )
+    )
+  )
+ )
+
 
 (defn authors->string [authors]
-  :-)
+  (apply str(interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (let [b-title (book :title)]
+    (let [b-strings (authors (list book))]
+      (format "%s, written by %s" b-title (authors->string b-strings))
+    )
+  )
+)
 
 (defn books->string [books]
-  :-)
+  (let [b-string (apply str(interpose ", " (map book->string books)))]
+   (cond
+    (= 0 (count books)) "No books."
+    (= 1 (count books)) (format "1 book. %s." b-string)
+    :else (format "%d books. %s." (count books) b-string))
+
+    )
+  )
 
 (defn books-by-author [author books]
-  :-)
+  (filter (fn [b] (has-author? b author)) books)
+
+  )
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter (fn [a] (= name (a :name))) authors))
+
+  )
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors)
+
+  )
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (:authors book))))
+  )
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books)
+  )
 
 ; %________%
