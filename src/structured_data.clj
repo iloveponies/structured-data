@@ -127,12 +127,14 @@
              (>= blen 2) (str blen " books. " bookkss "."))))
 
 (defn books-by-author [author books]
-      (filter (fn [book] (has-author? book author)) books))
+      (let [has-author?2
+            (fn [book] (has-author? book author))]
+           (filter has-author?2 books)))
 
 (defn author-by-name [name authors]
       (let [checkName
             (fn [author] (= (:name author) name))]
-           (seq (filter checkName authors))))
+           (first (filter checkName authors))))
 
 (defn living-authors [authors]
       (filter alive? authors))
