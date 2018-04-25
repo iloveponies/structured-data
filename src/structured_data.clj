@@ -1,4 +1,5 @@
-(ns structured-data)
+(ns structured-data
+  (:require [clojure.set]))
 
 (defn do-a-thing [x]
   (let [db (+ x x)]
