@@ -85,34 +85,58 @@
   (apply str (apply concat (repeat n "*"))))
 
 (defn toggle [a-set elem]
-  :-)
+  (if (contains? a-set elem)
+    (disj a-set elem)
+    (conj a-set elem)))
 
 (defn contains-duplicates? [a-seq]
-  :-)
+  (> (count a-seq) (count (set a-seq))))
 
 (defn old-book->new-book [book]
-  :-)
+  (let [old-authors (:authors book)
+        new-authors (set old-authors)]
+    (assoc book :authors new-authors)))
 
 (defn has-author? [book author]
-  :-)
+  (contains? (:authors book) author))
 
 (defn authors [books]
-  :-)
+  (apply clojure.set/union (map :authors books)))
 
 (defn all-author-names [books]
-  :-)
+  (set (map :name (authors books))))
 
 (defn author->string [author]
-  :-)
+  (let [name (:name author)
+        birth (:birth-year author)
+        death (or (:death-year author) "")
+        years (if birth
+                (str " (" birth " - " death ")")
+                ""
+                )]
+    (str name years)))
 
 (defn authors->string [authors]
-  :-)
+  (let [strings (map author->string authors)
+        interposed (interpose ", " strings)
+        result (apply str interposed)]
+   result))
 
 (defn book->string [book]
-  :-)
+  (let [authors (:authors book)
+        authors-string (authors->string authors)
+        result (str (:title book) ", written by " authors-string)]
+   result))
 
 (defn books->string [books]
-  :-)
+  (let [n (count books)
+        n-string (if (> n 1) (str n " books. ") "1 book. ")
+        book-strings (apply str (interpose ". " (map book->string books)))
+        result (if (= n 0)
+                 "No books."
+                 (str n-string book-strings ".")
+                 )]
+    result))
 
 (defn books-by-author [author books]
   :-)
