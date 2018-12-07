@@ -46,35 +46,43 @@
     (and (contains-point? outer p1)
          (contains-point? outer p2))))
 
+
+
+
 (defn title-length [book]
-  :-)
+  (count (:title book)))
 
 (defn author-count [book]
-  :-)
+  (count (:authors book)))
 
 (defn multiple-authors? [book]
-  :-)
+  (< 1 (author-count book)))
 
 (defn add-author [book new-author]
-  :-)
+  (let [old-authors (:authors book)
+        new-authors (conj old-authors new-author)]
+    (assoc book :authors new-authors)))
 
 (defn alive? [author]
-  :-)
+  (not (contains? author :death-year)))
 
 (defn element-lengths [collection]
-  :-)
+  (map count collection))
 
 (defn second-elements [collection]
-  :-)
+  (let [get-second (fn [coll] (get coll 1))]
+    (map get-second collection)))
 
 (defn titles [books]
-  :-)
+  (let [get-title (fn [book] (get book :title))]
+    (map get-title books)))
 
 (defn monotonic? [a-seq]
-  :-)
+  (or (apply >= a-seq)
+      (apply <= a-seq)))
 
 (defn stars [n]
-  :-)
+  (apply str (apply concat (repeat n "*"))))
 
 (defn toggle [a-set elem]
   :-)
