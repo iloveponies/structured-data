@@ -106,24 +106,35 @@
   (clojure.string/join ", " (map author->string authors)))
 
 (defn book->string [book]
-  :-)
+  (let [title (book :title) 
+        authors (authors->string (book :authors))]
+    (str title ", written by " authors)))
 
 (defn books->string [books]
-  :-)
+  (str 
+   (if (= (count books) 0) 
+     "No books." 
+     (str (count books) 
+          (if (= (count books) 1) 
+            (str " book. " 
+                 (str (apply book->string books)) ".")
+            (str " books. " 
+                 (clojure.string/join "" (map #(str (book->string %) ". ") books)))))))) 
+  
 
 (defn books-by-author [author books]
-  :-)
+  (filter #(has-author? %  author) books))
 
 (defn author-by-name [name authors]
-  :-)
+  (first (filter #(= name (:name  %)) authors)))
 
 (defn living-authors [authors]
-  :-)
+  (filter alive? authors))
 
 (defn has-a-living-author? [book]
-  :-)
+  (not (empty? (living-authors (:authors book)))))
 
 (defn books-by-living-authors [books]
-  :-)
+  (filter has-a-living-author? books))
 
 ; %________%
