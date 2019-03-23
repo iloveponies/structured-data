@@ -1,0 +1,47 @@
+(use 'structured-data)
+(cutify 0)
+quit
+(cutify 8
+(cutify 8)
+(c
+quit
+))
+(in-ns 'structured-data)
+cutify
+(cutify 0)
+(in-ns 'structured-data)
+(spiff [1 2])
+(+ 1 nil)
+(spiff [1 2 3])
+(spiff [1 2])
+(+ 2 nil)
+(def test [1, 2])
+(def testx [1, 2])
+(get testx 2)
+(get testx 0)
+(+ (get testx 0) (get testx 2))
+get testx 0)
+(clojure-version)
+(+ 1 nil)
+quit
+(+ 1 nil)
+quit
+(clojure-version)
+(+ 1 nil)
+(* 1 nil)
+quit
+qiot
+quit
+(in-ns 'structured-data)
+(fn [name] (str "Welcome to Rivendell mr " name))
+(def hello (fn [who] (str "Hello, " who "!")))
+(hello "you"
+)(
+)
+hello
+(hello "you")
+(== 2 2 2 2)
+(== 2 2 2 3)
+(titles books)
+(ns structured-data)
+(titles books)
