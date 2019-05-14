@@ -67,22 +67,24 @@
     (assoc book :authors new-authors)))
 
 (defn alive? [author]
-  :-)
+  (not (contains? author :death-year)))
 
 (defn element-lengths [collection]
-  :-)
+  (map count collection))
 
 (defn second-elements [collection]
-  :-)
+  (let [second
+        (fn [coll] (get coll 1))]
+    (map second collection)))
 
 (defn titles [books]
-  :-)
-
-(defn monotonic? [a-seq]
-  :-)
+  (map :title books))
 
 (defn stars [n]
-  :-)
+  (apply str (repeat n "*")))
+
+(defn monotonic? [a-seq]
+  (or (apply <= a-seq) (apply >= a-seq)))
 
 (defn toggle [a-set elem]
   :-)
