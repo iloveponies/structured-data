@@ -115,13 +115,18 @@
     (apply str (:name author) (life-info author))))
 
 (defn authors->string [authors]
-  :-)
+  (apply str (interpose ", " (map author->string authors))))
 
 (defn book->string [book]
-  :-)
+  (apply str (interpose ", written by " [(:title book), (authors->string (authors [book]))])))
 
 (defn books->string [books]
-  :-)
+  (let [print-book-numbers
+        (fn [library] (cond
+                        (empty? library) "No books. "
+                        (= (count library) 1) "1 book. "
+                        :else (str (count library) " books. ")))]
+    (apply str (print-book-numbers books), (interpose ". " (map book->string books)))))
 
 (defn books-by-author [author books]
   :-)
