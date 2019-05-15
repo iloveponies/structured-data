@@ -126,7 +126,7 @@
                         (empty? library) "No books. "
                         (= (count library) 1) "1 book. "
                         :else (str (count library) " books. ")))]
-    (apply str (print-book-numbers books), (interpose ". " (map book->string books)))))
+    (apply str (print-book-numbers books) (interpose ". " (map book->string books)))))
 
 (defn books-by-author [author books]
   (filter (fn [book] (has-author? book author)) books))
