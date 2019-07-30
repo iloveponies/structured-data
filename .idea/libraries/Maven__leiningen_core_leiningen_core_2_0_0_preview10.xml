@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: leiningen-core:leiningen-core:2.0.0-preview10">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/leiningen-core/leiningen-core/2.0.0-preview10/leiningen-core-2.0.0-preview10.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/leiningen-core/leiningen-core/2.0.0-preview10/leiningen-core-2.0.0-preview10-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/leiningen-core/leiningen-core/2.0.0-preview10/leiningen-core-2.0.0-preview10-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

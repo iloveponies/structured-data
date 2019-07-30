@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: midje-grader:midje-grader:0.1.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/midje-grader/midje-grader/0.1.0-SNAPSHOT/midje-grader-0.1.0-20131128.134409-10.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/midje-grader/midje-grader/0.1.0-SNAPSHOT/midje-grader-0.1.0-20131128.134409-10-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/midje-grader/midje-grader/0.1.0-SNAPSHOT/midje-grader-0.1.0-20131128.134409-10-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
